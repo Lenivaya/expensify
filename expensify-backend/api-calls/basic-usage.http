@@ -1,0 +1,47 @@
+###
+# @name register
+POST http://localhost:3000/api/auth/sign-up HTTP/1.1
+accept: application/json
+content-type: application/json
+
+{
+  "username": "johnydoe",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "user@example.com",
+  "password": "z1Tlxb1tuXH7"
+}
+
+###
+# @name login
+POST http://localhost:3000/api/auth/sign-in HTTP/1.1
+accept: application/json
+content-type: application/json
+
+{
+  "login": "user@example.com",
+  "password": "z1Tlxb1tuXH7"
+}
+
+###
+# @name authorize
+GET http://localhost:3000/api/auth/me HTTP/1.1
+accept: application/json
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+###
+# @name update_user
+PATCH http://localhost:3000/api/users/{{authorize.response.body.$.id}} HTTP/1.1
+Authorization: Bearer {{login.response.body.$.accessToken}}
+accept: application/json
+content-type: application/json
+
+{
+  "lastName": "Updated"
+}
+
+###
+# @name delete_user
+DELETE http://localhost:3000/api/users/{{authorize.response.body.$.id}} HTTP/1.1
+Authorization: Bearer {{login.response.body.$.accessToken}}
+accept: application/json
