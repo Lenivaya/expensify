@@ -32,6 +32,7 @@
               nativeBuildInputs = with pkgs; [
                 postgresql
                 pgcli
+                act
               ];
             };
           };

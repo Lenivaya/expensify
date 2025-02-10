@@ -33,7 +33,7 @@ jobs:
           version: latest
 
       - name: Run Biome Format
-        run: biome format --write .
+        run: cd expensify-backend && biome format --write .
 
       - name: Commit changes
         if: success()
