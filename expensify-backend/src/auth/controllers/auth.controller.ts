@@ -41,9 +41,9 @@ export class AuthController {
   @Public()
   @UseInterceptors(ClassSerializerInterceptor)
   @SerializeOptions({ type: SignInResponseDto })
+  @UseGuards(LocalAuthGuard)
   @Post('sign-in')
   @HttpCode(200)
-  @UseGuards(LocalAuthGuard)
   @ApiOperation({
     summary: 'Sign in a user',
     description:

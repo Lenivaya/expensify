@@ -18,7 +18,10 @@ async function bootstrap() {
   const app =
     await NestFactory.create<NestFastifyApplication>(
       AppModule,
-      new FastifyAdapter()
+      new FastifyAdapter(),
+      {
+        logger: ['error', 'warn', 'log', 'debug', 'verbose']
+      }
     )
   app.useGlobalPipes(
     new ValidationPipe({
@@ -62,6 +65,7 @@ async function bootstrap() {
   )
 
   app.setGlobalPrefix('api')
+  app.enableCors()
   await app.listen(process.env.PORT ?? 3000)
 }
 bootstrap()
