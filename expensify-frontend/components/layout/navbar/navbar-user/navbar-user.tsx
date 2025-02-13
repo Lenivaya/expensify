@@ -11,7 +11,9 @@ export function NavbarUser() {
 
   const { data, isLoading, error } =
     expensifyApi.auth.authControllerGetMe.useQuery(
-      {},
+      {
+        queryKey: ['currentUser']
+      },
       {
         enabled: isAuthTokenPresent
       }

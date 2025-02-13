@@ -27,6 +27,7 @@ import {
   UserPlus
 } from 'lucide-react'
 import Link from 'next/link'
+import PasswordStrengthChecker from '@/components/generic/password-strength-checker/PasswordStrenghChecker'
 
 const registerSchema = z.object({
   username: z
@@ -165,41 +166,17 @@ export function RegisterForm() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <div className="relative">
-                          <Input
-                            type={
-                              showPassword
-                                ? 'text'
-                                : 'password'
-                            }
-                            placeholder="Enter your password"
-                            {...field}
-                            disabled={fetching}
-                            className="pr-10"
-                          />
-                          <Button
-                            type="button"
-                            variant="ghost"
-                            size="icon"
-                            className="absolute top-0 right-0 h-full px-3 py-2 hover:bg-transparent"
-                            onClick={() =>
-                              setShowPassword(!showPassword)
-                            }
-                          >
-                            {showPassword ? (
-                              <EyeOff className="h-4 w-4 text-muted-foreground" />
-                            ) : (
-                              <Eye className="h-4 w-4 text-muted-foreground" />
-                            )}
-                          </Button>
-                        </div>
+                        <PasswordStrengthChecker
+                          initialPassword={field.value}
+                          placeholder="Enter your password"
+                          onPasswordChange={(
+                            password,
+                            strength
+                          ) => {
+                            field.onChange(password)
+                          }}
+                        />
                       </FormControl>
-                      <FormDescription className="text-xs">
-                        Password must be at least 8
-                        characters and include uppercase,
-                        lowercase, number, and special
-                        character
-                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
