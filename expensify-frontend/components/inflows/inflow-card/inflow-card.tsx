@@ -50,7 +50,7 @@ export type InflowCardData = {
   updatedAt: string | null
   createdAt: string
 }
-// Using pick remoes jsdoc, therefore things like storybook can't auto generate docs based on pure type showing Pick as description
+// Using pick removes jsdoc, therefore things like storybook can't auto generate docs based on pure type showing Pick as description
 // type InflowData = Pick<
 //   components['schemas']['InflowDto'],
 //   | 'id'
