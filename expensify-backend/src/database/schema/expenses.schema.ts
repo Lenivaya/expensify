@@ -9,12 +9,15 @@ import {
   text,
   uuid
 } from 'drizzle-orm/pg-core'
-import { timestamps } from './column.helpers'
-import { users } from './users.schema'
 import {
   createInsertSchema,
-  createSelectSchema
-} from 'drizzle-zod'
+  createSelectSchema,
+  createUpdateSchema,
+  timestamps
+} from './column.helpers'
+import { users } from './users.schema'
+import { z } from '@nest-zod/z'
+import { inflows } from './inflows.schema'
 
 export const expenses = pgTable('expenses', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -33,10 +36,29 @@ export const expenses = pgTable('expenses', {
 })
 export type Expense = InferSelectModel<typeof expenses>
 
-export const expenseSelectSchema =
-  createSelectSchema(expenses)
-export const expesneInsertSchema =
-  createInsertSchema(expenses)
+export const expenseSelectSchema = createSelectSchema(
+  expenses,
+  {
+    createdAt: z.dateString().cast(),
+    updatedAt: z.dateString().cast().nullable(),
+    deletedAt: z.dateString().cast().nullable()
+  }
+)
+export const expesneInsertSchema = createInsertSchema(
+  expenses
+).omit({
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true
+})
+
+export const expesneUpdateSchema = createUpdateSchema(
+  inflows
+).omit({
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true
+})
 
 export const expensesRelations = relations(
   expenses,

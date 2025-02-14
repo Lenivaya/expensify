@@ -40,15 +40,8 @@ async function bootstrap() {
     .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('api/docs', app, document, {})
+  SwaggerModule.setup('docs', app, document, {})
   await Promise.all([
-    // writeFile(
-    //   './openapi-spec.json',
-    //   JSON.stringify(document),
-    //   {
-    //     encoding: 'utf8'
-    //   }
-    // ),
     writeFile('./openapi-spec.yaml', yaml.dump(document), {
       encoding: 'utf8'
     })
@@ -64,7 +57,6 @@ async function bootstrap() {
     })
   )
 
-  app.setGlobalPrefix('api')
   app.enableCors()
   await app.listen(process.env.PORT ?? 3000)
 }

@@ -28,7 +28,7 @@ import { useCallback } from 'react'
 import { useAuthToken } from '@/lib/hooks/use-auth-token'
 
 /*
- * Optional callback function to handle user logout
+ * User data
  * */
 type UserData = Pick<
   components['schemas']['UserDto'],
