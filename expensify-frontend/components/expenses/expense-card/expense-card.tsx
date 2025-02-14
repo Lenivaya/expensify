@@ -21,27 +21,26 @@ import {
 import { cn } from '@/lib/utils'
 import { format, formatDistanceToNow } from 'date-fns'
 import {
-  ArrowUpFromLine,
+  ArrowDownFromLine,
   Calendar,
   MoreVertical,
   Pencil,
   Trash
 } from 'lucide-react'
 import type React from 'react'
-import type { FC } from 'react'
 
 /**
- * Data transfer object representing inflow information
- * @interface InflowCardData
- * @property {string} id - Unique identifier for the inflow
+ * Data transfer object representing expense information
+ * @interface ExpenseCardData
+ * @property {string} id - Unique identifier for the expense
  * @property {string} amount - Pre-formatted amount from backend
- * @property {string | null} description - Optional description of the inflow
- * @property {string[]} tags - Array of tags associated with the inflow
- * @property {string} userId - UUID of the user who owns this inflow
+ * @property {string | null} description - Optional description of the expense
+ * @property {string[]} tags - Array of tags associated with the expense
+ * @property {string} userId - UUID of the user who owns this expense
  * @property {string | null} updatedAt - ISO timestamp of last update
  * @property {string} createdAt - ISO timestamp of creation
  */
-export type InflowCardData = {
+export type ExpenseCardData = {
   id: string
   amount: string
   description: string | null
@@ -51,8 +50,8 @@ export type InflowCardData = {
   createdAt: string
 }
 // Using pick remoes jsdoc, therefore things like storybook can't auto generate docs based on pure type showing Pick as description
-// type InflowData = Pick<
-//   components['schemas']['InflowDto'],
+// type ExpenseData = Pick<
+//   components['schemas']['ExpenseDto'],
 //   | 'id'
 //   | 'amount'
 //   | 'description'
@@ -60,11 +59,11 @@ export type InflowCardData = {
 //   | 'userId'
 //   | 'createdAt'
 // >
-
+//
 /**
- * Props for the InflowCard component
- * @interface InflowCardProps
- * @property {InflowData} inflow - The inflow data to display
+ * Props for the ExpenseCard component
+ * @interface ExpenseCardProps
+ * @property {ExpenseCardData} expense - The expense data to display
  * @property {boolean} [isLoading] - Whether the card is in a loading state
  * @property {string} [className] - Additional CSS classes to apply to the card
  * @property {(id: string) => void} [onEdit] - Callback when edit action is triggered
@@ -72,8 +71,8 @@ export type InflowCardData = {
  * @property {(id: string) => void} [onClick] - Callback when the card is clicked
  * @property {boolean} [disabled] - Whether the card interactions are disabled
  */
-export interface InflowCardProps {
-  inflow: InflowCardData
+export interface ExpenseCardProps {
+  expense: ExpenseCardData
   isLoading?: boolean
   className?: string
   onEdit?: (id: string) => void
@@ -82,62 +81,46 @@ export interface InflowCardProps {
   disabled?: boolean
 }
 
-/**
- * InflowCard component displays inflow information in a card format
- * @component
- * @example
- * ```tsx
- * <InflowCard
- *   inflow={inflowData}
- *   onEdit={(id) => handleEdit(id)}
- *   onDelete={(id) => handleDelete(id)}
- * />
- * ```
- */
-export const InflowCard: FC<InflowCardProps> = ({
-  inflow,
+export function ExpenseCard({
+  expense,
   isLoading = false,
   className,
   onEdit,
   onDelete,
   onClick,
   disabled = false
-}) => {
-  // Amount is already formatted from the backend
-  const formattedAmount = inflow.amount
-
-  // Format the relative time (e.g., "2 hours ago")
+}: ExpenseCardProps) {
+  // Format date to relative time (e.g., "2 hours ago")
   const formattedDate = formatDistanceToNow(
-    new Date(inflow.createdAt),
+    new Date(expense.createdAt),
     {
       addSuffix: true
     }
   )
 
-  const handleEdit = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (!disabled && onEdit) {
-      onEdit(inflow.id)
-    }
-  }
-
-  const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    if (!disabled && onDelete) {
-      onDelete(inflow.id)
-    }
-  }
-
-  const handleClick = () => {
-    if (!disabled && onClick) {
-      onClick(inflow.id)
-    }
-  }
-
+  // Format exact date for tooltip
   const exactDate = format(
-    new Date(inflow.createdAt),
+    new Date(expense.createdAt),
     'PPP'
   )
+
+  // Amount is already formatted from backend, but we want to ensure it's negative
+  const formattedAmount = expense.amount.startsWith('-')
+    ? expense.amount
+    : `-${expense.amount}`
+
+  const handleClick =
+    onClick && !disabled
+      ? () => onClick(expense.id)
+      : undefined
+  const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onEdit?.(expense.id)
+  }
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onDelete?.(expense.id)
+  }
 
   return (
     <Card
@@ -153,19 +136,19 @@ export const InflowCard: FC<InflowCardProps> = ({
       )}
       onClick={handleClick}
     >
-      {/* Visual indicator for inflow */}
-      <div className="absolute left-0 top-0 h-full w-1 bg-emerald-500 rounded-l" />
+      {/* Visual indicator for expense - red line */}
+      <div className="absolute left-0 top-0 h-full w-1 bg-red-500 rounded-l" />
 
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <ArrowUpFromLine className="h-4 w-4 text-emerald-500" />
-            <p className="font-semibold text-base text-emerald-600 leading-none">
+            <ArrowDownFromLine className="h-4 w-4 text-red-500" />
+            <p className="font-semibold text-base leading-none text-red-600">
               {formattedAmount}
             </p>
           </div>
           <Tooltip>
-            <TooltipTrigger className="flex items-center gap-1.5 text-muted-foreground text-sm transition-colors hover:text-foreground">
+            <TooltipTrigger className="flex items-center gap-1.5 text-muted-foreground text-sm hover:text-foreground transition-colors">
               <Calendar className="h-3.5 w-3.5" />
               {formattedDate}
             </TooltipTrigger>
@@ -176,6 +159,16 @@ export const InflowCard: FC<InflowCardProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Category badge - could be first tag or dedicated category field */}
+          {expense.tags[0] && (
+            <Badge
+              variant="secondary"
+              className="bg-red-100 text-red-700 hover:bg-red-200"
+            >
+              {expense.tags[0]}
+            </Badge>
+          )}
+
           {/* Quick action buttons that appear on hover */}
           {(onEdit || onDelete) && (
             <div className="opacity-0 group-hover:opacity-100 transition-opacity">
@@ -185,20 +178,17 @@ export const InflowCard: FC<InflowCardProps> = ({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-8 w-8 p-0"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleEdit(e)
-                      }}
+                      className="h-8 w-8 p-0 hover:text-red-600"
+                      onClick={handleEdit}
                     >
                       <Pencil className="h-4 w-4" />
                       <span className="sr-only">
-                        Edit inflow
+                        Edit expense
                       </span>
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    Edit inflow
+                    Edit expense
                   </TooltipContent>
                 </Tooltip>
               )}
@@ -231,7 +221,7 @@ export const InflowCard: FC<InflowCardProps> = ({
                 )}
                 {onDelete && (
                   <DropdownMenuItem
-                    className="text-destructive focus:bg-destructive/10"
+                    className="text-red-600 focus:bg-red-50"
                     onClick={handleDelete}
                   >
                     <Trash className="mr-2 h-4 w-4" />
@@ -245,18 +235,25 @@ export const InflowCard: FC<InflowCardProps> = ({
       </CardHeader>
 
       <CardContent>
-        <p className="line-clamp-2 text-sm">
-          {inflow.description}
-        </p>
+        {expense.description ? (
+          <p className="line-clamp-2 text-sm">
+            {expense.description}
+          </p>
+        ) : (
+          <p className="text-sm text-muted-foreground italic">
+            No description provided
+          </p>
+        )}
       </CardContent>
 
-      {inflow.tags && inflow.tags.length > 0 && (
+      {expense.tags && expense.tags.length > 1 && (
         <CardFooter className="flex flex-wrap gap-1.5">
-          {inflow.tags.map((tag) => (
+          {/* Skip first tag as it's shown as category */}
+          {expense.tags.slice(1).map((tag) => (
             <Badge
               key={tag}
               variant="secondary"
-              className="bg-secondary/50 px-2 py-0.5 text-xs transition-colors hover:bg-secondary/70"
+              className="text-xs px-2 py-0.5 bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
             >
               {tag}
             </Badge>
@@ -265,7 +262,7 @@ export const InflowCard: FC<InflowCardProps> = ({
       )}
 
       {/* Focus/Active state indicator */}
-      <div className="absolute inset-0 rounded-lg opacity-0 ring-2 ring-primary ring-offset-2 focus-within:opacity-100 group-focus:opacity-100" />
+      <div className="absolute inset-0 rounded-lg ring-2 ring-offset-2 ring-red-500 opacity-0 focus-within:opacity-100 group-focus:opacity-100" />
     </Card>
   )
 }
