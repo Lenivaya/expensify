@@ -159,16 +159,6 @@ export function ExpenseCard({
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Category badge - could be first tag or dedicated category field */}
-          {expense.tags[0] && (
-            <Badge
-              variant="secondary"
-              className="bg-red-100 text-red-700 hover:bg-red-200"
-            >
-              {expense.tags[0]}
-            </Badge>
-          )}
-
           {/* Quick action buttons that appear on hover */}
           {(onEdit || onDelete) && (
             <div className="opacity-0 group-hover:opacity-100 transition-opacity">
@@ -246,10 +236,9 @@ export function ExpenseCard({
         )}
       </CardContent>
 
-      {expense.tags && expense.tags.length > 1 && (
+      {expense.tags && expense.tags.length > 0 && (
         <CardFooter className="flex flex-wrap gap-1.5">
-          {/* Skip first tag as it's shown as category */}
-          {expense.tags.slice(1).map((tag) => (
+          {expense.tags.map((tag) => (
             <Badge
               key={tag}
               variant="secondary"

@@ -30,6 +30,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <div style={{ width: '400px' }}>
