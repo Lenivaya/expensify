@@ -91,12 +91,12 @@ export const WithCustomHeader: Story = {
   args: {
     inflows: sampleInflows,
     header: (
-      <h2 className="text-xl font-semibold">
+      <h2 className="font-semibold text-xl">
         Recent Inflows
       </h2>
     ),
     footer: (
-      <p className="text-sm text-muted-foreground">
+      <p className="text-muted-foreground text-sm">
         Showing all inflows
       </p>
     )

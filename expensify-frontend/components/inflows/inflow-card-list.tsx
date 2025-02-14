@@ -225,7 +225,7 @@ export const InflowCardList: React.FC<
               onClick={onInflowClick}
               className={cn(
                 layout === 'compact' &&
-                  'shadow-none border-0 bg-transparent'
+                  'border-0 bg-transparent shadow-none'
               )}
             />
           ))}

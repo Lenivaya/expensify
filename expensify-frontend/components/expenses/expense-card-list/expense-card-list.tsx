@@ -210,7 +210,7 @@ export const ExpenseCardList: React.FC<
                   isLoading={true}
                   className={cn(
                     layout === 'compact' &&
-                      'shadow-none border-0 bg-transparent'
+                      'border-0 bg-transparent shadow-none'
                   )}
                 />
               ))
@@ -223,7 +223,7 @@ export const ExpenseCardList: React.FC<
                   onClick={onExpenseClick}
                   className={cn(
                     layout === 'compact' &&
-                      'shadow-none border-0 bg-transparent'
+                      'border-0 bg-transparent shadow-none'
                   )}
                 />
               ))}

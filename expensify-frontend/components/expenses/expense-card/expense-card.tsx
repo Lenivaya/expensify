@@ -137,18 +137,18 @@ export function ExpenseCard({
       onClick={handleClick}
     >
       {/* Visual indicator for expense - red line */}
-      <div className="absolute left-0 top-0 h-full w-1 bg-red-500 rounded-l" />
+      <div className="absolute top-0 left-0 h-full w-1 rounded-l bg-red-500" />
 
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <ArrowDownFromLine className="h-4 w-4 text-red-500" />
-            <p className="font-semibold text-base leading-none text-red-600">
+            <p className="font-semibold text-base text-red-600 leading-none">
               {formattedAmount}
             </p>
           </div>
           <Tooltip>
-            <TooltipTrigger className="flex items-center gap-1.5 text-muted-foreground text-sm hover:text-foreground transition-colors">
+            <TooltipTrigger className="flex items-center gap-1.5 text-muted-foreground text-sm transition-colors hover:text-foreground">
               <Calendar className="h-3.5 w-3.5" />
               {formattedDate}
             </TooltipTrigger>
@@ -161,7 +161,7 @@ export function ExpenseCard({
         <div className="flex items-center gap-2">
           {/* Quick action buttons that appear on hover */}
           {(onEdit || onDelete) && (
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="opacity-0 transition-opacity group-hover:opacity-100">
               {onEdit && (
                 <Tooltip>
                   <TooltipTrigger asChild={true}>
@@ -230,7 +230,7 @@ export function ExpenseCard({
             {expense.description}
           </p>
         ) : (
-          <p className="text-sm text-muted-foreground italic">
+          <p className="text-muted-foreground text-sm italic">
             No description provided
           </p>
         )}
@@ -242,7 +242,7 @@ export function ExpenseCard({
             <Badge
               key={tag}
               variant="secondary"
-              className="text-xs px-2 py-0.5 bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
+              className="bg-red-50 px-2 py-0.5 text-red-700 text-xs transition-colors hover:bg-red-100"
             >
               {tag}
             </Badge>
@@ -251,7 +251,7 @@ export function ExpenseCard({
       )}
 
       {/* Focus/Active state indicator */}
-      <div className="absolute inset-0 rounded-lg ring-2 ring-offset-2 ring-red-500 opacity-0 focus-within:opacity-100 group-focus:opacity-100" />
+      <div className="absolute inset-0 rounded-lg opacity-0 ring-2 ring-red-500 ring-offset-2 focus-within:opacity-100 group-focus:opacity-100" />
     </Card>
   )
 }

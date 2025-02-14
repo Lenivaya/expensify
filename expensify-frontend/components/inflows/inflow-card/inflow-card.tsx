@@ -154,7 +154,7 @@ export const InflowCard: FC<InflowCardProps> = ({
       onClick={handleClick}
     >
       {/* Visual indicator for inflow */}
-      <div className="absolute left-0 top-0 h-full w-1 bg-emerald-500 rounded-l" />
+      <div className="absolute top-0 left-0 h-full w-1 rounded-l bg-emerald-500" />
 
       <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
         <div className="space-y-1">
@@ -178,7 +178,7 @@ export const InflowCard: FC<InflowCardProps> = ({
         <div className="flex items-center gap-2">
           {/* Quick action buttons that appear on hover */}
           {(onEdit || onDelete) && (
-            <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="opacity-0 transition-opacity group-hover:opacity-100">
               {onEdit && (
                 <Tooltip>
                   <TooltipTrigger asChild={true}>

@@ -108,12 +108,12 @@ export const WithCustomHeader: Story = {
   args: {
     expenses: sampleExpenses,
     header: (
-      <h2 className="text-xl font-semibold">
+      <h2 className="font-semibold text-xl">
         Recent Expenses
       </h2>
     ),
     footer: (
-      <p className="text-sm text-muted-foreground">
+      <p className="text-muted-foreground text-sm">
         Showing all expenses
       </p>
     )

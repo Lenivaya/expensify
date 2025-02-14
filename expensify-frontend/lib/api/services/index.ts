@@ -3,14 +3,20 @@
  * Do not make direct changes to the file.
  */
 
-import { AuthService, authService } from './AuthService'
-import { UsersService, usersService } from './UsersService'
 import {
-  ExpensesService,
+  type AuthService,
+  authService
+} from './AuthService'
+import {
+  type UsersService,
+  usersService
+} from './UsersService'
+import {
+  type ExpensesService,
   expensesService
 } from './ExpensesService'
 import {
-  InflowsService,
+  type InflowsService,
   inflowsService
 } from './InflowsService'
 export type Services = {
