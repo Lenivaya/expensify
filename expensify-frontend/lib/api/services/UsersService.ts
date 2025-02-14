@@ -3,4810 +3,1911 @@
  * Do not make direct changes to the file.
  */
 
-import type { paths } from '../schema'
-import type {
-  AreAllOptional,
-  InvalidateQueryFilters,
-  MutationFiltersByMutationKey,
-  MutationFiltersByParameters,
-  MutationVariables,
-  OperationInfiniteData,
-  PartialParameters,
-  QueryFiltersByParameters,
-  QueryFiltersByQueryKey,
-  QueryFnOptionsByParameters,
-  QueryFnOptionsByQueryKey,
-  RequestFnResponse,
-  ServiceOperationEnsureInfiniteQueryDataOptions,
-  ServiceOperationEnsureQueryDataOptions,
-  ServiceOperationFetchInfiniteQueryOptions,
-  ServiceOperationFetchQueryOptions,
-  ServiceOperationInfiniteQueryKey,
-  ServiceOperationMutationFnOptions,
-  ServiceOperationMutationKey,
-  ServiceOperationQueryKey,
-  ServiceOperationUseMutationOptions,
-  UseQueryOptionsForUseQueries,
-  UseQueryOptionsForUseSuspenseQuery,
-  WithOptional
-} from '@openapi-qraft/tanstack-query-react-types'
-import type {
-  DefinedInitialDataInfiniteOptions,
-  DefinedInitialDataOptions,
-  DefinedUseInfiniteQueryResult,
-  DefinedUseQueryResult,
-  UndefinedInitialDataInfiniteOptions,
-  UndefinedInitialDataOptions,
-  UseInfiniteQueryResult,
-  UseMutationResult,
-  UseQueryResult,
-  UseSuspenseInfiniteQueryOptions,
-  UseSuspenseInfiniteQueryResult,
-  UseSuspenseQueryOptions,
-  UseSuspenseQueryResult
-} from '@tanstack/react-query'
-import type {
-  CancelOptions,
-  InfiniteQueryPageParamsOptions,
-  InvalidateOptions,
-  Mutation,
-  MutationState,
-  NoInfer,
-  QueryState,
-  RefetchOptions,
-  ResetOptions,
-  SetDataOptions,
-  Updater
-} from '@tanstack/query-core'
+import type { paths } from "../schema";
+import type { AreAllOptional, InvalidateQueryFilters, MutationFiltersByMutationKey, MutationFiltersByParameters, MutationVariables, OperationInfiniteData, PartialParameters, QueryFiltersByParameters, QueryFiltersByQueryKey, QueryFnOptionsByParameters, QueryFnOptionsByQueryKey, RequestFnResponse, ServiceOperationEnsureInfiniteQueryDataOptions, ServiceOperationEnsureQueryDataOptions, ServiceOperationFetchInfiniteQueryOptions, ServiceOperationFetchQueryOptions, ServiceOperationInfiniteQueryKey, ServiceOperationMutationFnOptions, ServiceOperationMutationKey, ServiceOperationQueryKey, ServiceOperationUseMutationOptions, UseQueryOptionsForUseQueries, UseQueryOptionsForUseSuspenseQuery, WithOptional } from "@openapi-qraft/tanstack-query-react-types";
+import type { DefinedInitialDataInfiniteOptions, DefinedInitialDataOptions, DefinedUseInfiniteQueryResult, DefinedUseQueryResult, UndefinedInitialDataInfiniteOptions, UndefinedInitialDataOptions, UseInfiniteQueryResult, UseMutationResult, UseQueryResult, UseSuspenseInfiniteQueryOptions, UseSuspenseInfiniteQueryResult, UseSuspenseQueryOptions, UseSuspenseQueryResult } from "@tanstack/react-query";
+import type { CancelOptions, InfiniteQueryPageParamsOptions, InvalidateOptions, Mutation, MutationState, NoInfer, QueryState, RefetchOptions, ResetOptions, SetDataOptions, Updater } from "@tanstack/query-core";
 export interface UsersService {
-  /**
-   * @summary Updates user
-   * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
-   */
-  usersControllerUpdateUser: {
     /**
      * @summary Updates user
      * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
      */
-    getMutationKey(
-      parameters: UsersControllerUpdateUserParameters | void
-    ): ServiceOperationMutationKey<
-      UsersControllerUpdateUserSchema,
-      UsersControllerUpdateUserParameters
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation()
-     * mutate({
-     *     body: bodyPayload,
-     *     path: {
-     *         id: id
-     *     }
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends UsersControllerUpdateUserBody,
-      TContext = unknown
-    >(
-      parameters: UsersControllerUpdateUserParameters,
-      options?: ServiceOperationUseMutationOptions<
-        UsersControllerUpdateUserSchema,
-        UsersControllerUpdateUserData,
-        UsersControllerUpdateUserParameters,
-        TVariables,
-        UsersControllerUpdateUserError,
-        TContext
-      >
-    ): UseMutationResult<
-      UsersControllerUpdateUserData,
-      UsersControllerUpdateUserError | Error,
-      AreAllOptional<TVariables> extends true
-        ? TVariables | void
-        : TVariables,
-      TContext
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation()
-     * mutate({
-     *     body: bodyPayload,
-     *     path: {
-     *         id: id
-     *     }
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends MutationVariables<
-        UsersControllerUpdateUserBody,
-        UsersControllerUpdateUserParameters
-      >,
-      TContext = unknown
-    >(
-      parameters: void,
-      options?: ServiceOperationUseMutationOptions<
-        UsersControllerUpdateUserSchema,
-        UsersControllerUpdateUserData,
-        UsersControllerUpdateUserParameters,
-        TVariables,
-        UsersControllerUpdateUserError,
-        TContext
-      >
-    ): UseMutationResult<
-      UsersControllerUpdateUserData,
-      UsersControllerUpdateUserError | Error,
-      TVariables,
-      TContext
-    >
-    /**
-     * Returns the count of currently in-progress mutations.
-     *
-     * @summary Updates user
-     * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-     * @example Check how many mutations are currently in progress for the specified service method.
-     * ```ts
-     * const usersControllerUpdateUserTotal = qraft.usersService.usersControllerUpdateUser.useIsMutating()
-     * ```
-     * @example Check how many mutations are currently in progress with the specified parameters.
-     * ```ts
-     * const usersControllerUpdateUserTotal = qraft.usersService.usersControllerUpdateUser.useIsMutating({
-     *     parameters: {
-     *         path: {
-     *             id: id
-     *         }
-     *     }
-     * })
-     * ```
-     */
-    useIsMutating<TContext = unknown>(
-      filters?:
-        | MutationFiltersByParameters<
-            UsersControllerUpdateUserBody,
-            UsersControllerUpdateUserData,
-            UsersControllerUpdateUserParameters,
-            UsersControllerUpdateUserError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            UsersControllerUpdateUserSchema,
-            UsersControllerUpdateUserBody,
-            UsersControllerUpdateUserData,
-            UsersControllerUpdateUserParameters,
-            UsersControllerUpdateUserError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Updates user
-     * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
-     */
-    isMutating<TContext>(
-      filters?:
-        | MutationFiltersByParameters<
-            UsersControllerUpdateUserBody,
-            UsersControllerUpdateUserData,
-            UsersControllerUpdateUserParameters,
-            UsersControllerUpdateUserError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            UsersControllerUpdateUserSchema,
-            UsersControllerUpdateUserBody,
-            UsersControllerUpdateUserData,
-            UsersControllerUpdateUserParameters,
-            UsersControllerUpdateUserError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Updates user
-     * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
-     */
-    (
-      options: ServiceOperationMutationFnOptions<
-        UsersControllerUpdateUserBody,
-        UsersControllerUpdateUserParameters
-      >,
-      client?: (
-        schema: UsersControllerUpdateUserSchema,
-        options: ServiceOperationMutationFnOptions<
-          UsersControllerUpdateUserBody,
-          UsersControllerUpdateUserParameters
-        >
-      ) => Promise<
-        RequestFnResponse<
-          UsersControllerUpdateUserData,
-          UsersControllerUpdateUserError
-        >
-      >
-    ): Promise<
-      RequestFnResponse<
-        UsersControllerUpdateUserData,
-        UsersControllerUpdateUserError
-      >
-    >
-    /**
-     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-     *
-     * @summary Updates user
-     * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-     * @example Get all variables of all running mutations.
-     * ```ts
-     * const usersControllerUpdateUserPendingMutationVariables = qraft.usersService.usersControllerUpdateUser.useMutationState({
-     *     filters: {
-     *         status: "pending"
-     *     },
-     *     select: mutation => mutation.state.variables
-     * })
-     * ```
-     * @example Get all data for specific mutations via the `parameters`.
-     * ```ts
-     * const usersControllerUpdateUserMutationData = qraft.usersService.usersControllerUpdateUser.useMutationState({
-     *     filters: {
-     *         parameters: {
-     *             path: {
-     *                 id: id
-     *             }
-     *         }
-     *     },
-     *     select: mutation => mutation.state.data
-     * })
-     * ```
-     */
-    useMutationState<
-      TContext = unknown,
-      TResult = MutationState<
-        UsersControllerUpdateUserData,
-        UsersControllerUpdateUserError,
-        MutationVariables<
-          UsersControllerUpdateUserBody,
-          UsersControllerUpdateUserParameters
-        >,
-        TContext
-      >
-    >(options?: {
-      filters?:
-        | MutationFiltersByParameters<
-            UsersControllerUpdateUserBody,
-            UsersControllerUpdateUserData,
-            UsersControllerUpdateUserParameters,
-            UsersControllerUpdateUserError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            UsersControllerUpdateUserSchema,
-            UsersControllerUpdateUserBody,
-            UsersControllerUpdateUserData,
-            UsersControllerUpdateUserParameters,
-            UsersControllerUpdateUserError,
-            TContext
-          >
-      select?: (
-        mutation: Mutation<
-          UsersControllerUpdateUserData,
-          UsersControllerUpdateUserError,
-          MutationVariables<
-            UsersControllerUpdateUserBody,
-            UsersControllerUpdateUserParameters
-          >,
-          TContext
-        >
-      ) => TResult
-    }): Array<TResult>
-    schema: UsersControllerUpdateUserSchema
-    types: {
-      parameters: UsersControllerUpdateUserParameters
-      data: UsersControllerUpdateUserData
-      error: UsersControllerUpdateUserError
-      body: UsersControllerUpdateUserBody
-    }
-  }
-  /**
-   * @summary Deletes user
-   * @description Deletes a user account. This operation cannot be undone.
-   */
-  usersControllerDeleteUser: {
+    usersControllerUpdateUser: {
+        /**
+         * @summary Updates user
+         * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
+         */
+        getMutationKey(parameters: UsersControllerUpdateUserParameters | void): ServiceOperationMutationKey<UsersControllerUpdateUserSchema, UsersControllerUpdateUserParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     path: {
+         *         id: id
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends UsersControllerUpdateUserBody, TContext = unknown>(parameters: UsersControllerUpdateUserParameters, options?: ServiceOperationUseMutationOptions<UsersControllerUpdateUserSchema, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, TVariables, UsersControllerUpdateUserError, TContext>): UseMutationResult<UsersControllerUpdateUserData, UsersControllerUpdateUserError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerUpdateUser.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     path: {
+         *         id: id
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<UsersControllerUpdateUserBody, UsersControllerUpdateUserParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<UsersControllerUpdateUserSchema, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, TVariables, UsersControllerUpdateUserError, TContext>): UseMutationResult<UsersControllerUpdateUserData, UsersControllerUpdateUserError | Error, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Updates user
+         * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const usersControllerUpdateUserTotal = qraft.usersService.usersControllerUpdateUser.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const usersControllerUpdateUserTotal = qraft.usersService.usersControllerUpdateUser.useIsMutating({
+         *     parameters: {
+         *         path: {
+         *             id: id
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<UsersControllerUpdateUserBody, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, UsersControllerUpdateUserError, TContext> | MutationFiltersByMutationKey<UsersControllerUpdateUserSchema, UsersControllerUpdateUserBody, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, UsersControllerUpdateUserError, TContext>): number;
+        /**
+         * @summary Updates user
+         * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
+         */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<UsersControllerUpdateUserBody, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, UsersControllerUpdateUserError, TContext> | MutationFiltersByMutationKey<UsersControllerUpdateUserSchema, UsersControllerUpdateUserBody, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, UsersControllerUpdateUserError, TContext>): number;
+        /**
+         * @summary Updates user
+         * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
+         */
+        (options: ServiceOperationMutationFnOptions<UsersControllerUpdateUserBody, UsersControllerUpdateUserParameters>, client?: (schema: UsersControllerUpdateUserSchema, options: ServiceOperationMutationFnOptions<UsersControllerUpdateUserBody, UsersControllerUpdateUserParameters>) => Promise<RequestFnResponse<UsersControllerUpdateUserData, UsersControllerUpdateUserError>>): Promise<RequestFnResponse<UsersControllerUpdateUserData, UsersControllerUpdateUserError>>;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Updates user
+         * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const usersControllerUpdateUserPendingMutationVariables = qraft.usersService.usersControllerUpdateUser.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const usersControllerUpdateUserMutationData = qraft.usersService.usersControllerUpdateUser.useMutationState({
+         *     filters: {
+         *         parameters: {
+         *             path: {
+         *                 id: id
+         *             }
+         *         }
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<UsersControllerUpdateUserData, UsersControllerUpdateUserError, MutationVariables<UsersControllerUpdateUserBody, UsersControllerUpdateUserParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<UsersControllerUpdateUserBody, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, UsersControllerUpdateUserError, TContext> | MutationFiltersByMutationKey<UsersControllerUpdateUserSchema, UsersControllerUpdateUserBody, UsersControllerUpdateUserData, UsersControllerUpdateUserParameters, UsersControllerUpdateUserError, TContext>;
+            select?: (mutation: Mutation<UsersControllerUpdateUserData, UsersControllerUpdateUserError, MutationVariables<UsersControllerUpdateUserBody, UsersControllerUpdateUserParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        schema: UsersControllerUpdateUserSchema;
+        types: {
+            parameters: UsersControllerUpdateUserParameters;
+            data: UsersControllerUpdateUserData;
+            error: UsersControllerUpdateUserError;
+            body: UsersControllerUpdateUserBody;
+        };
+    };
     /**
      * @summary Deletes user
      * @description Deletes a user account. This operation cannot be undone.
      */
-    getMutationKey(
-      parameters: UsersControllerDeleteUserParameters | void
-    ): ServiceOperationMutationKey<
-      UsersControllerDeleteUserSchema,
-      UsersControllerDeleteUserParameters
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation()
-     * mutate({
-     *     body: bodyPayload,
-     *     path: {
-     *         id: id
-     *     }
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends UsersControllerDeleteUserBody,
-      TContext = unknown
-    >(
-      parameters: UsersControllerDeleteUserParameters,
-      options?: ServiceOperationUseMutationOptions<
-        UsersControllerDeleteUserSchema,
-        UsersControllerDeleteUserData,
-        UsersControllerDeleteUserParameters,
-        TVariables,
-        UsersControllerDeleteUserError,
-        TContext
-      >
-    ): UseMutationResult<
-      UsersControllerDeleteUserData,
-      UsersControllerDeleteUserError | Error,
-      AreAllOptional<TVariables> extends true
-        ? TVariables | void
-        : TVariables,
-      TContext
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation()
-     * mutate({
-     *     body: bodyPayload,
-     *     path: {
-     *         id: id
-     *     }
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends MutationVariables<
-        UsersControllerDeleteUserBody,
-        UsersControllerDeleteUserParameters
-      >,
-      TContext = unknown
-    >(
-      parameters: void,
-      options?: ServiceOperationUseMutationOptions<
-        UsersControllerDeleteUserSchema,
-        UsersControllerDeleteUserData,
-        UsersControllerDeleteUserParameters,
-        TVariables,
-        UsersControllerDeleteUserError,
-        TContext
-      >
-    ): UseMutationResult<
-      UsersControllerDeleteUserData,
-      UsersControllerDeleteUserError | Error,
-      TVariables,
-      TContext
-    >
-    /**
-     * Returns the count of currently in-progress mutations.
-     *
-     * @summary Deletes user
-     * @description Deletes a user account. This operation cannot be undone.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-     * @example Check how many mutations are currently in progress for the specified service method.
-     * ```ts
-     * const usersControllerDeleteUserTotal = qraft.usersService.usersControllerDeleteUser.useIsMutating()
-     * ```
-     * @example Check how many mutations are currently in progress with the specified parameters.
-     * ```ts
-     * const usersControllerDeleteUserTotal = qraft.usersService.usersControllerDeleteUser.useIsMutating({
-     *     parameters: {
-     *         path: {
-     *             id: id
-     *         }
-     *     }
-     * })
-     * ```
-     */
-    useIsMutating<TContext = unknown>(
-      filters?:
-        | MutationFiltersByParameters<
-            UsersControllerDeleteUserBody,
-            UsersControllerDeleteUserData,
-            UsersControllerDeleteUserParameters,
-            UsersControllerDeleteUserError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            UsersControllerDeleteUserSchema,
-            UsersControllerDeleteUserBody,
-            UsersControllerDeleteUserData,
-            UsersControllerDeleteUserParameters,
-            UsersControllerDeleteUserError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Deletes user
-     * @description Deletes a user account. This operation cannot be undone.
-     */
-    isMutating<TContext>(
-      filters?:
-        | MutationFiltersByParameters<
-            UsersControllerDeleteUserBody,
-            UsersControllerDeleteUserData,
-            UsersControllerDeleteUserParameters,
-            UsersControllerDeleteUserError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            UsersControllerDeleteUserSchema,
-            UsersControllerDeleteUserBody,
-            UsersControllerDeleteUserData,
-            UsersControllerDeleteUserParameters,
-            UsersControllerDeleteUserError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Deletes user
-     * @description Deletes a user account. This operation cannot be undone.
-     */
-    (
-      options: ServiceOperationMutationFnOptions<
-        UsersControllerDeleteUserBody,
-        UsersControllerDeleteUserParameters
-      >,
-      client?: (
-        schema: UsersControllerDeleteUserSchema,
-        options: ServiceOperationMutationFnOptions<
-          UsersControllerDeleteUserBody,
-          UsersControllerDeleteUserParameters
-        >
-      ) => Promise<
-        RequestFnResponse<
-          UsersControllerDeleteUserData,
-          UsersControllerDeleteUserError
-        >
-      >
-    ): Promise<
-      RequestFnResponse<
-        UsersControllerDeleteUserData,
-        UsersControllerDeleteUserError
-      >
-    >
-    /**
-     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-     *
-     * @summary Deletes user
-     * @description Deletes a user account. This operation cannot be undone.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-     * @example Get all variables of all running mutations.
-     * ```ts
-     * const usersControllerDeleteUserPendingMutationVariables = qraft.usersService.usersControllerDeleteUser.useMutationState({
-     *     filters: {
-     *         status: "pending"
-     *     },
-     *     select: mutation => mutation.state.variables
-     * })
-     * ```
-     * @example Get all data for specific mutations via the `parameters`.
-     * ```ts
-     * const usersControllerDeleteUserMutationData = qraft.usersService.usersControllerDeleteUser.useMutationState({
-     *     filters: {
-     *         parameters: {
-     *             path: {
-     *                 id: id
-     *             }
-     *         }
-     *     },
-     *     select: mutation => mutation.state.data
-     * })
-     * ```
-     */
-    useMutationState<
-      TContext = unknown,
-      TResult = MutationState<
-        UsersControllerDeleteUserData,
-        UsersControllerDeleteUserError,
-        MutationVariables<
-          UsersControllerDeleteUserBody,
-          UsersControllerDeleteUserParameters
-        >,
-        TContext
-      >
-    >(options?: {
-      filters?:
-        | MutationFiltersByParameters<
-            UsersControllerDeleteUserBody,
-            UsersControllerDeleteUserData,
-            UsersControllerDeleteUserParameters,
-            UsersControllerDeleteUserError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            UsersControllerDeleteUserSchema,
-            UsersControllerDeleteUserBody,
-            UsersControllerDeleteUserData,
-            UsersControllerDeleteUserParameters,
-            UsersControllerDeleteUserError,
-            TContext
-          >
-      select?: (
-        mutation: Mutation<
-          UsersControllerDeleteUserData,
-          UsersControllerDeleteUserError,
-          MutationVariables<
-            UsersControllerDeleteUserBody,
-            UsersControllerDeleteUserParameters
-          >,
-          TContext
-        >
-      ) => TResult
-    }): Array<TResult>
-    schema: UsersControllerDeleteUserSchema
-    types: {
-      parameters: UsersControllerDeleteUserParameters
-      data: UsersControllerDeleteUserData
-      error: UsersControllerDeleteUserError
-      body: UsersControllerDeleteUserBody
-    }
-  }
-  /**
-   * @summary Get current balance
-   * @description Get user's current balance including total inflows and expenses
-   */
-  usersControllerGetCurrentBalance: {
+    usersControllerDeleteUser: {
+        /**
+         * @summary Deletes user
+         * @description Deletes a user account. This operation cannot be undone.
+         */
+        getMutationKey(parameters: UsersControllerDeleteUserParameters | void): ServiceOperationMutationKey<UsersControllerDeleteUserSchema, UsersControllerDeleteUserParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     path: {
+         *         id: id
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends UsersControllerDeleteUserBody, TContext = unknown>(parameters: UsersControllerDeleteUserParameters, options?: ServiceOperationUseMutationOptions<UsersControllerDeleteUserSchema, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, TVariables, UsersControllerDeleteUserError, TContext>): UseMutationResult<UsersControllerDeleteUserData, UsersControllerDeleteUserError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.usersService.usersControllerDeleteUser.useMutation()
+         * mutate({
+         *     body: bodyPayload,
+         *     path: {
+         *         id: id
+         *     }
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<UsersControllerDeleteUserBody, UsersControllerDeleteUserParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<UsersControllerDeleteUserSchema, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, TVariables, UsersControllerDeleteUserError, TContext>): UseMutationResult<UsersControllerDeleteUserData, UsersControllerDeleteUserError | Error, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Deletes user
+         * @description Deletes a user account. This operation cannot be undone.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const usersControllerDeleteUserTotal = qraft.usersService.usersControllerDeleteUser.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const usersControllerDeleteUserTotal = qraft.usersService.usersControllerDeleteUser.useIsMutating({
+         *     parameters: {
+         *         path: {
+         *             id: id
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError, TContext> | MutationFiltersByMutationKey<UsersControllerDeleteUserSchema, UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError, TContext>): number;
+        /**
+         * @summary Deletes user
+         * @description Deletes a user account. This operation cannot be undone.
+         */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError, TContext> | MutationFiltersByMutationKey<UsersControllerDeleteUserSchema, UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError, TContext>): number;
+        /**
+         * @summary Deletes user
+         * @description Deletes a user account. This operation cannot be undone.
+         */
+        (options: ServiceOperationMutationFnOptions<UsersControllerDeleteUserBody, UsersControllerDeleteUserParameters>, client?: (schema: UsersControllerDeleteUserSchema, options: ServiceOperationMutationFnOptions<UsersControllerDeleteUserBody, UsersControllerDeleteUserParameters>) => Promise<RequestFnResponse<UsersControllerDeleteUserData, UsersControllerDeleteUserError>>): Promise<RequestFnResponse<UsersControllerDeleteUserData, UsersControllerDeleteUserError>>;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Deletes user
+         * @description Deletes a user account. This operation cannot be undone.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const usersControllerDeleteUserPendingMutationVariables = qraft.usersService.usersControllerDeleteUser.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const usersControllerDeleteUserMutationData = qraft.usersService.usersControllerDeleteUser.useMutationState({
+         *     filters: {
+         *         parameters: {
+         *             path: {
+         *                 id: id
+         *             }
+         *         }
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<UsersControllerDeleteUserData, UsersControllerDeleteUserError, MutationVariables<UsersControllerDeleteUserBody, UsersControllerDeleteUserParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError, TContext> | MutationFiltersByMutationKey<UsersControllerDeleteUserSchema, UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError, TContext>;
+            select?: (mutation: Mutation<UsersControllerDeleteUserData, UsersControllerDeleteUserError, MutationVariables<UsersControllerDeleteUserBody, UsersControllerDeleteUserParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        schema: UsersControllerDeleteUserSchema;
+        types: {
+            parameters: UsersControllerDeleteUserParameters;
+            data: UsersControllerDeleteUserData;
+            error: UsersControllerDeleteUserError;
+            body: UsersControllerDeleteUserBody;
+        };
+    };
     /**
      * @summary Get current balance
      * @description Get user's current balance including total inflows and expenses
      */
-    cancelQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >,
-      options?: CancelOptions
-    ): Promise<void>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getQueryKey(
-      parameters: UsersControllerGetCurrentBalanceParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetCurrentBalanceSchema,
-      UsersControllerGetCurrentBalanceParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetCurrentBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetCurrentBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    fetchInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetCurrentBalanceParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetCurrentBalanceSchema,
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters,
-        TPageParam,
-        UsersControllerGetCurrentBalanceError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters
-      >
-    >
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    prefetchInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetCurrentBalanceParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetCurrentBalanceSchema,
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters,
-        TPageParam,
-        UsersControllerGetCurrentBalanceError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    ensureInfiniteQueryData<
-      TPageParam extends
-        UsersControllerGetCurrentBalanceParameters
-    >(
-      options: ServiceOperationEnsureInfiniteQueryDataOptions<
-        UsersControllerGetCurrentBalanceSchema,
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters,
-        TPageParam,
-        UsersControllerGetCurrentBalanceError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters
-      >
-    >
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    fetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetCurrentBalanceSchema,
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters,
-        UsersControllerGetCurrentBalanceError
-      >
-    ): Promise<UsersControllerGetCurrentBalanceData>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    prefetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetCurrentBalanceSchema,
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters,
-        UsersControllerGetCurrentBalanceError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    ensureQueryData(
-      options: ServiceOperationEnsureQueryDataOptions<
-        UsersControllerGetCurrentBalanceSchema,
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceParameters,
-        UsersControllerGetCurrentBalanceError
-      >
-    ): Promise<UsersControllerGetCurrentBalanceData>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getInfiniteQueryData(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceParameters
-        >
-      | undefined
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getQueriesData<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-    ): TInfinite extends true
-      ? Array<
-          [
-            queryKey: ServiceOperationInfiniteQueryKey<
-              UsersControllerGetCurrentBalanceSchema,
-              UsersControllerGetCurrentBalanceParameters
-            >,
-            data:
-              | NoInfer<
-                  OperationInfiniteData<
-                    UsersControllerGetCurrentBalanceData,
-                    UsersControllerGetCurrentBalanceParameters
-                  >
-                >
-              | undefined
-          ]
-        >
-      : Array<
-          [
-            queryKey: ServiceOperationQueryKey<
-              UsersControllerGetCurrentBalanceSchema,
-              UsersControllerGetCurrentBalanceParameters
-            >,
-            data:
-              | UsersControllerGetCurrentBalanceData
-              | undefined
-          ]
-        >
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getQueryData(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters
-    ): UsersControllerGetCurrentBalanceData | undefined
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getQueryState(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters
-    ):
-      | QueryState<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError
-        >
-      | undefined
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getInfiniteQueryState(
-      parameters:
-        | UsersControllerGetCurrentBalanceParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-    ):
-      | QueryState<
-          OperationInfiniteData<
-            UsersControllerGetCurrentBalanceData,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-          UsersControllerGetCurrentBalanceError
-        >
-      | undefined
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    invalidateQueries<TInfinite extends boolean = false>(
-      filters?: InvalidateQueryFilters<
-        UsersControllerGetCurrentBalanceSchema,
-        UsersControllerGetCurrentBalanceData,
-        TInfinite,
-        UsersControllerGetCurrentBalanceParameters,
-        UsersControllerGetCurrentBalanceError
-      >,
-      options?: InvalidateOptions
-    ): Promise<void>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    isFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-    ): number
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    <
-      TMeta extends Record<string, any>,
-      TSignal extends AbortSignal = AbortSignal
-    >(
-      options:
-        | QueryFnOptionsByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters,
-            TMeta,
-            TSignal
-          >
-        | QueryFnOptionsByParameters<
-            UsersControllerGetCurrentBalanceParameters,
-            TMeta,
-            TSignal
-          >,
-      client?: (
-        schema: UsersControllerGetCurrentBalanceSchema,
-        options: {
-          parameters: UsersControllerGetCurrentBalanceParameters
-          signal?: TSignal
-          meta?: TMeta
-        }
-      ) => Promise<
-        RequestFnResponse<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError
-        >
-      >
-    ): Promise<
-      RequestFnResponse<
-        UsersControllerGetCurrentBalanceData,
-        UsersControllerGetCurrentBalanceError
-      >
-    >
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    refetchQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >,
-      options?: RefetchOptions
-    ): Promise<void>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    removeQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-    ): void
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    resetQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >,
-      options?: ResetOptions
-    ): Promise<void>
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    setInfiniteQueryData(
-      parameters:
-        | UsersControllerGetCurrentBalanceParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-      updater: Updater<
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetCurrentBalanceData,
-              UsersControllerGetCurrentBalanceParameters
-            >
-          >
-        | undefined,
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetCurrentBalanceData,
-              UsersControllerGetCurrentBalanceParameters
-            >
-          >
-        | undefined
-      >,
-      options?: SetDataOptions
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceParameters
-        >
-      | undefined
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    setQueriesData<TInfinite extends boolean = false>(
-      filters:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >,
-      updater: Updater<
-        | NoInfer<UsersControllerGetCurrentBalanceData>
-        | undefined,
-        | NoInfer<UsersControllerGetCurrentBalanceData>
-        | undefined
-      >,
-      options?: SetDataOptions
-    ): Array<
-      UsersControllerGetCurrentBalanceData | undefined
-    >
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    setQueryData(
-      parameters:
-        | UsersControllerGetCurrentBalanceParameters
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-      updater: Updater<
-        | NoInfer<UsersControllerGetCurrentBalanceData>
-        | undefined,
-        | NoInfer<UsersControllerGetCurrentBalanceData>
-        | undefined
-      >,
-      options?: SetDataOptions
-    ): UsersControllerGetCurrentBalanceData | undefined
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getInfiniteQueryKey(
-      parameters: UsersControllerGetCurrentBalanceParameters
-    ): ServiceOperationInfiniteQueryKey<
-      UsersControllerGetCurrentBalanceSchema,
-      UsersControllerGetCurrentBalanceParameters
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetCurrentBalance.useInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetCurrentBalanceParameters,
-      TData = UsersControllerGetCurrentBalanceData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options: Omit<
-        UndefinedInitialDataInfiniteOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetCurrentBalanceData,
-          PartialParameters<TPageParam>
-        >
-    ): UseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetCurrentBalanceParameters
-      >,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetCurrentBalance.useInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetCurrentBalanceParameters,
-      TData = UsersControllerGetCurrentBalanceData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options: Omit<
-        DefinedInitialDataInfiniteOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetCurrentBalanceData,
-          PartialParameters<TPageParam>
-        >
-    ): DefinedUseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetCurrentBalanceParameters
-      >,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    /**
-     * Monitors the number of queries currently fetching, matching the provided filters.
-     * Useful for creating loading indicators or performing actions based on active requests.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-     * @example Checks the total number of queries fetching from the specified service method,
-     * both normal and infinite. If no parameters are provided, no filtering is applied.
-     * ```ts
-     * const usersControllerGetCurrentBalanceTotal = qraft.usersService.usersControllerGetCurrentBalance.useIsFetching()
-     * ```
-     * @example Checks the number of normal queries fetching with the specified parameters.
-     * ```ts
-     * const usersControllerGetCurrentBalanceByParametersTotal = qraft.usersService.usersControllerGetCurrentBalance.useIsFetching({
-     *     infinite: false,
-     *     parameters: {
-     *         path: {
-     *             id: id
-     *         }
-     *     }
-     * })
-     * ```
-     */
-    useIsFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceData,
-            TInfinite,
-            UsersControllerGetCurrentBalanceParameters,
-            UsersControllerGetCurrentBalanceError
-          >
-    ): number
-    /**
-     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-     *
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-     * ```ts
-     * const usersControllerGetCurrentBalanceResults = qraft.usersService.usersControllerGetCurrentBalance.useQueries({
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetCurrentBalanceResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-     * ```
-     * @example Combined results. Only the data will be returned.
-     * ```ts
-     * const usersControllerGetCurrentBalanceCombinedResults = qraft.usersService.usersControllerGetCurrentBalance.useQueries({
-     *     combine: results => results.map(result => result.data),
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetCurrentBalanceCombinedResults.forEach(data => console.log({ data }));
-     * ```
-     */
-    useQueries<
-      T extends Array<
-        UseQueryOptionsForUseQueries<
-          UsersControllerGetCurrentBalanceSchema,
-          UsersControllerGetCurrentBalanceParameters,
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError
-        >
-      >,
-      TCombinedResult = Array<
-        UseQueryResult<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          UseQueryResult<
-            UsersControllerGetCurrentBalanceData,
-            UsersControllerGetCurrentBalanceError
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    getQueryKey(
-      parameters: UsersControllerGetCurrentBalanceParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetCurrentBalanceSchema,
-      UsersControllerGetCurrentBalanceParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetCurrentBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetCurrentBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-     *
-     * @example Suspense Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetCurrentBalance.useSuspenseInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useSuspenseInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetCurrentBalanceParameters,
-      TData = UsersControllerGetCurrentBalanceData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options: Omit<
-        UseSuspenseInfiniteQueryOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-          UsersControllerGetCurrentBalanceData,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetCurrentBalanceData,
-          PartialParameters<TPageParam>
-        >
-    ): UseSuspenseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetCurrentBalanceParameters
-      >,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    useSuspenseQueries<
-      T extends Array<
-        UseQueryOptionsForUseSuspenseQuery<
-          UsersControllerGetCurrentBalanceSchema,
-          UsersControllerGetCurrentBalanceParameters,
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError
-        >
-      >,
-      TCombinedResult = Array<
-        UseSuspenseQueryResult<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          WithOptional<
-            UseSuspenseQueryResult<
-              UsersControllerGetCurrentBalanceData,
-              UsersControllerGetCurrentBalanceError
-            >,
-            'data'
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get current balance
-     * @description Get user's current balance including total inflows and expenses
-     */
-    useSuspenseQuery<
-      TData = UsersControllerGetCurrentBalanceData
-    >(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        | UsersControllerGetCurrentBalanceParameters,
-      options?: Omit<
-        UseSuspenseQueryOptions<
-          UsersControllerGetCurrentBalanceData,
-          UsersControllerGetCurrentBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetCurrentBalanceSchema,
-            UsersControllerGetCurrentBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseSuspenseQueryResult<
-      TData,
-      UsersControllerGetCurrentBalanceError | Error
-    >
-    schema: UsersControllerGetCurrentBalanceSchema
-    types: {
-      parameters: UsersControllerGetCurrentBalanceParameters
-      data: UsersControllerGetCurrentBalanceData
-      error: UsersControllerGetCurrentBalanceError
-    }
-  }
-  /**
-   * @summary Get monthly balance
-   * @description Get user's monthly balance breakdown for a specific year
-   */
-  usersControllerGetMonthlyBalance: {
+    usersControllerGetCurrentBalance: {
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>, options?: CancelOptions): Promise<void>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getQueryKey(parameters: UsersControllerGetCurrentBalanceParameters): ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetCurrentBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetCurrentBalanceError | Error>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        fetchInfiniteQuery<TPageParam extends UsersControllerGetCurrentBalanceParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters, TPageParam, UsersControllerGetCurrentBalanceError>): Promise<OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters>>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        prefetchInfiniteQuery<TPageParam extends UsersControllerGetCurrentBalanceParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters, TPageParam, UsersControllerGetCurrentBalanceError>): Promise<void>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        ensureInfiniteQueryData<TPageParam extends UsersControllerGetCurrentBalanceParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters, TPageParam, UsersControllerGetCurrentBalanceError>): Promise<OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters>>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        fetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>): Promise<UsersControllerGetCurrentBalanceData>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>): Promise<void>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>): Promise<UsersControllerGetCurrentBalanceData>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters)): OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters> | undefined;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>): TInfinite extends true ? Array<[
+            queryKey: ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>,
+            data: NoInfer<OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters>> | undefined
+        ]> : Array<[
+            queryKey: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>,
+            data: UsersControllerGetCurrentBalanceData | undefined
+        ]>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getQueryData(parameters: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters)): UsersControllerGetCurrentBalanceData | undefined;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getQueryState(parameters: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters)): QueryState<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError> | undefined;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getInfiniteQueryState(parameters: UsersControllerGetCurrentBalanceParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>): QueryState<OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters>, UsersControllerGetCurrentBalanceError> | undefined;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>, options?: InvalidateOptions): Promise<void>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>): number;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<UsersControllerGetCurrentBalanceParameters, TMeta, TSignal>), client?: (schema: UsersControllerGetCurrentBalanceSchema, options: {
+            parameters: UsersControllerGetCurrentBalanceParameters;
+            signal?: TSignal;
+            meta?: TMeta;
+        }) => Promise<RequestFnResponse<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>>): Promise<RequestFnResponse<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>, options?: RefetchOptions): Promise<void>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>): void;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>, options?: ResetOptions): Promise<void>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        setInfiniteQueryData(parameters: UsersControllerGetCurrentBalanceParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>, updater: Updater<NoInfer<OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters>> | undefined, NoInfer<OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceParameters> | undefined;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>, updater: Updater<NoInfer<UsersControllerGetCurrentBalanceData> | undefined, NoInfer<UsersControllerGetCurrentBalanceData> | undefined>, options?: SetDataOptions): Array<UsersControllerGetCurrentBalanceData | undefined>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        setQueryData(parameters: (UsersControllerGetCurrentBalanceParameters) | ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>, updater: Updater<NoInfer<UsersControllerGetCurrentBalanceData> | undefined, NoInfer<UsersControllerGetCurrentBalanceData> | undefined>, options?: SetDataOptions): UsersControllerGetCurrentBalanceData | undefined;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getInfiniteQueryKey(parameters: UsersControllerGetCurrentBalanceParameters): ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetCurrentBalance.useInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetCurrentBalanceParameters, TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options: Omit<UndefinedInitialDataInfiniteOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, OperationInfiniteData<TData, UsersControllerGetCurrentBalanceParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetCurrentBalanceData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetCurrentBalanceParameters>, UsersControllerGetCurrentBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetCurrentBalance.useInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetCurrentBalanceParameters, TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options: Omit<DefinedInitialDataInfiniteOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, OperationInfiniteData<TData, UsersControllerGetCurrentBalanceParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetCurrentBalanceData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetCurrentBalanceParameters>, UsersControllerGetCurrentBalanceError | Error>;
+        /**
+         * Monitors the number of queries currently fetching, matching the provided filters.
+         * Useful for creating loading indicators or performing actions based on active requests.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+         * @example Checks the total number of queries fetching from the specified service method,
+         * both normal and infinite. If no parameters are provided, no filtering is applied.
+         * ```ts
+         * const usersControllerGetCurrentBalanceTotal = qraft.usersService.usersControllerGetCurrentBalance.useIsFetching()
+         * ```
+         * @example Checks the number of normal queries fetching with the specified parameters.
+         * ```ts
+         * const usersControllerGetCurrentBalanceByParametersTotal = qraft.usersService.usersControllerGetCurrentBalance.useIsFetching({
+         *     infinite: false,
+         *     parameters: {
+         *         path: {
+         *             id: id
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError> | QueryFiltersByQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceData, TInfinite, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceError>): number;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+         *
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+         * ```ts
+         * const usersControllerGetCurrentBalanceResults = qraft.usersService.usersControllerGetCurrentBalance.useQueries({
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetCurrentBalanceResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example Combined results. Only the data will be returned.
+         * ```ts
+         * const usersControllerGetCurrentBalanceCombinedResults = qraft.usersService.usersControllerGetCurrentBalance.useQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetCurrentBalanceCombinedResults.forEach(data => console.log({ data }));
+         * ```
+         */
+        useQueries<T extends Array<UseQueryOptionsForUseQueries<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>>, TCombinedResult = Array<UseQueryResult<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>>>(options: {
+            queries: T;
+            combine?: (results: Array<UseQueryResult<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        getQueryKey(parameters: UsersControllerGetCurrentBalanceParameters): ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetCurrentBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetCurrentBalance.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetCurrentBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+         *
+         * @example Suspense Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetCurrentBalance.useSuspenseInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useSuspenseInfiniteQuery<TPageParam extends UsersControllerGetCurrentBalanceParameters, TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options: Omit<UseSuspenseInfiniteQueryOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, OperationInfiniteData<TData, UsersControllerGetCurrentBalanceParameters>, UsersControllerGetCurrentBalanceData, ServiceOperationInfiniteQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetCurrentBalanceData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetCurrentBalanceParameters>, UsersControllerGetCurrentBalanceError | Error>;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters, UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>>, TCombinedResult = Array<UseSuspenseQueryResult<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>>>(options: {
+            queries: T;
+            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError>, "data">>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get current balance
+         * @description Get user's current balance including total inflows and expenses
+         */
+        useSuspenseQuery<TData = UsersControllerGetCurrentBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters> | (UsersControllerGetCurrentBalanceParameters), options?: Omit<UseSuspenseQueryOptions<UsersControllerGetCurrentBalanceData, UsersControllerGetCurrentBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetCurrentBalanceSchema, UsersControllerGetCurrentBalanceParameters>>, "queryKey">): UseSuspenseQueryResult<TData, UsersControllerGetCurrentBalanceError | Error>;
+        schema: UsersControllerGetCurrentBalanceSchema;
+        types: {
+            parameters: UsersControllerGetCurrentBalanceParameters;
+            data: UsersControllerGetCurrentBalanceData;
+            error: UsersControllerGetCurrentBalanceError;
+        };
+    };
     /**
      * @summary Get monthly balance
      * @description Get user's monthly balance breakdown for a specific year
      */
-    cancelQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >,
-      options?: CancelOptions
-    ): Promise<void>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getQueryKey(
-      parameters: UsersControllerGetMonthlyBalanceParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetMonthlyBalanceSchema,
-      UsersControllerGetMonthlyBalanceParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
-     *     path: {
-     *         id: id,
-     *         year: year
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetMonthlyBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
-     *     path: {
-     *         id: id,
-     *         year: year
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetMonthlyBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    fetchInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetMonthlyBalanceParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetMonthlyBalanceSchema,
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters,
-        TPageParam,
-        UsersControllerGetMonthlyBalanceError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters
-      >
-    >
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    prefetchInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetMonthlyBalanceParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetMonthlyBalanceSchema,
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters,
-        TPageParam,
-        UsersControllerGetMonthlyBalanceError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    ensureInfiniteQueryData<
-      TPageParam extends
-        UsersControllerGetMonthlyBalanceParameters
-    >(
-      options: ServiceOperationEnsureInfiniteQueryDataOptions<
-        UsersControllerGetMonthlyBalanceSchema,
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters,
-        TPageParam,
-        UsersControllerGetMonthlyBalanceError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters
-      >
-    >
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    fetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetMonthlyBalanceSchema,
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters,
-        UsersControllerGetMonthlyBalanceError
-      >
-    ): Promise<UsersControllerGetMonthlyBalanceData>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    prefetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetMonthlyBalanceSchema,
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters,
-        UsersControllerGetMonthlyBalanceError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    ensureQueryData(
-      options: ServiceOperationEnsureQueryDataOptions<
-        UsersControllerGetMonthlyBalanceSchema,
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceParameters,
-        UsersControllerGetMonthlyBalanceError
-      >
-    ): Promise<UsersControllerGetMonthlyBalanceData>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getInfiniteQueryData(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceParameters
-        >
-      | undefined
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getQueriesData<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-    ): TInfinite extends true
-      ? Array<
-          [
-            queryKey: ServiceOperationInfiniteQueryKey<
-              UsersControllerGetMonthlyBalanceSchema,
-              UsersControllerGetMonthlyBalanceParameters
-            >,
-            data:
-              | NoInfer<
-                  OperationInfiniteData<
-                    UsersControllerGetMonthlyBalanceData,
-                    UsersControllerGetMonthlyBalanceParameters
-                  >
-                >
-              | undefined
-          ]
-        >
-      : Array<
-          [
-            queryKey: ServiceOperationQueryKey<
-              UsersControllerGetMonthlyBalanceSchema,
-              UsersControllerGetMonthlyBalanceParameters
-            >,
-            data:
-              | UsersControllerGetMonthlyBalanceData
-              | undefined
-          ]
-        >
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getQueryData(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters
-    ): UsersControllerGetMonthlyBalanceData | undefined
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getQueryState(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters
-    ):
-      | QueryState<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError
-        >
-      | undefined
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getInfiniteQueryState(
-      parameters:
-        | UsersControllerGetMonthlyBalanceParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-    ):
-      | QueryState<
-          OperationInfiniteData<
-            UsersControllerGetMonthlyBalanceData,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-          UsersControllerGetMonthlyBalanceError
-        >
-      | undefined
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    invalidateQueries<TInfinite extends boolean = false>(
-      filters?: InvalidateQueryFilters<
-        UsersControllerGetMonthlyBalanceSchema,
-        UsersControllerGetMonthlyBalanceData,
-        TInfinite,
-        UsersControllerGetMonthlyBalanceParameters,
-        UsersControllerGetMonthlyBalanceError
-      >,
-      options?: InvalidateOptions
-    ): Promise<void>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    isFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-    ): number
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    <
-      TMeta extends Record<string, any>,
-      TSignal extends AbortSignal = AbortSignal
-    >(
-      options:
-        | QueryFnOptionsByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters,
-            TMeta,
-            TSignal
-          >
-        | QueryFnOptionsByParameters<
-            UsersControllerGetMonthlyBalanceParameters,
-            TMeta,
-            TSignal
-          >,
-      client?: (
-        schema: UsersControllerGetMonthlyBalanceSchema,
-        options: {
-          parameters: UsersControllerGetMonthlyBalanceParameters
-          signal?: TSignal
-          meta?: TMeta
-        }
-      ) => Promise<
-        RequestFnResponse<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError
-        >
-      >
-    ): Promise<
-      RequestFnResponse<
-        UsersControllerGetMonthlyBalanceData,
-        UsersControllerGetMonthlyBalanceError
-      >
-    >
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    refetchQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >,
-      options?: RefetchOptions
-    ): Promise<void>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    removeQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-    ): void
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    resetQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >,
-      options?: ResetOptions
-    ): Promise<void>
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    setInfiniteQueryData(
-      parameters:
-        | UsersControllerGetMonthlyBalanceParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-      updater: Updater<
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetMonthlyBalanceData,
-              UsersControllerGetMonthlyBalanceParameters
-            >
-          >
-        | undefined,
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetMonthlyBalanceData,
-              UsersControllerGetMonthlyBalanceParameters
-            >
-          >
-        | undefined
-      >,
-      options?: SetDataOptions
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceParameters
-        >
-      | undefined
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    setQueriesData<TInfinite extends boolean = false>(
-      filters:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >,
-      updater: Updater<
-        | NoInfer<UsersControllerGetMonthlyBalanceData>
-        | undefined,
-        | NoInfer<UsersControllerGetMonthlyBalanceData>
-        | undefined
-      >,
-      options?: SetDataOptions
-    ): Array<
-      UsersControllerGetMonthlyBalanceData | undefined
-    >
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    setQueryData(
-      parameters:
-        | UsersControllerGetMonthlyBalanceParameters
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-      updater: Updater<
-        | NoInfer<UsersControllerGetMonthlyBalanceData>
-        | undefined,
-        | NoInfer<UsersControllerGetMonthlyBalanceData>
-        | undefined
-      >,
-      options?: SetDataOptions
-    ): UsersControllerGetMonthlyBalanceData | undefined
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getInfiniteQueryKey(
-      parameters: UsersControllerGetMonthlyBalanceParameters
-    ): ServiceOperationInfiniteQueryKey<
-      UsersControllerGetMonthlyBalanceSchema,
-      UsersControllerGetMonthlyBalanceParameters
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetMonthlyBalance.useInfiniteQuery({
-     *     path: {
-     *         id: id,
-     *         year: year
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetMonthlyBalanceParameters,
-      TData = UsersControllerGetMonthlyBalanceData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options: Omit<
-        UndefinedInitialDataInfiniteOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetMonthlyBalanceData,
-          PartialParameters<TPageParam>
-        >
-    ): UseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetMonthlyBalanceParameters
-      >,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetMonthlyBalance.useInfiniteQuery({
-     *     path: {
-     *         id: id,
-     *         year: year
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetMonthlyBalanceParameters,
-      TData = UsersControllerGetMonthlyBalanceData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options: Omit<
-        DefinedInitialDataInfiniteOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetMonthlyBalanceData,
-          PartialParameters<TPageParam>
-        >
-    ): DefinedUseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetMonthlyBalanceParameters
-      >,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    /**
-     * Monitors the number of queries currently fetching, matching the provided filters.
-     * Useful for creating loading indicators or performing actions based on active requests.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-     * @example Checks the total number of queries fetching from the specified service method,
-     * both normal and infinite. If no parameters are provided, no filtering is applied.
-     * ```ts
-     * const usersControllerGetMonthlyBalanceTotal = qraft.usersService.usersControllerGetMonthlyBalance.useIsFetching()
-     * ```
-     * @example Checks the number of normal queries fetching with the specified parameters.
-     * ```ts
-     * const usersControllerGetMonthlyBalanceByParametersTotal = qraft.usersService.usersControllerGetMonthlyBalance.useIsFetching({
-     *     infinite: false,
-     *     parameters: {
-     *         path: {
-     *             id: id,
-     *             year: year
-     *         }
-     *     }
-     * })
-     * ```
-     */
-    useIsFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceData,
-            TInfinite,
-            UsersControllerGetMonthlyBalanceParameters,
-            UsersControllerGetMonthlyBalanceError
-          >
-    ): number
-    /**
-     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-     *
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-     * ```ts
-     * const usersControllerGetMonthlyBalanceResults = qraft.usersService.usersControllerGetMonthlyBalance.useQueries({
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1,
-     *                 year: year1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2,
-     *                 year: year2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetMonthlyBalanceResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-     * ```
-     * @example Combined results. Only the data will be returned.
-     * ```ts
-     * const usersControllerGetMonthlyBalanceCombinedResults = qraft.usersService.usersControllerGetMonthlyBalance.useQueries({
-     *     combine: results => results.map(result => result.data),
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1,
-     *                 year: year1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2,
-     *                 year: year2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetMonthlyBalanceCombinedResults.forEach(data => console.log({ data }));
-     * ```
-     */
-    useQueries<
-      T extends Array<
-        UseQueryOptionsForUseQueries<
-          UsersControllerGetMonthlyBalanceSchema,
-          UsersControllerGetMonthlyBalanceParameters,
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError
-        >
-      >,
-      TCombinedResult = Array<
-        UseQueryResult<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          UseQueryResult<
-            UsersControllerGetMonthlyBalanceData,
-            UsersControllerGetMonthlyBalanceError
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    getQueryKey(
-      parameters: UsersControllerGetMonthlyBalanceParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetMonthlyBalanceSchema,
-      UsersControllerGetMonthlyBalanceParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
-     *     path: {
-     *         id: id,
-     *         year: year
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetMonthlyBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
-     *     path: {
-     *         id: id,
-     *         year: year
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetMonthlyBalanceData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-     *
-     * @example Suspense Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetMonthlyBalance.useSuspenseInfiniteQuery({
-     *     path: {
-     *         id: id,
-     *         year: year
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useSuspenseInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetMonthlyBalanceParameters,
-      TData = UsersControllerGetMonthlyBalanceData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options: Omit<
-        UseSuspenseInfiniteQueryOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-          UsersControllerGetMonthlyBalanceData,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetMonthlyBalanceData,
-          PartialParameters<TPageParam>
-        >
-    ): UseSuspenseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetMonthlyBalanceParameters
-      >,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    useSuspenseQueries<
-      T extends Array<
-        UseQueryOptionsForUseSuspenseQuery<
-          UsersControllerGetMonthlyBalanceSchema,
-          UsersControllerGetMonthlyBalanceParameters,
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError
-        >
-      >,
-      TCombinedResult = Array<
-        UseSuspenseQueryResult<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          WithOptional<
-            UseSuspenseQueryResult<
-              UsersControllerGetMonthlyBalanceData,
-              UsersControllerGetMonthlyBalanceError
-            >,
-            'data'
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get monthly balance
-     * @description Get user's monthly balance breakdown for a specific year
-     */
-    useSuspenseQuery<
-      TData = UsersControllerGetMonthlyBalanceData
-    >(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        | UsersControllerGetMonthlyBalanceParameters,
-      options?: Omit<
-        UseSuspenseQueryOptions<
-          UsersControllerGetMonthlyBalanceData,
-          UsersControllerGetMonthlyBalanceError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetMonthlyBalanceSchema,
-            UsersControllerGetMonthlyBalanceParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseSuspenseQueryResult<
-      TData,
-      UsersControllerGetMonthlyBalanceError | Error
-    >
-    schema: UsersControllerGetMonthlyBalanceSchema
-    types: {
-      parameters: UsersControllerGetMonthlyBalanceParameters
-      data: UsersControllerGetMonthlyBalanceData
-      error: UsersControllerGetMonthlyBalanceError
-    }
-  }
-  /**
-   * @summary Get financial summary
-   * @description Get comprehensive financial summary including balance and statistics
-   */
-  usersControllerGetFinancialSummary: {
+    usersControllerGetMonthlyBalance: {
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>, options?: CancelOptions): Promise<void>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getQueryKey(parameters: UsersControllerGetMonthlyBalanceParameters): ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
+         *     path: {
+         *         id: id,
+         *         year: year
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetMonthlyBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
+         *     path: {
+         *         id: id,
+         *         year: year
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetMonthlyBalanceError | Error>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        fetchInfiniteQuery<TPageParam extends UsersControllerGetMonthlyBalanceParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters, TPageParam, UsersControllerGetMonthlyBalanceError>): Promise<OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters>>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        prefetchInfiniteQuery<TPageParam extends UsersControllerGetMonthlyBalanceParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters, TPageParam, UsersControllerGetMonthlyBalanceError>): Promise<void>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        ensureInfiniteQueryData<TPageParam extends UsersControllerGetMonthlyBalanceParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters, TPageParam, UsersControllerGetMonthlyBalanceError>): Promise<OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters>>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        fetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>): Promise<UsersControllerGetMonthlyBalanceData>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>): Promise<void>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>): Promise<UsersControllerGetMonthlyBalanceData>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters)): OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters> | undefined;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>): TInfinite extends true ? Array<[
+            queryKey: ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>,
+            data: NoInfer<OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters>> | undefined
+        ]> : Array<[
+            queryKey: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>,
+            data: UsersControllerGetMonthlyBalanceData | undefined
+        ]>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getQueryData(parameters: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters)): UsersControllerGetMonthlyBalanceData | undefined;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getQueryState(parameters: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters)): QueryState<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError> | undefined;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getInfiniteQueryState(parameters: UsersControllerGetMonthlyBalanceParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>): QueryState<OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters>, UsersControllerGetMonthlyBalanceError> | undefined;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>, options?: InvalidateOptions): Promise<void>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>): number;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<UsersControllerGetMonthlyBalanceParameters, TMeta, TSignal>), client?: (schema: UsersControllerGetMonthlyBalanceSchema, options: {
+            parameters: UsersControllerGetMonthlyBalanceParameters;
+            signal?: TSignal;
+            meta?: TMeta;
+        }) => Promise<RequestFnResponse<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>>): Promise<RequestFnResponse<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>, options?: RefetchOptions): Promise<void>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>): void;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>, options?: ResetOptions): Promise<void>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        setInfiniteQueryData(parameters: UsersControllerGetMonthlyBalanceParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>, updater: Updater<NoInfer<OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters>> | undefined, NoInfer<OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceParameters> | undefined;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>, updater: Updater<NoInfer<UsersControllerGetMonthlyBalanceData> | undefined, NoInfer<UsersControllerGetMonthlyBalanceData> | undefined>, options?: SetDataOptions): Array<UsersControllerGetMonthlyBalanceData | undefined>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        setQueryData(parameters: (UsersControllerGetMonthlyBalanceParameters) | ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>, updater: Updater<NoInfer<UsersControllerGetMonthlyBalanceData> | undefined, NoInfer<UsersControllerGetMonthlyBalanceData> | undefined>, options?: SetDataOptions): UsersControllerGetMonthlyBalanceData | undefined;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getInfiniteQueryKey(parameters: UsersControllerGetMonthlyBalanceParameters): ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetMonthlyBalance.useInfiniteQuery({
+         *     path: {
+         *         id: id,
+         *         year: year
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetMonthlyBalanceParameters, TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options: Omit<UndefinedInitialDataInfiniteOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, OperationInfiniteData<TData, UsersControllerGetMonthlyBalanceParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetMonthlyBalanceData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetMonthlyBalanceParameters>, UsersControllerGetMonthlyBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetMonthlyBalance.useInfiniteQuery({
+         *     path: {
+         *         id: id,
+         *         year: year
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetMonthlyBalanceParameters, TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options: Omit<DefinedInitialDataInfiniteOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, OperationInfiniteData<TData, UsersControllerGetMonthlyBalanceParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetMonthlyBalanceData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetMonthlyBalanceParameters>, UsersControllerGetMonthlyBalanceError | Error>;
+        /**
+         * Monitors the number of queries currently fetching, matching the provided filters.
+         * Useful for creating loading indicators or performing actions based on active requests.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+         * @example Checks the total number of queries fetching from the specified service method,
+         * both normal and infinite. If no parameters are provided, no filtering is applied.
+         * ```ts
+         * const usersControllerGetMonthlyBalanceTotal = qraft.usersService.usersControllerGetMonthlyBalance.useIsFetching()
+         * ```
+         * @example Checks the number of normal queries fetching with the specified parameters.
+         * ```ts
+         * const usersControllerGetMonthlyBalanceByParametersTotal = qraft.usersService.usersControllerGetMonthlyBalance.useIsFetching({
+         *     infinite: false,
+         *     parameters: {
+         *         path: {
+         *             id: id,
+         *             year: year
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError> | QueryFiltersByQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceData, TInfinite, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceError>): number;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+         *
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+         * ```ts
+         * const usersControllerGetMonthlyBalanceResults = qraft.usersService.usersControllerGetMonthlyBalance.useQueries({
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1,
+         *                 year: year1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2,
+         *                 year: year2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetMonthlyBalanceResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example Combined results. Only the data will be returned.
+         * ```ts
+         * const usersControllerGetMonthlyBalanceCombinedResults = qraft.usersService.usersControllerGetMonthlyBalance.useQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1,
+         *                 year: year1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2,
+         *                 year: year2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetMonthlyBalanceCombinedResults.forEach(data => console.log({ data }));
+         * ```
+         */
+        useQueries<T extends Array<UseQueryOptionsForUseQueries<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>>, TCombinedResult = Array<UseQueryResult<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>>>(options: {
+            queries: T;
+            combine?: (results: Array<UseQueryResult<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        getQueryKey(parameters: UsersControllerGetMonthlyBalanceParameters): ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
+         *     path: {
+         *         id: id,
+         *         year: year
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetMonthlyBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetMonthlyBalance.useQuery({
+         *     path: {
+         *         id: id,
+         *         year: year
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetMonthlyBalanceError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+         *
+         * @example Suspense Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetMonthlyBalance.useSuspenseInfiniteQuery({
+         *     path: {
+         *         id: id,
+         *         year: year
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useSuspenseInfiniteQuery<TPageParam extends UsersControllerGetMonthlyBalanceParameters, TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options: Omit<UseSuspenseInfiniteQueryOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, OperationInfiniteData<TData, UsersControllerGetMonthlyBalanceParameters>, UsersControllerGetMonthlyBalanceData, ServiceOperationInfiniteQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetMonthlyBalanceData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetMonthlyBalanceParameters>, UsersControllerGetMonthlyBalanceError | Error>;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters, UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>>, TCombinedResult = Array<UseSuspenseQueryResult<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>>>(options: {
+            queries: T;
+            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError>, "data">>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get monthly balance
+         * @description Get user's monthly balance breakdown for a specific year
+         */
+        useSuspenseQuery<TData = UsersControllerGetMonthlyBalanceData>(parameters: ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters> | (UsersControllerGetMonthlyBalanceParameters), options?: Omit<UseSuspenseQueryOptions<UsersControllerGetMonthlyBalanceData, UsersControllerGetMonthlyBalanceError, TData, ServiceOperationQueryKey<UsersControllerGetMonthlyBalanceSchema, UsersControllerGetMonthlyBalanceParameters>>, "queryKey">): UseSuspenseQueryResult<TData, UsersControllerGetMonthlyBalanceError | Error>;
+        schema: UsersControllerGetMonthlyBalanceSchema;
+        types: {
+            parameters: UsersControllerGetMonthlyBalanceParameters;
+            data: UsersControllerGetMonthlyBalanceData;
+            error: UsersControllerGetMonthlyBalanceError;
+        };
+    };
     /**
      * @summary Get financial summary
      * @description Get comprehensive financial summary including balance and statistics
      */
-    cancelQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >,
-      options?: CancelOptions
-    ): Promise<void>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getQueryKey(
-      parameters: UsersControllerGetFinancialSummaryParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetFinancialSummarySchema,
-      UsersControllerGetFinancialSummaryParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    fetchInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetFinancialSummaryParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetFinancialSummarySchema,
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters,
-        TPageParam,
-        UsersControllerGetFinancialSummaryError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters
-      >
-    >
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    prefetchInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetFinancialSummaryParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetFinancialSummarySchema,
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters,
-        TPageParam,
-        UsersControllerGetFinancialSummaryError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    ensureInfiniteQueryData<
-      TPageParam extends
-        UsersControllerGetFinancialSummaryParameters
-    >(
-      options: ServiceOperationEnsureInfiniteQueryDataOptions<
-        UsersControllerGetFinancialSummarySchema,
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters,
-        TPageParam,
-        UsersControllerGetFinancialSummaryError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters
-      >
-    >
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    fetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetFinancialSummarySchema,
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters,
-        UsersControllerGetFinancialSummaryError
-      >
-    ): Promise<UsersControllerGetFinancialSummaryData>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    prefetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetFinancialSummarySchema,
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters,
-        UsersControllerGetFinancialSummaryError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    ensureQueryData(
-      options: ServiceOperationEnsureQueryDataOptions<
-        UsersControllerGetFinancialSummarySchema,
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryParameters,
-        UsersControllerGetFinancialSummaryError
-      >
-    ): Promise<UsersControllerGetFinancialSummaryData>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getInfiniteQueryData(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryParameters
-        >
-      | undefined
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getQueriesData<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-    ): TInfinite extends true
-      ? Array<
-          [
-            queryKey: ServiceOperationInfiniteQueryKey<
-              UsersControllerGetFinancialSummarySchema,
-              UsersControllerGetFinancialSummaryParameters
-            >,
-            data:
-              | NoInfer<
-                  OperationInfiniteData<
-                    UsersControllerGetFinancialSummaryData,
-                    UsersControllerGetFinancialSummaryParameters
-                  >
-                >
-              | undefined
-          ]
-        >
-      : Array<
-          [
-            queryKey: ServiceOperationQueryKey<
-              UsersControllerGetFinancialSummarySchema,
-              UsersControllerGetFinancialSummaryParameters
-            >,
-            data:
-              | UsersControllerGetFinancialSummaryData
-              | undefined
-          ]
-        >
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getQueryData(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters
-    ): UsersControllerGetFinancialSummaryData | undefined
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getQueryState(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters
-    ):
-      | QueryState<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError
-        >
-      | undefined
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getInfiniteQueryState(
-      parameters:
-        | UsersControllerGetFinancialSummaryParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-    ):
-      | QueryState<
-          OperationInfiniteData<
-            UsersControllerGetFinancialSummaryData,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-          UsersControllerGetFinancialSummaryError
-        >
-      | undefined
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    invalidateQueries<TInfinite extends boolean = false>(
-      filters?: InvalidateQueryFilters<
-        UsersControllerGetFinancialSummarySchema,
-        UsersControllerGetFinancialSummaryData,
-        TInfinite,
-        UsersControllerGetFinancialSummaryParameters,
-        UsersControllerGetFinancialSummaryError
-      >,
-      options?: InvalidateOptions
-    ): Promise<void>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    isFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-    ): number
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    <
-      TMeta extends Record<string, any>,
-      TSignal extends AbortSignal = AbortSignal
-    >(
-      options:
-        | QueryFnOptionsByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters,
-            TMeta,
-            TSignal
-          >
-        | QueryFnOptionsByParameters<
-            UsersControllerGetFinancialSummaryParameters,
-            TMeta,
-            TSignal
-          >,
-      client?: (
-        schema: UsersControllerGetFinancialSummarySchema,
-        options: {
-          parameters: UsersControllerGetFinancialSummaryParameters
-          signal?: TSignal
-          meta?: TMeta
-        }
-      ) => Promise<
-        RequestFnResponse<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError
-        >
-      >
-    ): Promise<
-      RequestFnResponse<
-        UsersControllerGetFinancialSummaryData,
-        UsersControllerGetFinancialSummaryError
-      >
-    >
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    refetchQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >,
-      options?: RefetchOptions
-    ): Promise<void>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    removeQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-    ): void
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    resetQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >,
-      options?: ResetOptions
-    ): Promise<void>
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    setInfiniteQueryData(
-      parameters:
-        | UsersControllerGetFinancialSummaryParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-      updater: Updater<
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetFinancialSummaryData,
-              UsersControllerGetFinancialSummaryParameters
-            >
-          >
-        | undefined,
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetFinancialSummaryData,
-              UsersControllerGetFinancialSummaryParameters
-            >
-          >
-        | undefined
-      >,
-      options?: SetDataOptions
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryParameters
-        >
-      | undefined
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    setQueriesData<TInfinite extends boolean = false>(
-      filters:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >,
-      updater: Updater<
-        | NoInfer<UsersControllerGetFinancialSummaryData>
-        | undefined,
-        | NoInfer<UsersControllerGetFinancialSummaryData>
-        | undefined
-      >,
-      options?: SetDataOptions
-    ): Array<
-      UsersControllerGetFinancialSummaryData | undefined
-    >
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    setQueryData(
-      parameters:
-        | UsersControllerGetFinancialSummaryParameters
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-      updater: Updater<
-        | NoInfer<UsersControllerGetFinancialSummaryData>
-        | undefined,
-        | NoInfer<UsersControllerGetFinancialSummaryData>
-        | undefined
-      >,
-      options?: SetDataOptions
-    ): UsersControllerGetFinancialSummaryData | undefined
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getInfiniteQueryKey(
-      parameters: UsersControllerGetFinancialSummaryParameters
-    ): ServiceOperationInfiniteQueryKey<
-      UsersControllerGetFinancialSummarySchema,
-      UsersControllerGetFinancialSummaryParameters
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetFinancialSummary.useInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetFinancialSummaryParameters,
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options: Omit<
-        UndefinedInitialDataInfiniteOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetFinancialSummaryData,
-          PartialParameters<TPageParam>
-        >
-    ): UseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetFinancialSummaryParameters
-      >,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetFinancialSummary.useInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetFinancialSummaryParameters,
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options: Omit<
-        DefinedInitialDataInfiniteOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetFinancialSummaryData,
-          PartialParameters<TPageParam>
-        >
-    ): DefinedUseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetFinancialSummaryParameters
-      >,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    /**
-     * Monitors the number of queries currently fetching, matching the provided filters.
-     * Useful for creating loading indicators or performing actions based on active requests.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-     * @example Checks the total number of queries fetching from the specified service method,
-     * both normal and infinite. If no parameters are provided, no filtering is applied.
-     * ```ts
-     * const usersControllerGetFinancialSummaryTotal = qraft.usersService.usersControllerGetFinancialSummary.useIsFetching()
-     * ```
-     * @example Checks the number of normal queries fetching with the specified parameters.
-     * ```ts
-     * const usersControllerGetFinancialSummaryByParametersTotal = qraft.usersService.usersControllerGetFinancialSummary.useIsFetching({
-     *     infinite: false,
-     *     parameters: {
-     *         path: {
-     *             id: id
-     *         }
-     *     }
-     * })
-     * ```
-     */
-    useIsFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryData,
-            TInfinite,
-            UsersControllerGetFinancialSummaryParameters,
-            UsersControllerGetFinancialSummaryError
-          >
-    ): number
-    /**
-     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-     *
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-     * ```ts
-     * const usersControllerGetFinancialSummaryResults = qraft.usersService.usersControllerGetFinancialSummary.useQueries({
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetFinancialSummaryResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-     * ```
-     * @example Combined results. Only the data will be returned.
-     * ```ts
-     * const usersControllerGetFinancialSummaryCombinedResults = qraft.usersService.usersControllerGetFinancialSummary.useQueries({
-     *     combine: results => results.map(result => result.data),
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetFinancialSummaryCombinedResults.forEach(data => console.log({ data }));
-     * ```
-     */
-    useQueries<
-      T extends Array<
-        UseQueryOptionsForUseQueries<
-          UsersControllerGetFinancialSummarySchema,
-          UsersControllerGetFinancialSummaryParameters,
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError
-        >
-      >,
-      TCombinedResult = Array<
-        UseQueryResult<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          UseQueryResult<
-            UsersControllerGetFinancialSummaryData,
-            UsersControllerGetFinancialSummaryError
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    getQueryKey(
-      parameters: UsersControllerGetFinancialSummaryParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetFinancialSummarySchema,
-      UsersControllerGetFinancialSummaryParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-     *
-     * @example Suspense Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetFinancialSummary.useSuspenseInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useSuspenseInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetFinancialSummaryParameters,
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options: Omit<
-        UseSuspenseInfiniteQueryOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-          UsersControllerGetFinancialSummaryData,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetFinancialSummaryData,
-          PartialParameters<TPageParam>
-        >
-    ): UseSuspenseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetFinancialSummaryParameters
-      >,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    useSuspenseQueries<
-      T extends Array<
-        UseQueryOptionsForUseSuspenseQuery<
-          UsersControllerGetFinancialSummarySchema,
-          UsersControllerGetFinancialSummaryParameters,
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError
-        >
-      >,
-      TCombinedResult = Array<
-        UseSuspenseQueryResult<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          WithOptional<
-            UseSuspenseQueryResult<
-              UsersControllerGetFinancialSummaryData,
-              UsersControllerGetFinancialSummaryError
-            >,
-            'data'
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get financial summary
-     * @description Get comprehensive financial summary including balance and statistics
-     */
-    useSuspenseQuery<
-      TData = UsersControllerGetFinancialSummaryData
-    >(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        | UsersControllerGetFinancialSummaryParameters,
-      options?: Omit<
-        UseSuspenseQueryOptions<
-          UsersControllerGetFinancialSummaryData,
-          UsersControllerGetFinancialSummaryError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetFinancialSummarySchema,
-            UsersControllerGetFinancialSummaryParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseSuspenseQueryResult<
-      TData,
-      UsersControllerGetFinancialSummaryError | Error
-    >
-    schema: UsersControllerGetFinancialSummarySchema
-    types: {
-      parameters: UsersControllerGetFinancialSummaryParameters
-      data: UsersControllerGetFinancialSummaryData
-      error: UsersControllerGetFinancialSummaryError
-    }
-  }
-  /**
-   * @summary Get top tags
-   * @description Get summary of top tags for both inflows and expenses
-   */
-  usersControllerGetTopTags: {
+    usersControllerGetFinancialSummary: {
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>, options?: CancelOptions): Promise<void>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getQueryKey(parameters: UsersControllerGetFinancialSummaryParameters): ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, TData, ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetFinancialSummaryError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, TData, ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetFinancialSummaryError | Error>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        fetchInfiniteQuery<TPageParam extends UsersControllerGetFinancialSummaryParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters, TPageParam, UsersControllerGetFinancialSummaryError>): Promise<OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters>>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        prefetchInfiniteQuery<TPageParam extends UsersControllerGetFinancialSummaryParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters, TPageParam, UsersControllerGetFinancialSummaryError>): Promise<void>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        ensureInfiniteQueryData<TPageParam extends UsersControllerGetFinancialSummaryParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters, TPageParam, UsersControllerGetFinancialSummaryError>): Promise<OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters>>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        fetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>): Promise<UsersControllerGetFinancialSummaryData>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>): Promise<void>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>): Promise<UsersControllerGetFinancialSummaryData>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters)): OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters> | undefined;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>): TInfinite extends true ? Array<[
+            queryKey: ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>,
+            data: NoInfer<OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters>> | undefined
+        ]> : Array<[
+            queryKey: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>,
+            data: UsersControllerGetFinancialSummaryData | undefined
+        ]>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getQueryData(parameters: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters)): UsersControllerGetFinancialSummaryData | undefined;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getQueryState(parameters: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters)): QueryState<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError> | undefined;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getInfiniteQueryState(parameters: UsersControllerGetFinancialSummaryParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>): QueryState<OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters>, UsersControllerGetFinancialSummaryError> | undefined;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>, options?: InvalidateOptions): Promise<void>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>): number;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<UsersControllerGetFinancialSummaryParameters, TMeta, TSignal>), client?: (schema: UsersControllerGetFinancialSummarySchema, options: {
+            parameters: UsersControllerGetFinancialSummaryParameters;
+            signal?: TSignal;
+            meta?: TMeta;
+        }) => Promise<RequestFnResponse<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>>): Promise<RequestFnResponse<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>, options?: RefetchOptions): Promise<void>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>): void;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>, options?: ResetOptions): Promise<void>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        setInfiniteQueryData(parameters: UsersControllerGetFinancialSummaryParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>, updater: Updater<NoInfer<OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters>> | undefined, NoInfer<OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryParameters> | undefined;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>, updater: Updater<NoInfer<UsersControllerGetFinancialSummaryData> | undefined, NoInfer<UsersControllerGetFinancialSummaryData> | undefined>, options?: SetDataOptions): Array<UsersControllerGetFinancialSummaryData | undefined>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        setQueryData(parameters: (UsersControllerGetFinancialSummaryParameters) | ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>, updater: Updater<NoInfer<UsersControllerGetFinancialSummaryData> | undefined, NoInfer<UsersControllerGetFinancialSummaryData> | undefined>, options?: SetDataOptions): UsersControllerGetFinancialSummaryData | undefined;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getInfiniteQueryKey(parameters: UsersControllerGetFinancialSummaryParameters): ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetFinancialSummary.useInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetFinancialSummaryParameters, TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options: Omit<UndefinedInitialDataInfiniteOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, OperationInfiniteData<TData, UsersControllerGetFinancialSummaryParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetFinancialSummaryData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetFinancialSummaryParameters>, UsersControllerGetFinancialSummaryError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetFinancialSummary.useInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetFinancialSummaryParameters, TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options: Omit<DefinedInitialDataInfiniteOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, OperationInfiniteData<TData, UsersControllerGetFinancialSummaryParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetFinancialSummaryData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetFinancialSummaryParameters>, UsersControllerGetFinancialSummaryError | Error>;
+        /**
+         * Monitors the number of queries currently fetching, matching the provided filters.
+         * Useful for creating loading indicators or performing actions based on active requests.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+         * @example Checks the total number of queries fetching from the specified service method,
+         * both normal and infinite. If no parameters are provided, no filtering is applied.
+         * ```ts
+         * const usersControllerGetFinancialSummaryTotal = qraft.usersService.usersControllerGetFinancialSummary.useIsFetching()
+         * ```
+         * @example Checks the number of normal queries fetching with the specified parameters.
+         * ```ts
+         * const usersControllerGetFinancialSummaryByParametersTotal = qraft.usersService.usersControllerGetFinancialSummary.useIsFetching({
+         *     infinite: false,
+         *     parameters: {
+         *         path: {
+         *             id: id
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError> | QueryFiltersByQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryData, TInfinite, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryError>): number;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+         *
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+         * ```ts
+         * const usersControllerGetFinancialSummaryResults = qraft.usersService.usersControllerGetFinancialSummary.useQueries({
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetFinancialSummaryResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example Combined results. Only the data will be returned.
+         * ```ts
+         * const usersControllerGetFinancialSummaryCombinedResults = qraft.usersService.usersControllerGetFinancialSummary.useQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetFinancialSummaryCombinedResults.forEach(data => console.log({ data }));
+         * ```
+         */
+        useQueries<T extends Array<UseQueryOptionsForUseQueries<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>>, TCombinedResult = Array<UseQueryResult<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>>>(options: {
+            queries: T;
+            combine?: (results: Array<UseQueryResult<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        getQueryKey(parameters: UsersControllerGetFinancialSummaryParameters): ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, TData, ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetFinancialSummaryError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetFinancialSummary.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, TData, ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetFinancialSummaryError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+         *
+         * @example Suspense Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetFinancialSummary.useSuspenseInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useSuspenseInfiniteQuery<TPageParam extends UsersControllerGetFinancialSummaryParameters, TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options: Omit<UseSuspenseInfiniteQueryOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, OperationInfiniteData<TData, UsersControllerGetFinancialSummaryParameters>, UsersControllerGetFinancialSummaryData, ServiceOperationInfiniteQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetFinancialSummaryData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetFinancialSummaryParameters>, UsersControllerGetFinancialSummaryError | Error>;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters, UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>>, TCombinedResult = Array<UseSuspenseQueryResult<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>>>(options: {
+            queries: T;
+            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError>, "data">>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get financial summary
+         * @description Get comprehensive financial summary including balance and statistics
+         */
+        useSuspenseQuery<TData = UsersControllerGetFinancialSummaryData>(parameters: ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters> | (UsersControllerGetFinancialSummaryParameters), options?: Omit<UseSuspenseQueryOptions<UsersControllerGetFinancialSummaryData, UsersControllerGetFinancialSummaryError, TData, ServiceOperationQueryKey<UsersControllerGetFinancialSummarySchema, UsersControllerGetFinancialSummaryParameters>>, "queryKey">): UseSuspenseQueryResult<TData, UsersControllerGetFinancialSummaryError | Error>;
+        schema: UsersControllerGetFinancialSummarySchema;
+        types: {
+            parameters: UsersControllerGetFinancialSummaryParameters;
+            data: UsersControllerGetFinancialSummaryData;
+            error: UsersControllerGetFinancialSummaryError;
+        };
+    };
     /**
      * @summary Get top tags
      * @description Get summary of top tags for both inflows and expenses
      */
-    cancelQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >,
-      options?: CancelOptions
-    ): Promise<void>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getQueryKey(
-      parameters: UsersControllerGetTopTagsParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetTopTagsSchema,
-      UsersControllerGetTopTagsParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetTopTagsData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetTopTagsError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetTopTagsData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetTopTagsError | Error
-    >
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    fetchInfiniteQuery<
-      TPageParam extends UsersControllerGetTopTagsParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetTopTagsSchema,
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters,
-        TPageParam,
-        UsersControllerGetTopTagsError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters
-      >
-    >
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    prefetchInfiniteQuery<
-      TPageParam extends UsersControllerGetTopTagsParameters
-    >(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        UsersControllerGetTopTagsSchema,
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters,
-        TPageParam,
-        UsersControllerGetTopTagsError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    ensureInfiniteQueryData<
-      TPageParam extends UsersControllerGetTopTagsParameters
-    >(
-      options: ServiceOperationEnsureInfiniteQueryDataOptions<
-        UsersControllerGetTopTagsSchema,
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters,
-        TPageParam,
-        UsersControllerGetTopTagsError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters
-      >
-    >
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    fetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetTopTagsSchema,
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters,
-        UsersControllerGetTopTagsError
-      >
-    ): Promise<UsersControllerGetTopTagsData>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    prefetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        UsersControllerGetTopTagsSchema,
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters,
-        UsersControllerGetTopTagsError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    ensureQueryData(
-      options: ServiceOperationEnsureQueryDataOptions<
-        UsersControllerGetTopTagsSchema,
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsParameters,
-        UsersControllerGetTopTagsError
-      >
-    ): Promise<UsersControllerGetTopTagsData>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getInfiniteQueryData(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsParameters
-        >
-      | undefined
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getQueriesData<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-    ): TInfinite extends true
-      ? Array<
-          [
-            queryKey: ServiceOperationInfiniteQueryKey<
-              UsersControllerGetTopTagsSchema,
-              UsersControllerGetTopTagsParameters
-            >,
-            data:
-              | NoInfer<
-                  OperationInfiniteData<
-                    UsersControllerGetTopTagsData,
-                    UsersControllerGetTopTagsParameters
-                  >
-                >
-              | undefined
-          ]
-        >
-      : Array<
-          [
-            queryKey: ServiceOperationQueryKey<
-              UsersControllerGetTopTagsSchema,
-              UsersControllerGetTopTagsParameters
-            >,
+    usersControllerGetTopTags: {
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>, options?: CancelOptions): Promise<void>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getQueryKey(parameters: UsersControllerGetTopTagsParameters): ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, TData, ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetTopTagsError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, TData, ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetTopTagsError | Error>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        fetchInfiniteQuery<TPageParam extends UsersControllerGetTopTagsParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters, TPageParam, UsersControllerGetTopTagsError>): Promise<OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters>>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        prefetchInfiniteQuery<TPageParam extends UsersControllerGetTopTagsParameters>(options: ServiceOperationFetchInfiniteQueryOptions<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters, TPageParam, UsersControllerGetTopTagsError>): Promise<void>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        ensureInfiniteQueryData<TPageParam extends UsersControllerGetTopTagsParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters, TPageParam, UsersControllerGetTopTagsError>): Promise<OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters>>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        fetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>): Promise<UsersControllerGetTopTagsData>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>): Promise<void>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>): Promise<UsersControllerGetTopTagsData>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters)): OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters> | undefined;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>): TInfinite extends true ? Array<[
+            queryKey: ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>,
+            data: NoInfer<OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters>> | undefined
+        ]> : Array<[
+            queryKey: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>,
             data: UsersControllerGetTopTagsData | undefined
-          ]
-        >
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getQueryData(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters
-    ): UsersControllerGetTopTagsData | undefined
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getQueryState(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters
-    ):
-      | QueryState<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError
-        >
-      | undefined
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getInfiniteQueryState(
-      parameters:
-        | UsersControllerGetTopTagsParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-    ):
-      | QueryState<
-          OperationInfiniteData<
-            UsersControllerGetTopTagsData,
-            UsersControllerGetTopTagsParameters
-          >,
-          UsersControllerGetTopTagsError
-        >
-      | undefined
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    invalidateQueries<TInfinite extends boolean = false>(
-      filters?: InvalidateQueryFilters<
-        UsersControllerGetTopTagsSchema,
-        UsersControllerGetTopTagsData,
-        TInfinite,
-        UsersControllerGetTopTagsParameters,
-        UsersControllerGetTopTagsError
-      >,
-      options?: InvalidateOptions
-    ): Promise<void>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    isFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-    ): number
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    <
-      TMeta extends Record<string, any>,
-      TSignal extends AbortSignal = AbortSignal
-    >(
-      options:
-        | QueryFnOptionsByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters,
-            TMeta,
-            TSignal
-          >
-        | QueryFnOptionsByParameters<
-            UsersControllerGetTopTagsParameters,
-            TMeta,
-            TSignal
-          >,
-      client?: (
-        schema: UsersControllerGetTopTagsSchema,
-        options: {
-          parameters: UsersControllerGetTopTagsParameters
-          signal?: TSignal
-          meta?: TMeta
-        }
-      ) => Promise<
-        RequestFnResponse<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError
-        >
-      >
-    ): Promise<
-      RequestFnResponse<
-        UsersControllerGetTopTagsData,
-        UsersControllerGetTopTagsError
-      >
-    >
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    refetchQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >,
-      options?: RefetchOptions
-    ): Promise<void>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    removeQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-    ): void
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    resetQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >,
-      options?: ResetOptions
-    ): Promise<void>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    setInfiniteQueryData(
-      parameters:
-        | UsersControllerGetTopTagsParameters
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >,
-      updater: Updater<
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetTopTagsData,
-              UsersControllerGetTopTagsParameters
-            >
-          >
-        | undefined,
-        | NoInfer<
-            OperationInfiniteData<
-              UsersControllerGetTopTagsData,
-              UsersControllerGetTopTagsParameters
-            >
-          >
-        | undefined
-      >,
-      options?: SetDataOptions
-    ):
-      | OperationInfiniteData<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsParameters
-        >
-      | undefined
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    setQueriesData<TInfinite extends boolean = false>(
-      filters:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >,
-      updater: Updater<
-        NoInfer<UsersControllerGetTopTagsData> | undefined,
-        NoInfer<UsersControllerGetTopTagsData> | undefined
-      >,
-      options?: SetDataOptions
-    ): Array<UsersControllerGetTopTagsData | undefined>
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    setQueryData(
-      parameters:
-        | UsersControllerGetTopTagsParameters
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >,
-      updater: Updater<
-        NoInfer<UsersControllerGetTopTagsData> | undefined,
-        NoInfer<UsersControllerGetTopTagsData> | undefined
-      >,
-      options?: SetDataOptions
-    ): UsersControllerGetTopTagsData | undefined
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getInfiniteQueryKey(
-      parameters: UsersControllerGetTopTagsParameters
-    ): ServiceOperationInfiniteQueryKey<
-      UsersControllerGetTopTagsSchema,
-      UsersControllerGetTopTagsParameters
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetTopTags.useInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetTopTagsParameters,
-      TData = UsersControllerGetTopTagsData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options: Omit<
-        UndefinedInitialDataInfiniteOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetTopTagsParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetTopTagsData,
-          PartialParameters<TPageParam>
-        >
-    ): UseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetTopTagsParameters
-      >,
-      UsersControllerGetTopTagsError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetTopTags.useInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetTopTagsParameters,
-      TData = UsersControllerGetTopTagsData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options: Omit<
-        DefinedInitialDataInfiniteOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetTopTagsParameters
-          >,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetTopTagsData,
-          PartialParameters<TPageParam>
-        >
-    ): DefinedUseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetTopTagsParameters
-      >,
-      UsersControllerGetTopTagsError | Error
-    >
-    /**
-     * Monitors the number of queries currently fetching, matching the provided filters.
-     * Useful for creating loading indicators or performing actions based on active requests.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-     * @example Checks the total number of queries fetching from the specified service method,
-     * both normal and infinite. If no parameters are provided, no filtering is applied.
-     * ```ts
-     * const usersControllerGetTopTagsTotal = qraft.usersService.usersControllerGetTopTags.useIsFetching()
-     * ```
-     * @example Checks the number of normal queries fetching with the specified parameters.
-     * ```ts
-     * const usersControllerGetTopTagsByParametersTotal = qraft.usersService.usersControllerGetTopTags.useIsFetching({
-     *     infinite: false,
-     *     parameters: {
-     *         path: {
-     *             id: id
-     *         }
-     *     }
-     * })
-     * ```
-     */
-    useIsFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-        | QueryFiltersByQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsData,
-            TInfinite,
-            UsersControllerGetTopTagsParameters,
-            UsersControllerGetTopTagsError
-          >
-    ): number
-    /**
-     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-     *
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-     * ```ts
-     * const usersControllerGetTopTagsResults = qraft.usersService.usersControllerGetTopTags.useQueries({
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetTopTagsResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-     * ```
-     * @example Combined results. Only the data will be returned.
-     * ```ts
-     * const usersControllerGetTopTagsCombinedResults = qraft.usersService.usersControllerGetTopTags.useQueries({
-     *     combine: results => results.map(result => result.data),
-     *     queries: [
-     *         {
-     *             path: {
-     *                 id: id1
-     *             }
-     *         },
-     *         {
-     *             path: {
-     *                 id: id2
-     *             }
-     *         }
-     *     ]
-     * });
-     * usersControllerGetTopTagsCombinedResults.forEach(data => console.log({ data }));
-     * ```
-     */
-    useQueries<
-      T extends Array<
-        UseQueryOptionsForUseQueries<
-          UsersControllerGetTopTagsSchema,
-          UsersControllerGetTopTagsParameters,
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError
-        >
-      >,
-      TCombinedResult = Array<
-        UseQueryResult<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          UseQueryResult<
-            UsersControllerGetTopTagsData,
-            UsersControllerGetTopTagsError
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    getQueryKey(
-      parameters: UsersControllerGetTopTagsParameters
-    ): ServiceOperationQueryKey<
-      UsersControllerGetTopTagsSchema,
-      UsersControllerGetTopTagsParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetTopTagsData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<
-      TData,
-      UsersControllerGetTopTagsError | Error
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query with parameters
-     * ```ts
-     * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * })
-     * ```
-     */
-    useQuery<TData = UsersControllerGetTopTagsData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options: Omit<
-        DefinedInitialDataOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<
-      TData,
-      UsersControllerGetTopTagsError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-     *
-     * @example Suspense Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetTopTags.useSuspenseInfiniteQuery({
-     *     path: {
-     *         id: id
-     *     }
-     * }, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useSuspenseInfiniteQuery<
-      TPageParam extends
-        UsersControllerGetTopTagsParameters,
-      TData = UsersControllerGetTopTagsData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options: Omit<
-        UseSuspenseInfiniteQueryOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          OperationInfiniteData<
-            TData,
-            UsersControllerGetTopTagsParameters
-          >,
-          UsersControllerGetTopTagsData,
-          ServiceOperationInfiniteQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          UsersControllerGetTopTagsData,
-          PartialParameters<TPageParam>
-        >
-    ): UseSuspenseInfiniteQueryResult<
-      OperationInfiniteData<
-        TData,
-        UsersControllerGetTopTagsParameters
-      >,
-      UsersControllerGetTopTagsError | Error
-    >
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    useSuspenseQueries<
-      T extends Array<
-        UseQueryOptionsForUseSuspenseQuery<
-          UsersControllerGetTopTagsSchema,
-          UsersControllerGetTopTagsParameters,
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError
-        >
-      >,
-      TCombinedResult = Array<
-        UseSuspenseQueryResult<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          WithOptional<
-            UseSuspenseQueryResult<
-              UsersControllerGetTopTagsData,
-              UsersControllerGetTopTagsError
-            >,
-            'data'
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get top tags
-     * @description Get summary of top tags for both inflows and expenses
-     */
-    useSuspenseQuery<TData = UsersControllerGetTopTagsData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        | UsersControllerGetTopTagsParameters,
-      options?: Omit<
-        UseSuspenseQueryOptions<
-          UsersControllerGetTopTagsData,
-          UsersControllerGetTopTagsError,
-          TData,
-          ServiceOperationQueryKey<
-            UsersControllerGetTopTagsSchema,
-            UsersControllerGetTopTagsParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseSuspenseQueryResult<
-      TData,
-      UsersControllerGetTopTagsError | Error
-    >
-    schema: UsersControllerGetTopTagsSchema
-    types: {
-      parameters: UsersControllerGetTopTagsParameters
-      data: UsersControllerGetTopTagsData
-      error: UsersControllerGetTopTagsError
-    }
-  }
+        ]>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getQueryData(parameters: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters)): UsersControllerGetTopTagsData | undefined;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getQueryState(parameters: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters)): QueryState<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError> | undefined;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getInfiniteQueryState(parameters: UsersControllerGetTopTagsParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>): QueryState<OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters>, UsersControllerGetTopTagsError> | undefined;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>, options?: InvalidateOptions): Promise<void>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>): number;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<UsersControllerGetTopTagsParameters, TMeta, TSignal>), client?: (schema: UsersControllerGetTopTagsSchema, options: {
+            parameters: UsersControllerGetTopTagsParameters;
+            signal?: TSignal;
+            meta?: TMeta;
+        }) => Promise<RequestFnResponse<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>>): Promise<RequestFnResponse<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>, options?: RefetchOptions): Promise<void>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>): void;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>, options?: ResetOptions): Promise<void>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        setInfiniteQueryData(parameters: UsersControllerGetTopTagsParameters | ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>, updater: Updater<NoInfer<OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters>> | undefined, NoInfer<OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<UsersControllerGetTopTagsData, UsersControllerGetTopTagsParameters> | undefined;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>, updater: Updater<NoInfer<UsersControllerGetTopTagsData> | undefined, NoInfer<UsersControllerGetTopTagsData> | undefined>, options?: SetDataOptions): Array<UsersControllerGetTopTagsData | undefined>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        setQueryData(parameters: (UsersControllerGetTopTagsParameters) | ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>, updater: Updater<NoInfer<UsersControllerGetTopTagsData> | undefined, NoInfer<UsersControllerGetTopTagsData> | undefined>, options?: SetDataOptions): UsersControllerGetTopTagsData | undefined;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getInfiniteQueryKey(parameters: UsersControllerGetTopTagsParameters): ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetTopTags.useInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetTopTagsParameters, TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options: Omit<UndefinedInitialDataInfiniteOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, OperationInfiniteData<TData, UsersControllerGetTopTagsParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetTopTagsData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetTopTagsParameters>, UsersControllerGetTopTagsError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetTopTags.useInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends UsersControllerGetTopTagsParameters, TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options: Omit<DefinedInitialDataInfiniteOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, OperationInfiniteData<TData, UsersControllerGetTopTagsParameters>, ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetTopTagsData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetTopTagsParameters>, UsersControllerGetTopTagsError | Error>;
+        /**
+         * Monitors the number of queries currently fetching, matching the provided filters.
+         * Useful for creating loading indicators or performing actions based on active requests.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+         * @example Checks the total number of queries fetching from the specified service method,
+         * both normal and infinite. If no parameters are provided, no filtering is applied.
+         * ```ts
+         * const usersControllerGetTopTagsTotal = qraft.usersService.usersControllerGetTopTags.useIsFetching()
+         * ```
+         * @example Checks the number of normal queries fetching with the specified parameters.
+         * ```ts
+         * const usersControllerGetTopTagsByParametersTotal = qraft.usersService.usersControllerGetTopTags.useIsFetching({
+         *     infinite: false,
+         *     parameters: {
+         *         path: {
+         *             id: id
+         *         }
+         *     }
+         * })
+         * ```
+         */
+        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError> | QueryFiltersByQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsData, TInfinite, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsError>): number;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+         *
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+         * ```ts
+         * const usersControllerGetTopTagsResults = qraft.usersService.usersControllerGetTopTags.useQueries({
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetTopTagsResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example Combined results. Only the data will be returned.
+         * ```ts
+         * const usersControllerGetTopTagsCombinedResults = qraft.usersService.usersControllerGetTopTags.useQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {
+         *             path: {
+         *                 id: id1
+         *             }
+         *         },
+         *         {
+         *             path: {
+         *                 id: id2
+         *             }
+         *         }
+         *     ]
+         * });
+         * usersControllerGetTopTagsCombinedResults.forEach(data => console.log({ data }));
+         * ```
+         */
+        useQueries<T extends Array<UseQueryOptionsForUseQueries<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>>, TCombinedResult = Array<UseQueryResult<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>>>(options: {
+            queries: T;
+            combine?: (results: Array<UseQueryResult<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        getQueryKey(parameters: UsersControllerGetTopTagsParameters): ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options?: Omit<UndefinedInitialDataOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, TData, ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>>, "queryKey">): UseQueryResult<TData, UsersControllerGetTopTagsError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query with parameters
+         * ```ts
+         * const { data, isLoading } = qraft.usersService.usersControllerGetTopTags.useQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * })
+         * ```
+         */
+        useQuery<TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options: Omit<DefinedInitialDataOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, TData, ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>>, "queryKey">): DefinedUseQueryResult<TData, UsersControllerGetTopTagsError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+         *
+         * @example Suspense Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.usersService.usersControllerGetTopTags.useSuspenseInfiniteQuery({
+         *     path: {
+         *         id: id
+         *     }
+         * }, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useSuspenseInfiniteQuery<TPageParam extends UsersControllerGetTopTagsParameters, TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options: Omit<UseSuspenseInfiniteQueryOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, OperationInfiniteData<TData, UsersControllerGetTopTagsParameters>, UsersControllerGetTopTagsData, ServiceOperationInfiniteQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<UsersControllerGetTopTagsData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, UsersControllerGetTopTagsParameters>, UsersControllerGetTopTagsError | Error>;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters, UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>>, TCombinedResult = Array<UseSuspenseQueryResult<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>>>(options: {
+            queries: T;
+            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError>, "data">>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get top tags
+         * @description Get summary of top tags for both inflows and expenses
+         */
+        useSuspenseQuery<TData = UsersControllerGetTopTagsData>(parameters: ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters> | (UsersControllerGetTopTagsParameters), options?: Omit<UseSuspenseQueryOptions<UsersControllerGetTopTagsData, UsersControllerGetTopTagsError, TData, ServiceOperationQueryKey<UsersControllerGetTopTagsSchema, UsersControllerGetTopTagsParameters>>, "queryKey">): UseSuspenseQueryResult<TData, UsersControllerGetTopTagsError | Error>;
+        schema: UsersControllerGetTopTagsSchema;
+        types: {
+            parameters: UsersControllerGetTopTagsParameters;
+            data: UsersControllerGetTopTagsData;
+            error: UsersControllerGetTopTagsError;
+        };
+    };
 }
 export const usersService: {
-  /**
-   * @summary Updates user
-   * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
-   */
-  usersControllerUpdateUser: {
-    schema: {
-      method: 'patch'
-      url: '/users/{id}'
-      mediaType: ['application/json']
-      security: ['bearer']
-    }
-  }
-  /**
-   * @summary Deletes user
-   * @description Deletes a user account. This operation cannot be undone.
-   */
-  usersControllerDeleteUser: {
-    schema: {
-      method: 'delete'
-      url: '/users/{id}'
-      security: ['bearer']
-    }
-  }
-  /**
-   * @summary Get current balance
-   * @description Get user's current balance including total inflows and expenses
-   */
-  usersControllerGetCurrentBalance: {
-    schema: {
-      method: 'get'
-      url: '/users/{id}/balance'
-      security: ['bearer']
-    }
-  }
-  /**
-   * @summary Get monthly balance
-   * @description Get user's monthly balance breakdown for a specific year
-   */
-  usersControllerGetMonthlyBalance: {
-    schema: {
-      method: 'get'
-      url: '/users/{id}/monthly-balance/{year}'
-      security: ['bearer']
-    }
-  }
-  /**
-   * @summary Get financial summary
-   * @description Get comprehensive financial summary including balance and statistics
-   */
-  usersControllerGetFinancialSummary: {
-    schema: {
-      method: 'get'
-      url: '/users/{id}/financial-summary'
-      security: ['bearer']
-    }
-  }
-  /**
-   * @summary Get top tags
-   * @description Get summary of top tags for both inflows and expenses
-   */
-  usersControllerGetTopTags: {
-    schema: {
-      method: 'get'
-      url: '/users/{id}/top-tags'
-      security: ['bearer']
-    }
-  }
+    /**
+     * @summary Updates user
+     * @description This endpoint allows the user to update their details. Note that this requires authentication of user you are updating.
+     */
+    usersControllerUpdateUser: {
+        schema: {
+            method: "patch";
+            url: "/users/{id}";
+            mediaType: [
+                "application/json"
+            ];
+            security: [
+                "bearer"
+            ];
+        };
+    };
+    /**
+     * @summary Deletes user
+     * @description Deletes a user account. This operation cannot be undone.
+     */
+    usersControllerDeleteUser: {
+        schema: {
+            method: "delete";
+            url: "/users/{id}";
+            security: [
+                "bearer"
+            ];
+        };
+    };
+    /**
+     * @summary Get current balance
+     * @description Get user's current balance including total inflows and expenses
+     */
+    usersControllerGetCurrentBalance: {
+        schema: {
+            method: "get";
+            url: "/users/{id}/balance";
+            security: [
+                "bearer"
+            ];
+        };
+    };
+    /**
+     * @summary Get monthly balance
+     * @description Get user's monthly balance breakdown for a specific year
+     */
+    usersControllerGetMonthlyBalance: {
+        schema: {
+            method: "get";
+            url: "/users/{id}/monthly-balance/{year}";
+            security: [
+                "bearer"
+            ];
+        };
+    };
+    /**
+     * @summary Get financial summary
+     * @description Get comprehensive financial summary including balance and statistics
+     */
+    usersControllerGetFinancialSummary: {
+        schema: {
+            method: "get";
+            url: "/users/{id}/financial-summary";
+            security: [
+                "bearer"
+            ];
+        };
+    };
+    /**
+     * @summary Get top tags
+     * @description Get summary of top tags for both inflows and expenses
+     */
+    usersControllerGetTopTags: {
+        schema: {
+            method: "get";
+            url: "/users/{id}/top-tags";
+            security: [
+                "bearer"
+            ];
+        };
+    };
 } = {
-  usersControllerUpdateUser: {
-    schema: {
-      method: 'patch',
-      url: '/users/{id}',
-      mediaType: ['application/json'],
-      security: ['bearer']
+    usersControllerUpdateUser: {
+        schema: {
+            method: "patch",
+            url: "/users/{id}",
+            mediaType: ["application/json"],
+            security: ["bearer"]
+        }
+    },
+    usersControllerDeleteUser: {
+        schema: {
+            method: "delete",
+            url: "/users/{id}",
+            security: ["bearer"]
+        }
+    },
+    usersControllerGetCurrentBalance: {
+        schema: {
+            method: "get",
+            url: "/users/{id}/balance",
+            security: ["bearer"]
+        }
+    },
+    usersControllerGetMonthlyBalance: {
+        schema: {
+            method: "get",
+            url: "/users/{id}/monthly-balance/{year}",
+            security: ["bearer"]
+        }
+    },
+    usersControllerGetFinancialSummary: {
+        schema: {
+            method: "get",
+            url: "/users/{id}/financial-summary",
+            security: ["bearer"]
+        }
+    },
+    usersControllerGetTopTags: {
+        schema: {
+            method: "get",
+            url: "/users/{id}/top-tags",
+            security: ["bearer"]
+        }
     }
-  },
-  usersControllerDeleteUser: {
-    schema: {
-      method: 'delete',
-      url: '/users/{id}',
-      security: ['bearer']
-    }
-  },
-  usersControllerGetCurrentBalance: {
-    schema: {
-      method: 'get',
-      url: '/users/{id}/balance',
-      security: ['bearer']
-    }
-  },
-  usersControllerGetMonthlyBalance: {
-    schema: {
-      method: 'get',
-      url: '/users/{id}/monthly-balance/{year}',
-      security: ['bearer']
-    }
-  },
-  usersControllerGetFinancialSummary: {
-    schema: {
-      method: 'get',
-      url: '/users/{id}/financial-summary',
-      security: ['bearer']
-    }
-  },
-  usersControllerGetTopTags: {
-    schema: {
-      method: 'get',
-      url: '/users/{id}/top-tags',
-      security: ['bearer']
-    }
-  }
-}
+};
 type UsersControllerUpdateUserSchema = {
-  method: 'patch'
-  url: '/users/{id}'
-  mediaType: ['application/json']
-  security: ['bearer']
-}
-type UsersControllerUpdateUserParameters =
-  paths['/users/{id}']['patch']['parameters']
-type UsersControllerUpdateUserData =
-  paths['/users/{id}']['patch']['responses']['200']['content']['application/json']
-type UsersControllerUpdateUserError = unknown
-type UsersControllerUpdateUserBody = NonNullable<
-  paths['/users/{id}']['patch']['requestBody']
->['content']['application/json']
+    method: "patch";
+    url: "/users/{id}";
+    mediaType: [
+        "application/json"
+    ];
+    security: [
+        "bearer"
+    ];
+};
+type UsersControllerUpdateUserParameters = paths["/users/{id}"]["patch"]["parameters"];
+type UsersControllerUpdateUserData = paths["/users/{id}"]["patch"]["responses"]["200"]["content"]["application/json"];
+type UsersControllerUpdateUserError = unknown;
+type UsersControllerUpdateUserBody = NonNullable<paths["/users/{id}"]["patch"]["requestBody"]>["content"]["application/json"];
 type UsersControllerDeleteUserSchema = {
-  method: 'delete'
-  url: '/users/{id}'
-  security: ['bearer']
-}
-type UsersControllerDeleteUserParameters =
-  paths['/users/{id}']['delete']['parameters']
-type UsersControllerDeleteUserData = unknown
-type UsersControllerDeleteUserError = unknown
-type UsersControllerDeleteUserBody = undefined
+    method: "delete";
+    url: "/users/{id}";
+    security: [
+        "bearer"
+    ];
+};
+type UsersControllerDeleteUserParameters = paths["/users/{id}"]["delete"]["parameters"];
+type UsersControllerDeleteUserData = unknown;
+type UsersControllerDeleteUserError = unknown;
+type UsersControllerDeleteUserBody = undefined;
 type UsersControllerGetCurrentBalanceSchema = {
-  method: 'get'
-  url: '/users/{id}/balance'
-  security: ['bearer']
-}
-type UsersControllerGetCurrentBalanceParameters =
-  paths['/users/{id}/balance']['get']['parameters']
-type UsersControllerGetCurrentBalanceData =
-  paths['/users/{id}/balance']['get']['responses']['200']['content']['application/json']
-type UsersControllerGetCurrentBalanceError = unknown
+    method: "get";
+    url: "/users/{id}/balance";
+    security: [
+        "bearer"
+    ];
+};
+type UsersControllerGetCurrentBalanceParameters = paths["/users/{id}/balance"]["get"]["parameters"];
+type UsersControllerGetCurrentBalanceData = paths["/users/{id}/balance"]["get"]["responses"]["200"]["content"]["application/json"];
+type UsersControllerGetCurrentBalanceError = unknown;
 type UsersControllerGetMonthlyBalanceSchema = {
-  method: 'get'
-  url: '/users/{id}/monthly-balance/{year}'
-  security: ['bearer']
-}
-type UsersControllerGetMonthlyBalanceParameters =
-  paths['/users/{id}/monthly-balance/{year}']['get']['parameters']
-type UsersControllerGetMonthlyBalanceData =
-  paths['/users/{id}/monthly-balance/{year}']['get']['responses']['200']['content']['application/json']
-type UsersControllerGetMonthlyBalanceError = unknown
+    method: "get";
+    url: "/users/{id}/monthly-balance/{year}";
+    security: [
+        "bearer"
+    ];
+};
+type UsersControllerGetMonthlyBalanceParameters = paths["/users/{id}/monthly-balance/{year}"]["get"]["parameters"];
+type UsersControllerGetMonthlyBalanceData = paths["/users/{id}/monthly-balance/{year}"]["get"]["responses"]["200"]["content"]["application/json"];
+type UsersControllerGetMonthlyBalanceError = unknown;
 type UsersControllerGetFinancialSummarySchema = {
-  method: 'get'
-  url: '/users/{id}/financial-summary'
-  security: ['bearer']
-}
-type UsersControllerGetFinancialSummaryParameters =
-  paths['/users/{id}/financial-summary']['get']['parameters']
-type UsersControllerGetFinancialSummaryData =
-  paths['/users/{id}/financial-summary']['get']['responses']['200']['content']['application/json']
-type UsersControllerGetFinancialSummaryError = unknown
+    method: "get";
+    url: "/users/{id}/financial-summary";
+    security: [
+        "bearer"
+    ];
+};
+type UsersControllerGetFinancialSummaryParameters = paths["/users/{id}/financial-summary"]["get"]["parameters"];
+type UsersControllerGetFinancialSummaryData = paths["/users/{id}/financial-summary"]["get"]["responses"]["200"]["content"]["application/json"];
+type UsersControllerGetFinancialSummaryError = unknown;
 type UsersControllerGetTopTagsSchema = {
-  method: 'get'
-  url: '/users/{id}/top-tags'
-  security: ['bearer']
-}
-type UsersControllerGetTopTagsParameters =
-  paths['/users/{id}/top-tags']['get']['parameters']
-type UsersControllerGetTopTagsData =
-  paths['/users/{id}/top-tags']['get']['responses']['200']['content']['application/json']
-type UsersControllerGetTopTagsError = unknown
+    method: "get";
+    url: "/users/{id}/top-tags";
+    security: [
+        "bearer"
+    ];
+};
+type UsersControllerGetTopTagsParameters = paths["/users/{id}/top-tags"]["get"]["parameters"];
+type UsersControllerGetTopTagsData = paths["/users/{id}/top-tags"]["get"]["responses"]["200"]["content"]["application/json"];
+type UsersControllerGetTopTagsError = unknown;
