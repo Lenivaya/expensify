@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof PasswordStrengthChecker> = {
   title:
-    'UI/PasswordStrengthChecker/PasswordStrengthChecker',
+    'Components/PasswordStrengthChecker/PasswordStrengthChecker',
   component: PasswordStrengthChecker,
   parameters: {
     layout: 'centered',

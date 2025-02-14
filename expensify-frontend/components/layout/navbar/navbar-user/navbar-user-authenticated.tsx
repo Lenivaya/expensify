@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * @module NavbarUserAuthenticated
+ * @description This module contains components for rendering the authenticated user's navbar dropdown menu.
+ */
+
 import type React from 'react'
 import {
   DropdownMenu,
@@ -22,27 +27,61 @@ import Link from 'next/link'
 import { useCallback } from 'react'
 import { useAuthToken } from '@/lib/hooks/use-auth-token'
 
-type UserData = components['schemas']['UserDto']
+/*
+ * Optional callback function to handle user logout
+ * */
+type UserData = Pick<
+  components['schemas']['UserDto'],
+  'username' | 'email' | 'id'
+>
 
+/**
+ * Props for the NavbarUserAuthenticated component
+ * @interface NavbarUserAuthenticatedProps
+ * @property {UserData} user - The authenticated user's data from the API
+ * @property {() => void} [handleLogout] - Optional callback function to handle user logout
+ */
 interface NavbarUserAuthenticatedProps {
   user: UserData
+  handleLogout?: () => void
 }
 
+/**
+ * NavbarUserAuthenticated Component
+ *
+ * Renders a dropdown menu for authenticated users in the navigation bar.
+ * Displays user information and provides navigation options for profile, settings,
+ * and logout functionality.
+ *
+ * @component
+ * @example
+ * ```tsx
+ * <NavbarUserAuthenticated user={{
+ *   username: "johndoe",
+ *   email: "john@example.com"
+ * }} />
+ * ```
+ */
 export function NavbarUserAuthenticated({
-  user
+  user,
+  handleLogout
 }: NavbarUserAuthenticatedProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_t, _ct, removeToken] = useAuthToken()
 
-  const handleLogout = useCallback(async () => {
+  const handleLogoutWrapper = useCallback(async () => {
     removeToken()
+    handleLogout?.()
     localStorage.removeItem('auth:token')
     window.location.reload()
-  }, [removeToken])
+  }, [handleLogout, removeToken])
 
   return (
     <div suppressHydrationWarning={true}>
-      <MenuItem handleLogout={handleLogout} user={user}>
+      <MenuItem
+        handleLogout={handleLogoutWrapper}
+        user={user}
+      >
         <Button
           variant="ghost"
           size="sm"
@@ -59,15 +98,24 @@ export function NavbarUserAuthenticated({
   )
 }
 
+/**
+ * Props for the MenuItem component
+ * @interface MenuItemProps
+ * @property {UserData} user - The authenticated user's data
+ * @property {React.ReactNode} children - The trigger element for the dropdown menu
+ * @property {() => void} [handleLogout] - Optional callback function to handle user logout
+ */
+interface MenuItemProps {
+  user: UserData
+  children: React.ReactNode
+  handleLogout?: () => void
+}
+
 function MenuItem({
   user,
   children,
   handleLogout
-}: {
-  user: UserData
-  children: React.ReactNode
-  handleLogout?: () => void
-}) {
+}: MenuItemProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild={true}>

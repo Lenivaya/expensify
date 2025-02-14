@@ -4,7 +4,7 @@ import { themes } from '@storybook/theming'
 
 const meta: Meta<typeof PasswordStrengthIndicator> = {
   title:
-    'UI/PasswordStrengthChecker/PasswordStrengthIndicator',
+    'Components/PasswordStrengthChecker/PasswordStrengthIndicator',
   component: PasswordStrengthIndicator,
   parameters: {
     layout: 'centered',
