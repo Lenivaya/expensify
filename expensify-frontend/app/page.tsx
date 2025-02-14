@@ -46,7 +46,7 @@ const STATS = [
 
 export default async function Home() {
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center px-4 py-16">
+    <main className="flex h-screen flex-col items-center justify-center px-4 py-18">
       {/* Hero Section */}
       <div className="mb-16 space-y-6 text-center">
         <Badge variant="outline" className="mb-4 px-3 py-1">
