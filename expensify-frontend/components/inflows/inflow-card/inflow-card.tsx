@@ -41,7 +41,7 @@ import type { FC } from 'react'
  * @property {string | null} updatedAt - ISO timestamp of last update
  * @property {string} createdAt - ISO timestamp of creation
  */
-type InflowData = {
+export type InflowCardData = {
   id: string
   amount: string
   description: string | null
@@ -73,7 +73,7 @@ type InflowData = {
  * @property {boolean} [disabled] - Whether the card interactions are disabled
  */
 export interface InflowCardProps {
-  inflow: InflowData
+  inflow: InflowCardData
   isLoading?: boolean
   className?: string
   onEdit?: (id: string) => void
