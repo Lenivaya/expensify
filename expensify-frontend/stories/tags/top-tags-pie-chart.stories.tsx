@@ -1,7 +1,5 @@
-import {
-  type TagSummaryItemDto,
-  TopTagsPieChart
-} from '@/components/tags/top-tags-pie-chart/top-tags-pie-chart'
+import { TopTagsPieChart } from '@/components/tags/top-tags-pie-chart/top-tags-pie-chart'
+import type { TagSummaryItemDto } from '@/components/tags/top-tags-pie-chart/types'
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
