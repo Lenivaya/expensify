@@ -1,8 +1,6 @@
-import {
-  Injectable,
-  NotFoundException
-} from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { or, eq, sql } from 'drizzle-orm'
+// biome-ignore lint/style/useImportType: <explanation>
 import { DrizzleService } from 'src/database/drizzle.service'
 import { users } from 'src/database/schema/users.schema'
 import { expenses } from 'src/database/schema/expenses.schema'
@@ -11,9 +9,7 @@ import type { UserUpdateDto } from './dto/user-update.dto'
 
 @Injectable()
 export class UsersService {
-  constructor(
-    private readonly drizzleService: DrizzleService
-  ) {}
+  constructor(private readonly drizzleService: DrizzleService) {}
 
   async findById(id: string) {
     const [user] = await this.drizzleService.db
@@ -27,12 +23,7 @@ export class UsersService {
     const [user] = await this.drizzleService.db
       .select()
       .from(users)
-      .where(
-        or(
-          eq(users.email, login),
-          eq(users.username, login)
-        )
-      )
+      .where(or(eq(users.email, login), eq(users.username, login)))
     return user
   }
 
@@ -100,9 +91,7 @@ export class UsersService {
       .where(
         sql`EXTRACT(YEAR FROM ${inflows.createdAt}) = ${year} AND ${inflows.userId} = ${userId}`
       )
-      .groupBy(
-        sql`EXTRACT(MONTH FROM ${inflows.createdAt})`
-      )
+      .groupBy(sql`EXTRACT(MONTH FROM ${inflows.createdAt})`)
 
     const monthlyExpenses = this.drizzleService.db
       .select({
@@ -113,34 +102,28 @@ export class UsersService {
       .where(
         sql`EXTRACT(YEAR FROM ${expenses.createdAt}) = ${year} AND ${expenses.userId} = ${userId}`
       )
-      .groupBy(
-        sql`EXTRACT(MONTH FROM ${expenses.createdAt})`
-      )
+      .groupBy(sql`EXTRACT(MONTH FROM ${expenses.createdAt})`)
 
-    const [inflowsResult, expensesResult] =
-      await Promise.all([monthlyInflows, monthlyExpenses])
+    const [inflowsResult, expensesResult] = await Promise.all([
+      monthlyInflows,
+      monthlyExpenses
+    ])
 
-    const monthlyBalance = Array.from(
-      { length: 12 },
-      (_, i) => i + 1
-    ).map((month) => {
-      const inflow = inflowsResult.find(
-        (r) => r.month === month
-      )
-      const expense = expensesResult.find(
-        (r) => r.month === month
-      )
+    const monthlyBalance = Array.from({ length: 12 }, (_, i) => i + 1).map(
+      (month) => {
+        const inflow = inflowsResult.find((r) => r.month === month)
+        const expense = expensesResult.find((r) => r.month === month)
 
-      return {
-        month,
-        inflow: inflow?.total || '0',
-        expense: expense?.total || '0',
-        balance: (
-          Number(inflow?.total || 0) -
-          Number(expense?.total || 0)
-        ).toString()
+        return {
+          month,
+          inflow: inflow?.total || '0',
+          expense: expense?.total || '0',
+          balance: (
+            Number(inflow?.total || 0) - Number(expense?.total || 0)
+          ).toString()
+        }
       }
-    })
+    )
 
     return monthlyBalance
   }
@@ -195,8 +178,10 @@ export class UsersService {
       .where(eq(expenses.userId, userId))
       .groupBy(sql`unnest(${expenses.tags})`)
 
-    const [inflowResults, expenseResults] =
-      await Promise.all([inflowTags, expenseTags])
+    const [inflowResults, expenseResults] = await Promise.all([
+      inflowTags,
+      expenseTags
+    ])
 
     return {
       inflowTags: inflowResults.sort(
@@ -206,5 +191,83 @@ export class UsersService {
         (a, b) => Number(b.amount) - Number(a.amount)
       )
     }
+  }
+
+  async getBalanceHistory(userId: string) {
+    const monthlyInflows = this.drizzleService.db
+      .select({
+        year: sql<number>`EXTRACT(YEAR FROM ${inflows.createdAt})`,
+        month: sql<number>`EXTRACT(MONTH FROM ${inflows.createdAt})`,
+        total: sql<string>`COALESCE(SUM(${inflows.amount}), 0)`
+      })
+      .from(inflows)
+      .where(eq(inflows.userId, userId))
+      .groupBy(
+        sql`EXTRACT(YEAR FROM ${inflows.createdAt}), EXTRACT(MONTH FROM ${inflows.createdAt})`
+      )
+      .orderBy(
+        sql`EXTRACT(YEAR FROM ${inflows.createdAt}), EXTRACT(MONTH FROM ${inflows.createdAt})`
+      )
+
+    const monthlyExpenses = this.drizzleService.db
+      .select({
+        year: sql<number>`EXTRACT(YEAR FROM ${expenses.createdAt})`,
+        month: sql<number>`EXTRACT(MONTH FROM ${expenses.createdAt})`,
+        total: sql<string>`COALESCE(SUM(${expenses.amount}), 0)`
+      })
+      .from(expenses)
+      .where(eq(expenses.userId, userId))
+      .groupBy(
+        sql`EXTRACT(YEAR FROM ${expenses.createdAt}), EXTRACT(MONTH FROM ${expenses.createdAt})`
+      )
+      .orderBy(
+        sql`EXTRACT(YEAR FROM ${expenses.createdAt}), EXTRACT(MONTH FROM ${expenses.createdAt})`
+      )
+
+    const [inflowsResult, expensesResult] = await Promise.all([
+      monthlyInflows,
+      monthlyExpenses
+    ])
+
+    // Create a map of all unique year-month combinations
+    const periodMap = new Map<string, { year: number; month: number }>()
+    for (const r of inflowsResult) {
+      periodMap.set(`${r.year}-${r.month}`, { year: r.year, month: r.month })
+    }
+    for (const r of expensesResult) {
+      periodMap.set(`${r.year}-${r.month}`, { year: r.year, month: r.month })
+    }
+
+    // Convert to array and sort by date
+    const periods = Array.from(periodMap.values()).sort((a, b) => {
+      if (a.year !== b.year) return a.year - b.year
+      return a.month - b.month
+    })
+
+    let cumulativeBalance = 0
+    const balanceHistory = periods.map((period) => {
+      const inflow = inflowsResult.find(
+        (r) => r.year === period.year && r.month === period.month
+      )
+      const expense = expensesResult.find(
+        (r) => r.year === period.year && r.month === period.month
+      )
+
+      const inflowAmount = Number(inflow?.total || 0)
+      const expenseAmount = Number(expense?.total || 0)
+      const balance = inflowAmount - expenseAmount
+      cumulativeBalance += balance
+
+      return {
+        year: period.year,
+        month: period.month,
+        inflow: inflow?.total || '0',
+        expense: expense?.total || '0',
+        balance: balance.toString(),
+        cumulativeBalance: cumulativeBalance.toString()
+      }
+    })
+
+    return balanceHistory
   }
 }

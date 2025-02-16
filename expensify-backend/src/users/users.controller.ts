@@ -34,13 +34,12 @@ import { BalanceDto } from './dto/balance.dto'
 import { FinancialSummaryDto } from './dto/financial-summary.dto'
 import { MonthlyBalanceDto } from './dto/monthly-balance.dto'
 import { TagSummaryDto } from './dto/tag-summary.dto'
+import { BalanceHistoryItemDto } from './dto/balance-history.dto'
 
 @ApiTags('Users')
 @Controller('users')
 export class UsersController {
-  constructor(
-    private readonly usersService: UsersService
-  ) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Patch(':id')
   @HttpCode(200)
@@ -62,8 +61,7 @@ export class UsersController {
     type: UserDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to update this profile'
+    description: 'User is not authorized to update this profile'
   })
   @ApiNotFoundResponse({
     description: 'User not found'
@@ -73,12 +71,8 @@ export class UsersController {
     @Body() updateDto: UserUpdateDto,
     @Param('id') id: string
   ) {
-    if (request.user.id !== id)
-      throw new UnauthorizedException()
-    const updatedUser = await this.usersService.updateUser(
-      id,
-      updateDto
-    )
+    if (request.user.id !== id) throw new UnauthorizedException()
+    const updatedUser = await this.usersService.updateUser(id, updateDto)
     return updatedUser
   }
 
@@ -88,25 +82,19 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Deletes user',
-    description:
-      'Deletes a user account. This operation cannot be undone.'
+    description: 'Deletes a user account. This operation cannot be undone.'
   })
   @ApiNoContentResponse({
     description: 'User successfully deleted'
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to delete this account'
+    description: 'User is not authorized to delete this account'
   })
   @ApiNotFoundResponse({
     description: 'User not found'
   })
-  async deleteUser(
-    @Req() request: RequestWithUser,
-    @Param('id') id: string
-  ) {
-    if (request.user.id !== id)
-      throw new UnauthorizedException()
+  async deleteUser(@Req() request: RequestWithUser, @Param('id') id: string) {
+    if (request.user.id !== id) throw new UnauthorizedException()
     await this.usersService.deleteUser(id)
   }
 
@@ -123,8 +111,7 @@ export class UsersController {
     type: BalanceDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view this balance'
+    description: 'User is not authorized to view this balance'
   })
   @ApiNotFoundResponse({
     description: 'User not found'
@@ -133,8 +120,7 @@ export class UsersController {
     @Req() request: RequestWithUser,
     @Param('id') id: string
   ) {
-    if (request.user.id !== id)
-      throw new UnauthorizedException()
+    if (request.user.id !== id) throw new UnauthorizedException()
     return await this.usersService.getCurrentBalance(id)
   }
 
@@ -143,8 +129,7 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Get monthly balance',
-    description:
-      "Get user's monthly balance breakdown for a specific year"
+    description: "Get user's monthly balance breakdown for a specific year"
   })
   @ApiParam({
     name: 'year',
@@ -157,8 +142,7 @@ export class UsersController {
     type: [MonthlyBalanceDto]
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view these statistics'
+    description: 'User is not authorized to view these statistics'
   })
   @ApiNotFoundResponse({
     description: 'User not found'
@@ -168,12 +152,8 @@ export class UsersController {
     @Param('id') id: string,
     @Param('year', ParseIntPipe) year: number
   ) {
-    if (request.user.id !== id)
-      throw new UnauthorizedException()
-    return await this.usersService.getMonthlyBalance(
-      id,
-      year
-    )
+    if (request.user.id !== id) throw new UnauthorizedException()
+    return await this.usersService.getMonthlyBalance(id, year)
   }
 
   @Get(':id/financial-summary')
@@ -189,8 +169,7 @@ export class UsersController {
     type: FinancialSummaryDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view this financial summary'
+    description: 'User is not authorized to view this financial summary'
   })
   @ApiNotFoundResponse({
     description: 'User not found'
@@ -199,8 +178,7 @@ export class UsersController {
     @Req() request: RequestWithUser,
     @Param('id') id: string
   ) {
-    if (request.user.id !== id)
-      throw new UnauthorizedException()
+    if (request.user.id !== id) throw new UnauthorizedException()
     return await this.usersService.getFinancialSummary(id)
   }
 
@@ -209,27 +187,50 @@ export class UsersController {
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Get top tags',
-    description:
-      'Get summary of top tags for both inflows and expenses'
+    description: 'Get summary of top tags for both inflows and expenses'
   })
   @ApiOkResponse({
     description: 'Tag summary',
     type: TagSummaryDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view these tag statistics'
+    description: 'User is not authorized to view these tag statistics'
   })
   @ApiNotFoundResponse({
     description: 'User not found'
   })
-  async getTopTags(
+  async getTopTags(@Req() request: RequestWithUser, @Param('id') id: string) {
+    if (request.user.id !== id) {
+      throw new UnauthorizedException()
+    }
+    return await this.usersService.getTopTags(id)
+  }
+
+  @Get(':id/balance-history')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiOperation({
+    summary: 'Get balance history',
+    description:
+      'Get complete history of monthly balances with cumulative totals for plotting trends'
+  })
+  @ApiOkResponse({
+    description: 'Balance history with cumulative totals',
+    type: [BalanceHistoryItemDto]
+  })
+  @ApiUnauthorizedResponse({
+    description: 'User is not authorized to view this balance history'
+  })
+  @ApiNotFoundResponse({
+    description: 'User not found'
+  })
+  async getBalanceHistory(
     @Req() request: RequestWithUser,
     @Param('id') id: string
   ) {
     if (request.user.id !== id) {
       throw new UnauthorizedException()
     }
-    return await this.usersService.getTopTags(id)
+    return await this.usersService.getBalanceHistory(id)
   }
 }
