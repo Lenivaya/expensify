@@ -3,8 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { themes } from '@storybook/theming'
 
 const meta: Meta<typeof PasswordStrengthIndicator> = {
-  title:
-    'Components/PasswordStrengthChecker/PasswordStrengthIndicator',
+  title: 'Components/Generic/PasswordStrengthChecker/PasswordStrengthIndicator',
   component: PasswordStrengthIndicator,
   parameters: {
     layout: 'centered',
@@ -30,24 +29,16 @@ const meta: Meta<typeof PasswordStrengthIndicator> = {
   tags: ['autodocs'],
   argTypes: {
     strength: {
-      description:
-        'The current strength level of the password',
+      description: 'The current strength level of the password',
       control: 'select',
-      options: [
-        'veryWeak',
-        'weak',
-        'moderate',
-        'strong',
-        'veryStrong'
-      ],
+      options: ['veryWeak', 'weak', 'moderate', 'strong', 'veryStrong'],
       table: {
         type: { summary: 'PasswordStrength' },
         defaultValue: { summary: 'veryWeak' }
       }
     },
     strengthMap: {
-      description:
-        'Custom mapping for strength levels appearance',
+      description: 'Custom mapping for strength levels appearance',
       control: 'object',
       table: {
         type: { summary: 'Partial<StrengthMapType>' }
@@ -70,8 +61,8 @@ const meta: Meta<typeof PasswordStrengthIndicator> = {
   },
   decorators: [
     (Story) => (
-      <div className="flex min-h-[200px] items-center justify-center p-8">
-        <div className="w-[600px] rounded-lg bg-background p-6 shadow-lg">
+      <div className='flex min-h-[200px] items-center justify-center p-8'>
+        <div className='w-[600px] rounded-lg bg-background p-6 shadow-lg'>
           <Story />
         </div>
       </div>

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { BalanceHistoryChart } from '@/components/users/balance-history-chart/balance-history-chart'
 
 const meta = {
-  title: 'User/BalanceHistoryChart',
+  title: 'Components/Users/BalanceHistoryChart',
   component: BalanceHistoryChart,
   tags: ['autodocs'],
   parameters: {

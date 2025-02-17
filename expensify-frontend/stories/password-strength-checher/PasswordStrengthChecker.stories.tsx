@@ -3,8 +3,7 @@ import type { PasswordStrength } from '@/components/generic/password-strength-ch
 import type { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof PasswordStrengthChecker> = {
-  title:
-    'Components/PasswordStrengthChecker/PasswordStrengthChecker',
+  title: 'Components/Generic/PasswordStrengthChecker/PasswordStrengthChecker',
   component: PasswordStrengthChecker,
   parameters: {
     layout: 'centered',
@@ -24,10 +23,7 @@ type Story = StoryObj<typeof PasswordStrengthChecker>
 export const Default: Story = {
   args: {
     placeholder: 'Enter your password',
-    onSubmit: (
-      password: string,
-      strength: PasswordStrength
-    ) =>
+    onSubmit: (password: string, strength: PasswordStrength) =>
       console.log('Password submitted:', password, strength)
   }
 }
@@ -36,10 +32,7 @@ export const WithInitialPassword: Story = {
   args: {
     initialPassword: 'initialPassword123',
     placeholder: 'Enter your password',
-    onSubmit: (
-      password: string,
-      strength: PasswordStrength
-    ) =>
+    onSubmit: (password: string, strength: PasswordStrength) =>
       console.log('Password submitted:', password, strength)
   }
 }
