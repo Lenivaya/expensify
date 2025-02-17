@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { SearchBox } from '@/components/generic/password-strength-checker/search-box/search-box'
+import { SearchBox } from '@/components/generic/search-box/search-box'
 
 const meta = {
   title: 'Components/Generic/SearchBox',
