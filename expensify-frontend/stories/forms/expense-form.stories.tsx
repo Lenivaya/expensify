@@ -1,27 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { CreateExpenseForm } from '@/components/forms/expenses/create-expense.form'
+import { ExpenseForm } from '@/components/forms/expenses/expense-form'
 import { fn } from '@storybook/test'
 import { action } from '@storybook/addon-actions'
 
-type ExpenseFormValues = {
-  amount: number
-  description: string
-  tags: string[]
-}
-
 /**
- * The `CreateExpenseForm` component provides a user-friendly interface for creating new expenses.
+ * The `ExpenseForm` component provides a unified interface for creating and editing expenses.
  * It includes fields for amount, description, and tags with comprehensive validation and error handling.
  */
 const meta = {
-  title: 'Forms/Expenses/CreateExpenseForm',
-  component: CreateExpenseForm,
+  title: 'Forms/Expenses/ExpenseForm',
+  component: ExpenseForm,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
         component:
-          'A form component for creating new expenses with validation and tag management.'
+          'A unified form component for creating and editing expenses with validation and tag management.'
       }
     },
     actions: {
@@ -38,6 +32,14 @@ const meta = {
       description: 'Flag to indicate if the form is currently submitting',
       control: 'boolean'
     },
+    isEditing: {
+      description: 'Flag to indicate if the form is in edit mode',
+      control: 'boolean'
+    },
+    defaultValues: {
+      description: 'Initial values for the form fields',
+      control: 'object'
+    },
     title: {
       description: 'Title of the form card',
       control: 'text'
@@ -51,13 +53,13 @@ const meta = {
       control: 'text'
     }
   }
-} satisfies Meta<typeof CreateExpenseForm>
+} satisfies Meta<typeof ExpenseForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 // Mock submit handler that logs the form values and triggers actions
-const handleSubmit = async (values: ExpenseFormValues) => {
+const handleSubmit = async (values: any) => {
   action('form-submitted')(values)
   console.log('Form submitted with values:', values)
   // Simulate API delay
@@ -66,11 +68,27 @@ const handleSubmit = async (values: ExpenseFormValues) => {
 }
 
 /**
- * Default state of the form with all default props
+ * Default create mode of the form with all default props
  */
-export const Default: Story = {
+export const Create: Story = {
   args: {
-    onSubmit: fn(handleSubmit)
+    onSubmit: fn(handleSubmit),
+    isEditing: false
+  }
+}
+
+/**
+ * Edit mode with pre-filled values
+ */
+export const Edit: Story = {
+  args: {
+    onSubmit: fn(handleSubmit),
+    isEditing: true,
+    defaultValues: {
+      amount: 42.5,
+      description: 'Team lunch at Restaurant',
+      tags: ['food', 'work', 'team']
+    }
   }
 }
 
@@ -90,24 +108,8 @@ export const Submitting: Story = {
 export const CustomTitleAndDescription: Story = {
   args: {
     onSubmit: fn(handleSubmit),
-    title: 'Record Expense',
-    description:
-      'Add your expense details below to keep track of your spending.'
-  }
-}
-
-/**
- * Form with pre-filled values for testing
- */
-export const PrefilledForm: Story = {
-  args: {
-    onSubmit: fn(async (values: ExpenseFormValues) => {
-      action('edit-form-submitted')(values)
-      console.log('Edited form submitted with values:', values)
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      action('edit-form-completed')(values)
-    }),
-    title: 'Edit Expense'
+    title: 'Record Business Expense',
+    description: 'Add your business expense details below for reimbursement.'
   }
 }
 
@@ -117,7 +119,7 @@ export const PrefilledForm: Story = {
 export const CustomStyling: Story = {
   args: {
     onSubmit: fn(handleSubmit),
-    className: 'max-w-md shadow-lg'
+    className: 'max-w-md shadow-lg bg-card/50 backdrop-blur'
   }
 }
 
@@ -126,7 +128,7 @@ export const CustomStyling: Story = {
  */
 export const WithErrors: Story = {
   args: {
-    onSubmit: fn(async (values: ExpenseFormValues) => {
+    onSubmit: fn(async (values) => {
       action('form-submission-failed')(values)
       console.log('Form submission failed with values:', values)
       throw new Error('Simulated API error')
@@ -147,21 +149,13 @@ export const WithErrors: Story = {
  */
 export const WithMaxTags: Story = {
   args: {
-    onSubmit: fn(async (values: ExpenseFormValues) => {
-      action('max-tags-form-submitted')(values)
-      await handleSubmit(values)
-    }),
-    title: 'Form with Maximum Tags'
-  },
-  decorators: [
-    (Story) => {
-      return (
-        <div className='w-full max-w-md'>
-          <Story />
-        </div>
-      )
+    onSubmit: fn(handleSubmit),
+    defaultValues: {
+      amount: 100,
+      description: 'Testing max tags',
+      tags: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5']
     }
-  ],
+  },
   parameters: {
     docs: {
       description: {

@@ -1,3 +1,6 @@
+const MAX_TAGS = 5
+const MAX_TAG_LENGTH = 20
+
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,7 +12,9 @@ import {
   Loader2,
   Receipt,
   DollarSign,
-  FileText
+  FileText,
+  Plus,
+  PencilLine
 } from 'lucide-react'
 import {
   Form,
@@ -33,37 +38,18 @@ import { cn } from '@/lib/utils'
 import { useCallback, useState, useEffect } from 'react'
 import { Separator } from '@/components/ui/separator'
 
-export interface CreateExpenseFormProps {
-  /**
-   * Callback function that handles form submission
-   * @param values The validated form values
-   * @returns A promise that resolves when the submission is complete
-   */
-  onSubmit: (values: CreateExpenseFormValues) => Promise<void>
-  /**
-   * Optional flag to disable the form while submission is in progress
-   */
-  isSubmitting?: boolean
-  /**
-   * Optional className for styling the form container
-   */
-  className?: string
-  /**
-   * Optional title for the form card
-   * @default "Create New Expense"
-   */
-  title?: string
-  /**
-   * Optional description for the form
-   * @default "Record a new expense with amount, description, and optional tags."
-   */
-  description?: string
-}
+const SUGGESTED_TAGS = [
+  'groceries',
+  'utilities',
+  'entertainment',
+  'transport',
+  'food',
+  'shopping',
+  'health',
+  'bills'
+]
 
-const MAX_TAGS = 5
-const MAX_TAG_LENGTH = 20
-
-const createExpenseSchema = z.object({
+export const expenseSchema = z.object({
   amount: z
     .number()
     .min(0.01, 'Amount must be greater than 0')
@@ -90,36 +76,69 @@ const createExpenseSchema = z.object({
     .default([])
 })
 
-type CreateExpenseFormValues = z.infer<typeof createExpenseSchema>
+export type ExpenseFormValues = z.infer<typeof expenseSchema>
 
-const SUGGESTED_TAGS = [
-  'groceries',
-  'utilities',
-  'entertainment',
-  'transport',
-  'food',
-  'shopping',
-  'health',
-  'bills'
-]
+export interface ExpenseFormProps {
+  /**
+   * Callback function that handles form submission
+   * @param values The validated form values
+   * @returns A promise that resolves when the submission is complete
+   */
+  onSubmit: (values: ExpenseFormValues) => Promise<void>
+  /**
+   * Optional initial values for the form
+   */
+  defaultValues?: Partial<ExpenseFormValues>
+  /**
+   * Optional flag to indicate if this is an edit form
+   * @default false
+   */
+  isEditing?: boolean
+  /**
+   * Optional flag to disable the form while submission is in progress
+   */
+  isSubmitting?: boolean
+  /**
+   * Optional className for styling the form container
+   */
+  className?: string
+  /**
+   * Optional title for the form card
+   * If not provided, will use default based on isEditing
+   */
+  title?: string
+  /**
+   * Optional description for the form
+   * If not provided, will use default based on isEditing
+   */
+  description?: string
+}
 
-export function CreateExpenseForm({
+export function ExpenseForm({
   onSubmit,
+  defaultValues,
+  isEditing = false,
   isSubmitting = false,
   className,
-  title = 'Create New Expense',
-  description = 'Record a new expense with amount, description, and optional tags.'
-}: CreateExpenseFormProps) {
-  const [suggestedTags, setSuggestedTags] = useState<string[]>(SUGGESTED_TAGS)
+  title,
+  description
+}: ExpenseFormProps) {
+  const [suggestedTags, setSuggestedTags] = useState<string[]>(
+    defaultValues?.tags
+      ? SUGGESTED_TAGS.filter((tag) => !defaultValues.tags?.includes(tag))
+      : SUGGESTED_TAGS
+  )
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [formattedAmount, setFormattedAmount] = useState('0.00')
+  const [formattedAmount, setFormattedAmount] = useState(
+    defaultValues?.amount?.toFixed(2) || '0.00'
+  )
 
-  const form = useForm<CreateExpenseFormValues>({
-    resolver: zodResolver(createExpenseSchema),
+  const form = useForm<ExpenseFormValues>({
+    resolver: zodResolver(expenseSchema),
     defaultValues: {
-      amount: 0,
-      description: '',
-      tags: []
+      amount: defaultValues?.amount || 0,
+      description: defaultValues?.description || '',
+      tags: defaultValues?.tags || []
     }
   })
 
@@ -153,11 +172,13 @@ export function CreateExpenseForm({
     return () => subscription.unsubscribe()
   }, [form.watch])
 
-  const handleSubmit = async (values: CreateExpenseFormValues) => {
+  const handleSubmit = async (values: ExpenseFormValues) => {
     try {
       await onSubmit(values)
-      form.reset()
-      setShowSuggestions(false)
+      if (!isEditing) {
+        form.reset()
+        setShowSuggestions(false)
+      }
     } catch (error) {
       console.error('Form submission failed:', error)
     }
@@ -270,20 +291,34 @@ export function CreateExpenseForm({
     [form]
   )
 
+  // Default texts based on mode
+  const defaultTitle = isEditing ? 'Edit Expense' : 'Create New Expense'
+  const defaultDescription = isEditing
+    ? 'Update the expense details below'
+    : 'Record a new expense with amount, description, and optional tags.'
+  const buttonText = isEditing ? 'Update Expense' : 'Create Expense'
+  const loadingText = isEditing ? 'Updating...' : 'Creating...'
+
   return (
     <Card className={cn('w-full max-w-md mx-auto', className)}>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
           className='space-y-6'
-          aria-label='Create expense form'
+          aria-label={isEditing ? 'Edit expense form' : 'Create expense form'}
         >
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>
-              <Receipt className='w-5 h-5' />
-              {title}
+              {isEditing ? (
+                <PencilLine className='w-5 h-5' />
+              ) : (
+                <Plus className='w-5 h-5' />
+              )}
+              {title || defaultTitle}
             </CardTitle>
-            <CardDescription>{description}</CardDescription>
+            <CardDescription>
+              {description || defaultDescription}
+            </CardDescription>
           </CardHeader>
 
           <CardContent className='space-y-6'>
@@ -298,7 +333,7 @@ export function CreateExpenseForm({
                   </FormLabel>
                   <FormControl>
                     <div className='relative'>
-                      <span className='absolute left-3 top-1.5 text-foreground font-medium select-none'>
+                      <span className='absolute left-3 top-2.5 text-foreground font-medium select-none'>
                         $
                       </span>
                       <Input
@@ -453,10 +488,10 @@ export function CreateExpenseForm({
               {isSubmitting ? (
                 <>
                   <Loader2 className='mr-2 h-5 w-5 animate-spin' />
-                  Creating...
+                  {loadingText}
                 </>
               ) : (
-                'Create Expense'
+                buttonText
               )}
             </Button>
           </CardFooter>
