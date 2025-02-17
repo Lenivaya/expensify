@@ -39,9 +39,9 @@ export interface ExpenseCardListProps {
   showLayoutToggle?: boolean
   showSortOptions?: boolean
   maxHeight?: number
+  currentUserId: string
   onEdit?: (id: string) => void
-  onDelete?: (id: string) => void
-  onExpenseClick?: (id: string) => void
+  onDelete?: (id: string) => Promise<void> | void
   header?: React.ReactNode
   footer?: React.ReactNode
 }
@@ -49,9 +49,7 @@ export interface ExpenseCardListProps {
 /**
  * ExpenseCardList component for displaying a list of expense cards in various layouts
  */
-export const ExpenseCardList: React.FC<
-  ExpenseCardListProps
-> = ({
+export const ExpenseCardList: React.FC<ExpenseCardListProps> = ({
   expenses,
   isLoading = false,
   className,
@@ -59,48 +57,32 @@ export const ExpenseCardList: React.FC<
   showLayoutToggle = true,
   showSortOptions = true,
   maxHeight,
+  currentUserId,
   onEdit,
   onDelete,
-  onExpenseClick,
   header,
   footer
 }) => {
   // State for layout and sort options
-  const [layout, setLayout] =
-    useState<ExpenseCardLayout>(defaultLayout)
-  const [sortOption, setSortOption] =
-    useState<ExpenseSortOption>('date-desc')
+  const [layout, setLayout] = useState<ExpenseCardLayout>(defaultLayout)
+  const [sortOption, setSortOption] = useState<ExpenseSortOption>('date-desc')
 
   // Sort expenses based on selected option
   const sortedExpenses = [...expenses].sort((a, b) => {
     switch (sortOption) {
       case 'date-desc':
-        return (
-          new Date(b.createdAt).getTime() -
-          new Date(a.createdAt).getTime()
-        )
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       case 'date-asc':
-        return (
-          new Date(a.createdAt).getTime() -
-          new Date(b.createdAt).getTime()
-        )
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
       case 'amount-desc':
         return (
-          Number.parseFloat(
-            b.amount.replace(/[^0-9.-]+/g, '')
-          ) -
-          Number.parseFloat(
-            a.amount.replace(/[^0-9.-]+/g, '')
-          )
+          Number.parseFloat(b.amount.replace(/[^0-9.-]+/g, '')) -
+          Number.parseFloat(a.amount.replace(/[^0-9.-]+/g, ''))
         )
       case 'amount-asc':
         return (
-          Number.parseFloat(
-            a.amount.replace(/[^0-9.-]+/g, '')
-          ) -
-          Number.parseFloat(
-            b.amount.replace(/[^0-9.-]+/g, '')
-          )
+          Number.parseFloat(a.amount.replace(/[^0-9.-]+/g, '')) -
+          Number.parseFloat(b.amount.replace(/[^0-9.-]+/g, ''))
         )
       default:
         return 0
@@ -124,9 +106,9 @@ export const ExpenseCardList: React.FC<
   return (
     <div className={cn('space-y-4', className)}>
       {/* List Header with Controls */}
-      <div className="flex items-center justify-between">
+      <div className='flex items-center justify-between'>
         {header || <div />}
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           {showSortOptions && (
             <Select
               value={sortOption}
@@ -134,49 +116,35 @@ export const ExpenseCardList: React.FC<
                 setSortOption(value as ExpenseSortOption)
               }
             >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Sort by..." />
+              <SelectTrigger className='w-[180px]'>
+                <SelectValue placeholder='Sort by...' />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="date-desc">
-                  Newest first
-                </SelectItem>
-                <SelectItem value="date-asc">
-                  Oldest first
-                </SelectItem>
-                <SelectItem value="amount-desc">
-                  Highest amount
-                </SelectItem>
-                <SelectItem value="amount-asc">
-                  Lowest amount
-                </SelectItem>
+                <SelectItem value='date-desc'>Newest first</SelectItem>
+                <SelectItem value='date-asc'>Oldest first</SelectItem>
+                <SelectItem value='amount-desc'>Highest amount</SelectItem>
+                <SelectItem value='amount-asc'>Lowest amount</SelectItem>
               </SelectContent>
             </Select>
           )}
 
           {showLayoutToggle && (
-            <div className="flex items-center rounded-md border bg-muted">
+            <div className='flex items-center rounded-md border bg-muted'>
               <Button
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  'px-3',
-                  layout === 'grid' && 'bg-background'
-                )}
+                variant='ghost'
+                size='sm'
+                className={cn('px-3', layout === 'grid' && 'bg-background')}
                 onClick={() => setLayout('grid')}
               >
-                <Grid className="h-4 w-4" />
+                <Grid className='h-4 w-4' />
               </Button>
               <Button
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  'px-3',
-                  layout === 'feed' && 'bg-background'
-                )}
+                variant='ghost'
+                size='sm'
+                className={cn('px-3', layout === 'feed' && 'bg-background')}
                 onClick={() => setLayout('feed')}
               >
-                <List className="h-4 w-4" />
+                <List className='h-4 w-4' />
               </Button>
             </div>
           )}
@@ -194,10 +162,7 @@ export const ExpenseCardList: React.FC<
           {isLoading
             ? Array.from({ length: 6 }).map((_, index) => (
                 <ExpenseCard
-                  key={`skeleton-${
-                    // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                    index
-                  }`}
+                  key={`skeleton-${index}`}
                   expense={{
                     id: `skeleton-${index}`,
                     amount: '$0.00',
@@ -205,7 +170,7 @@ export const ExpenseCardList: React.FC<
                     tags: [],
                     userId: '',
                     createdAt: new Date().toISOString(),
-                    updatedAt: new Date().toISOString()
+                    updatedAt: null
                   }}
                   isLoading={true}
                   className={cn(
@@ -218,9 +183,9 @@ export const ExpenseCardList: React.FC<
                 <ExpenseCard
                   key={expense.id}
                   expense={expense}
+                  isAuthor={expense.userId === currentUserId}
                   onEdit={onEdit}
                   onDelete={onDelete}
-                  onClick={onExpenseClick}
                   className={cn(
                     layout === 'compact' &&
                       'border-0 bg-transparent shadow-none'
@@ -231,7 +196,7 @@ export const ExpenseCardList: React.FC<
       </ScrollArea>
 
       {/* List Footer */}
-      {footer && <div className="mt-4">{footer}</div>}
+      {footer && <div className='mt-4'>{footer}</div>}
     </div>
   )
 }

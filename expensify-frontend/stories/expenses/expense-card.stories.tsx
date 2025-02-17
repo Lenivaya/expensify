@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { ExpenseCard } from '@/components/expenses/expense-card/expense-card'
 import type { ExpenseCardData } from '@/components/expenses/expense-card/expense-card'
+import { action } from '@storybook/addon-actions'
 
 // Helper function to create sample expense data
 const createSampleExpense = (
@@ -10,9 +11,7 @@ const createSampleExpense = (
   tags: string[],
   daysAgo = 0
 ): ExpenseCardData => {
-  const date = new Date(
-    Date.now() - daysAgo * 86400000
-  ).toISOString()
+  const date = new Date(Date.now() - daysAgo * 86400000).toISOString()
   return {
     id,
     amount,
@@ -51,19 +50,15 @@ export const Default: Story = {
       'Grocery shopping at Walmart',
       ['groceries', 'food', 'essentials'],
       0
-    )
+    ),
+    isAuthor: true
   }
 }
 
 export const WithoutDescription: Story = {
   args: {
-    expense: createSampleExpense(
-      '2',
-      '$45.00',
-      null,
-      ['entertainment'],
-      1
-    )
+    expense: createSampleExpense('2', '$45.00', null, ['entertainment'], 1),
+    isAuthor: true
   }
 }
 
@@ -75,7 +70,8 @@ export const LargeAmount: Story = {
       'New laptop for work',
       ['electronics', 'work', 'hardware'],
       2
-    )
+    ),
+    isAuthor: true
   }
 }
 
@@ -88,7 +84,21 @@ export const Loading: Story = {
       ['dining', 'food'],
       0
     ),
-    isLoading: true
+    isLoading: true,
+    isAuthor: true
+  }
+}
+
+export const ReadOnly: Story = {
+  args: {
+    expense: createSampleExpense(
+      '4',
+      '$75.00',
+      'Restaurant dinner',
+      ['dining', 'food'],
+      0
+    ),
+    isAuthor: false
   }
 }
 
@@ -101,8 +111,13 @@ export const Interactive: Story = {
       ['entertainment', 'movies'],
       0
     ),
-    onClick: (id) => alert(`Clicked expense ${id}`),
-    onEdit: (id) => alert(`Edit expense ${id}`),
-    onDelete: (id) => alert(`Delete expense ${id}`)
+    isAuthor: true,
+    onEdit: action('onEdit'),
+    onDelete: async (id: string) => {
+      action('onDelete')(id)
+      // Simulate async operation
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      action('onDelete complete')(id)
+    }
   }
 }

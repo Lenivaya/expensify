@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { InflowCard } from '@/components/inflows/inflow-card/inflow-card'
+import { action } from '@storybook/addon-actions'
 
 const meta = {
   title: 'Components/Inflows/InflowCard',
@@ -10,7 +11,7 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="w-[400px] p-4">
+      <div className='w-[400px] p-4'>
         <Story />
       </div>
     )
@@ -25,12 +26,26 @@ const baseInflow = {
   amount: '$1,250.75',
   description: 'Monthly salary payment from Company XYZ',
   tags: ['salary', 'monthly', 'work'],
-  userId: 'user123',
-  createdAt: new Date().toISOString()
+  userId: 'current-user',
+  createdAt: new Date().toISOString(),
+  updatedAt: null
+}
+
+// Action handlers
+const handleEdit = action('onEdit')
+const handleDelete = async (id: string): Promise<void> => {
+  action('onDelete')(id)
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      action('onDelete complete')(id)
+      resolve()
+    }, 1000)
+  })
 }
 
 export const Default: Story = {
   args: {
+    isAuthor: true,
     inflow: baseInflow
   }
 }
@@ -68,11 +83,18 @@ export const Disabled: Story = {
   }
 }
 
+export const ReadOnly: Story = {
+  args: {
+    inflow: baseInflow,
+    isAuthor: false
+  }
+}
+
 export const Interactive: Story = {
   args: {
     inflow: baseInflow,
-    onEdit: (id) => alert(`Edit inflow ${id}`),
-    onDelete: (id) => alert(`Delete inflow ${id}`),
-    onClick: (id) => alert(`Clicked inflow ${id}`)
+    isAuthor: true,
+    onEdit: handleEdit,
+    onDelete: handleDelete
   }
 }

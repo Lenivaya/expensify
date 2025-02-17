@@ -38,9 +38,9 @@ export type InflowSortOption =
  * @property {boolean} [showLayoutToggle] - Whether to show layout toggle controls
  * @property {boolean} [showSortOptions] - Whether to show sort options
  * @property {number} [maxHeight] - Maximum height of the list container
- * @property {(id: string) => void} [onInflowEdit] - Callback when an inflow is edited
- * @property {(id: string) => void} [onInflowDelete] - Callback when an inflow is deleted
- * @property {(id: string) => void} [onInflowClick] - Callback when an inflow is clicked
+ * @property {string} currentUserId - ID of the current user to determine authorship
+ * @property {(id: string) => void} [onEdit] - Callback when an inflow is edited
+ * @property {(id: string) => Promise<void> | void} [onDelete] - Callback when an inflow is deleted
  * @property {React.ReactNode} [header] - Custom header content
  * @property {React.ReactNode} [footer] - Custom footer content
  */
@@ -52,15 +52,16 @@ export interface InflowCardListProps {
   showLayoutToggle?: boolean
   showSortOptions?: boolean
   maxHeight?: number
-  onInflowEdit?: (id: string) => void
-  onInflowDelete?: (id: string) => void
-  onInflowClick?: (id: string) => void
+  currentUserId: string
+  onEdit?: (id: string) => void
+  onDelete?: (id: string) => Promise<void> | void
   header?: React.ReactNode
   footer?: React.ReactNode
 }
 
 /**
  * InflowCardList component for displaying a list of inflow cards in various layouts
+ * with edit and delete capabilities based on authorship
  * @component
  * @example
  * ```tsx
@@ -69,13 +70,13 @@ export interface InflowCardListProps {
  *   defaultLayout="grid"
  *   showLayoutToggle={true}
  *   showSortOptions={true}
- *   onInflowClick={(id) => handleInflowSelect(id)}
+ *   currentUserId={currentUserId}
+ *   onEdit={(id) => handleEdit(id)}
+ *   onDelete={(id) => handleDelete(id)}
  * />
  * ```
  */
-export const InflowCardList: React.FC<
-  InflowCardListProps
-> = ({
+export const InflowCardList: React.FC<InflowCardListProps> = ({
   inflows,
   isLoading = false,
   className,
@@ -83,48 +84,32 @@ export const InflowCardList: React.FC<
   showLayoutToggle = true,
   showSortOptions = true,
   maxHeight,
-  onInflowEdit,
-  onInflowDelete,
-  onInflowClick,
+  currentUserId,
+  onEdit,
+  onDelete,
   header,
   footer
 }) => {
   // State for layout and sort options
-  const [layout, setLayout] =
-    useState<InflowCardLayout>(defaultLayout)
-  const [sortOption, setSortOption] =
-    useState<InflowSortOption>('date-desc')
+  const [layout, setLayout] = useState<InflowCardLayout>(defaultLayout)
+  const [sortOption, setSortOption] = useState<InflowSortOption>('date-desc')
 
   // Sort inflows based on selected option
   const sortedInflows = [...inflows].sort((a, b) => {
     switch (sortOption) {
       case 'date-desc':
-        return (
-          new Date(b.createdAt).getTime() -
-          new Date(a.createdAt).getTime()
-        )
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       case 'date-asc':
-        return (
-          new Date(a.createdAt).getTime() -
-          new Date(b.createdAt).getTime()
-        )
+        return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
       case 'amount-desc':
         return (
-          Number.parseFloat(
-            b.amount.replace(/[^0-9.-]+/g, '')
-          ) -
-          Number.parseFloat(
-            a.amount.replace(/[^0-9.-]+/g, '')
-          )
+          Number.parseFloat(b.amount.replace(/[^0-9.-]+/g, '')) -
+          Number.parseFloat(a.amount.replace(/[^0-9.-]+/g, ''))
         )
       case 'amount-asc':
         return (
-          Number.parseFloat(
-            a.amount.replace(/[^0-9.-]+/g, '')
-          ) -
-          Number.parseFloat(
-            b.amount.replace(/[^0-9.-]+/g, '')
-          )
+          Number.parseFloat(a.amount.replace(/[^0-9.-]+/g, '')) -
+          Number.parseFloat(b.amount.replace(/[^0-9.-]+/g, ''))
         )
       default:
         return 0
@@ -148,9 +133,9 @@ export const InflowCardList: React.FC<
   return (
     <div className={cn('space-y-4', className)}>
       {/* List Header with Controls */}
-      <div className="flex items-center justify-between">
+      <div className='flex items-center justify-between'>
         {header || <div />}
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           {showSortOptions && (
             <Select
               value={sortOption}
@@ -158,49 +143,35 @@ export const InflowCardList: React.FC<
                 setSortOption(value as InflowSortOption)
               }
             >
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Sort by..." />
+              <SelectTrigger className='w-[180px]'>
+                <SelectValue placeholder='Sort by...' />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="date-desc">
-                  Newest first
-                </SelectItem>
-                <SelectItem value="date-asc">
-                  Oldest first
-                </SelectItem>
-                <SelectItem value="amount-desc">
-                  Highest amount
-                </SelectItem>
-                <SelectItem value="amount-asc">
-                  Lowest amount
-                </SelectItem>
+                <SelectItem value='date-desc'>Newest first</SelectItem>
+                <SelectItem value='date-asc'>Oldest first</SelectItem>
+                <SelectItem value='amount-desc'>Highest amount</SelectItem>
+                <SelectItem value='amount-asc'>Lowest amount</SelectItem>
               </SelectContent>
             </Select>
           )}
 
           {showLayoutToggle && (
-            <div className="flex items-center rounded-md border bg-muted">
+            <div className='flex items-center rounded-md border bg-muted'>
               <Button
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  'px-3',
-                  layout === 'grid' && 'bg-background'
-                )}
+                variant='ghost'
+                size='sm'
+                className={cn('px-3', layout === 'grid' && 'bg-background')}
                 onClick={() => setLayout('grid')}
               >
-                <Grid className="h-4 w-4" />
+                <Grid className='h-4 w-4' />
               </Button>
               <Button
-                variant="ghost"
-                size="sm"
-                className={cn(
-                  'px-3',
-                  layout === 'feed' && 'bg-background'
-                )}
+                variant='ghost'
+                size='sm'
+                className={cn('px-3', layout === 'feed' && 'bg-background')}
                 onClick={() => setLayout('feed')}
               >
-                <List className="h-4 w-4" />
+                <List className='h-4 w-4' />
               </Button>
             </div>
           )}
@@ -220,12 +191,11 @@ export const InflowCardList: React.FC<
               key={inflow.id}
               inflow={inflow}
               isLoading={isLoading}
-              onEdit={onInflowEdit}
-              onDelete={onInflowDelete}
-              onClick={onInflowClick}
+              isAuthor={inflow.userId === currentUserId}
+              onEdit={onEdit}
+              onDelete={onDelete}
               className={cn(
-                layout === 'compact' &&
-                  'border-0 bg-transparent shadow-none'
+                layout === 'compact' && 'border-0 bg-transparent shadow-none'
               )}
             />
           ))}
@@ -233,7 +203,7 @@ export const InflowCardList: React.FC<
       </ScrollArea>
 
       {/* List Footer */}
-      {footer && <div className="mt-4">{footer}</div>}
+      {footer && <div className='mt-4'>{footer}</div>}
     </div>
   )
 }
