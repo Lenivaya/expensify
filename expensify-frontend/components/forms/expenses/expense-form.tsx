@@ -333,7 +333,7 @@ export function ExpenseForm({
                   </FormLabel>
                   <FormControl>
                     <div className='relative'>
-                      <span className='absolute left-3 top-2.5 text-foreground font-medium select-none'>
+                      <span className='absolute left-3 top-1.5 text-foreground font-medium select-none'>
                         $
                       </span>
                       <Input
