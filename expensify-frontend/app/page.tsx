@@ -46,82 +46,80 @@ const STATS = [
 
 export default async function Home() {
   return (
-    <main className="flex h-screen flex-col items-center justify-center px-4 py-18">
-      {/* Hero Section */}
-      <div className="mb-16 space-y-6 text-center">
-        <Badge variant="outline" className="mb-4 px-3 py-1">
-          ✨ Simple, yet powerful expense tracking
-        </Badge>
-        <h1 className="font-black text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-          Master Your Finances
-          <br />
-          <span className="bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent">
-            with Expensify
-          </span>
-        </h1>
-        <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-          Take control of your financial life with smart
-          expense tracking, insightful analytics, and
-          powerful budgeting tools. Your path to financial
-          freedom starts here.
-        </p>
-      </div>
+    <main className='relative min-h-screen w-full overflow-x-hidden'>
+      {/* Add padding for floating navbar and proper spacing */}
+      <div className='mx-auto flex w-full max-w-7xl flex-col px-4 pt-30 sm:px-6 lg:px-8'>
+        {/* Hero Section */}
+        <section className='mx-auto mb-24 max-w-4xl space-y-8 text-center'>
+          <Badge variant='outline' className='inline-flex px-4 py-1.5 text-sm'>
+            ✨ Simple, yet powerful expense tracking
+          </Badge>
+          <h1 className='font-black text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-7xl'>
+            Master Your Finances
+            <br />
+            <span className='bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent'>
+              with Expensify
+            </span>
+          </h1>
+          <p className='mx-auto max-w-2xl text-base text-muted-foreground sm:text-lg md:text-xl'>
+            Take control of your financial life with smart expense tracking,
+            insightful analytics, and powerful budgeting tools. Your path to
+            financial freedom starts here.
+          </p>
+        </section>
 
-      {/* Feature Cards */}
-      <div className="container mb-16">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURE_CARDS.map((card) => (
-            <Link
-              key={card.title}
-              href={card.href}
-              className="transition-transform hover:scale-[1.02]"
-            >
-              <FeatureCard {...card} />
-            </Link>
-          ))}
-        </div>
-      </div>
+        {/* Feature Cards */}
+        <section className='mb-24 w-full'>
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+            {FEATURE_CARDS.map((card) => (
+              <Link
+                key={card.title}
+                href={card.href}
+                className='transition-transform duration-300 hover:scale-[1.02]'
+              >
+                <FeatureCard {...card} />
+              </Link>
+            ))}
+          </div>
+        </section>
 
-      {/* Stats Section */}
-      <div className="container mb-16">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
-          {STATS.map(({ value, label, icon: Icon }) => (
-            <Card
-              key={label}
-              className="border-border/50 bg-secondary/30 p-6"
-            >
-              <div className="flex items-center gap-4">
-                <div className="rounded-lg bg-primary/10 p-2.5 text-primary ring-1 ring-primary/25">
-                  <Icon className="h-6 w-6" />
+        {/* Stats Section */}
+        <section className='mb-24 w-full'>
+          <div className='grid grid-cols-1 gap-6 sm:grid-cols-3'>
+            {STATS.map(({ value, label, icon: Icon }) => (
+              <Card
+                key={label}
+                className='border-border/50 bg-secondary/30 p-6 backdrop-blur-sm'
+              >
+                <div className='flex items-center gap-4'>
+                  <div className='rounded-lg bg-primary/10 p-2.5 text-primary ring-1 ring-primary/25'>
+                    <Icon className='h-6 w-6' />
+                  </div>
+                  <div>
+                    <p className='font-bold text-3xl tracking-tight'>{value}</p>
+                    <p className='font-medium text-muted-foreground'>{label}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="font-bold text-3xl tracking-tight">
-                    {value}
-                  </p>
-                  <p className="font-medium text-muted-foreground">
-                    {label}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
+              </Card>
+            ))}
+          </div>
+        </section>
 
-      {/* CTA Section */}
-      <div className="flex flex-col items-center gap-6 text-center">
-        <Button
-          size="lg"
-          className="group h-12 rounded-full bg-primary px-8 text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90"
-        >
-          <span className="flex items-center gap-2">
-            Get Started Free
-            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </span>
-        </Button>
-        <p className="text-muted-foreground text-sm">
-          No credit card required · Cancel anytime
-        </p>
+        {/* CTA Section */}
+        <section className='mb-24 flex flex-col items-center gap-6 text-center'>
+          <Button
+            size='lg'
+            className='group relative h-14 rounded-full bg-primary px-8 text-lg text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30'
+          >
+            <span className='flex items-center gap-2'>
+              Get Started Free
+              <ArrowRight className='h-5 w-5 transition-transform duration-300 group-hover:translate-x-1' />
+            </span>
+          </Button>
+          <p className='text-muted-foreground text-sm'>
+            No credit card required · Cancel anytime
+          </p>
+        </section>
       </div>
     </main>
   )
@@ -141,27 +139,25 @@ function FeatureCard({
   badge
 }: FeatureCardProps) {
   return (
-    <Card className="group relative flex h-[250px] flex-col overflow-hidden border-border/50 bg-secondary/30 p-6 transition-all duration-300 hover:border-primary/50 hover:bg-secondary/50">
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-      <div className="relative flex h-full flex-col">
-        <div className="mb-4 flex items-start justify-between">
-          <div className="h-12 w-12 rounded-lg bg-primary/10 p-2.5 text-primary ring-1 ring-primary/25">
-            <Icon className="h-full w-full" />
+    <Card className='group relative flex h-full min-h-[280px] flex-col overflow-hidden border-border/50 bg-secondary/30 p-6 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 hover:bg-secondary/50'>
+      <div className='absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100' />
+      <div className='relative flex h-full flex-col'>
+        <div className='mb-6 flex items-start justify-between'>
+          <div className='h-12 w-12 rounded-lg bg-primary/10 p-2.5 text-primary ring-1 ring-primary/25'>
+            <Icon className='h-full w-full' />
           </div>
           {badge && (
             <Badge
-              variant="secondary"
-              className="bg-primary/10 text-primary"
+              variant='secondary'
+              className='bg-primary/10 px-3 py-1 text-sm font-medium text-primary'
             >
               {badge}
             </Badge>
           )}
         </div>
-        <div className="flex-1">
-          <h3 className="mb-2 font-semibold text-lg">
-            {title}
-          </h3>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+        <div className='flex-1'>
+          <h3 className='mb-3 font-semibold text-xl'>{title}</h3>
+          <p className='text-muted-foreground text-base leading-relaxed'>
             {description}
           </p>
         </div>
