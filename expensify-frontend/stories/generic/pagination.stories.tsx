@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight, MoveLeft, MoveRight } from 'lucide-react'
 import React from 'react'
 
 const meta = {
-  title: 'Generic/Pagination',
+  title: 'Components/Generic/Pagination',
   component: Pagination,
   parameters: {
     layout: 'centered'

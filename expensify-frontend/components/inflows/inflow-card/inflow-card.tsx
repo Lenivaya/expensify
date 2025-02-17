@@ -1,11 +1,6 @@
-import { Badge } from '@/components/ui/badge'
+import { PrettyTag } from '@/components/generic/pretty-tag'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader
-} from '@/components/ui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -50,16 +45,6 @@ export type InflowCardData = {
   updatedAt: string | null
   createdAt: string
 }
-// Using pick removes jsdoc, therefore things like storybook can't auto generate docs based on pure type showing Pick as description
-// type InflowData = Pick<
-//   components['schemas']['InflowDto'],
-//   | 'id'
-//   | 'amount'
-//   | 'description'
-//   | 'tags'
-//   | 'userId'
-//   | 'createdAt'
-// >
 
 /**
  * Props for the InflowCard component
@@ -107,12 +92,9 @@ export const InflowCard: FC<InflowCardProps> = ({
   const formattedAmount = inflow.amount
 
   // Format the relative time (e.g., "2 hours ago")
-  const formattedDate = formatDistanceToNow(
-    new Date(inflow.createdAt),
-    {
-      addSuffix: true
-    }
-  )
+  const formattedDate = formatDistanceToNow(new Date(inflow.createdAt), {
+    addSuffix: true
+  })
 
   const handleEdit = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -134,39 +116,34 @@ export const InflowCard: FC<InflowCardProps> = ({
     }
   }
 
-  const exactDate = format(
-    new Date(inflow.createdAt),
-    'PPP'
-  )
+  const exactDate = format(new Date(inflow.createdAt), 'PPP')
 
   return (
     <Card
       className={cn(
         'group relative transition-all duration-200 hover:border-primary/20',
         {
-          'pointer-events-none opacity-50':
-            isLoading || disabled,
-          'cursor-pointer hover:shadow-md':
-            !disabled && onClick
+          'pointer-events-none opacity-50': isLoading || disabled,
+          'cursor-pointer hover:shadow-md': !disabled && onClick
         },
         className
       )}
       onClick={handleClick}
     >
       {/* Visual indicator for inflow */}
-      <div className="absolute top-0 left-0 h-full w-1 rounded-l bg-emerald-500" />
+      <div className='absolute top-0 left-0 h-full w-1 rounded-l bg-emerald-500' />
 
-      <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <ArrowUpFromLine className="h-4 w-4 text-emerald-500" />
-            <p className="font-semibold text-base text-emerald-600 leading-none">
+      <CardHeader className='flex flex-row items-start justify-between space-y-0 pb-2'>
+        <div className='space-y-1'>
+          <div className='flex items-center gap-2'>
+            <ArrowUpFromLine className='h-4 w-4 text-emerald-500' />
+            <p className='font-semibold text-base text-emerald-600 leading-none'>
               {formattedAmount}
             </p>
           </div>
           <Tooltip>
-            <TooltipTrigger className="flex items-center gap-1.5 text-muted-foreground text-sm transition-colors hover:text-foreground">
-              <Calendar className="h-3.5 w-3.5" />
+            <TooltipTrigger className='flex items-center gap-1.5 text-muted-foreground text-sm transition-colors hover:text-foreground'>
+              <Calendar className='h-3.5 w-3.5' />
               {formattedDate}
             </TooltipTrigger>
             <TooltipContent>
@@ -175,31 +152,27 @@ export const InflowCard: FC<InflowCardProps> = ({
           </Tooltip>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           {/* Quick action buttons that appear on hover */}
           {(onEdit || onDelete) && (
-            <div className="opacity-0 transition-opacity group-hover:opacity-100">
+            <div className='opacity-0 transition-opacity group-hover:opacity-100'>
               {onEdit && (
                 <Tooltip>
                   <TooltipTrigger asChild={true}>
                     <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 w-8 p-0"
+                      variant='ghost'
+                      size='sm'
+                      className='h-8 w-8 p-0'
                       onClick={(e) => {
                         e.stopPropagation()
                         handleEdit(e)
                       }}
                     >
-                      <Pencil className="h-4 w-4" />
-                      <span className="sr-only">
-                        Edit inflow
-                      </span>
+                      <Pencil className='h-4 w-4' />
+                      <span className='sr-only'>Edit inflow</span>
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>
-                    Edit inflow
-                  </TooltipContent>
+                  <TooltipContent>Edit inflow</TooltipContent>
                 </Tooltip>
               )}
             </div>
@@ -210,31 +183,29 @@ export const InflowCard: FC<InflowCardProps> = ({
             <DropdownMenu>
               <DropdownMenuTrigger asChild={true}>
                 <Button
-                  variant="ghost"
-                  size="sm"
-                  className="h-8 w-8 p-0"
+                  variant='ghost'
+                  size='sm'
+                  className='h-8 w-8 p-0'
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <span className="sr-only">Open menu</span>
-                  <MoreVertical className="h-4 w-4" />
+                  <span className='sr-only'>Open menu</span>
+                  <MoreVertical className='h-4 w-4' />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align='end'>
                 {onEdit && (
                   <DropdownMenuItem onClick={handleEdit}>
-                    <Pencil className="mr-2 h-4 w-4" />
+                    <Pencil className='mr-2 h-4 w-4' />
                     Edit
                   </DropdownMenuItem>
                 )}
-                {onEdit && onDelete && (
-                  <DropdownMenuSeparator />
-                )}
+                {onEdit && onDelete && <DropdownMenuSeparator />}
                 {onDelete && (
                   <DropdownMenuItem
-                    className="text-destructive focus:bg-destructive/10"
+                    className='text-destructive focus:bg-destructive/10'
                     onClick={handleDelete}
                   >
-                    <Trash className="mr-2 h-4 w-4" />
+                    <Trash className='mr-2 h-4 w-4' />
                     Delete
                   </DropdownMenuItem>
                 )}
@@ -245,27 +216,30 @@ export const InflowCard: FC<InflowCardProps> = ({
       </CardHeader>
 
       <CardContent>
-        <p className="line-clamp-2 text-sm">
-          {inflow.description}
-        </p>
+        {inflow.description ? (
+          <p className='line-clamp-2 text-sm'>{inflow.description}</p>
+        ) : (
+          <p className='text-muted-foreground text-sm italic'>
+            No description provided
+          </p>
+        )}
       </CardContent>
 
       {inflow.tags && inflow.tags.length > 0 && (
-        <CardFooter className="flex flex-wrap gap-1.5">
-          {inflow.tags.map((tag) => (
-            <Badge
+        <CardFooter className='flex flex-wrap gap-1.5'>
+          {inflow.tags.map((tag, index) => (
+            <PrettyTag
               key={tag}
-              variant="secondary"
-              className="bg-secondary/50 px-2 py-0.5 text-xs transition-colors hover:bg-secondary/70"
-            >
-              {tag}
-            </Badge>
+              label={tag}
+              index={index}
+              showIcon={index === 0} // Only show icon for first tag
+            />
           ))}
         </CardFooter>
       )}
 
       {/* Focus/Active state indicator */}
-      <div className="absolute inset-0 rounded-lg opacity-0 ring-2 ring-primary ring-offset-2 focus-within:opacity-100 group-focus:opacity-100" />
+      <div className='absolute inset-0 rounded-lg opacity-0 ring-2 ring-primary ring-offset-2 focus-within:opacity-100 group-focus:opacity-100' />
     </Card>
   )
 }
