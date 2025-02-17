@@ -9,6 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
+    "code:format": "prettier --write .",
     "code:biome:format": "pnpm biome format --write",
     "code:biome:fix": "pnpm biome format --write && pnpm biome lint --write"
   },
@@ -54,6 +55,7 @@
     "@chromatic-com/storybook": "^3.2.4",
     "@eslint/eslintrc": "^3.2.0",
     "@openapi-qraft/cli": "2.0.1",
+    "@storybook/addon-actions": "^8.5.6",
     "@storybook/addon-essentials": "^8.5.6",
     "@storybook/addon-interactions": "^8.5.6",
     "@storybook/addon-onboarding": "^8.5.6",
