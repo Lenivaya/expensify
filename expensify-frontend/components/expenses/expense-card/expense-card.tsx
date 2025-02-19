@@ -21,11 +21,11 @@ import {
   HoverCardContent,
   HoverCardTrigger
 } from '@/components/ui/hover-card'
-import { cn } from '@/lib/utils'
+import { cn, Option } from '@/lib/utils'
 import { format, formatDistanceToNow } from 'date-fns'
 import { ArrowDownFromLine, Calendar, Pencil, Trash } from 'lucide-react'
 import type React from 'react'
-import { useState } from 'react'
+import { useState, useCallback, useMemo, memo } from 'react'
 import { PrettyTag } from '@/components/generic/pretty-tag'
 
 /**
@@ -44,7 +44,7 @@ export type ExpenseCardData = {
   amount: string
   description: string | null
   tags: string[]
-  userId: string
+  userId: Option<string>
   updatedAt: string | null
   createdAt: string
 }
@@ -59,6 +59,7 @@ export type ExpenseCardData = {
  * @property {(id: string) => void} [onEdit] - Callback when edit action is triggered
  * @property {(id: string) => Promise<void> | void} [onDelete] - Callback when delete is confirmed
  * @property {boolean} [disabled] - Whether the card interactions are disabled
+ * @property {(tag: string) => void} [onTagClick] - Callback when a tag is clicked
  */
 export interface ExpenseCardProps {
   expense: ExpenseCardData
@@ -68,7 +69,11 @@ export interface ExpenseCardProps {
   onEdit?: (id: string) => void
   onDelete?: (id: string) => Promise<void> | void
   disabled?: boolean
+  onTagClick?: (tag: string) => void
 }
+
+// Memoized PrettyTag component to prevent unnecessary re-renders
+const MemoizedPrettyTag = memo(PrettyTag)
 
 export function ExpenseCard({
   expense,
@@ -77,27 +82,51 @@ export function ExpenseCard({
   isAuthor = false,
   onEdit,
   onDelete,
-  disabled = false
+  disabled = false,
+  onTagClick
 }: ExpenseCardProps) {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
 
-  // Amount is already formatted from backend, but we want to ensure it's negative
-  const formattedAmount = expense.amount.startsWith('-')
-    ? expense.amount
-    : `-${expense.amount}`
+  // Memoize the formatted amount to avoid recalculation on every render
+  const formattedAmount = useMemo(() => {
+    return expense.amount.startsWith('-')
+      ? expense.amount
+      : `-${expense.amount}`
+  }, [expense.amount])
 
-  const handleEdit = () => {
+  // Memoize the formatted date strings to avoid expensive date calculations on every render
+  const dateStrings = useMemo(() => {
+    const createdDate = new Date(expense.createdAt)
+    return {
+      relative: formatDistanceToNow(createdDate, { addSuffix: true }),
+      full: format(createdDate, 'PPP')
+    }
+  }, [expense.createdAt])
+
+  // Memoize the card class to avoid recalculation on every render
+  const cardClass = useMemo(() => {
+    return cn(
+      'group relative transition-all duration-200 hover:shadow-md',
+      {
+        'pointer-events-none opacity-50': isLoading || disabled
+      },
+      className
+    )
+  }, [className, isLoading, disabled])
+
+  // Memoize event handlers to prevent recreation on every render
+  const handleEdit = useCallback(() => {
     if (onEdit) {
       onEdit(expense.id)
     }
-  }
+  }, [onEdit, expense.id])
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = useCallback(() => {
     setIsDeleteDialogOpen(true)
-  }
+  }, [])
 
-  const handleDeleteConfirm = async () => {
+  const handleDeleteConfirm = useCallback(async () => {
     if (onDelete) {
       setIsDeleting(true)
       try {
@@ -107,47 +136,80 @@ export function ExpenseCard({
         setIsDeleteDialogOpen(false)
       }
     }
-  }
+  }, [onDelete, expense.id])
+
+  const handleDialogChange = useCallback((open: boolean) => {
+    setIsDeleteDialogOpen(open)
+  }, [])
+
+  // Handler for tag clicks
+  const handleTagClick = useCallback(
+    (tag: string) => {
+      if (onTagClick && !isLoading && !disabled) {
+        onTagClick(tag)
+      }
+    },
+    [onTagClick, isLoading, disabled]
+  )
+
+  // Memoize the tags rendering to avoid recreation on every render
+  const tagElements = useMemo(() => {
+    if (!expense.tags || expense.tags.length === 0) return null
+
+    return expense.tags.map((tag, index) => (
+      <MemoizedPrettyTag
+        key={`${expense.id}-tag-${tag}`}
+        label={tag}
+        index={index}
+        showIcon={index === 0}
+        className={cn(
+          'text-xs font-medium',
+          onTagClick &&
+            !isLoading &&
+            !disabled &&
+            'cursor-pointer hover:opacity-80'
+        )}
+        onClick={onTagClick ? () => handleTagClick(tag) : undefined}
+      />
+    ))
+  }, [
+    expense.id,
+    expense.tags,
+    onTagClick,
+    handleTagClick,
+    isLoading,
+    disabled
+  ])
 
   return (
     <>
-      <Card
-        className={cn(
-          'group relative transition-all duration-200',
-          {
-            'pointer-events-none opacity-50': isLoading || disabled
-          },
-          className
-        )}
-      >
-        {/* Visual indicator for expense - red line */}
-        <div className='absolute top-0 left-0 h-full w-1 rounded-l bg-red-500' />
+      <Card className={cardClass}>
+        {/* Visual indicator for expense - red line with gradient */}
+        <div className='absolute top-0 left-0 h-full w-1.5 rounded-l bg-gradient-to-b from-red-500 to-red-600' />
 
-        <CardHeader className='flex flex-row items-start justify-between space-y-0 pb-2'>
+        <CardHeader className='flex flex-row items-start justify-between space-y-0 pb-2 pt-3'>
           {/* Amount and date section */}
-          <div className='min-w-0 flex-1 space-y-1'>
+          <div className='min-w-0 flex-1 space-y-2'>
             <div className='flex items-center gap-2'>
-              <ArrowDownFromLine className='h-4 w-4 shrink-0 text-red-500' />
-              <p className='font-semibold text-base text-red-600 leading-none truncate'>
+              <div className='flex items-center justify-center h-6 w-6 rounded-full bg-red-100'>
+                <ArrowDownFromLine className='h-3.5 w-3.5 shrink-0 text-red-600' />
+              </div>
+              <p className='font-bold text-lg text-red-600 leading-none tracking-tight'>
                 {formattedAmount}
               </p>
             </div>
             <HoverCard>
               <HoverCardTrigger asChild>
-                <button className='flex items-center gap-1.5 text-muted-foreground text-sm transition-colors hover:text-foreground max-w-full'>
-                  <Calendar className='h-3.5 w-3.5 shrink-0' />
-                  <span className='truncate'>
-                    {formatDistanceToNow(new Date(expense.createdAt), {
-                      addSuffix: true
-                    })}
-                  </span>
+                <button className='flex items-center gap-1.5 text-muted-foreground text-xs transition-colors hover:text-foreground max-w-full'>
+                  <Calendar className='h-3 w-3 shrink-0' />
+                  <span className='truncate'>{dateStrings.relative}</span>
                 </button>
               </HoverCardTrigger>
               <HoverCardContent className='w-auto'>
                 <div className='flex flex-col gap-1'>
                   <p className='text-sm font-medium'>Created on</p>
                   <p className='text-sm text-muted-foreground'>
-                    {format(new Date(expense.createdAt), 'PPP')}
+                    {dateStrings.full}
                   </p>
                 </div>
               </HoverCardContent>
@@ -156,34 +218,46 @@ export function ExpenseCard({
 
           {/* Action buttons */}
           {isAuthor && !disabled && !isLoading && (
-            <div className='flex items-center gap-2 ml-4'>
-              <Button
-                type='button'
-                variant='ghost'
-                size='sm'
-                className='h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity'
-                onClick={handleEdit}
-              >
-                <Pencil className='h-4 w-4' />
-                <span className='sr-only'>Edit expense</span>
-              </Button>
-              <Button
-                type='button'
-                variant='ghost'
-                size='sm'
-                className='h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:text-destructive'
-                onClick={handleDeleteClick}
-              >
-                <Trash className='h-4 w-4' />
-                <span className='sr-only'>Delete expense</span>
-              </Button>
+            <div className='flex items-center gap-1 ml-2'>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type='button'
+                    variant='ghost'
+                    size='sm'
+                    className='h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity'
+                    onClick={handleEdit}
+                  >
+                    <Pencil className='h-4 w-4' />
+                    <span className='sr-only'>Edit expense</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Edit expense</TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    type='button'
+                    variant='ghost'
+                    size='sm'
+                    className='h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:text-destructive hover:bg-destructive/10'
+                    onClick={handleDeleteClick}
+                  >
+                    <Trash className='h-4 w-4' />
+                    <span className='sr-only'>Delete expense</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Delete expense</TooltipContent>
+              </Tooltip>
             </div>
           )}
         </CardHeader>
 
-        <CardContent>
+        <CardContent className='pb-2'>
           {expense.description ? (
-            <p className='line-clamp-2 text-sm'>{expense.description}</p>
+            <p className='line-clamp-2 text-sm font-medium'>
+              {expense.description}
+            </p>
           ) : (
             <p className='text-muted-foreground text-sm italic'>
               No description provided
@@ -192,23 +266,13 @@ export function ExpenseCard({
         </CardContent>
 
         {expense.tags && expense.tags.length > 0 && (
-          <CardFooter className='flex flex-wrap gap-1.5'>
-            {expense.tags.map((tag, index) => (
-              <PrettyTag
-                key={tag}
-                label={tag}
-                index={index}
-                showIcon={index === 0}
-              />
-            ))}
+          <CardFooter className='flex flex-wrap gap-1.5 pt-1 pb-3'>
+            {tagElements}
           </CardFooter>
         )}
       </Card>
 
-      <AlertDialog
-        open={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}
-      >
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={handleDialogChange}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Expense</AlertDialogTitle>
@@ -232,3 +296,6 @@ export function ExpenseCard({
     </>
   )
 }
+
+// Export a memoized version of the component for use in lists
+export const MemoizedExpenseCard = memo(ExpenseCard)

@@ -10,10 +10,14 @@ import { UpdateInflowDto } from './dto/update-inflow.dto'
 import { InflowSearchDto } from './dto/inflow-search.dto'
 import { TagStatistics } from 'src/common/dto/tag-stats.dto'
 import { MonthlyStats } from 'src/common/dto/month-stats.dto'
+import { UsersService } from 'src/users/users.service'
 
 @Injectable()
 export class InflowsService {
-  constructor(private readonly drizzleService: DrizzleService) {}
+  constructor(
+    private readonly drizzleService: DrizzleService,
+    private readonly usersService: UsersService
+  ) {}
 
   async create(
     userId: string,
@@ -28,6 +32,9 @@ export class InflowsService {
         userId
       })
       .returning()
+
+    // Invalidate user stats cache after creating new inflow
+    await this.usersService.invalidateUserStatsCache(userId)
     return inflow
   }
 
@@ -69,7 +76,10 @@ export class InflowsService {
     }
 
     if (tags && tags.length > 0) {
-      conditions.push(sql`${inflows.tags} && ${makePgArray(tags)}`)
+      const tagConditions = tags.map(
+        (tag) => sql`${tag} = ANY(${inflows.tags})`
+      )
+      conditions.push(and(...tagConditions) as SQL)
     }
 
     const query = this.drizzleService.db
@@ -132,6 +142,8 @@ export class InflowsService {
       throw new NotFoundException(`Inflow with ID ${id} not found`)
     }
 
+    // Invalidate user stats cache after updating inflow
+    await this.usersService.invalidateUserStatsCache(userId)
     return inflow
   }
 
@@ -145,6 +157,8 @@ export class InflowsService {
       throw new NotFoundException(`Inflow with ID ${id} not found`)
     }
 
+    // Invalidate user stats cache after removing inflow
+    await this.usersService.invalidateUserStatsCache(userId)
     return inflow
   }
 

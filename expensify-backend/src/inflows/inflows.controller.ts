@@ -6,6 +6,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseArrayPipe,
   ParseUUIDPipe,
   Patch,
   Post,
@@ -97,7 +98,11 @@ export class InflowsController {
     @Query('page') page?: number,
     @Query('limit') limit?: number,
     @Query('search') search?: string,
-    @Query('tags') tags?: string[]
+    @Query(
+      'tags',
+      new ParseArrayPipe({ items: String, separator: ',', optional: true })
+    )
+    tags?: string[]
   ) {
     return await this.inflowsService.findAll(request.user.id, {
       page,

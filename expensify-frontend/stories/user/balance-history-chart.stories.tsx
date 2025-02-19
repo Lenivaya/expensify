@@ -6,7 +6,7 @@ const meta = {
   component: BalanceHistoryChart,
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered',
+    layout: 'padded',
     backgrounds: {
       default: 'dark'
     }
@@ -28,18 +28,11 @@ const meta = {
     showTimeRangeSelector: {
       description: 'Show/hide the time range selector',
       control: 'boolean'
-    },
-    showZoomControls: {
-      description: 'Show/hide the zoom controls',
-      control: 'boolean'
     }
   },
   decorators: [
     (Story) => (
-      <div
-        className='dark bg-background p-4'
-        style={{ width: '1000px', minHeight: '600px' }}
-      >
+      <div className='dark bg-background h-full w-full'>
         <Story />
       </div>
     )
@@ -89,18 +82,22 @@ const generateSampleData = () => {
 export const Default: Story = {
   args: {
     balanceHistory: generateSampleData(),
-    height: 400,
     defaultTimeRange: 'ALL',
-    showTimeRangeSelector: true,
-    showZoomControls: true
+    showTimeRangeSelector: true
   }
 }
 
 export const Tall: Story = {
   args: {
-    ...Default.args,
-    height: 600
-  }
+    ...Default.args
+  },
+  decorators: [
+    (Story) => (
+      <div className='dark bg-background w-full h-[800px]'>
+        <Story />
+      </div>
+    )
+  ]
 }
 
 export const NoControls: Story = {

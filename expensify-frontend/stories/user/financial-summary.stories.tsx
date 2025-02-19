@@ -57,6 +57,8 @@ const defaultData = {
   statistics: {
     averageInflow: '1000.00',
     averageExpense: '800.00',
+    averageMonthlyInflow: '4000.00',
+    averageMonthlyExpense: '3200.00',
     totalInflowCount: 25,
     totalExpenseCount: 50
   }
@@ -110,6 +112,8 @@ export const HighBalance: Story = {
       statistics: {
         averageInflow: '15000.00',
         averageExpense: '5000.00',
+        averageMonthlyInflow: '60000.00',
+        averageMonthlyExpense: '20000.00',
         totalInflowCount: 10,
         totalExpenseCount: 20
       }
@@ -136,6 +140,8 @@ export const NegativeBalance: Story = {
       statistics: {
         averageInflow: '750.00',
         averageExpense: '1250.00',
+        averageMonthlyInflow: '3000.00',
+        averageMonthlyExpense: '5000.00',
         totalInflowCount: 4,
         totalExpenseCount: 8
       }

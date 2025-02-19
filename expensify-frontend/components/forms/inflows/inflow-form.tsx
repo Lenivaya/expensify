@@ -459,14 +459,7 @@ export function InflowForm({
                               <Badge
                                 key={tag}
                                 variant='outline'
-                                className={cn(
-                                  'px-3 py-1.5 cursor-pointer',
-                                  'border-emerald-200 text-emerald-700',
-                                  'hover:bg-emerald-100 hover:text-emerald-900 hover:border-emerald-300',
-                                  'dark:border-emerald-800 dark:text-emerald-200',
-                                  'dark:hover:bg-emerald-900/30 dark:hover:text-emerald-50 dark:hover:border-emerald-700',
-                                  'transition-colors'
-                                )}
+                                className='px-3 py-1.5 cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors'
                                 onClick={() => addSuggestedTag(tag, field)}
                               >
                                 <TagIcon className='w-3 h-3 mr-1 opacity-70' />

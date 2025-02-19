@@ -6,6 +6,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseArrayPipe,
   ParseUUIDPipe,
   Post,
   Put,
@@ -97,7 +98,11 @@ export class ExpensesController {
     @Query('page') page?: number,
     @Query('limit') limit?: number,
     @Query('search') search?: string,
-    @Query('tags') tags?: string[]
+    @Query(
+      'tags',
+      new ParseArrayPipe({ items: String, separator: ',', optional: true })
+    )
+    tags?: string[]
   ) {
     return await this.expensesService.findAll(request.user.id, {
       page,

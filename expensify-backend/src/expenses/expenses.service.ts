@@ -1,18 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
+import { SQL, and, desc, eq, ilike, or, sql } from 'drizzle-orm'
+import { isSome } from 'lib/utils'
+import { MonthlyStats } from 'src/common/dto/month-stats.dto'
+import { TagStatistics } from 'src/common/dto/tag-stats.dto'
 import { DrizzleService } from 'src/database/drizzle.service'
 import { expenses } from 'src/database/schema/expenses.schema'
-import { SQL, and, desc, eq, ilike, or, sql } from 'drizzle-orm'
-import { makePgArray } from 'drizzle-orm/pg-core'
+import { UsersService } from 'src/users/users.service'
 import { CreateExpenseDto } from './dto/create-expense.dto'
-import { UpdateExpenseDto } from './dto/update-expense.dto'
-import { isSome } from 'lib/utils'
-import { TagStatistics } from 'src/common/dto/tag-stats.dto'
 import { ExpenseSearchDto } from './dto/expenses-search.dto'
-import { MonthlyStats } from 'src/common/dto/month-stats.dto'
+import { UpdateExpenseDto } from './dto/update-expense.dto'
 
 @Injectable()
 export class ExpensesService {
-  constructor(private readonly drizzleService: DrizzleService) {}
+  constructor(
+    private readonly drizzleService: DrizzleService,
+    private readonly usersService: UsersService
+  ) {}
 
   async create(userId: string, createExpenseDto: CreateExpenseDto) {
     const [expense] = await this.drizzleService.db
@@ -25,6 +28,8 @@ export class ExpensesService {
       })
       .returning()
 
+    // Invalidate user stats cache after creating new expense
+    await this.usersService.invalidateUserStatsCache(userId)
     return expense
   }
 
@@ -51,8 +56,8 @@ export class ExpensesService {
             or(
               ilike(expenses.description, `%${term}%`),
               sql`EXISTS (
-              SELECT 1 
-              FROM unnest(${expenses.tags}) AS tag 
+              SELECT 1
+              FROM unnest(${expenses.tags}) AS tag
               WHERE tag ILIKE ${`%${term}%`}
             )`
             )
@@ -66,7 +71,11 @@ export class ExpensesService {
     }
 
     if (tags && tags.length > 0) {
-      conditions.push(sql`${expenses.tags} && ${makePgArray(tags)}`)
+      // conditions.push(sql`${expenses.tags} && ${makePgArray(tags)}`)
+      const tagConditions = tags.map(
+        (tag) => sql`${tag} = ANY(${expenses.tags})`
+      )
+      conditions.push(and(...tagConditions) as SQL)
     }
 
     const query = this.drizzleService.db
@@ -129,6 +138,8 @@ export class ExpensesService {
       throw new NotFoundException(`Expense with ID ${id} not found`)
     }
 
+    // Invalidate user stats cache after updating expense
+    await this.usersService.invalidateUserStatsCache(userId)
     return expense
   }
 
@@ -142,6 +153,8 @@ export class ExpensesService {
       throw new NotFoundException(`Expense with ID ${id} not found`)
     }
 
+    // Invalidate user stats cache after removing expense
+    await this.usersService.invalidateUserStatsCache(userId)
     return expense
   }
 

@@ -31,10 +31,6 @@ const meta = {
       control: 'text',
       description: 'Description text below the title'
     },
-    showLabels: {
-      control: 'boolean',
-      description: 'Whether to show labels on pie segments'
-    },
     labelMinPercentage: {
       control: {
         type: 'number',
@@ -43,6 +39,15 @@ const meta = {
         step: 1
       },
       description: 'Minimum percentage for a segment to show its label'
+    },
+    pieMinPercentage: {
+      control: {
+        type: 'number',
+        min: 0,
+        max: 100,
+        step: 1
+      },
+      description: 'Minimum percentage for a segment to show in the pie chart'
     }
   },
   decorators: [
@@ -61,42 +66,42 @@ type Story = StoryObj<typeof TopTagsPieChart>
 const sampleData: TagSummaryItemDto[] = [
   {
     tag: 'Groceries',
-    amount: '$500.00',
+    amount: 500,
     type: 'expense'
   },
   {
     tag: 'Salary',
-    amount: '$5000.00',
+    amount: 5000,
     type: 'inflow'
   },
   {
     tag: 'Rent',
-    amount: '$1200.00',
+    amount: 1200,
     type: 'expense'
   },
   {
     tag: 'Freelance',
-    amount: '$2000.00',
+    amount: 2000,
     type: 'inflow'
   },
   {
     tag: 'Utilities',
-    amount: '$150.00',
+    amount: 150,
     type: 'expense'
   },
   {
     tag: 'Investments',
-    amount: '$1000.00',
+    amount: 1000,
     type: 'inflow'
   },
   {
     tag: 'Entertainment',
-    amount: '$200.00',
+    amount: 200,
     type: 'expense'
   },
   {
     tag: 'Bonus',
-    amount: '$3000.00',
+    amount: 3000,
     type: 'inflow'
   }
 ]
@@ -161,8 +166,8 @@ export const WithLabels: Story = {
   args: {
     tagStats: sampleData,
     height: 400,
-    showLabels: true,
-    labelMinPercentage: 5
+    labelMinPercentage: 0,
+    pieMinPercentage: 0
   }
 }
 

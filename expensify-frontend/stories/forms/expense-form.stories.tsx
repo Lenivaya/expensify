@@ -2,6 +2,14 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ExpenseForm } from '@/components/forms/expenses/expense-form'
 import { fn } from '@storybook/test'
 import { action } from '@storybook/addon-actions'
+import { within, userEvent } from '@storybook/testing-library'
+import { useState } from 'react'
+
+type ExpenseFormValues = {
+  amount: number
+  description: string
+  tags: string[]
+}
 
 /**
  * The `ExpenseForm` component provides a unified interface for creating and editing expenses.
@@ -17,9 +25,6 @@ const meta = {
         component:
           'A unified form component for creating and editing expenses with validation and tag management.'
       }
-    },
-    actions: {
-      handles: ['onSubmit']
     }
   },
   tags: ['autodocs'],
@@ -52,19 +57,52 @@ const meta = {
       description: 'Additional CSS classes to apply to the form container',
       control: 'text'
     }
-  }
+  },
+  decorators: [
+    (Story, context) => {
+      const [isSubmitting, setIsSubmitting] = useState(false)
+      const [values, setValues] = useState(context.args.defaultValues)
+
+      const handleSubmit = async (formValues: ExpenseFormValues) => {
+        setIsSubmitting(true)
+        action('form-submitted')(formValues)
+
+        try {
+          // Simulate API delay
+          await new Promise((resolve) => setTimeout(resolve, 1000))
+          setValues(formValues)
+          action('form-submission-completed')(formValues)
+
+          // Call the original onSubmit if provided
+          if (context.args.onSubmit) {
+            await context.args.onSubmit(formValues)
+          }
+        } finally {
+          setIsSubmitting(false)
+        }
+      }
+
+      return (
+        <Story
+          args={{
+            ...context.args,
+            defaultValues: values,
+            onSubmit: handleSubmit,
+            isSubmitting
+          }}
+        />
+      )
+    }
+  ]
 } satisfies Meta<typeof ExpenseForm>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Mock submit handler that logs the form values and triggers actions
-const handleSubmit = async (values: any) => {
-  action('form-submitted')(values)
-  console.log('Form submitted with values:', values)
-  // Simulate API delay
+// Default submit handler for stories that need their own handler
+const defaultSubmitHandler = async (values: ExpenseFormValues) => {
+  action('story-submit-handler')(values)
   await new Promise((resolve) => setTimeout(resolve, 1000))
-  action('form-submission-completed')(values)
 }
 
 /**
@@ -72,8 +110,16 @@ const handleSubmit = async (values: any) => {
  */
 export const Create: Story = {
   args: {
-    onSubmit: fn(handleSubmit),
-    isEditing: false
+    isEditing: false,
+    onSubmit: defaultSubmitHandler
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const amountInput = canvas.getByLabelText(/amount/i)
+    const descriptionInput = canvas.getByLabelText(/description/i)
+
+    await userEvent.type(amountInput, '42.50')
+    await userEvent.type(descriptionInput, 'Test expense')
   }
 }
 
@@ -82,8 +128,8 @@ export const Create: Story = {
  */
 export const Edit: Story = {
   args: {
-    onSubmit: fn(handleSubmit),
     isEditing: true,
+    onSubmit: defaultSubmitHandler,
     defaultValues: {
       amount: 42.5,
       description: 'Team lunch at Restaurant',
@@ -97,7 +143,9 @@ export const Edit: Story = {
  */
 export const Submitting: Story = {
   args: {
-    onSubmit: fn(handleSubmit),
+    onSubmit: fn(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+    }),
     isSubmitting: true
   }
 }
@@ -107,7 +155,7 @@ export const Submitting: Story = {
  */
 export const CustomTitleAndDescription: Story = {
   args: {
-    onSubmit: fn(handleSubmit),
+    onSubmit: defaultSubmitHandler,
     title: 'Record Business Expense',
     description: 'Add your business expense details below for reimbursement.'
   }
@@ -118,7 +166,7 @@ export const CustomTitleAndDescription: Story = {
  */
 export const CustomStyling: Story = {
   args: {
-    onSubmit: fn(handleSubmit),
+    onSubmit: defaultSubmitHandler,
     className: 'max-w-md shadow-lg bg-card/50 backdrop-blur'
   }
 }
@@ -149,7 +197,7 @@ export const WithErrors: Story = {
  */
 export const WithMaxTags: Story = {
   args: {
-    onSubmit: fn(handleSubmit),
+    onSubmit: defaultSubmitHandler,
     defaultValues: {
       amount: 100,
       description: 'Testing max tags',

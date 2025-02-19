@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button'
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from '@/components/ui/card'
+  EnhancedCard,
+  EnhancedCardContent,
+  EnhancedCardDescription,
+  EnhancedCardHeader,
+  EnhancedCardTitle
+} from '@/components/ui/enhanced-card'
 import { Separator } from '@/components/ui/separator'
 import { StatsCard } from '@/components/ui/stats-card'
 import {
@@ -14,27 +14,38 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
-import { ArrowDownIcon, ArrowUpIcon, InfoIcon } from 'lucide-react'
+import {
+  ArrowDownIcon,
+  ArrowUpIcon,
+  InfoIcon,
+  CalendarIcon,
+  TrendingUpIcon,
+  TrendingDownIcon,
+  CircleDollarSignIcon,
+  BarChart3Icon,
+  ChevronRightIcon
+} from 'lucide-react'
 import { BalanceSection } from './balance-section'
 import { StatsInfoButton } from './stats-info-button'
 import { TransactionSummary } from './transaction-summary'
+import { useState } from 'react'
 
 type FinanicalSummaryBalance = {
   /**
    * @description Total amount of all inflows
    * @example 5000.00
    */
-  totalInflows: string
+  totalInflows: number
   /**
    * @description Total amount of all expenses
    * @example 3000.00
    */
-  totalExpenses: string
+  totalExpenses: number
   /**
    * @description Current balance (inflows - expenses)
    * @example 2000.00
    */
-  balance: string
+  balance: number
 }
 
 type FinancialStatisticsDto = {
@@ -42,12 +53,22 @@ type FinancialStatisticsDto = {
    * @description Average amount of inflows
    * @example 1000.00
    */
-  averageInflow: string
+  averageInflow: number
   /**
    * @description Average amount of expenses
    * @example 800.00
    */
-  averageExpense: string
+  averageExpense: number
+  /**
+   * @description Average monthly inflow
+   * @example 1000.00
+   */
+  averageMonthlyInflow: number
+  /**
+   * @description Average monthly expense
+   * @example 800.00
+   */
+  averageMonthlyExpense: number
   /**
    * @description Total number of inflow transactions
    * @example 25
@@ -88,6 +109,7 @@ export interface FinancialStatisticsCardProps {
  * - Average transaction statistics
  * - Interactive sections with click handlers
  * - Responsive design with dark mode support
+ * - Collapsible statistics section for compact view
  *
  * @example
  * ```tsx
@@ -107,49 +129,84 @@ export function FinancialSummaryCard({
   onBalanceClick
 }: FinancialStatisticsCardProps) {
   const { currentBalance, statistics } = data
+  const [showStats, setShowStats] = useState(true)
+
+  // Calculate the percentage of expenses relative to inflows
+  const expenseRatio =
+    currentBalance.totalInflows > 0
+      ? (currentBalance.totalExpenses / currentBalance.totalInflows) * 100
+      : 0
 
   return (
-    <Card
-      className={cn(
-        'w-full overflow-hidden backdrop-blur-sm',
-        'border-secondary/20 bg-background/50',
-        'dark:bg-background/30',
-        className
-      )}
-    >
-      <CardHeader className='space-y-2 pb-6'>
-        <div className='flex items-center justify-between'>
-          <div className='space-y-1'>
-            <CardTitle className='text-2xl font-bold tracking-tight bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent'>
-              Financial Summary
-            </CardTitle>
-            <CardDescription className='text-muted-foreground/80'>
-              Track your inflows, expenses, and overall balance
-            </CardDescription>
-          </div>
-          <Tooltip delayDuration={300}>
+    <EnhancedCard className={cn('h-full', className)} hoverIntensity='high'>
+      <EnhancedCardHeader className='items-center pb-0 space-y-1 pt-4'>
+        <div className='flex items-center gap-2'>
+          <CircleDollarSignIcon className='h-5 w-5 text-primary/70' />
+          <EnhancedCardTitle>Financial Summary</EnhancedCardTitle>
+        </div>
+        <EnhancedCardDescription>
+          Track your inflows, expenses, and overall balance
+        </EnhancedCardDescription>
+        <div className='absolute right-4 top-4'>
+          <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
               <Button
                 variant='ghost'
                 size='icon'
-                className='h-9 w-9 rounded-full hover:bg-secondary/20 transition-colors'
+                className='h-8 w-8 rounded-full hover:bg-secondary/20 transition-colors'
               >
-                <InfoIcon className='h-[1.125rem] w-[1.125rem] text-muted-foreground/70' />
+                <InfoIcon className='h-4 w-4 text-muted-foreground/70' />
               </Button>
             </TooltipTrigger>
-            <TooltipContent className='bg-popover/95 backdrop-blur-sm'>
+            <TooltipContent
+              side='left'
+              className='bg-popover/95 backdrop-blur-sm border border-border/50 shadow-lg'
+            >
               View your financial activity overview
             </TooltipContent>
           </Tooltip>
         </div>
-      </CardHeader>
+      </EnhancedCardHeader>
 
-      <CardContent className='grid gap-8'>
-        {/* Balance Section */}
-        <BalanceSection balance={currentBalance} onClick={onBalanceClick} />
+      <EnhancedCardContent className='flex-1 px-4 pb-3 pt-2'>
+        {/* Balance Section with Progress Indicator */}
+        <div className='space-y-2'>
+          <BalanceSection balance={currentBalance} onClick={onBalanceClick} />
+
+          {/* Expense to Income Ratio Progress Bar */}
+          <div className='px-1 space-y-1'>
+            <div className='flex justify-between items-center text-xs text-muted-foreground'>
+              <span>Expense to Income Ratio</span>
+              <span
+                className={cn(
+                  expenseRatio > 90
+                    ? 'text-red-500'
+                    : expenseRatio > 75
+                      ? 'text-amber-500'
+                      : 'text-emerald-500'
+                )}
+              >
+                {expenseRatio.toFixed(0)}%
+              </span>
+            </div>
+            <div className='h-1.5 w-full bg-secondary/20 rounded-full overflow-hidden'>
+              <div
+                className={cn(
+                  'h-full rounded-full transition-all duration-500',
+                  expenseRatio > 90
+                    ? 'bg-red-500'
+                    : expenseRatio > 75
+                      ? 'bg-amber-500'
+                      : 'bg-emerald-500'
+                )}
+                style={{ width: `${Math.min(expenseRatio, 100)}%` }}
+              />
+            </div>
+          </div>
+        </div>
 
         {/* Transaction Summaries */}
-        <div className='grid grid-cols-2 gap-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4'>
           <TransactionSummary
             type='inflow'
             amount={currentBalance.totalInflows}
@@ -164,32 +221,80 @@ export function FinancialSummaryCard({
           />
         </div>
 
-        <Separator className='my-2 bg-border/50' />
+        <Separator className='my-3 bg-border/50' />
 
-        {/* Statistics Section */}
-        <div className='space-y-6'>
-          <div className='flex items-center justify-between'>
-            <h3 className='text-lg font-semibold tracking-tight bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent'>
-              Statistics
-            </h3>
-            <StatsInfoButton />
+        {/* Statistics Section with Toggle */}
+        <div className='space-y-2'>
+          <div
+            className='flex items-center justify-between cursor-pointer'
+            onClick={() => setShowStats(!showStats)}
+          >
+            <div className='flex items-center gap-1.5'>
+              <BarChart3Icon className='h-4 w-4 text-muted-foreground/70' />
+              <h3 className='text-base font-semibold tracking-tight text-foreground'>
+                Statistics
+              </h3>
+            </div>
+            <div className='flex items-center gap-2'>
+              <StatsInfoButton />
+              <Button
+                variant='ghost'
+                size='icon'
+                className='h-6 w-6 rounded-full hover:bg-secondary/20 transition-colors'
+              >
+                <ChevronRightIcon
+                  className={cn(
+                    'h-4 w-4 text-muted-foreground transition-transform duration-200',
+                    showStats && 'rotate-90'
+                  )}
+                />
+              </Button>
+            </div>
           </div>
-          <div className='grid grid-cols-2 gap-6'>
+
+          <div
+            className={cn(
+              'grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 overflow-hidden transition-all duration-300',
+              showStats ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+            )}
+          >
             <StatsCard
-              title='Average Inflow'
-              value={statistics.averageInflow}
-              icon={ArrowUpIcon}
+              title='Monthly Inflow'
+              subtitle='Monthly average'
+              value={statistics.averageMonthlyInflow}
+              icon={TrendingUpIcon}
+              secondaryIcon={CalendarIcon}
               variant='success'
+              className='hover:border-success/30 transition-colors'
             />
             <StatsCard
-              title='Average Expense'
-              value={statistics.averageExpense}
-              icon={ArrowDownIcon}
+              title='Monthly Expense'
+              subtitle='Monthly average'
+              value={statistics.averageMonthlyExpense}
+              icon={TrendingDownIcon}
+              secondaryIcon={CalendarIcon}
               variant='danger'
+              className='hover:border-danger/30 transition-colors'
+            />
+            <StatsCard
+              title='Avg. Transaction Inflow'
+              subtitle='Per transaction'
+              value={statistics.averageInflow}
+              icon={CircleDollarSignIcon}
+              variant='success'
+              className='hover:border-success/30 transition-colors'
+            />
+            <StatsCard
+              title='Avg. Transaction Expense'
+              subtitle='Per transaction'
+              value={statistics.averageExpense}
+              icon={CircleDollarSignIcon}
+              variant='danger'
+              className='hover:border-danger/30 transition-colors'
             />
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </EnhancedCardContent>
+    </EnhancedCard>
   )
 }

@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 
 interface CurrencyDisplayProps {
   /** The amount to display */
-  amount: string
+  amount: number
   /** Optional className for styling */
   className?: string
   /** Optional text size class */
@@ -28,7 +28,12 @@ export function CurrencyDisplay({
   variant = 'primary',
   showSign = false
 }: CurrencyDisplayProps) {
-  const formattedAmount = Number.parseFloat(amount).toLocaleString()
+  const formattedAmount = amount.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
   const isNegative = Number(amount) < 0
 
   const sizeClasses = {

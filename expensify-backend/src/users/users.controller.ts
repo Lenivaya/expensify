@@ -124,7 +124,7 @@ export class UsersController {
     return await this.usersService.getCurrentBalance(id)
   }
 
-  @Get(':id/monthly-balance/:year')
+  @Get('monthly-balance/:year')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({
@@ -149,14 +149,12 @@ export class UsersController {
   })
   async getMonthlyBalance(
     @Req() request: RequestWithUser,
-    @Param('id') id: string,
     @Param('year', ParseIntPipe) year: number
   ) {
-    if (request.user.id !== id) throw new UnauthorizedException()
-    return await this.usersService.getMonthlyBalance(id, year)
+    return await this.usersService.getMonthlyBalance(request.user.id, year)
   }
 
-  @Get(':id/financial-summary')
+  @Get('financial-summary')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({
@@ -174,15 +172,11 @@ export class UsersController {
   @ApiNotFoundResponse({
     description: 'User not found'
   })
-  async getFinancialSummary(
-    @Req() request: RequestWithUser,
-    @Param('id') id: string
-  ) {
-    if (request.user.id !== id) throw new UnauthorizedException()
-    return await this.usersService.getFinancialSummary(id)
+  async getFinancialSummary(@Req() request: RequestWithUser) {
+    return await this.usersService.getFinancialSummary(request.user.id)
   }
 
-  @Get(':id/top-tags')
+  @Get('top-tags')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({
@@ -199,14 +193,11 @@ export class UsersController {
   @ApiNotFoundResponse({
     description: 'User not found'
   })
-  async getTopTags(@Req() request: RequestWithUser, @Param('id') id: string) {
-    if (request.user.id !== id) {
-      throw new UnauthorizedException()
-    }
-    return await this.usersService.getTopTags(id)
+  async getTopTags(@Req() request: RequestWithUser) {
+    return await this.usersService.getTopTags(request.user.id)
   }
 
-  @Get(':id/balance-history')
+  @Get('balance-history')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({
@@ -224,13 +215,7 @@ export class UsersController {
   @ApiNotFoundResponse({
     description: 'User not found'
   })
-  async getBalanceHistory(
-    @Req() request: RequestWithUser,
-    @Param('id') id: string
-  ) {
-    if (request.user.id !== id) {
-      throw new UnauthorizedException()
-    }
-    return await this.usersService.getBalanceHistory(id)
+  async getBalanceHistory(@Req() request: RequestWithUser) {
+    return await this.usersService.getBalanceHistory(request.user.id)
   }
 }

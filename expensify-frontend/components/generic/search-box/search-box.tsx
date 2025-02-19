@@ -1,7 +1,7 @@
 import { Search, X, Keyboard } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import { useCallback, useState, useRef } from 'react'
+import { useCallback, useState, useRef, useMemo, memo } from 'react'
 import { useDebounceCallback } from 'usehooks-ts'
 import { useHotkeys } from 'react-hotkeys-hook'
 
@@ -76,7 +76,7 @@ interface SearchBoxProps {
  * />
  * ```
  */
-export const SearchBox = ({
+const SearchBoxComponent = ({
   placeholder = 'Search...',
   className,
   inputClassName,
@@ -93,57 +93,110 @@ export const SearchBox = ({
   const [isHotkeyPressed, setIsHotkeyPressed] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const debouncedSearch = useDebounceCallback((searchValue: string) => {
-    onSearch?.(searchValue)
-  }, debounceMs)
+  // Create a stable debounced search function that won't change on re-renders
+  const debouncedSearch = useDebounceCallback(
+    useCallback(
+      (searchValue: string) => {
+        onSearch?.(searchValue)
+      },
+      [onSearch]
+    ),
+    debounceMs
+  )
 
+  // Memoize the change handler to prevent recreation on each render
   const handleChange = useCallback(
-    (newValue: string) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value
       setValue(newValue)
       debouncedSearch(newValue)
     },
     [debouncedSearch]
   )
 
+  // Memoize the clear handler to prevent recreation on each render
   const handleClear = useCallback(() => {
-    handleChange('')
+    setValue('')
+    debouncedSearch('')
     inputRef.current?.focus()
-  }, [handleChange])
+  }, [debouncedSearch])
 
+  // Memoize the hotkey handler to prevent recreation on each render
+  const handleHotkey = useCallback(() => {
+    if (enableHotkey && !disabled) {
+      setIsHotkeyPressed(true)
+      inputRef.current?.focus()
+      // Reset the pressed state after animation
+      setTimeout(() => setIsHotkeyPressed(false), 200)
+    }
+  }, [enableHotkey, disabled])
+
+  // Set up hotkeys with memoized handler
   useHotkeys(
     hotkey,
-    () => {
-      if (enableHotkey && !disabled) {
-        setIsHotkeyPressed(true)
-        inputRef.current?.focus()
-        // Reset the pressed state after animation
-        setTimeout(() => setIsHotkeyPressed(false), 200)
-      }
-    },
+    handleHotkey,
     {
       preventDefault: true,
       enabled: enableHotkey && !disabled
     },
-    [enableHotkey, disabled]
+    [handleHotkey, enableHotkey, disabled]
   )
 
-  const hotkeyDisplay = hotkey
-    .replace('ctrl', '⌃')
-    .replace('cmd', '⌘')
-    .replace('shift', '⇧')
-    .replace('alt', '⌥')
-    .toUpperCase()
+  // Memoize the hotkey display to avoid recalculation on every render
+  const hotkeyDisplay = useMemo(() => {
+    return hotkey
+      .replace('ctrl', '⌃')
+      .replace('cmd', '⌘')
+      .replace('shift', '⇧')
+      .replace('alt', '⌥')
+      .toUpperCase()
+  }, [hotkey])
+
+  // Memoize container class to avoid recalculation on every render
+  const containerClass = useMemo(() => {
+    return cn(
+      'group relative flex w-full items-center transition-all duration-300',
+      'hover:shadow-md focus-within:shadow-md',
+      'rounded-lg bg-background',
+      isHotkeyPressed && 'ring-2 ring-primary ring-offset-2',
+      className
+    )
+  }, [className, isHotkeyPressed])
+
+  // Memoize input class to avoid recalculation on every render
+  const inputClass = useMemo(() => {
+    return cn(
+      'border-0 pl-10 pr-9 text-center shadow-none',
+      'placeholder:text-muted-foreground/60',
+      'focus-visible:ring-2 focus-visible:ring-offset-0',
+      'transition-all duration-200',
+      inputClassName
+    )
+  }, [inputClassName])
+
+  // Memoize clear button class to avoid recalculation on every render
+  const clearButtonClass = useMemo(() => {
+    return cn(
+      'absolute right-3',
+      'text-muted-foreground/60 hover:text-foreground',
+      'transition-all duration-200',
+      'focus-visible:outline-none focus-visible:ring-2',
+      'focus-visible:ring-ring focus-visible:ring-offset-2',
+      'rounded-full p-0.5'
+    )
+  }, [])
+
+  // Memoize hotkey indicator class to avoid recalculation on every render
+  const hotkeyIndicatorClass = useMemo(() => {
+    return cn(
+      'pointer-events-none absolute right-3 flex items-center gap-1',
+      'text-xs text-muted-foreground/40',
+      value && 'hidden'
+    )
+  }, [value])
 
   return (
-    <div
-      className={cn(
-        'group relative flex w-full items-center transition-all duration-300',
-        'hover:shadow-md focus-within:shadow-md',
-        'rounded-lg bg-background',
-        isHotkeyPressed && 'ring-2 ring-primary ring-offset-2',
-        className
-      )}
-    >
+    <div className={containerClass}>
       <Search
         size={iconSize}
         className={cn(
@@ -157,28 +210,15 @@ export const SearchBox = ({
         ref={inputRef}
         type='text'
         value={value}
-        onChange={(e) => handleChange(e.target.value)}
-        className={cn(
-          'border-0 pl-10 pr-9 text-center shadow-none',
-          'placeholder:text-muted-foreground/60',
-          'focus-visible:ring-2 focus-visible:ring-offset-0',
-          'transition-all duration-200',
-          inputClassName
-        )}
+        onChange={handleChange}
+        className={inputClass}
         placeholder={placeholder}
         disabled={disabled}
       />
       {showClear && value && (
         <button
           onClick={handleClear}
-          className={cn(
-            'absolute right-3',
-            'text-muted-foreground/60 hover:text-foreground',
-            'transition-all duration-200',
-            'focus-visible:outline-none focus-visible:ring-2',
-            'focus-visible:ring-ring focus-visible:ring-offset-2',
-            'rounded-full p-0.5'
-          )}
+          className={clearButtonClass}
           disabled={disabled}
           type='button'
           aria-label='Clear search'
@@ -190,13 +230,7 @@ export const SearchBox = ({
         </button>
       )}
       {enableHotkey && !disabled && (
-        <div
-          className={cn(
-            'pointer-events-none absolute right-3 flex items-center gap-1',
-            'text-xs text-muted-foreground/40',
-            value && 'hidden'
-          )}
-        >
+        <div className={hotkeyIndicatorClass}>
           <Keyboard size={14} />
           <span>{hotkeyDisplay}</span>
         </div>
@@ -204,3 +238,6 @@ export const SearchBox = ({
     </div>
   )
 }
+
+// Export a memoized version of the component to prevent unnecessary re-renders
+export const SearchBox = memo(SearchBoxComponent)

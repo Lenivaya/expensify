@@ -14,11 +14,13 @@ interface TransactionSummaryProps {
   /** Type of transaction summary to display */
   type: 'inflow' | 'expense'
   /** Total amount for this transaction type */
-  amount: string
+  amount: number
   /** Number of transactions */
   count: number
   /** Optional click handler */
   onClick?: () => void
+  /** Optional compact mode for smaller displays */
+  compact?: boolean
 }
 
 /**
@@ -29,7 +31,8 @@ export function TransactionSummary({
   type,
   amount,
   count,
-  onClick
+  onClick,
+  compact = false
 }: TransactionSummaryProps) {
   const isInflow = type === 'inflow'
   const variant = isInflow ? 'success' : 'danger'
@@ -73,11 +76,12 @@ export function TransactionSummary({
       variant='ghost'
       className={cn(
         'h-auto w-full grid content-start gap-3',
-        'rounded-xl bg-gradient-to-br p-4',
+        'rounded-xl bg-gradient-to-br',
         'text-left border transition-all duration-300',
         'hover:scale-[1.02] hover:shadow-lg',
         'after:absolute after:inset-0 after:rounded-xl after:bg-gradient-to-br',
         'after:opacity-0 hover:after:opacity-100 after:transition-opacity after:-z-10',
+        compact ? 'p-3' : 'p-4',
         styles[type].bg,
         styles[type].border,
         onClick && styles[type].hover,
@@ -87,20 +91,39 @@ export function TransactionSummary({
     >
       <div className='flex items-center justify-between gap-2'>
         <div className='flex items-center gap-2'>
-          <div className={cn('rounded-full p-1.5', styles[type].iconBg)}>
+          <div
+            className={cn(
+              'rounded-full',
+              compact ? 'p-1' : 'p-1.5',
+              styles[type].iconBg
+            )}
+          >
             <Icon className={cn('h-4 w-4', styles[type].iconColor)} />
           </div>
-          <span className='text-sm font-medium'>
-            Total {isInflow ? 'Inflows' : 'Expenses'}
+          <span className={cn('font-medium', compact ? 'text-xs' : 'text-sm')}>
+            {compact
+              ? isInflow
+                ? 'Inflows'
+                : 'Expenses'
+              : `Total ${isInflow ? 'Inflows' : 'Expenses'}`}
           </span>
         </div>
         <TrendIcon className={cn('h-4 w-4', styles[type].trendColor)} />
       </div>
       <div className='space-y-1'>
         <div className='flex items-baseline gap-1 justify-center'>
-          <CurrencyDisplay amount={amount} variant={variant} size='md' />
+          <CurrencyDisplay
+            amount={amount}
+            variant={variant}
+            size={compact ? 'sm' : 'md'}
+          />
         </div>
-        <p className='text-sm text-muted-foreground text-center'>
+        <p
+          className={cn(
+            'text-muted-foreground text-center',
+            compact ? 'text-xs' : 'text-sm'
+          )}
+        >
           {count.toLocaleString()} transactions
         </p>
       </div>
