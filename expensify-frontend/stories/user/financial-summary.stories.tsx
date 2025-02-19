@@ -16,28 +16,23 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     onInflowClick: {
-      description:
-        'Callback fired when the inflow section is clicked',
+      description: 'Callback fired when the inflow section is clicked',
       control: false
     },
     onExpenseClick: {
-      description:
-        'Callback fired when the expense section is clicked',
+      description: 'Callback fired when the expense section is clicked',
       control: false
     },
     onBalanceClick: {
-      description:
-        'Callback fired when the balance section is clicked',
+      description: 'Callback fired when the balance section is clicked',
       control: false
     },
     className: {
-      description:
-        'Additional CSS classes to apply to the component',
+      description: 'Additional CSS classes to apply to the component',
       control: 'text'
     },
     data: {
-      description:
-        'Financial data to display in the component',
+      description: 'Financial data to display in the component',
       control: 'object'
     }
   },
@@ -98,8 +93,7 @@ export const CustomStyling: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Example with custom styling applied through className prop.'
+        story: 'Example with custom styling applied through className prop.'
       }
     }
   }
@@ -150,8 +144,7 @@ export const NegativeBalance: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Example showing how negative balances are displayed.'
+        story: 'Example showing how negative balances are displayed.'
       }
     }
   }

@@ -92,17 +92,14 @@ export class AuthController {
   @ApiBearerAuth()
   @ApiOperation({
     summary: 'Get current user',
-    description:
-      'This endpoint returns the current authenticated user.'
+    description: 'This endpoint returns the current authenticated user.'
   })
   @ApiOkResponse({
     description: 'Current user details',
     type: UserDto
   })
   async getMe(@Req() request: RequestWithUser) {
-    const user = await this.userService.findById(
-      request.user.id
-    )
+    const user = await this.userService.findById(request.user.id)
     return user
   }
 }

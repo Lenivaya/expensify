@@ -1,18 +1,7 @@
-import {
-  Injectable,
-  NotFoundException
-} from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { DrizzleService } from 'src/database/drizzle.service'
 import { expenses } from 'src/database/schema/expenses.schema'
-import {
-  SQL,
-  and,
-  desc,
-  eq,
-  ilike,
-  or,
-  sql
-} from 'drizzle-orm'
+import { SQL, and, desc, eq, ilike, or, sql } from 'drizzle-orm'
 import { makePgArray } from 'drizzle-orm/pg-core'
 import { CreateExpenseDto } from './dto/create-expense.dto'
 import { UpdateExpenseDto } from './dto/update-expense.dto'
@@ -23,14 +12,9 @@ import { MonthlyStats } from 'src/common/dto/month-stats.dto'
 
 @Injectable()
 export class ExpensesService {
-  constructor(
-    private readonly drizzleService: DrizzleService
-  ) {}
+  constructor(private readonly drizzleService: DrizzleService) {}
 
-  async create(
-    userId: string,
-    createExpenseDto: CreateExpenseDto
-  ) {
+  async create(userId: string, createExpenseDto: CreateExpenseDto) {
     const [expense] = await this.drizzleService.db
       .insert(expenses)
       .values({
@@ -53,21 +37,13 @@ export class ExpensesService {
       limit?: number
     }
   ): Promise<ExpenseSearchDto> {
-    const {
-      search,
-      tags,
-      page = 1,
-      limit = 10
-    } = params || {}
+    const { search, tags, page = 1, limit = 10 } = params || {}
     const offset = (page - 1) * limit
 
     const conditions: SQL[] = [eq(expenses.userId, userId)]
 
     if (search) {
-      const searchTerms = search
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean)
+      const searchTerms = search.trim().split(/\s+/).filter(Boolean)
 
       if (searchTerms.length > 0) {
         const searchConditions = searchTerms
@@ -90,9 +66,7 @@ export class ExpensesService {
     }
 
     if (tags && tags.length > 0) {
-      conditions.push(
-        sql`${expenses.tags} && ${makePgArray(tags)}`
-      )
+      conditions.push(sql`${expenses.tags} && ${makePgArray(tags)}`)
     }
 
     const query = this.drizzleService.db
@@ -101,11 +75,7 @@ export class ExpensesService {
       .orderBy(desc(expenses.createdAt))
       .limit(limit)
       .offset(offset)
-      .where(
-        conditions.length > 0
-          ? and(...conditions)
-          : undefined
-      )
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
 
     const [result, [{ count }]] = await Promise.all([
       query,
@@ -130,27 +100,16 @@ export class ExpensesService {
     const [expense] = await this.drizzleService.db
       .select()
       .from(expenses)
-      .where(
-        and(
-          eq(expenses.id, id),
-          eq(expenses.userId, userId)
-        )
-      )
+      .where(and(eq(expenses.id, id), eq(expenses.userId, userId)))
 
     if (!expense) {
-      throw new NotFoundException(
-        `Expense with ID ${id} not found`
-      )
+      throw new NotFoundException(`Expense with ID ${id} not found`)
     }
 
     return expense
   }
 
-  async update(
-    userId: string,
-    id: string,
-    updateExpenseDto: UpdateExpenseDto
-  ) {
+  async update(userId: string, id: string, updateExpenseDto: UpdateExpenseDto) {
     const [expense] = await this.drizzleService.db
       .update(expenses)
       .set({
@@ -160,23 +119,14 @@ export class ExpensesService {
         ...(updateExpenseDto.description
           ? { description: updateExpenseDto.description }
           : {}),
-        ...(updateExpenseDto.tags
-          ? { tags: updateExpenseDto.tags }
-          : {}),
+        ...(updateExpenseDto.tags ? { tags: updateExpenseDto.tags } : {}),
         updatedAt: new Date()
       })
-      .where(
-        and(
-          eq(expenses.id, id),
-          eq(expenses.userId, userId)
-        )
-      )
+      .where(and(eq(expenses.id, id), eq(expenses.userId, userId)))
       .returning()
 
     if (!expense) {
-      throw new NotFoundException(
-        `Expense with ID ${id} not found`
-      )
+      throw new NotFoundException(`Expense with ID ${id} not found`)
     }
 
     return expense
@@ -185,18 +135,11 @@ export class ExpensesService {
   async remove(userId: string, id: string) {
     const [expense] = await this.drizzleService.db
       .delete(expenses)
-      .where(
-        and(
-          eq(expenses.id, id),
-          eq(expenses.userId, userId)
-        )
-      )
+      .where(and(eq(expenses.id, id), eq(expenses.userId, userId)))
       .returning()
 
     if (!expense) {
-      throw new NotFoundException(
-        `Expense with ID ${id} not found`
-      )
+      throw new NotFoundException(`Expense with ID ${id} not found`)
     }
 
     return expense
@@ -213,9 +156,7 @@ export class ExpensesService {
     return result.total || 0
   }
 
-  async getTagStats(
-    userId: string
-  ): Promise<TagStatistics[]> {
+  async getTagStats(userId: string): Promise<TagStatistics[]> {
     const result = await this.drizzleService.db
       .select({
         tag: sql<string>`unnest(${expenses.tags})`,
@@ -230,10 +171,7 @@ export class ExpensesService {
     return result
   }
 
-  async getMonthlyStats(
-    userId: string,
-    year: number
-  ): Promise<MonthlyStats[]> {
+  async getMonthlyStats(userId: string, year: number): Promise<MonthlyStats[]> {
     const result = await this.drizzleService.db
       .select({
         month: sql<number>`EXTRACT(MONTH FROM ${expenses.createdAt})`,
@@ -247,12 +185,8 @@ export class ExpensesService {
           sql`EXTRACT(YEAR FROM ${expenses.createdAt}) = ${year}`
         )
       )
-      .groupBy(
-        sql`EXTRACT(MONTH FROM ${expenses.createdAt})`
-      )
-      .orderBy(
-        sql`EXTRACT(MONTH FROM ${expenses.createdAt})`
-      )
+      .groupBy(sql`EXTRACT(MONTH FROM ${expenses.createdAt})`)
+      .orderBy(sql`EXTRACT(MONTH FROM ${expenses.createdAt})`)
 
     return result
   }

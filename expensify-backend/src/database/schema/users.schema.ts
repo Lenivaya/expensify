@@ -26,16 +26,12 @@ export const userSelectSchema = createSelectSchema(users, {
   updatedAt: z.dateString().cast().nullable(),
   deletedAt: z.dateString().cast().nullable()
 }).omit({ password: true })
-export const userInsertSchema = createInsertSchema(
-  users
-).omit({
+export const userInsertSchema = createInsertSchema(users).omit({
   createdAt: true,
   updatedAt: true,
   deletedAt: true
 })
-export const userUpdateSchema = createUpdateSchema(
-  users
-).omit({
+export const userUpdateSchema = createUpdateSchema(users).omit({
   password: true,
   username: true,
   createdAt: true,
@@ -43,10 +39,7 @@ export const userUpdateSchema = createUpdateSchema(
   deletedAt: true
 })
 
-export const userRelations = relations(
-  users,
-  ({ many }) => ({
-    expenses: many(expenses),
-    inflows: many(inflows)
-  })
-)
+export const userRelations = relations(users, ({ many }) => ({
+  expenses: many(expenses),
+  inflows: many(inflows)
+}))

@@ -14,6 +14,5 @@ export const COLORS = [
 export const DEFAULT_CHART_HEIGHT = 300
 export const DEFAULT_VIEW = 'all'
 export const DEFAULT_TITLE = 'Tag Distribution'
-export const DEFAULT_DESCRIPTION =
-  'Overview of your financial categories'
+export const DEFAULT_DESCRIPTION = 'Overview of your financial categories'
 export const DEFAULT_LABEL_MIN_PERCENTAGE = 5

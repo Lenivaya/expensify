@@ -1,10 +1,5 @@
 import { Card } from '@/components/ui/card'
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger
-} from '@/components/ui/tabs'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import { useCallback, useMemo, useState } from 'react'
 import {
@@ -43,8 +38,7 @@ export function TopTagsPieChart({
   showLabels = false,
   labelMinPercentage = DEFAULT_LABEL_MIN_PERCENTAGE
 }: TopTagsPieChartProps) {
-  const [activeTab, setActiveTab] =
-    useState<string>(defaultView)
+  const [activeTab, setActiveTab] = useState<string>(defaultView)
 
   // Memoize chart data calculation
   const chartData = useMemo(() => {
@@ -54,9 +48,7 @@ export function TopTagsPieChart({
 
     return filteredStats.map((stat, index) => ({
       name: stat.tag,
-      value: Number.parseFloat(
-        stat.amount.replace(/[^0-9.-]+/g, '')
-      ),
+      value: Number.parseFloat(stat.amount.replace(/[^0-9.-]+/g, '')),
       color: COLORS[index % COLORS.length]
     }))
   }, [tagStats, activeTab])
@@ -85,32 +77,23 @@ export function TopTagsPieChart({
       }
 
       const radian = Math.PI / 180
-      const radius =
-        (innerRadius + (outerRadius - innerRadius) * 0.5) *
-        0.8
+      const radius = (innerRadius + (outerRadius - innerRadius) * 0.5) * 0.8
       const x = cx + radius * Math.cos(-midAngle * radian)
       const y = cy + radius * Math.sin(-midAngle * radian)
 
-      const total = chartData.reduce(
-        (sum, item) => sum + item.value,
-        0
-      )
+      const total = chartData.reduce((sum, item) => sum + item.value, 0)
       const percent = ((value / total) * 100).toFixed(0)
 
       return Number(percent) > labelMinPercentage ? (
         <text
           x={x}
           y={y}
-          fill="white"
-          textAnchor="middle"
-          dominantBaseline="central"
-          className={cn(
-            'font-bold',
-            height > 400 ? 'text-sm' : 'text-xs'
-          )}
+          fill='white'
+          textAnchor='middle'
+          dominantBaseline='central'
+          className={cn('font-bold', height > 400 ? 'text-sm' : 'text-xs')}
           style={{
-            filter:
-              'drop-shadow(0px 1px 1px rgb(0 0 0 / 0.3))',
+            filter: 'drop-shadow(0px 1px 1px rgb(0 0 0 / 0.3))',
             letterSpacing: '0.02em'
           }}
         >
@@ -123,38 +106,29 @@ export function TopTagsPieChart({
 
   return (
     <Card className={cn('space-y-6 p-6', className)}>
-      <div className="space-y-2">
-        <h3 className="font-semibold text-lg tracking-tight">
-          {title}
-        </h3>
-        <p className="text-muted-foreground text-sm">
-          {description}
-        </p>
+      <div className='space-y-2'>
+        <h3 className='font-semibold text-lg tracking-tight'>{title}</h3>
+        <p className='text-muted-foreground text-sm'>{description}</p>
       </div>
 
       <Tabs
         defaultValue={defaultView}
         value={activeTab}
         onValueChange={setActiveTab}
-        className="space-y-6"
+        className='space-y-6'
       >
-        <TabsList className="grid w-full grid-cols-3 bg-muted/50">
-          <TabsTrigger value="all">All Tags</TabsTrigger>
-          <TabsTrigger value="inflow">Inflows</TabsTrigger>
-          <TabsTrigger value="expense">
-            Expenses
-          </TabsTrigger>
+        <TabsList className='grid w-full grid-cols-3 bg-muted/50'>
+          <TabsTrigger value='all'>All Tags</TabsTrigger>
+          <TabsTrigger value='inflow'>Inflows</TabsTrigger>
+          <TabsTrigger value='expense'>Expenses</TabsTrigger>
         </TabsList>
 
-        <TabsContent
-          value={activeTab}
-          className="space-y-6"
-        >
+        <TabsContent value={activeTab} className='space-y-6'>
           {chartData.length > 0 ? (
             <ResponsiveContainer
-              width="100%"
+              width='100%'
               height={height}
-              className="min-w-[200px]"
+              className='min-w-[200px]'
             >
               <PieChart
                 margin={{
@@ -166,12 +140,12 @@ export function TopTagsPieChart({
               >
                 <Pie
                   data={chartData}
-                  dataKey="value"
-                  nameKey="name"
-                  cx="50%"
-                  cy="50%"
-                  outerRadius="80%"
-                  innerRadius="0%"
+                  dataKey='value'
+                  nameKey='name'
+                  cx='50%'
+                  cy='50%'
+                  outerRadius='80%'
+                  innerRadius='0%'
                   labelLine={false}
                   label={renderCustomLabel}
                 >
@@ -188,23 +162,20 @@ export function TopTagsPieChart({
                 <Tooltip content={<CustomTooltip />} />
                 {showLegend && (
                   <Legend
-                    layout="vertical"
-                    align="right"
-                    verticalAlign="middle"
-                    iconType="circle"
+                    layout='vertical'
+                    align='right'
+                    verticalAlign='middle'
+                    iconType='circle'
                     iconSize={8}
                     formatter={(value, entry) => (
-                      <span className="text-sm">
+                      <span className='text-sm'>
                         {value}{' '}
-                        <span className="ml-1 text-muted-foreground">
+                        <span className='ml-1 text-muted-foreground'>
                           ($
-                          {entry.payload?.value.toLocaleString(
-                            'en-US',
-                            {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2
-                            }
-                          )}
+                          {entry.payload?.value.toLocaleString('en-US', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                          })}
                           )
                         </span>
                       </span>

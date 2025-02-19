@@ -1,14 +1,5 @@
-import {
-  InferSelectModel,
-  relations,
-  sql
-} from 'drizzle-orm'
-import {
-  numeric,
-  pgTable,
-  text,
-  uuid
-} from 'drizzle-orm/pg-core'
+import { InferSelectModel, relations, sql } from 'drizzle-orm'
+import { numeric, pgTable, text, uuid } from 'drizzle-orm/pg-core'
 import {
   createInsertSchema,
   createSelectSchema,
@@ -36,36 +27,26 @@ export const expenses = pgTable('expenses', {
 })
 export type Expense = InferSelectModel<typeof expenses>
 
-export const expenseSelectSchema = createSelectSchema(
-  expenses,
-  {
-    createdAt: z.dateString().cast(),
-    updatedAt: z.dateString().cast().nullable(),
-    deletedAt: z.dateString().cast().nullable()
-  }
-)
-export const expesneInsertSchema = createInsertSchema(
-  expenses
-).omit({
+export const expenseSelectSchema = createSelectSchema(expenses, {
+  createdAt: z.dateString().cast(),
+  updatedAt: z.dateString().cast().nullable(),
+  deletedAt: z.dateString().cast().nullable()
+})
+export const expesneInsertSchema = createInsertSchema(expenses).omit({
   createdAt: true,
   updatedAt: true,
   deletedAt: true
 })
 
-export const expesneUpdateSchema = createUpdateSchema(
-  inflows
-).omit({
+export const expesneUpdateSchema = createUpdateSchema(inflows).omit({
   createdAt: true,
   updatedAt: true,
   deletedAt: true
 })
 
-export const expensesRelations = relations(
-  expenses,
-  ({ one }) => ({
-    user: one(users, {
-      fields: [expenses.userId],
-      references: [users.id]
-    })
+export const expensesRelations = relations(expenses, ({ one }) => ({
+  user: one(users, {
+    fields: [expenses.userId],
+    references: [users.id]
   })
-)
+}))

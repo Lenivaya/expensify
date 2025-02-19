@@ -3,8 +3,7 @@ import type { Icon as LucideIconType } from 'lucide-react'
 import type React from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-interface EmptyPlaceholderProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+interface EmptyPlaceholderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function EmptyPlaceholder({
   className,
@@ -19,7 +18,7 @@ export function EmptyPlaceholder({
       )}
       {...props}
     >
-      <div className="mx-auto flex max-w-[420px] flex-col items-center justify-center text-center">
+      <div className='mx-auto flex max-w-[420px] flex-col items-center justify-center text-center'>
         {children}
       </div>
     </div>
@@ -45,11 +44,8 @@ EmptyPlaceholder.Icon = function EmptyPlaceholderIcon({
   }
 
   return (
-    <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-      <Icon
-        className={cn('h-10 w-10', className)}
-        {...props}
-      />
+    <div className='flex h-20 w-20 items-center justify-center rounded-full bg-muted'>
+      <Icon className={cn('h-10 w-10', className)} {...props} />
     </div>
   )
 }
@@ -63,13 +59,7 @@ EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
   ...props
 }: EmptyPlaceholderTitleProps) {
   return (
-    <h2
-      className={cn(
-        'mt-6 text-xl font-semibold',
-        className
-      )}
-      {...props}
-    />
+    <h2 className={cn('mt-6 text-xl font-semibold', className)} {...props} />
   )
 }
 
@@ -77,18 +67,17 @@ EmptyPlaceholder.Title = function EmptyPlaceholderTitle({
 interface EmptyPlaceholderDescriptionProps
   extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-EmptyPlaceholder.Description =
-  function EmptyPlaceholderDescription({
-    className,
-    ...props
-  }: EmptyPlaceholderDescriptionProps) {
-    return (
-      <p
-        className={cn(
-          'mb-8 mt-3 text-center text-sm font-normal leading-6 text-muted-foreground',
-          className
-        )}
-        {...props}
-      />
-    )
-  }
+EmptyPlaceholder.Description = function EmptyPlaceholderDescription({
+  className,
+  ...props
+}: EmptyPlaceholderDescriptionProps) {
+  return (
+    <p
+      className={cn(
+        'mb-8 mt-3 text-center text-sm font-normal leading-6 text-muted-foreground',
+        className
+      )}
+      {...props}
+    />
+  )
+}

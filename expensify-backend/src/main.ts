@@ -4,10 +4,7 @@ import {
   FastifyAdapter,
   type NestFastifyApplication
 } from '@nestjs/platform-fastify'
-import {
-  DocumentBuilder,
-  SwaggerModule
-} from '@nestjs/swagger'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import { patchNestJsSwagger } from 'nestjs-zod'
 import { apiReference } from '@scalar/nestjs-api-reference'
@@ -15,14 +12,13 @@ import { writeFile } from 'fs/promises'
 import * as yaml from 'js-yaml'
 
 async function bootstrap() {
-  const app =
-    await NestFactory.create<NestFastifyApplication>(
-      AppModule,
-      new FastifyAdapter(),
-      {
-        logger: ['error', 'warn', 'log', 'debug', 'verbose']
-      }
-    )
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+    {
+      logger: ['error', 'warn', 'log', 'debug', 'verbose']
+    }
+  )
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

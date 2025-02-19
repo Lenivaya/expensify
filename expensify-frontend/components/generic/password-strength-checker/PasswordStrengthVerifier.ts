@@ -12,9 +12,7 @@ abstract class PasswordCriterion {
 
   verify(password: string): number {
     const score = this.check(password)
-    return this.next
-      ? score + this.next.verify(password)
-      : score
+    return this.next ? score + this.next.verify(password) : score
   }
 }
 

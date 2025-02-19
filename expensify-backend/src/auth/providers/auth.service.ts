@@ -1,16 +1,10 @@
-import {
-  BadRequestException,
-  Injectable
-} from '@nestjs/common'
+import { BadRequestException, Injectable } from '@nestjs/common'
 import { DrizzleService } from 'src/database/drizzle.service'
 import { HashingService } from './hashing.service'
 import { eq, or } from 'drizzle-orm'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import {
-  User,
-  users
-} from 'src/database/schema/users.schema'
+import { User, users } from 'src/database/schema/users.schema'
 import { SignUpDto } from 'src/auth/dto/sign-up.dto'
 import { UsersService } from 'src/users/users.service'
 
@@ -23,21 +17,17 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly userService: UsersService
   ) {}
-  async validateUser(
-    login: string,
-    password: string
-  ): Promise<User> {
+  async validateUser(login: string, password: string): Promise<User> {
     const user = await this.userService.findByLogin(login)
 
     if (!user) {
       throw new BadRequestException('Invalid credentials')
     }
 
-    const isPasswordValid =
-      await this.hashingService.compare(
-        password,
-        user.password
-      )
+    const isPasswordValid = await this.hashingService.compare(
+      password,
+      user.password
+    )
     if (!isPasswordValid) {
       throw new BadRequestException('Invalid credentials')
     }
@@ -46,12 +36,9 @@ export class AuthService {
   }
 
   async signUp(signUpDto: SignUpDto) {
-    const hashedPassword = await this.hashingService.hash(
-      signUpDto.password
-    )
+    const hashedPassword = await this.hashingService.hash(signUpDto.password)
 
-    const userWithEmail =
-      await this.userService.findByEmail(signUpDto.email)
+    const userWithEmail = await this.userService.findByEmail(signUpDto.email)
     if (userWithEmail) {
       throw new BadRequestException('Email already used')
     }

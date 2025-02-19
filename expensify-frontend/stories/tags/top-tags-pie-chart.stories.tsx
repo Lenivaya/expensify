@@ -42,8 +42,7 @@ const meta = {
         max: 100,
         step: 1
       },
-      description:
-        'Minimum percentage for a segment to show its label'
+      description: 'Minimum percentage for a segment to show its label'
     }
   },
   decorators: [
@@ -112,9 +111,7 @@ export const Default: Story = {
 
 export const ExpensesOnly: Story = {
   args: {
-    tagStats: sampleData.filter(
-      (item) => item.type === 'expense'
-    ),
+    tagStats: sampleData.filter((item) => item.type === 'expense'),
     height: 400,
     defaultView: 'expense'
   }
@@ -122,9 +119,7 @@ export const ExpensesOnly: Story = {
 
 export const InflowsOnly: Story = {
   args: {
-    tagStats: sampleData.filter(
-      (item) => item.type === 'inflow'
-    ),
+    tagStats: sampleData.filter((item) => item.type === 'inflow'),
     height: 400,
     defaultView: 'inflow'
   }

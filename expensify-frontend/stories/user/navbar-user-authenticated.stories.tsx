@@ -10,8 +10,8 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <div className="mx-auto w-full max-w-screen-xl bg-background p-4">
-        <div className="flex justify-end">
+      <div className='mx-auto w-full max-w-screen-xl bg-background p-4'>
+        <div className='flex justify-end'>
           <Story />
         </div>
       </div>
@@ -59,7 +59,6 @@ export const WithCustomLogoutHandler: Story = {
       username: 'bobsmith',
       email: 'bob.smith@example.com'
     },
-    handleLogout: () =>
-      alert('Custom logout handler called!')
+    handleLogout: () => alert('Custom logout handler called!')
   }
 }

@@ -22,8 +22,7 @@ export function NavbarUser() {
     console.error(error)
   }
 
-  const isQueryValid =
-    isSome(data) && isNone(error) && !isLoading
+  const isQueryValid = isSome(data) && isNone(error) && !isLoading
 
   return isQueryValid ? (
     <NavbarUserAuthenticated user={data} />

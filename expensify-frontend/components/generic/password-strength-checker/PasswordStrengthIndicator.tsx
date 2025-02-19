@@ -1,9 +1,5 @@
 import { cn } from '@/lib/utils'
-import type {
-  PasswordStrength,
-  StrengthMapType,
-  StyleConfig
-} from './types'
+import type { PasswordStrength, StrengthMapType, StyleConfig } from './types'
 import { cva } from 'class-variance-authority'
 
 const strengthVariants = cva('', {
@@ -83,14 +79,8 @@ export function PasswordStrengthIndicator({
   const { label, percentage } = mergedStrengthMap[strength]
 
   return (
-    <div
-      className={cn(
-        'space-y-2',
-        className,
-        styleConfig.containerClassName
-      )}
-    >
-      <div className="flex items-center justify-between">
+    <div className={cn('space-y-2', className, styleConfig.containerClassName)}>
+      <div className='flex items-center justify-between'>
         <span
           className={cn(
             'text-muted-foreground text-xs',
@@ -125,8 +115,8 @@ export function PasswordStrengthIndicator({
       </div>
 
       {styleConfig.showPercentage && (
-        <div className="flex justify-end">
-          <span className="text-[10px] text-muted-foreground/70 tabular-nums">
+        <div className='flex justify-end'>
+          <span className='text-[10px] text-muted-foreground/70 tabular-nums'>
             {percentage}%
           </span>
         </div>

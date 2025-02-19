@@ -20,12 +20,7 @@ import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
-import {
-  Eye,
-  EyeOff,
-  Loader2,
-  UserPlus
-} from 'lucide-react'
+import { Eye, EyeOff, Loader2, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import PasswordStrengthChecker from '@/components/generic/password-strength-checker/PasswordStrenghChecker'
 
@@ -65,13 +60,8 @@ export function RegisterForm() {
     }
   })
 
-  const register =
-    expensifyApi.auth.authControllerSignUp.useMutation(
-      {},
-      {}
-    )
-  const registerCount =
-    expensifyApi.auth.authControllerSignUp.useIsMutating()
+  const register = expensifyApi.auth.authControllerSignUp.useMutation({}, {})
+  const registerCount = expensifyApi.auth.authControllerSignUp.useIsMutating()
   const fetching = registerCount > 0
 
   const onSubmit = useCallback(
@@ -97,43 +87,40 @@ export function RegisterForm() {
 
   return (
     <Form {...form}>
-      <Card className="relative mx-auto w-full max-w-md border border-border/40 bg-background p-8 shadow-primary/5 shadow-xs transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-        <div className="pointer-events-none absolute inset-x-0 inset-y-0 rounded-lg bg-gradient-to-r from-primary/10 via-transparent to-primary/10 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
-        <div className="mb-8 space-y-2 text-center">
-          <div className="mb-4 flex justify-center">
-            <UserPlus className="h-12 w-12 text-primary" />
+      <Card className='relative mx-auto w-full max-w-md border border-border/40 bg-background p-8 shadow-primary/5 shadow-xs transition-all duration-300 hover:shadow-lg hover:shadow-primary/10'>
+        <div className='pointer-events-none absolute inset-x-0 inset-y-0 rounded-lg bg-gradient-to-r from-primary/10 via-transparent to-primary/10 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100' />
+        <div className='mb-8 space-y-2 text-center'>
+          <div className='mb-4 flex justify-center'>
+            <UserPlus className='h-12 w-12 text-primary' />
           </div>
-          <h1 className="font-semibold text-2xl tracking-tight">
+          <h1 className='font-semibold text-2xl tracking-tight'>
             Create an account
           </h1>
-          <p className="text-muted-foreground text-sm">
+          <p className='text-muted-foreground text-sm'>
             Track your expenses with Expensify today
           </p>
         </div>
 
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
           {/* Account Information Section */}
-          <div className="space-y-6">
+          <div className='space-y-6'>
             <div>
-              <h2 className="mb-4 font-medium text-base">
+              <h2 className='mb-4 font-medium text-base'>
                 Account Information
               </h2>
-              <div className="space-y-4">
+              <div className='space-y-4'>
                 <FormField
                   control={form.control}
-                  name="username"
+                  name='username'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Username</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Enter your username"
+                          placeholder='Enter your username'
                           {...field}
                           disabled={fetching}
-                          className="shadow-xs"
+                          className='shadow-xs'
                         />
                       </FormControl>
                       <FormMessage />
@@ -142,17 +129,17 @@ export function RegisterForm() {
                 />
                 <FormField
                   control={form.control}
-                  name="email"
+                  name='email'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input
-                          type="email"
-                          placeholder="Enter your email"
+                          type='email'
+                          placeholder='Enter your email'
                           {...field}
                           disabled={fetching}
-                          className="shadow-xs"
+                          className='shadow-xs'
                         />
                       </FormControl>
                       <FormMessage />
@@ -161,18 +148,15 @@ export function RegisterForm() {
                 />
                 <FormField
                   control={form.control}
-                  name="password"
+                  name='password'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
                         <PasswordStrengthChecker
                           initialPassword={field.value}
-                          placeholder="Enter your password"
-                          onPasswordChange={(
-                            password,
-                            strength
-                          ) => {
+                          placeholder='Enter your password'
+                          onPasswordChange={(password, strength) => {
                             field.onChange(password)
                           }}
                         />
@@ -184,29 +168,27 @@ export function RegisterForm() {
               </div>
             </div>
 
-            <Separator className="my-6" />
+            <Separator className='my-6' />
 
             {/* Personal Information Section */}
             <div>
-              <h2 className="mb-4 font-medium text-base">
+              <h2 className='mb-4 font-medium text-base'>
                 Personal Information
               </h2>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className='grid gap-4 sm:grid-cols-2'>
                 <FormField
                   control={form.control}
-                  name="firstName"
+                  name='firstName'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        First Name (optional)
-                      </FormLabel>
+                      <FormLabel>First Name (optional)</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Enter your first name"
+                          placeholder='Enter your first name'
                           {...field}
                           value={field.value ?? ''}
                           disabled={fetching}
-                          className="shadow-xs"
+                          className='shadow-xs'
                         />
                       </FormControl>
                       <FormMessage />
@@ -215,19 +197,17 @@ export function RegisterForm() {
                 />
                 <FormField
                   control={form.control}
-                  name="lastName"
+                  name='lastName'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>
-                        Last name (optional)
-                      </FormLabel>
+                      <FormLabel>Last name (optional)</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Enter your last name"
+                          placeholder='Enter your last name'
                           {...field}
                           value={field.value ?? ''}
                           disabled={fetching}
-                          className="shadow-xs"
+                          className='shadow-xs'
                         />
                       </FormControl>
                       <FormMessage />
@@ -238,23 +218,19 @@ export function RegisterForm() {
             </div>
           </div>
 
-          <Separator className="my-6" />
+          <Separator className='my-6' />
 
           {form.formState.errors.root && (
-            <div className="mb-6 rounded-md bg-destructive/10 p-3 text-destructive text-sm">
+            <div className='mb-6 rounded-md bg-destructive/10 p-3 text-destructive text-sm'>
               {form.formState.errors.root.message}
             </div>
           )}
 
-          <div className="space-y-6">
-            <Button
-              type="submit"
-              className="w-full"
-              disabled={fetching}
-            >
+          <div className='space-y-6'>
+            <Button type='submit' className='w-full' disabled={fetching}>
               {fetching ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className='mr-2 h-4 w-4 animate-spin' />
                   Creating account
                 </>
               ) : (
@@ -262,40 +238,40 @@ export function RegisterForm() {
               )}
             </Button>
 
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <Separator className="w-full" />
+            <div className='relative'>
+              <div className='absolute inset-0 flex items-center'>
+                <Separator className='w-full' />
               </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
+              <div className='relative flex justify-center text-xs uppercase'>
+                <span className='bg-background px-2 text-muted-foreground'>
                   Already have an account?
                 </span>
               </div>
             </div>
 
             <Button
-              type="button"
-              variant="outline"
-              className="w-full"
+              type='button'
+              variant='outline'
+              className='w-full'
               asChild={true}
             >
-              <Link href="/auth/sign-in">Sign in</Link>
+              <Link href='/auth/sign-in'>Sign in</Link>
             </Button>
           </div>
         </form>
 
-        <div className="mt-8 text-center text-muted-foreground text-xs">
+        <div className='mt-8 text-center text-muted-foreground text-xs'>
           By creating an account, you agree to our{' '}
           <Link
-            href="/terms"
-            className="underline underline-offset-4 hover:text-primary"
+            href='/terms'
+            className='underline underline-offset-4 hover:text-primary'
           >
             Terms of Service
           </Link>{' '}
           and{' '}
           <Link
-            href="/privacy"
-            className="underline underline-offset-4 hover:text-primary"
+            href='/privacy'
+            className='underline underline-offset-4 hover:text-primary'
           >
             Privacy Policy
           </Link>

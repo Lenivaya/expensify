@@ -12,10 +12,7 @@ export const env = createEnv({
       .enum(['development', 'production', 'test'])
       .default('development'),
     // biome-ignore lint/style/useNamingConvention: <explanation>
-    API_URL: z
-      .string()
-      .url()
-      .default('http://localhost:3000/api')
+    API_URL: z.string().url().default('http://localhost:3000/api')
   },
   /*
    * Environment variables available on the client (and server).
@@ -24,10 +21,7 @@ export const env = createEnv({
    */
   client: {
     // biome-ignore lint/style/useNamingConvention: <explanation>
-    NEXT_PUBLIC_API_URL: z
-      .string()
-      .url()
-      .default('http://localhost:3000/api')
+    NEXT_PUBLIC_API_URL: z.string().url().default('http://localhost:3000/api')
   },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,

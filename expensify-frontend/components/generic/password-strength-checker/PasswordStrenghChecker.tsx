@@ -5,28 +5,18 @@ import { Button } from '@/components/ui/button'
 import { Eye, EyeOff } from 'lucide-react'
 import { PasswordStrengthIndicator } from './PasswordStrengthIndicator'
 import { PasswordStrengthVerifier } from './PasswordStrengthVerifier'
-import type {
-  PasswordStrength,
-  StrengthMapType,
-  StyleConfig
-} from './types'
+import type { PasswordStrength, StrengthMapType, StyleConfig } from './types'
 import { cn } from '@/lib/utils'
 
 interface PasswordStrengthCheckerProps {
   /**
    * Callback function that is called when the password changes.
    */
-  onPasswordChange?: (
-    password: string,
-    strength: PasswordStrength
-  ) => void
+  onPasswordChange?: (password: string, strength: PasswordStrength) => void
   /**
    * Callback function that is called when the password is submitted.
    */
-  onSubmit?: (
-    password: string,
-    strength: PasswordStrength
-  ) => void
+  onSubmit?: (password: string, strength: PasswordStrength) => void
   /**
    * The initial password to display.
    */
@@ -63,9 +53,7 @@ interface PasswordStrengthCheckerProps {
  * It also allows the user to toggle the visibility of the password.
  * It also allows the user to submit the password along with its strength to the parent component.
  */
-const PasswordStrengthChecker: React.FC<
-  PasswordStrengthCheckerProps
-> = ({
+const PasswordStrengthChecker: React.FC<PasswordStrengthCheckerProps> = ({
   onPasswordChange,
   onSubmit,
   initialPassword = '',
@@ -76,8 +64,7 @@ const PasswordStrengthChecker: React.FC<
   strengthMap
 }) => {
   const [password, setPassword] = useState(initialPassword)
-  const [strength, setStrength] =
-    useState<PasswordStrength>('veryWeak')
+  const [strength, setStrength] = useState<PasswordStrength>('veryWeak')
   const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
@@ -95,8 +82,7 @@ const PasswordStrengthChecker: React.FC<
     []
   )
 
-  const togglePasswordVisibility = () =>
-    setShowPassword(!showPassword)
+  const togglePasswordVisibility = () => setShowPassword(!showPassword)
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
@@ -109,27 +95,20 @@ const PasswordStrengthChecker: React.FC<
   return (
     <form
       onSubmit={handleSubmit}
-      className={cn(
-        'w-full max-w-md space-y-3',
-        'rounded-lg',
-        className
-      )}
+      className={cn('w-full max-w-md space-y-3', 'rounded-lg', className)}
     >
-      <div className="relative">
+      <div className='relative'>
         <Input
           type={showPassword ? 'text' : 'password'}
           placeholder={placeholder}
           value={password}
           onChange={handlePasswordChange}
-          className={cn(
-            'pr-10',
-            styleConfig?.inputClassName
-          )}
+          className={cn('pr-10', styleConfig?.inputClassName)}
         />
         <Button
-          type="button"
-          variant="ghost"
-          size="icon"
+          type='button'
+          variant='ghost'
+          size='icon'
           className={cn(
             'absolute top-0 right-0 h-full px-3',
             'hover:bg-transparent',
@@ -138,9 +117,9 @@ const PasswordStrengthChecker: React.FC<
           onClick={togglePasswordVisibility}
         >
           {showPassword ? (
-            <EyeOff className="h-4 w-4 text-muted-foreground/70" />
+            <EyeOff className='h-4 w-4 text-muted-foreground/70' />
           ) : (
-            <Eye className="h-4 w-4 text-muted-foreground/70" />
+            <Eye className='h-4 w-4 text-muted-foreground/70' />
           )}
         </Button>
       </div>
@@ -153,7 +132,7 @@ const PasswordStrengthChecker: React.FC<
       )}
       {onSubmit && (
         <Button
-          type="submit"
+          type='submit'
           className={cn(
             'w-full',
             'h-10',
