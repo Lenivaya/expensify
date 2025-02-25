@@ -38,4 +38,6 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          exitZeroOnChanges: true
+          onlyChanged: true
           workingDir: ./expensify-frontend
