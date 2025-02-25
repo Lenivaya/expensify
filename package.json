@@ -1,5 +1,0 @@
-{
-	"devDependencies": {
-		"@storybook/testing-library": "^0.2.2"
-	}
-}
