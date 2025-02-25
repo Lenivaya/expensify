@@ -129,7 +129,9 @@ export const InflowCard: FC<InflowCardProps> = ({
   const dateStrings = useMemo(() => {
     const createdDate = new Date(inflow.createdAt)
     return {
-      relative: formatDistanceToNow(createdDate, { addSuffix: true }),
+      relative: formatDistanceToNow(createdDate, {
+        addSuffix: true
+      }),
       full: format(createdDate, 'PPP')
     }
   }, [inflow.createdAt])

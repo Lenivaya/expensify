@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin "tailwindcss-animate";
 
@@ -32,9 +32,9 @@
   --radius: 0.5rem;
 
   /* Money-themed chart colors - Optimized for financial data visualization */
-  --chart-1: 142 71% 45%;  /* Green for inflow */
-  --chart-2: 354 70% 54%;  /* Red for expense */
-  --chart-3: 45 93% 47%;   /* Gold for balance */
+  --chart-1: 142 71% 45%; /* Green for inflow */
+  --chart-2: 354 70% 54%; /* Red for expense */
+  --chart-3: 45 93% 47%; /* Gold for balance */
   --chart-4: 200 98% 40%;
   --chart-5: 262 83% 58%;
 }
@@ -61,9 +61,9 @@
   --ring: hsl(142, 71%, 45%);
 
   /* Chart colors for dark theme */
-  --chart-1: 142 71% 45%;  /* Green for inflow */
-  --chart-2: 354 70% 54%;  /* Red for expense */
-  --chart-3: 45 93% 47%;   /* Gold for balance */
+  --chart-1: 142 71% 45%; /* Green for inflow */
+  --chart-2: 354 70% 54%; /* Red for expense */
+  --chart-3: 45 93% 47%; /* Gold for balance */
   --chart-4: 200 98% 40%;
   --chart-5: 262 83% 58%;
 }
@@ -84,7 +84,9 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-foreground: var(
+    --destructive-foreground
+  );
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -111,18 +113,18 @@
 /* scrollbar */
 /* width */
 ::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-    background: var(--secondary);
+  background: var(--secondary);
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: var(--accent);
-    border-radius: var(--radius-sm);
+  background: var(--accent);
+  border-radius: var(--radius-sm);
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--muted-foreground);
+  background: var(--muted-foreground);
 }

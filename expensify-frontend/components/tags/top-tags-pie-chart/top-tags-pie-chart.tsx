@@ -164,7 +164,11 @@ export function TopTagsPieChart({
         (acc, stat) => {
           const key = stat.tag.toLowerCase()
           if (!acc[key]) {
-            acc[key] = { tag: stat.tag, type: stat.type, amount: stat.amount }
+            acc[key] = {
+              tag: stat.tag,
+              type: stat.type,
+              amount: stat.amount
+            }
           } else {
             acc[key].amount += stat.amount
           }

@@ -199,7 +199,9 @@ export function FinancialSummaryCard({
                       ? 'bg-amber-500'
                       : 'bg-emerald-500'
                 )}
-                style={{ width: `${Math.min(expenseRatio, 100)}%` }}
+                style={{
+                  width: `${Math.min(expenseRatio, 100)}%`
+                }}
               />
             </div>
           </div>

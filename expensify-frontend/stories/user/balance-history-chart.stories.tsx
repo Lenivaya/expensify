@@ -18,7 +18,12 @@ const meta = {
     },
     height: {
       description: 'Height of the chart container in pixels',
-      control: { type: 'number', min: 200, max: 800, step: 50 }
+      control: {
+        type: 'number',
+        min: 200,
+        max: 800,
+        step: 50
+      }
     },
     defaultTimeRange: {
       description: 'Initial time range to display',

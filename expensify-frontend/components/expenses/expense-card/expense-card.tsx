@@ -99,7 +99,9 @@ export function ExpenseCard({
   const dateStrings = useMemo(() => {
     const createdDate = new Date(expense.createdAt)
     return {
-      relative: formatDistanceToNow(createdDate, { addSuffix: true }),
+      relative: formatDistanceToNow(createdDate, {
+        addSuffix: true
+      }),
       full: format(createdDate, 'PPP')
     }
   }, [expense.createdAt])

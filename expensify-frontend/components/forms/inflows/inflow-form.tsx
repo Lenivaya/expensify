@@ -186,7 +186,10 @@ export function InflowForm({
   const handleKeyDown = useCallback(
     (
       event: React.KeyboardEvent<HTMLInputElement>,
-      field: { value: string[]; onChange: (value: string[]) => void }
+      field: {
+        value: string[]
+        onChange: (value: string[]) => void
+      }
     ) => {
       const input = event.currentTarget
       const value = input.value.trim().toLowerCase()
@@ -254,7 +257,10 @@ export function InflowForm({
   const removeTag = useCallback(
     (
       tagToRemove: string,
-      field: { value: string[]; onChange: (value: string[]) => void }
+      field: {
+        value: string[]
+        onChange: (value: string[]) => void
+      }
     ) => {
       const newTags = field.value.filter((tag) => tag !== tagToRemove)
       field.onChange(newTags)
@@ -271,7 +277,10 @@ export function InflowForm({
   const addSuggestedTag = useCallback(
     (
       tag: string,
-      field: { value: string[]; onChange: (value: string[]) => void }
+      field: {
+        value: string[]
+        onChange: (value: string[]) => void
+      }
     ) => {
       if (field.value.length >= MAX_TAGS) {
         form.setError('tags', {
