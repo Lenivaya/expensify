@@ -13,8 +13,7 @@ export class MonthlyStats {
 
   @Expose()
   @ApiProperty({
-    description:
-      'Count of times some thing appears per month'
+    description: 'Count of times some thing appears per month'
   })
   @IsNotEmpty()
   count: number

@@ -1,16 +1,5 @@
-import {
-  Injectable,
-  NotFoundException
-} from '@nestjs/common'
-import {
-  SQL,
-  and,
-  desc,
-  eq,
-  ilike,
-  or,
-  sql
-} from 'drizzle-orm'
+import { Injectable, NotFoundException } from '@nestjs/common'
+import { SQL, and, desc, eq, ilike, or, sql } from 'drizzle-orm'
 import { makePgArray } from 'drizzle-orm/pg-core'
 import { isSome } from 'lib/utils'
 import { DrizzleService } from 'src/database/drizzle.service'
@@ -21,11 +10,13 @@ import { UpdateInflowDto } from './dto/update-inflow.dto'
 import { InflowSearchDto } from './dto/inflow-search.dto'
 import { TagStatistics } from 'src/common/dto/tag-stats.dto'
 import { MonthlyStats } from 'src/common/dto/month-stats.dto'
+import { UsersService } from 'src/users/users.service'
 
 @Injectable()
 export class InflowsService {
   constructor(
-    private readonly drizzleService: DrizzleService
+    private readonly drizzleService: DrizzleService,
+    private readonly usersService: UsersService
   ) {}
 
   async create(
@@ -41,6 +32,9 @@ export class InflowsService {
         userId
       })
       .returning()
+
+    // Invalidate user stats cache after creating new inflow
+    await this.usersService.invalidateUserStatsCache(userId)
     return inflow
   }
 
@@ -53,21 +47,13 @@ export class InflowsService {
       limit?: number
     }
   ): Promise<InflowSearchDto> {
-    const {
-      search,
-      tags,
-      page = 1,
-      limit = 10
-    } = params || {}
+    const { search, tags, page = 1, limit = 10 } = params || {}
     const offset = (page - 1) * limit
 
     const conditions: SQL[] = [eq(inflows.userId, userId)]
 
     if (search) {
-      const searchTerms = search
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean)
+      const searchTerms = search.trim().split(/\s+/).filter(Boolean)
 
       if (searchTerms.length > 0) {
         const searchConditions = searchTerms
@@ -75,8 +61,8 @@ export class InflowsService {
             or(
               ilike(inflows.description, `%${term}%`),
               sql`EXISTS (
-              SELECT 1 
-              FROM unnest(${inflows.tags}) AS tag 
+              SELECT 1
+              FROM unnest(${inflows.tags}) AS tag
               WHERE tag ILIKE ${`%${term}%`}
             )`
             )
@@ -90,9 +76,10 @@ export class InflowsService {
     }
 
     if (tags && tags.length > 0) {
-      conditions.push(
-        sql`${inflows.tags} && ${makePgArray(tags)}`
+      const tagConditions = tags.map(
+        (tag) => sql`${tag} = ANY(${inflows.tags})`
       )
+      conditions.push(and(...tagConditions) as SQL)
     }
 
     const query = this.drizzleService.db
@@ -101,11 +88,7 @@ export class InflowsService {
       .orderBy(desc(inflows.createdAt))
       .limit(limit)
       .offset(offset)
-      .where(
-        conditions.length > 0
-          ? and(...conditions)
-          : undefined
-      )
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
 
     const [result, [{ count }]] = await Promise.all([
       query,
@@ -130,24 +113,16 @@ export class InflowsService {
     const [inflow] = await this.drizzleService.db
       .select()
       .from(inflows)
-      .where(
-        and(eq(inflows.id, id), eq(inflows.userId, userId))
-      )
+      .where(and(eq(inflows.id, id), eq(inflows.userId, userId)))
 
     if (!inflow) {
-      throw new NotFoundException(
-        `Inflow with ID ${id} not found`
-      )
+      throw new NotFoundException(`Inflow with ID ${id} not found`)
     }
 
     return inflow
   }
 
-  async update(
-    userId: string,
-    id: string,
-    updateInflowDto: UpdateInflowDto
-  ) {
+  async update(userId: string, id: string, updateInflowDto: UpdateInflowDto) {
     const [inflow] = await this.drizzleService.db
       .update(inflows)
       .set({
@@ -157,39 +132,33 @@ export class InflowsService {
         ...(updateInflowDto.description
           ? { description: updateInflowDto.description }
           : {}),
-        ...(updateInflowDto.tags
-          ? { tags: updateInflowDto.tags }
-          : {}),
+        ...(updateInflowDto.tags ? { tags: updateInflowDto.tags } : {}),
         updatedAt: new Date()
       })
-      .where(
-        and(eq(inflows.id, id), eq(inflows.userId, userId))
-      )
+      .where(and(eq(inflows.id, id), eq(inflows.userId, userId)))
       .returning()
 
     if (!inflow) {
-      throw new NotFoundException(
-        `Inflow with ID ${id} not found`
-      )
+      throw new NotFoundException(`Inflow with ID ${id} not found`)
     }
 
+    // Invalidate user stats cache after updating inflow
+    await this.usersService.invalidateUserStatsCache(userId)
     return inflow
   }
 
   async remove(userId: string, id: string) {
     const [inflow] = await this.drizzleService.db
       .delete(inflows)
-      .where(
-        and(eq(inflows.id, id), eq(inflows.userId, userId))
-      )
+      .where(and(eq(inflows.id, id), eq(inflows.userId, userId)))
       .returning()
 
     if (!inflow) {
-      throw new NotFoundException(
-        `Inflow with ID ${id} not found`
-      )
+      throw new NotFoundException(`Inflow with ID ${id} not found`)
     }
 
+    // Invalidate user stats cache after removing inflow
+    await this.usersService.invalidateUserStatsCache(userId)
     return inflow
   }
 
@@ -204,9 +173,7 @@ export class InflowsService {
     return result.total || 0
   }
 
-  async getTagStats(
-    userId: string
-  ): Promise<TagStatistics[]> {
+  async getTagStats(userId: string): Promise<TagStatistics[]> {
     const result = await this.drizzleService.db
       .select({
         tag: sql<string>`unnest(${inflows.tags})`,
@@ -221,10 +188,7 @@ export class InflowsService {
     return result
   }
 
-  async getMonthlyStats(
-    userId: string,
-    year: number
-  ): Promise<MonthlyStats[]> {
+  async getMonthlyStats(userId: string, year: number): Promise<MonthlyStats[]> {
     const result = await this.drizzleService.db
       .select({
         month: sql<number>`EXTRACT(MONTH FROM ${inflows.createdAt})`,
@@ -238,12 +202,8 @@ export class InflowsService {
           sql`EXTRACT(YEAR FROM ${inflows.createdAt}) = ${year}`
         )
       )
-      .groupBy(
-        sql`EXTRACT(MONTH FROM ${inflows.createdAt})`
-      )
-      .orderBy(
-        sql`EXTRACT(MONTH FROM ${inflows.createdAt})`
-      )
+      .groupBy(sql`EXTRACT(MONTH FROM ${inflows.createdAt})`)
+      .orderBy(sql`EXTRACT(MONTH FROM ${inflows.createdAt})`)
 
     return result
   }

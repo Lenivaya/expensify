@@ -1,37 +1,37 @@
 ###
 # @name register
-POST http://localhost:3000/api/auth/sign-up HTTP/1.1
+POST http://localhost:3000/auth/sign-up HTTP/1.1
 accept: application/json
 content-type: application/json
 
 {
-  "username": "johnydoe",
+  "username": "john.doe",
   "firstName": "John",
   "lastName": "Doe",
-  "email": "user@example.com",
-  "password": "z1Tlxb1tuXH7"
+  "email": "john.doe@example.com",
+  "password": "password123"
 }
 
 ###
 # @name login
-POST http://localhost:3000/api/auth/sign-in HTTP/1.1
+POST http://localhost:3000/auth/sign-in HTTP/1.1
 accept: application/json
 content-type: application/json
 
 {
-  "login": "user@example.com",
-  "password": "z1Tlxb1tuXH7"
+  "login": "john.doe@example.com",
+  "password": "password123"
 }
 
 ###
 # @name authorize
-GET http://localhost:3000/api/auth/me HTTP/1.1
+GET http://localhost:3000/auth/me HTTP/1.1
 accept: application/json
 Authorization: Bearer {{login.response.body.$.accessToken}}
 
 ###
 # @name update_user
-PATCH http://localhost:3000/api/users/{{authorize.response.body.$.id}} HTTP/1.1
+PATCH http://localhost:3000/users/{{authorize.response.body.$.id}} HTTP/1.1
 Authorization: Bearer {{login.response.body.$.accessToken}}
 accept: application/json
 content-type: application/json
@@ -42,6 +42,35 @@ content-type: application/json
 
 ###
 # @name delete_user
-DELETE http://localhost:3000/api/users/{{authorize.response.body.$.id}} HTTP/1.1
+DELETE http://localhost:3000/users/{{authorize.response.body.$.id}} HTTP/1.1
 Authorization: Bearer {{login.response.body.$.accessToken}}
 accept: application/json
+
+###
+# @name financial_summary
+GET http://localhost:3000/users/financial-summary HTTP/1.1
+accept: application/json
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+###
+# @name balance-history
+GET http://localhost:3000/users/balance-history HTTP/1.1
+accept: application/json
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+###
+# @name monthly-balance
+GET http://localhost:3000/users/monthly-balance/2020 HTTP/1.1
+accept: application/json
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+###
+# @name top-tags
+GET http://localhost:3000/users/top-tags HTTP/1.1
+accept: application/json
+Authorization: Bearer {{login.response.body.$.accessToken}}
+
+
+
+
+

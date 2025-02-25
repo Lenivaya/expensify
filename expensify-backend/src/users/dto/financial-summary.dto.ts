@@ -4,15 +4,27 @@ import { BalanceDto } from './balance.dto'
 export class FinancialStatisticsDto {
   @ApiProperty({
     description: 'Average amount of inflows',
-    example: '1000.00'
+    example: 1000.0
   })
-  averageInflow: string
+  averageInflow: number
 
   @ApiProperty({
     description: 'Average amount of expenses',
-    example: '800.00'
+    example: 800.0
   })
-  averageExpense: string
+  averageExpense: number
+
+  @ApiProperty({
+    description: 'Average monthly expenses',
+    example: 1000.0
+  })
+  averageMonthlyInflow: number
+
+  @ApiProperty({
+    description: 'Average monthly expenses',
+    example: 800.0
+  })
+  averageMonthlyExpense: number
 
   @ApiProperty({
     description: 'Total number of inflow transactions',

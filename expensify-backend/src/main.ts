@@ -4,10 +4,7 @@ import {
   FastifyAdapter,
   type NestFastifyApplication
 } from '@nestjs/platform-fastify'
-import {
-  DocumentBuilder,
-  SwaggerModule
-} from '@nestjs/swagger'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import { patchNestJsSwagger } from 'nestjs-zod'
 import { apiReference } from '@scalar/nestjs-api-reference'
@@ -15,11 +12,13 @@ import { writeFile } from 'fs/promises'
 import * as yaml from 'js-yaml'
 
 async function bootstrap() {
-  const app =
-    await NestFactory.create<NestFastifyApplication>(
-      AppModule,
-      new FastifyAdapter()
-    )
+  const app = await NestFactory.create<NestFastifyApplication>(
+    AppModule,
+    new FastifyAdapter(),
+    {
+      logger: ['error', 'warn', 'log', 'debug', 'verbose']
+    }
+  )
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -37,15 +36,8 @@ async function bootstrap() {
     .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('api/docs', app, document, {})
+  SwaggerModule.setup('docs', app, document, {})
   await Promise.all([
-    // writeFile(
-    //   './openapi-spec.json',
-    //   JSON.stringify(document),
-    //   {
-    //     encoding: 'utf8'
-    //   }
-    // ),
     writeFile('./openapi-spec.yaml', yaml.dump(document), {
       encoding: 'utf8'
     })
@@ -61,9 +53,10 @@ async function bootstrap() {
     })
   )
 
-  app.setGlobalPrefix('api')
+  app.enableCors()
   await app.listen(process.env.PORT ?? 3000)
 }
+
 bootstrap()
   .catch(console.error)
   .finally(() => console.log('Server started'))

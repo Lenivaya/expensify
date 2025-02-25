@@ -1,0 +1,20 @@
+services:
+  expensify-dev-database:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: expensify
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+
+networks:
+  default:
+    name: expensify-dev-network
+
+volumes:
+  expensify-dev-database:
+

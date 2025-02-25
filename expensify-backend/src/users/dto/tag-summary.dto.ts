@@ -11,7 +11,7 @@ export class TagSummaryItemDto {
     description: 'Total amount for this tag',
     example: '500.00'
   })
-  amount: string
+  amount: number
 
   @ApiProperty({
     description: 'Type of transaction',

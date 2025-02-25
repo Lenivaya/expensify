@@ -6,6 +6,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseArrayPipe,
   ParseUUIDPipe,
   Post,
   Put,
@@ -40,21 +41,17 @@ import { MonthlyStats } from 'src/common/dto/month-stats.dto'
 @ApiBearerAuth()
 @UseInterceptors(ClassSerializerInterceptor)
 export class ExpensesController {
-  constructor(
-    private readonly expensesService: ExpensesService
-  ) {}
+  constructor(private readonly expensesService: ExpensesService) {}
 
   @Post()
   @HttpCode(201)
   @ApiOperation({
     summary: 'Create expense',
-    description:
-      'Create a new expense for the authenticated user'
+    description: 'Create a new expense for the authenticated user'
   })
   @ApiResponse({
     status: 201,
-    description:
-      'The expense has been successfully created',
+    description: 'The expense has been successfully created',
     type: ExpenseDto
   })
   @ApiUnauthorizedResponse({
@@ -64,10 +61,7 @@ export class ExpensesController {
     @Req() request: RequestWithUser,
     @Body() createExpenseDto: CreateExpenseDto
   ) {
-    return await this.expensesService.create(
-      request.user.id,
-      createExpenseDto
-    )
+    return await this.expensesService.create(request.user.id, createExpenseDto)
   }
 
   @Get()
@@ -93,8 +87,7 @@ export class ExpensesController {
     type: [String]
   })
   @ApiOkResponse({
-    description:
-      'List of expenses with pagination metadata',
+    description: 'List of expenses with pagination metadata',
     type: ExpenseSearchDto
   })
   @ApiUnauthorizedResponse({
@@ -105,12 +98,18 @@ export class ExpensesController {
     @Query('page') page?: number,
     @Query('limit') limit?: number,
     @Query('search') search?: string,
-    @Query('tags') tags?: string[]
-  ) {
-    return await this.expensesService.findAll(
-      request.user.id,
-      { page, limit, search, tags }
+    @Query(
+      'tags',
+      new ParseArrayPipe({ items: String, separator: ',', optional: true })
     )
+    tags?: string[]
+  ) {
+    return await this.expensesService.findAll(request.user.id, {
+      page,
+      limit,
+      search,
+      tags
+    })
   }
 
   @Get(':id')
@@ -123,8 +122,7 @@ export class ExpensesController {
     type: ExpenseDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view this expense'
+    description: 'User is not authorized to view this expense'
   })
   @ApiNotFoundResponse({
     description: 'Expense not found'
@@ -133,10 +131,7 @@ export class ExpensesController {
     @Req() request: RequestWithUser,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    return await this.expensesService.findById(
-      request.user.id,
-      id
-    )
+    return await this.expensesService.findById(request.user.id, id)
   }
 
   @Put(':id')
@@ -145,13 +140,11 @@ export class ExpensesController {
     description: 'Update an existing expense by ID'
   })
   @ApiOkResponse({
-    description:
-      'The expense has been successfully updated',
+    description: 'The expense has been successfully updated',
     type: ExpenseDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to update this expense'
+    description: 'User is not authorized to update this expense'
   })
   @ApiNotFoundResponse({
     description: 'Expense not found'
@@ -174,13 +167,11 @@ export class ExpensesController {
     description: 'Delete an expense by ID'
   })
   @ApiOkResponse({
-    description:
-      'The expense has been successfully deleted',
+    description: 'The expense has been successfully deleted',
     type: ExpenseDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to delete this expense'
+    description: 'User is not authorized to delete this expense'
   })
   @ApiNotFoundResponse({
     description: 'Expense not found'
@@ -189,30 +180,23 @@ export class ExpensesController {
     @Req() request: RequestWithUser,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    return await this.expensesService.remove(
-      request.user.id,
-      id
-    )
+    return await this.expensesService.remove(request.user.id, id)
   }
 
   @Get('stats/total')
   @ApiOperation({
     summary: 'Get total spent',
-    description:
-      'Get the total amount spent across all expenses'
+    description: 'Get the total amount spent across all expenses'
   })
   @ApiOkResponse({
     description: 'Total amount spent',
     type: Number
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view total spent'
+    description: 'User is not authorized to view total spent'
   })
   async getTotalSpent(@Req() request: RequestWithUser) {
-    return await this.expensesService.getTotalSpent(
-      request.user.id
-    )
+    return await this.expensesService.getTotalSpent(request.user.id)
   }
 
   @Get('stats/tags')
@@ -226,36 +210,28 @@ export class ExpensesController {
     type: [TagStatistics]
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view tag statistics'
+    description: 'User is not authorized to view tag statistics'
   })
   async getTagStats(@Req() request: RequestWithUser) {
-    return await this.expensesService.getTagStats(
-      request.user.id
-    )
+    return await this.expensesService.getTagStats(request.user.id)
   }
 
   @Get('stats/monthly/:year')
   @ApiOperation({
     summary: 'Get monthly statistics',
-    description:
-      'Get monthly expense statistics for a specific year'
+    description: 'Get monthly expense statistics for a specific year'
   })
   @ApiOkResponse({
     description: 'Monthly statistics',
     type: [MonthlyStats]
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view monthly statistics'
+    description: 'User is not authorized to view monthly statistics'
   })
   async getMonthlyStats(
     @Req() request: RequestWithUser,
     @Param('year') year: number
   ) {
-    return await this.expensesService.getMonthlyStats(
-      request.user.id,
-      year
-    )
+    return await this.expensesService.getMonthlyStats(request.user.id, year)
   }
 }

@@ -28,12 +28,9 @@ import { CommonModule } from './common/common.module'
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         host: configService.getOrThrow('POSTGRES_HOST'),
-        port:
-          configService.getOrThrow('POSTGRES_PORT') ?? 3000,
+        port: configService.getOrThrow('POSTGRES_PORT') ?? 3000,
         user: configService.getOrThrow('POSTGRES_USER'),
-        password: configService.getOrThrow(
-          'POSTGRES_PASSWORD'
-        ),
+        password: configService.getOrThrow('POSTGRES_PASSWORD'),
         database: configService.getOrThrow('POSTGRES_DB')
       })
     }),

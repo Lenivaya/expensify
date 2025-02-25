@@ -6,6 +6,7 @@ import {
   Get,
   HttpCode,
   Param,
+  ParseArrayPipe,
   ParseUUIDPipe,
   Patch,
   Post,
@@ -40,16 +41,13 @@ import { MonthlyStats } from 'src/common/dto/month-stats.dto'
 @ApiBearerAuth()
 @UseInterceptors(ClassSerializerInterceptor)
 export class InflowsController {
-  constructor(
-    private readonly inflowsService: InflowsService
-  ) {}
+  constructor(private readonly inflowsService: InflowsService) {}
 
   @Post()
   @HttpCode(201)
   @ApiOperation({
     summary: 'Create inflow',
-    description:
-      'Create a new inflow for the authenticated user'
+    description: 'Create a new inflow for the authenticated user'
   })
   @ApiResponse({
     status: 201,
@@ -63,10 +61,7 @@ export class InflowsController {
     @Req() request: RequestWithUser,
     @Body() createInflowDto: CreateInflowDto
   ) {
-    return await this.inflowsService.create(
-      request.user.id,
-      createInflowDto
-    )
+    return await this.inflowsService.create(request.user.id, createInflowDto)
   }
 
   @Get()
@@ -103,12 +98,18 @@ export class InflowsController {
     @Query('page') page?: number,
     @Query('limit') limit?: number,
     @Query('search') search?: string,
-    @Query('tags') tags?: string[]
-  ) {
-    return await this.inflowsService.findAll(
-      request.user.id,
-      { page, limit, search, tags }
+    @Query(
+      'tags',
+      new ParseArrayPipe({ items: String, separator: ',', optional: true })
     )
+    tags?: string[]
+  ) {
+    return await this.inflowsService.findAll(request.user.id, {
+      page,
+      limit,
+      search,
+      tags
+    })
   }
 
   @Get(':id')
@@ -121,8 +122,7 @@ export class InflowsController {
     type: InflowDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view this inflow'
+    description: 'User is not authorized to view this inflow'
   })
   @ApiNotFoundResponse({
     description: 'Inflow not found'
@@ -131,10 +131,7 @@ export class InflowsController {
     @Req() request: RequestWithUser,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    return await this.inflowsService.findById(
-      request.user.id,
-      id
-    )
+    return await this.inflowsService.findById(request.user.id, id)
   }
 
   @Patch(':id')
@@ -147,8 +144,7 @@ export class InflowsController {
     type: InflowDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to update this inflow'
+    description: 'User is not authorized to update this inflow'
   })
   @ApiNotFoundResponse({
     description: 'Inflow not found'
@@ -175,8 +171,7 @@ export class InflowsController {
     type: InflowDto
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to delete this inflow'
+    description: 'User is not authorized to delete this inflow'
   })
   @ApiNotFoundResponse({
     description: 'Inflow not found'
@@ -185,30 +180,23 @@ export class InflowsController {
     @Req() request: RequestWithUser,
     @Param('id', ParseUUIDPipe) id: string
   ) {
-    return await this.inflowsService.remove(
-      request.user.id,
-      id
-    )
+    return await this.inflowsService.remove(request.user.id, id)
   }
 
   @Get('stats/total')
   @ApiOperation({
     summary: 'Get total inflow',
-    description:
-      'Get the total amount received across all inflows'
+    description: 'Get the total amount received across all inflows'
   })
   @ApiOkResponse({
     description: 'Total amount received',
     type: Number
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view total inflow'
+    description: 'User is not authorized to view total inflow'
   })
   async getTotalInflow(@Req() request: RequestWithUser) {
-    return await this.inflowsService.getTotalInflow(
-      request.user.id
-    )
+    return await this.inflowsService.getTotalInflow(request.user.id)
   }
 
   @Get('stats/tags')
@@ -222,36 +210,28 @@ export class InflowsController {
     type: TagStatistics
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view tag statistics'
+    description: 'User is not authorized to view tag statistics'
   })
   async getTagStats(@Req() request: RequestWithUser) {
-    return await this.inflowsService.getTagStats(
-      request.user.id
-    )
+    return await this.inflowsService.getTagStats(request.user.id)
   }
 
   @Get('stats/monthly/:year')
   @ApiOperation({
     summary: 'Get monthly statistics',
-    description:
-      'Get monthly inflow statistics for a specific year'
+    description: 'Get monthly inflow statistics for a specific year'
   })
   @ApiOkResponse({
     description: 'Monthly statistics',
     type: MonthlyStats
   })
   @ApiUnauthorizedResponse({
-    description:
-      'User is not authorized to view monthly statistics'
+    description: 'User is not authorized to view monthly statistics'
   })
   async getMonthlyStats(
     @Req() request: RequestWithUser,
     @Param('year') year: number
   ) {
-    return await this.inflowsService.getMonthlyStats(
-      request.user.id,
-      year
-    )
+    return await this.inflowsService.getMonthlyStats(request.user.id, year)
   }
 }
