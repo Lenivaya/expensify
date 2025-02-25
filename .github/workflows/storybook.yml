@@ -1,20 +1,41 @@
 name: "Chromatic Publish"
 
-on: push
+on:
+  push:
+    paths:
+      - "expensify-frontend/**"
+      - ".github/workflows/storybook.yml"
 
 jobs:
-  test:
+  publish-storybook:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./expensify-frontend
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10
+          run_install: false
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
-      - run: pnpm install
-      - uses: chromaui/action@latest
+          cache-dependency-path: "expensify-frontend/pnpm-lock.yaml"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: ./expensify-frontend
