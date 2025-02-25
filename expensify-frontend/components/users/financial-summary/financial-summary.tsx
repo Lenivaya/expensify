@@ -138,7 +138,7 @@ export function FinancialSummaryCard({
       : 0
 
   return (
-    <EnhancedCard className={cn('h-full', className)} hoverIntensity='high'>
+    <EnhancedCard className={cn('h-full', className)}>
       <EnhancedCardHeader className='items-center pb-0 space-y-1 pt-4'>
         <div className='flex items-center gap-2'>
           <CircleDollarSignIcon className='h-5 w-5 text-primary/70' />

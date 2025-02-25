@@ -48,7 +48,7 @@ function EnhancedCard({
     low: 'hover:shadow-md hover:border-emerald-500/20 hover:shadow-emerald-500/5',
     medium:
       'hover:shadow-md hover:border-emerald-500/40 hover:shadow-emerald-500/10 hover:border-[1.5px]',
-    high: 'hover:shadow-xl hover:border-emerald-500/70 hover:shadow-emerald-500/30 hover:border-2 hover:bg-emerald-50/10 hover:-translate-y-[1px]'
+    high: 'hover:shadow-xl hover:border-emerald-500/70 hover:shadow-emerald-500/30 hover:border-2 hover:-translate-y-[1px]'
   }
 
   return (

@@ -164,12 +164,12 @@ export class UsersService {
           })
           .from(expenses)
           .where(eq(expenses.userId, userId))
-        const balanceResult = {
+
+        return {
           totalInflows: Number(totalInflows ?? 0),
           totalExpenses: Number(totalExpenses ?? 0),
           balance: Number((totalInflows ?? 0) - (totalExpenses ?? 0))
         }
-        return balanceResult
       }
     )
   }
@@ -295,7 +295,10 @@ export class UsersService {
     return {
       currentBalance,
       statistics: {
-        ...statistics,
+        averageInflow: Number(statistics?.averageInflow ?? 0),
+        averageExpense: Number(statistics?.averageExpense ?? 0),
+        averageMonthlyInflow: Number(statistics?.averageMonthlyInflow ?? 0),
+        averageMonthlyExpense: Number(statistics?.averageMonthlyExpense ?? 0),
         totalInflowCount: Number(inflowCount?.totalInflowCount ?? 0),
         totalExpenseCount: Number(expenseCount?.totalExpenseCount ?? 0)
       }

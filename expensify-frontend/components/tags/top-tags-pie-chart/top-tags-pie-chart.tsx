@@ -63,7 +63,7 @@ const CustomLegendItem = ({
   percentage: number
 }) => {
   return (
-    <div className='flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 transition-colors w-full'>
+    <div className='flex items-center gap-3 p-2 rounded-md transition-colors w-full'>
       <div
         className='w-4 h-4 rounded-sm flex-shrink-0'
         style={{ backgroundColor: color }}
@@ -357,7 +357,6 @@ export function TopTagsPieChart({
   return (
     <EnhancedCard
       className={cn('h-full flex flex-col overflow-hidden', className)}
-      hoverIntensity='high'
     >
       <EnhancedCardHeader className='items-center pb-0 space-y-1 pt-4'>
         <div className='flex items-center gap-2'>
