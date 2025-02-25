@@ -87,10 +87,6 @@ jobs:
         working-directory: ./expensify-frontend
         run: pnpm install
 
-      - name: Run Biome Format
-        working-directory: ./expensify-frontend
-        run: pnpm code:biome:format
-
       - name: Run Prettier Format
         working-directory: ./expensify-frontend
         run: pnpm code:prettier:format
