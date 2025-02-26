@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - main
-    # Review gh actions docs if you want to further define triggers, paths, etc
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+    paths:
+      - "expensify-docs/**"
+      - "expensify-frontend/**"
+      - "expensify-backend/**"
+      - ".github/workflows/deploy-docasaurus.yml"
 
 jobs:
   build:
