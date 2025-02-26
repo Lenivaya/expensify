@@ -1,0 +1,71 @@
+---
+id: expenses-controller-create
+title: "Create expense"
+description: "Create a new expense for the authenticated user"
+sidebar_label: "Create expense"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVstu2zAQ/BWCl16UxE6bQ3xz07RwEaBB46AHIyhoaS0xkUiVjySq4H/vLvWw/GgatL0YIrXcnZ0djlzzBGxsZOmkVnzCLwwIB0wwBU8MnktQFthKG+Yy3PX4q5yMMSRh3oLhEdclGEGnZwmev2yO2AutnNF5DuZ7HFJiZCmMKMCBsXyyuIu4gR8erHuvk4pP6rCUBjCLMx4iHmMKrEavRFnmVBWrnNxbAlpzG2dQCHpyVQlYWi/vIXZUxxAmJ8GGs4X2TZY2TvliGZBvdz7HBgutwAlTseYQs9iMY1KF7m1lHRRvLEtgJXzuWOyNARVXmAqeRVHmmP30/Pj8POKFVLLwBZ+Mjkfj9U6pHol1Rqp0D8mUxTkIwwa7NIpcYFKVBiylN6XGyehVWLaDGgLhn4yOAVuxmS7LpgyiugKVuoxP3uJKPHer07MzBOlEGhjbRnMlrQt18G1QAk0/1Ub+JDBCJUybVKhm+RswC77SOsGdNICiydwFODNkFGuOIy6bp54bYYyoOKHaWq+jgU4W3XC3GWw7wQpOusBFo+pWmx+cxjxNJltqUivVPR2N95ufb/phmbBsCaCY9XEM1q58nlesUTf19p/0KpNDCkHiC4G5ufcYgNj3ZN2G/llsCnGLJfFC92ww9y2m9yfSFcATdPVnr8Ppy4T4mR6AOoimmCMnCziEr6X41SkCBTn8U9UdnUka8Eti6zkZdjyEPsQ0UOaeJt8dkuEt5mbSMqVdMGG6fejATrfy6zRqw3QsoDNJh6a6qPkSnQTdDg13fdeNetHbdLiGgAnJu9FRghwFWQI/6XNSRvPY23aX/oYE3Wi2K9KqnBprt6L24WPH+edvc95f6sy5MkCmS/J18zm47IxjY9+tsW7zcsDjug73DQfLSLXSQRFb7MtVtefB/Rs2vZ7hW2q/eTM+HrWXXcQkL4JPzBUi3DYlio3jDLxw51L2ZvEXX9yWPAfP7iR8FcI9MznlbYa34DAYcEZzxb26XgoLtyZfr2kb2TZVM9JHYWQj/gXRlIFIgmZq/gAVYWzQHs2pMoXnPjjFrs2to+7EFC2ydC/GDqV3/eWGZLFs/woUOqEzRjzhJv1OePinQaeD4MJezXOhUi9Sim1y0jCIs8G13xFi6KpzOlUNECI9IWKuH0AhRVHbiqM1wsXkvwBXIyxu
+sidebar_class_name: "post api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create expense"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/expenses"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a new expense for the authenticated user
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"amount":{"type":"number","description":"The monetary amount spent in the system's default currency","example":29.99,"minimum":0.01},"description":{"type":"string","description":"A clear description explaining the purpose of the expense","example":"Grocery shopping","minLength":3,"maxLength":255},"tags":{"description":"List of tags for categorizing and organizing the expense","example":["food","groceries"],"minItems":1,"items":{"type":"array"},"type":"array"}},"required":["amount","description","tags"],"title":"CreateExpenseDto"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"The expense has been successfully created","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"ExpenseDto"}}}},"401":{"description":"User is not authorized to create expenses"}}}
+>
+  
+</StatusCodes>
+
+
+      

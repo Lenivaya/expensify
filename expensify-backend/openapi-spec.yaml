@@ -1,0 +1,1248 @@
+openapi: 3.0.0
+paths:
+  /auth/sign-in:
+    post:
+      description: >-
+        This endpoint allows a user to sign in by providing valid credentials.
+        On successful authentication, a token is generated and returned.
+      operationId: AuthController_signIn
+      parameters: []
+      requestBody:
+        required: true
+        description: User sign-in credentials
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInDto'
+      responses:
+        '200':
+          description: User successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInResponseDto'
+      summary: Sign in a user
+      tags: &ref_0
+        - Auth
+  /auth/sign-up:
+    post:
+      description: >-
+        This endpoint allows a new user to sign up by providing necessary
+        registration details. On successful registration, user details are
+        returned.
+      operationId: AuthController_signUp
+      parameters: []
+      requestBody:
+        required: true
+        description: User sign-up details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpDto'
+      responses:
+        '201':
+          description: User successfully registered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponseDto'
+      summary: Sign up a new user
+      tags: *ref_0
+  /auth/me:
+    get:
+      description: This endpoint returns the current authenticated user.
+      operationId: AuthController_getMe
+      parameters: []
+      responses:
+        '200':
+          description: Current user details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+      security:
+        - bearer: []
+      summary: Get current user
+      tags: *ref_0
+  /users/{id}:
+    patch:
+      description: >-
+        This endpoint allows the user to update their details. Note that this
+        requires authentication of user you are updating.
+      operationId: UsersController_updateUser
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        description: User update dto
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateDto'
+      responses:
+        '200':
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDto'
+        '401':
+          description: User is not authorized to update this profile
+        '404':
+          description: User not found
+      security:
+        - bearer: []
+      summary: Updates user
+      tags: &ref_1
+        - Users
+    delete:
+      description: Deletes a user account. This operation cannot be undone.
+      operationId: UsersController_deleteUser
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '204':
+          description: User successfully deleted
+        '401':
+          description: User is not authorized to delete this account
+        '404':
+          description: User not found
+      security:
+        - bearer: []
+      summary: Deletes user
+      tags: *ref_1
+  /users/{id}/balance:
+    get:
+      description: Get user's current balance including total inflows and expenses
+      operationId: UsersController_getCurrentBalance
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User's current balance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceDto'
+        '401':
+          description: User is not authorized to view this balance
+        '404':
+          description: User not found
+      security:
+        - bearer: []
+      summary: Get current balance
+      tags: *ref_1
+  /users/monthly-balance/{year}:
+    get:
+      description: Get user's monthly balance breakdown for a specific year
+      operationId: UsersController_getMonthlyBalance
+      parameters:
+        - name: year
+          required: true
+          in: path
+          description: Year for which to get statistics
+          schema:
+            example: 2024
+            type: number
+      responses:
+        '200':
+          description: Monthly balance breakdown
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyBalanceDto'
+        '401':
+          description: User is not authorized to view these statistics
+        '404':
+          description: User not found
+      security:
+        - bearer: []
+      summary: Get monthly balance
+      tags: *ref_1
+  /users/financial-summary:
+    get:
+      description: Get comprehensive financial summary including balance and statistics
+      operationId: UsersController_getFinancialSummary
+      parameters: []
+      responses:
+        '200':
+          description: Financial summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinancialSummaryDto'
+        '401':
+          description: User is not authorized to view this financial summary
+        '404':
+          description: User not found
+      security:
+        - bearer: []
+      summary: Get financial summary
+      tags: *ref_1
+  /users/top-tags:
+    get:
+      description: Get summary of top tags for both inflows and expenses
+      operationId: UsersController_getTopTags
+      parameters: []
+      responses:
+        '200':
+          description: Tag summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagSummaryDto'
+        '401':
+          description: User is not authorized to view these tag statistics
+        '404':
+          description: User not found
+      security:
+        - bearer: []
+      summary: Get top tags
+      tags: *ref_1
+  /users/balance-history:
+    get:
+      description: >-
+        Get complete history of monthly balances with cumulative totals for
+        plotting trends
+      operationId: UsersController_getBalanceHistory
+      parameters: []
+      responses:
+        '200':
+          description: Balance history with cumulative totals
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BalanceHistoryItemDto'
+        '401':
+          description: User is not authorized to view this balance history
+        '404':
+          description: User not found
+      security:
+        - bearer: []
+      summary: Get balance history
+      tags: *ref_1
+  /expenses:
+    post:
+      description: Create a new expense for the authenticated user
+      operationId: ExpensesController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExpenseDto'
+      responses:
+        '201':
+          description: The expense has been successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDto'
+        '401':
+          description: User is not authorized to create expenses
+      security: &ref_2
+        - bearer: []
+      summary: Create expense
+      tags: &ref_3
+        - Expenses
+    get:
+      description: >-
+        Retrieve all expenses for the authenticated user with pagination and
+        filtering options
+      operationId: ExpensesController_findAll
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: tags
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: List of expenses with pagination metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseSearchDto'
+        '401':
+          description: User is not authorized to view expenses
+      security: *ref_2
+      summary: Get all expenses
+      tags: *ref_3
+  /expenses/{id}:
+    get:
+      description: Retrieve a specific expense by its ID
+      operationId: ExpensesController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The expense details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDto'
+        '401':
+          description: User is not authorized to view this expense
+        '404':
+          description: Expense not found
+      security: *ref_2
+      summary: Get expense by ID
+      tags: *ref_3
+    put:
+      description: Update an existing expense by ID
+      operationId: ExpensesController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateExpenseDto'
+      responses:
+        '200':
+          description: The expense has been successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDto'
+        '401':
+          description: User is not authorized to update this expense
+        '404':
+          description: Expense not found
+      security: *ref_2
+      summary: Update expense
+      tags: *ref_3
+    delete:
+      description: Delete an expense by ID
+      operationId: ExpensesController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The expense has been successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseDto'
+        '401':
+          description: User is not authorized to delete this expense
+        '404':
+          description: Expense not found
+      security: *ref_2
+      summary: Delete expense
+      tags: *ref_3
+  /expenses/stats/total:
+    get:
+      description: Get the total amount spent across all expenses
+      operationId: ExpensesController_getTotalSpent
+      parameters: []
+      responses:
+        '200':
+          description: Total amount spent
+          content:
+            application/json:
+              schema:
+                type: number
+        '401':
+          description: User is not authorized to view total spent
+      security: *ref_2
+      summary: Get total spent
+      tags: *ref_3
+  /expenses/stats/tags:
+    get:
+      description: Get statistics about expense tags including count and total amount
+      operationId: ExpensesController_getTagStats
+      parameters: []
+      responses:
+        '200':
+          description: Tag statistics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TagStatistics'
+        '401':
+          description: User is not authorized to view tag statistics
+      security: *ref_2
+      summary: Get tag statistics
+      tags: *ref_3
+  /expenses/stats/monthly/{year}:
+    get:
+      description: Get monthly expense statistics for a specific year
+      operationId: ExpensesController_getMonthlyStats
+      parameters:
+        - name: year
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Monthly statistics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MonthlyStats'
+        '401':
+          description: User is not authorized to view monthly statistics
+      security: *ref_2
+      summary: Get monthly statistics
+      tags: *ref_3
+  /inflows:
+    post:
+      description: Create a new inflow for the authenticated user
+      operationId: InflowsController_create
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInflowDto'
+      responses:
+        '201':
+          description: The inflow has been successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InflowDto'
+        '401':
+          description: User is not authorized to create inflows
+      security: &ref_4
+        - bearer: []
+      summary: Create inflow
+      tags: &ref_5
+        - Inflows
+    get:
+      description: >-
+        Retrieve all inflows for the authenticated user with pagination and
+        filtering options
+      operationId: InflowsController_findAll
+      parameters:
+        - name: page
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: limit
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: tags
+          required: false
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: List of inflows with pagination metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InflowSearchDto'
+        '401':
+          description: User is not authorized to view inflows
+      security: *ref_4
+      summary: Get all inflows
+      tags: *ref_5
+  /inflows/{id}:
+    get:
+      description: Retrieve a specific inflow by its ID
+      operationId: InflowsController_findOne
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The inflow details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InflowDto'
+        '401':
+          description: User is not authorized to view this inflow
+        '404':
+          description: Inflow not found
+      security: *ref_4
+      summary: Get inflow by ID
+      tags: *ref_5
+    patch:
+      description: Partially update an existing inflow by ID
+      operationId: InflowsController_update
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInflowDto'
+      responses:
+        '200':
+          description: The inflow has been successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InflowDto'
+        '401':
+          description: User is not authorized to update this inflow
+        '404':
+          description: Inflow not found
+      security: *ref_4
+      summary: Update inflow
+      tags: *ref_5
+    delete:
+      description: Delete an inflow by ID
+      operationId: InflowsController_remove
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The inflow has been successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InflowDto'
+        '401':
+          description: User is not authorized to delete this inflow
+        '404':
+          description: Inflow not found
+      security: *ref_4
+      summary: Delete inflow
+      tags: *ref_5
+  /inflows/stats/total:
+    get:
+      description: Get the total amount received across all inflows
+      operationId: InflowsController_getTotalInflow
+      parameters: []
+      responses:
+        '200':
+          description: Total amount received
+          content:
+            application/json:
+              schema:
+                type: number
+        '401':
+          description: User is not authorized to view total inflow
+      security: *ref_4
+      summary: Get total inflow
+      tags: *ref_5
+  /inflows/stats/tags:
+    get:
+      description: Get statistics about inflow tags including count and total amount
+      operationId: InflowsController_getTagStats
+      parameters: []
+      responses:
+        '200':
+          description: Tag statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagStatistics'
+        '401':
+          description: User is not authorized to view tag statistics
+      security: *ref_4
+      summary: Get tag statistics
+      tags: *ref_5
+  /inflows/stats/monthly/{year}:
+    get:
+      description: Get monthly inflow statistics for a specific year
+      operationId: InflowsController_getMonthlyStats
+      parameters:
+        - name: year
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Monthly statistics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonthlyStats'
+        '401':
+          description: User is not authorized to view monthly statistics
+      security: *ref_4
+      summary: Get monthly statistics
+      tags: *ref_5
+info:
+  title: Expensify
+  description: Expensify API
+  version: '1.0'
+  contact: {}
+tags:
+  - name: expensify
+    description: ''
+servers:
+  - url: '{server}'
+    description: Server URL
+    variables:
+      server:
+        default: http://localhost:3000
+        description: Server identifier
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    SignInDto:
+      type: object
+      properties:
+        login:
+          type: string
+          description: Login identifier (email or username)
+          example: user@example.com
+          minLength: 3
+        password:
+          type: string
+          description: User password for authentication
+          example: z1Tlxb1tuXH7
+          minLength: 8
+      required:
+        - login
+        - password
+    SignInResponseDto:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          description: JWT access token for authentication
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        refreshToken:
+          type: string
+          description: The refresh token for the user
+          example: dGhpcyBpcyBhIHJlZnJlc2ggdG9rZW4gZXhhbXBsZQ==
+      required:
+        - accessToken
+        - refreshToken
+    SignUpDto:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Unique username for identification
+          example: johndoe
+          minLength: 3
+        firstName:
+          type: string
+          description: User's first name (optional)
+          example: John
+        lastName:
+          type: string
+          description: User's last name (optional)
+          example: Doe
+        email:
+          type: string
+          description: Valid and unique email address
+          example: user@example.com
+          format: email
+        password:
+          type: string
+          description: User password (min 8 characters)
+          example: z1Tlxb1tuXH7
+          minLength: 8
+      required:
+        - username
+        - firstName
+        - lastName
+        - email
+        - password
+    SignUpResponseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (UUID) of the newly registered user
+          example: 550e8400-e29b-41d4-a716-446655440000
+        email:
+          type: string
+          description: Email of the user
+      required:
+        - id
+        - email
+    UserDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        email:
+          type: string
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - username
+        - firstName
+        - lastName
+        - email
+        - updatedAt
+        - createdAt
+        - deletedAt
+    UserUpdateDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        email:
+          type: string
+    BalanceDto:
+      type: object
+      properties:
+        totalInflows:
+          type: number
+          description: Total amount of all inflows
+          example: 5000
+          minimum: 0
+        totalExpenses:
+          type: number
+          description: Total amount of all expenses
+          example: 3000
+          minimum: 0
+        balance:
+          type: number
+          description: Current balance (totalInflows - totalExpenses)
+          example: 2000
+      required:
+        - totalInflows
+        - totalExpenses
+        - balance
+    MonthlyBalanceDto:
+      type: object
+      properties:
+        month:
+          type: number
+          description: Month number (1-12)
+          example: 1
+        inflow:
+          type: string
+          description: Total inflows for the month
+          example: '1000.00'
+        expense:
+          type: string
+          description: Total expenses for the month
+          example: '800.00'
+        balance:
+          type: string
+          description: Balance for the month
+          example: '200.00'
+      required:
+        - month
+        - inflow
+        - expense
+        - balance
+    FinancialStatisticsDto:
+      type: object
+      properties:
+        averageInflow:
+          type: number
+          description: Average amount per inflow transaction
+          example: 1000
+          minimum: 0
+        averageExpense:
+          type: number
+          description: Average amount per expense transaction
+          example: 800
+          minimum: 0
+        averageMonthlyInflow:
+          type: number
+          description: Average total inflows per month
+          example: 1000
+          minimum: 0
+        averageMonthlyExpense:
+          type: number
+          description: Average total expenses per month
+          example: 800
+          minimum: 0
+        totalInflowCount:
+          type: number
+          description: Total number of inflow transactions
+          example: 25
+          minimum: 0
+        totalExpenseCount:
+          type: number
+          description: Total number of expense transactions
+          example: 50
+          minimum: 0
+      required:
+        - averageInflow
+        - averageExpense
+        - averageMonthlyInflow
+        - averageMonthlyExpense
+        - totalInflowCount
+        - totalExpenseCount
+    FinancialSummaryDto:
+      type: object
+      properties:
+        currentBalance:
+          description: Current balance information
+          allOf:
+            - $ref: '#/components/schemas/BalanceDto'
+        statistics:
+          description: Statistical analysis of financial transactions
+          allOf:
+            - $ref: '#/components/schemas/FinancialStatisticsDto'
+      required:
+        - currentBalance
+        - statistics
+    TagSummaryItemDto:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: Tag name
+          example: groceries
+        amount:
+          type: number
+          description: Total amount for this tag
+          example: '500.00'
+        type:
+          type: string
+          description: Type of transaction
+          example: expense
+          enum:
+            - inflow
+            - expense
+      required:
+        - tag
+        - amount
+        - type
+    TagSummaryDto:
+      type: object
+      properties:
+        inflowTags:
+          description: Top inflow tags with amounts
+          type: array
+          items:
+            $ref: '#/components/schemas/TagSummaryItemDto'
+        expenseTags:
+          description: Top expense tags with amounts
+          type: array
+          items:
+            $ref: '#/components/schemas/TagSummaryItemDto'
+      required:
+        - inflowTags
+        - expenseTags
+    BalanceHistoryItemDto:
+      type: object
+      properties:
+        year:
+          type: number
+          description: Year of the balance record
+          example: 2024
+          minimum: 1900
+          maximum: 9999
+        month:
+          type: number
+          description: Month of the balance record (1-12)
+          example: 3
+          minimum: 1
+          maximum: 12
+        inflow:
+          type: string
+          description: Total inflows for the period
+          example: '1500.00'
+        expense:
+          type: string
+          description: Total expenses for the period
+          example: '1200.00'
+        balance:
+          type: string
+          description: Net balance for the period (inflows - expenses)
+          example: '300.00'
+        cumulativeBalance:
+          type: string
+          description: Cumulative balance up to this period
+          example: '2500.00'
+      required:
+        - year
+        - month
+        - inflow
+        - expense
+        - balance
+        - cumulativeBalance
+    CreateExpenseDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: The monetary amount spent in the system's default currency
+          example: 29.99
+          minimum: 0.01
+        description:
+          type: string
+          description: A clear description explaining the purpose of the expense
+          example: Grocery shopping
+          minLength: 3
+          maxLength: 255
+        tags:
+          description: List of tags for categorizing and organizing the expense
+          example:
+            - food
+            - groceries
+          minItems: 1
+          items:
+            type: array
+          type: array
+      required:
+        - amount
+        - description
+        - tags
+    ExpenseDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        amount:
+          type: string
+        description:
+          type: string
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+        userId:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - amount
+        - description
+        - tags
+        - userId
+        - updatedAt
+        - createdAt
+        - deletedAt
+    MetaSearchInfo:
+      type: object
+      properties:
+        page:
+          type: number
+          description: Current page number (1-indexed)
+          example: 1
+          minimum: 1
+        limit:
+          type: number
+          description: Number of items per page
+          example: 10
+          minimum: 1
+        total:
+          type: number
+          description: Total number of items matching the search criteria
+          example: 45
+          minimum: 0
+          default: 10
+        pageCount:
+          type: number
+          description: Total number of pages available
+          example: 5
+          minimum: 1
+          default: 1
+      required:
+        - page
+        - limit
+        - total
+        - pageCount
+    ExpenseSearchDto:
+      type: object
+      properties:
+        data:
+          description: Array of expense records matching the search criteria
+          example: '['
+          items:
+            type: array
+          type: array
+        meta:
+          description: Metadata about the search results including pagination information
+          example: '{'
+          allOf:
+            - $ref: '#/components/schemas/MetaSearchInfo'
+      required:
+        - data
+        - meta
+    UpdateExpenseDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: The new monetary amount spent in the system's default currency
+          example: 35.5
+          minimum: 0.01
+        description:
+          type: string
+          description: Updated description explaining the purpose of the expense
+          example: Updated grocery list with extra items
+          minLength: 3
+          maxLength: 255
+        tags:
+          description: Updated list of tags for categorizing and organizing the expense
+          example:
+            - food
+            - groceries
+            - household
+          minItems: 1
+          items:
+            type: array
+          type: array
+    TagStatistics:
+      type: object
+      properties:
+        tag:
+          type: string
+          description: Tag name used for categorization
+          example: groceries
+          minLength: 1
+        count:
+          type: number
+          description: Number of transactions with this tag
+          example: 12
+          minimum: 0
+        total:
+          type: number
+          description: Total monetary value for transactions with this tag
+          example: 450.75
+          minimum: 0
+      required:
+        - tag
+        - count
+        - total
+    MonthlyStats:
+      type: object
+      properties:
+        month:
+          type: number
+          description: Month number (1-12)
+          example: 2
+          minimum: 1
+          maximum: 12
+        count:
+          type: number
+          description: Number of records in this month
+          example: 15
+          minimum: 0
+        total:
+          type: number
+          description: Total monetary value for the month
+          example: 2500.5
+          minimum: 0
+      required:
+        - month
+        - count
+        - total
+    CreateInflowDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: The monetary amount of the inflow in the system's default currency
+          example: 2500
+          minimum: 0.01
+        description:
+          type: string
+          description: A clear description explaining the source or purpose of the inflow
+          example: Monthly salary
+          minLength: 3
+          maxLength: 255
+        tags:
+          description: List of tags for categorizing and organizing the inflow
+          example:
+            - salary
+            - work
+          minItems: 1
+          items:
+            type: array
+          type: array
+      required:
+        - amount
+        - description
+        - tags
+    InflowDto:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        amount:
+          type: string
+        description:
+          type: string
+          nullable: true
+        tags:
+          type: array
+          items:
+            type: string
+        userId:
+          type: string
+          format: uuid
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+      required:
+        - id
+        - amount
+        - description
+        - tags
+        - userId
+        - updatedAt
+        - createdAt
+        - deletedAt
+    InflowSearchDto:
+      type: object
+      properties:
+        data:
+          description: Array of inflow records matching the search criteria
+          example: '['
+          items:
+            type: array
+          type: array
+        meta:
+          description: Metadata about the search results including pagination information
+          example: '{'
+          allOf:
+            - $ref: '#/components/schemas/MetaSearchInfo'
+      required:
+        - data
+        - meta
+    UpdateInflowDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: >-
+            The new monetary amount for the inflow in the system's default
+            currency
+          example: 2500
+          minimum: 0.01
+        description:
+          type: string
+          description: Updated description explaining the source or purpose of the inflow
+          example: Monthly salary with performance bonus
+          minLength: 3
+          maxLength: 255
+        tags:
+          description: Updated list of tags for categorizing and organizing the inflow
+          example:
+            - salary
+            - bonus
+            - performance
+          minItems: 1
+          items:
+            type: array
+          type: array

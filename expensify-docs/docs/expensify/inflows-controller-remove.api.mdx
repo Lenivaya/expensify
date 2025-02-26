@@ -1,0 +1,71 @@
+---
+id: inflows-controller-remove
+title: "Delete inflow"
+description: "Delete an inflow by ID"
+sidebar_label: "Delete inflow"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVE2P0zAQ/SuWTyAV2kV76m1Fi1TEAUFXHKoKucl0493E9vqjbIjy35mx3ZJuugg41emMZ948vzcdL8EVVhovteJzvoAaPDChmFT7Wv9gu5atFnzCtQErKGlVYtoqBt17rbzVdQ32u4VGHwATjbCiwRrW8fmm4wo/8IIsMWThMUgLWMDbABMuqaMRvsKYKypoBJ933LeGbjhvpbrjfb+li85o5cBR/N1sRj/nuNcVHBFXwrEdgGIuFAU4tw913bIyDkYoCgQNylMNYUwtizjW9N5RoW4MRO/uofA0mSUSvEwwcKIR2Anfa9sIrM1DwIR+wkWjQ2r2bK7J+QTjUgpxi10NiS3M9+LODRKFtaLFPOmhcZeIm/DgwK7+DmcwpUB+bi5AHWRTzhsvG7iEr7DwTyUiBfFV/r9rP1TVJsksU35OcKbvxMlw4iH0ISZUnpeeemXBL7xGXqnp9exqLMJbLM2kY0p7JoKvtJU/oWReZ/UxX2E0yZTHItfjIqlTrLHHOcr4kA6KYKVvo6V2ICxYPG7JG0kVm6MlCTTar9Jk09Q2mhJNNufT1NtNO1n2ZDqwh2TU7e8eX8kASePHTtkVRET+a5IPH45v9PHbmjhOT1h5byJu7Kfj02Yal08GlJP79tnrDCLs5vMKo4QrRa7ezrJrRUE6obpGO9+IaJu8YPLiyuSOzHUy/csbLmP38OSnpha4nMgWtqbrib8Nz/xh9hylhqRVCIQCXbcTDm5t3ff092MA2yZaD8LKJFh8ulI6OuPb7EXt4A8wX33Jsn7NXsJ23AOK2DyIOtAXHh+gTRu332JWBaKMauly4Aa3ovGDK6Mt2A81tFh+Wq6XZKtAHJxs+kwIscFFREhNzFjrB1B9fwLo6Zsw9v0vq+I4Zw==
+sidebar_class_name: "delete api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete inflow"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/inflows/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete an inflow by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The inflow has been successfully deleted","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"InflowDto"}}}},"401":{"description":"User is not authorized to delete this inflow"},"404":{"description":"Inflow not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

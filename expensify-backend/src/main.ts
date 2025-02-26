@@ -34,6 +34,12 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('expensify')
     .addBearerAuth()
+    .addServer('{server}', 'Server URL', {
+      server: {
+        default: 'http://localhost:3000',
+        description: 'Server identifier'
+      }
+    })
     .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('docs', app, document, {})

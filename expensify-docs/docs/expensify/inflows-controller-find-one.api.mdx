@@ -1,0 +1,71 @@
+---
+id: inflows-controller-find-one
+title: "Get inflow by ID"
+description: "Retrieve a specific inflow by its ID"
+sidebar_label: "Get inflow by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVE1v2zAM/SuCThvgLenQU27F2hXZZUPXYocgGBSbrtXKlirRaT3D/32k5HRukg0ddoocfj0+PrKXBYTca4faNnIhrwC9hi0IJYKDXJc6F7opjX0Um05oDGJ5LjNpHXjFIcuCgpbRIXy0DXprDPgfpW6KLw2Qp1Ne1YDgg1ysetnQB0XogkweHlrtgTKgbyGTmgE4hRXZQl5BreSil9g5jgiEq7mVw7DmwOBsEyCw/cN8zj8v27iuYAe7AFTaBMqZEz5okL2Vc0bnsYPZXeCQ/rCk3dxBjtyD535Rp4KE/QBWJkvra0W5ZduSw5BJVds2FdvrIHuJ9TBV0xqjNgYSL+SP6jZMHJX3qiM/jVCHYxRlsg3gl6/D2bpCIRRnR6BOvNnnHeoajuHLPfxTikiBgf+qOkz1s0qCGil/SfBI3zMn046n0KeYSGOokWuN2j5HS7xy0dP5yaHcbii10EE0FoVqsbJe/4RCoBVbDY8CK7IlOcqY4vQwRaoTM5TURRHHGCBvvcYurs4GlAdPzzXvQNLEard7DJnWrLK8j7cQVcubtJCzVDjMel0MvFngt2kb178LfGPtJ3nvyowLwRyMf2Xj49NuPJ+/XzO9aXoVoougqZ6NUx0ZvHhy0ARddnuDmVjE2dclWRlXspy8n48Lq3KWCOd1NmCt4saMV+QScHKc4mHaW63nlX/tYRubQXjCmTOKThKviDecLBG6kiOh5L0g2RGLFSFjQ99vVIAbb4aB/35owXeJ563yOomXBlnowG+aVKlMgL+AfnM1Svyt+BO23U1omN6tMi1/0fMeunRnhzV5VaCKqJ1+NJzlOTichBxcxGGqqMsLnjRLe7Kve7KI2Y/CIV6ix7W9h2YYntEhfzPAYfgF+wI4vQ==
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get inflow by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/inflows/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieve a specific inflow by its ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The inflow details","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"InflowDto"}}}},"401":{"description":"User is not authorized to view this inflow"},"404":{"description":"Inflow not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

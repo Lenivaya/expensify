@@ -1,0 +1,71 @@
+---
+id: users-controller-get-balance-history
+title: "Get balance history"
+description: "Get complete history of monthly balances with cumulative totals for plotting trends"
+sidebar_label: "Get balance history"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1VU1P20AQ/SurPbVSIE6gB3IDSimVWlUqqKpQVW2cCV6wd83uOOBa/u+dWX/EhrRwaS7Jrsfvvfl6qeQKfOx0jtoauZDngCK2WZ4Cgki0R+tKYdciswaTtBRLlSoTgxcPGhMRF1mRKtQbEGhRpV6srRN5ahG1uRHowKy8nEibg1PMcLEijisPzp8SoLNpCu7XDeBJA/uxIaQ3cuVURhqcl4vrnxPpwOfWeKBjJedRxF9j5S1EL3q3QIKOiRkMMoLK81THQdn01jNMJX2cQKb4F5Y5ELByTrEkjZD5wb1d3kKMrNVxfqgbcSUoN4gyRbYER1FjtT8oiuuKCXQ1FQ5i61YUCo+KOyAX82h+OJGZNjorMrmYHUURHdVjczyiT01nbs3LjJ85bDeleDPbm83fDpkPhrQDztmcGLVZp/ZhQOnRUb+fUV5yyUUT3YwGc1OttB2lKWfvomifmlrzZQ7U59eCt+H/Rp/36G3eL6N/oT3oijSGFm+6hPZ69lHp5EFPtx2/k9cSn24ntuMvchpeUqD9ruzmXe1q3pL7QjugJbtu5rCbjr5n2wJvi7FLJ60cagwE4928oC14j5boamY8jGbPV5EXXJBaY1GoAhPr9G9YcRIbDQ9NJsvxusqAdfgXLAZa28KsQpYe4sJpLCnLSi4pTZp2MomaNasbNozGYjgJ8pDEsumQyQRb4VWR04KfT1sNe0lvO3S96T2n4/nGjtAsd8fW2gSXp72atD8+WJcpMhf56fslXbbNThDzoJ3aYMMQtMU9C93Q6/LZIPRPxPHXC3rKupons/2otTEVs40xbm49ZioYmFFB1/lggrcJjjiqrRf+J+Nv00d4xGmeKm24z4VLmbvpxbUMvdiOY98N6kBCWXFIVS2VhyuX1jVf3xfgyqZHG+W0WnIpaQDoBVCrMA2VvAMKkcdxDDl3fqPSIrj5U8uvh1NyfsZN45kdbOqTDgf07r/BlANskhkiLu0dGJI6aUUgn4mINuYPrxmOyw==
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get balance history"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/balance-history"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get complete history of monthly balances with cumulative totals for plotting trends
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Balance history with cumulative totals","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"year":{"type":"number","description":"Year of the balance record","example":2024,"minimum":1900,"maximum":9999},"month":{"type":"number","description":"Month of the balance record (1-12)","example":3,"minimum":1,"maximum":12},"inflow":{"type":"string","description":"Total inflows for the period","example":"1500.00"},"expense":{"type":"string","description":"Total expenses for the period","example":"1200.00"},"balance":{"type":"string","description":"Net balance for the period (inflows - expenses)","example":"300.00"},"cumulativeBalance":{"type":"string","description":"Cumulative balance up to this period","example":"2500.00"}},"required":["year","month","inflow","expense","balance","cumulativeBalance"],"title":"BalanceHistoryItemDto"}}}}},"401":{"description":"User is not authorized to view this balance history"},"404":{"description":"User not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

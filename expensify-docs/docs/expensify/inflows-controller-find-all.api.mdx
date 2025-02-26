@@ -1,0 +1,71 @@
+---
+id: inflows-controller-find-all
+title: "Get all inflows"
+description: "Retrieve all inflows for the authenticated user with pagination and filtering options"
+sidebar_label: "Get all inflows"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1VU1v2zAM/SuCTxuQrcnQXXIruq7osC+sHXYIgoGx6VitbLkSnSYz/N9Hyk7iJN2aAtuljSzp8ZF8fKqjBH3sdEnaFtE4+obkNC5QgTFKF6mxD16l1inK+FvFfwvSMRAmqvLo1IOmTJUw1wUIgoIiUak2hE4Xc2UDrI8GkS3RhRNXCUe5aoHPbUHOGoPuZ6qL5MwYPlmCgxwZwEfjSR0VvOAbHAJ50+F9pR0yRgrG4yDSQvq+QrfiXR9nmEM0riNalXKrqPIZuqhpBhsgo3NN/wTJI7g4ez6UJ6nNDhTB3D8fCJwD2dCEuX8sQDMVTF9yCzAceDMcyr/dln/UnpRNN93ebyk3AxIg4EgxN4wFIBhQlkaEwCdObr0A1YcM7ewWY6l26UQApFsaAe2Ax5mksyWiHMbWJV7lQHEmahIJtkVXfE0kJpxwCXlpJNrkkVq0NWoGB2vJ6pDDpy5XBTNbUT8i17Ey5JlcbKpE6PRKxIyty8PvHUY1r3iQvqRByn8vSlD4geAGewTPK+e4AxIcVXtGvRi94unBJSYv+9FHnKQudF7l/JszbpX/ZITPLaj0QWqpmKLqpm8LPdzDJktgnsa+kWNr2psIxzb49G0v6lCwU+CeCJ1mEOp3bqviiBT3achVr2AB2sDM7GTaDznqh+Tx7c3rZG1Qa3tpC9JnxbNImoIsRGXXIU82Qhs1032wbtyCRnv3Wttsb74jKxPOF0+Ho0Mhfxdz1l4VloJtW6d/sWeTVQuND+tZFxNiH4srrvYqaHTG4Fyx8WQq5hF8ifl0fi1cmFNmxcPnGDQMlPHiZA0ocG7Rmvd0i30tztDqfB2hswvJq/s06H68D7PE3z/8uIk2k5sRlYGvDFvocVeVi2WJhdfp6qDPmx119vWKd4VXuzN6PezsDGIRjOCW1lMOwcg6W75E6r+D+/j11g//27vZJU+4pJPSAD8IzLRypnUMqf0k0tvuZJyDfKrrGXj87kzTyOf2CZH+JtqLxLdPzB2uts/rAkwl4SJ5m/5wdK3wY85unshjDneP4PboVBbsATKSIkhODyEJ6qy7O2dxjGWfzcGz1PQ1e3khgpJ29ExiT319q4Zi1cPmooYTN/YOCy7shriswxQ3vwEITDKb
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get all inflows"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/inflows"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieve all inflows for the authenticated user with pagination and filtering options
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"page","required":false,"in":"query","schema":{"type":"number"}},{"name":"limit","required":false,"in":"query","schema":{"type":"number"}},{"name":"search","required":false,"in":"query","schema":{"type":"string"}},{"name":"tags","required":false,"in":"query","schema":{"type":"array","items":{"type":"string"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"List of inflows with pagination metadata","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"description":"Array of inflow records matching the search criteria","example":"[","items":{"type":"array"},"type":"array"},"meta":{"description":"Metadata about the search results including pagination information","example":"{","allOf":[{"type":"object","properties":{"page":{"type":"number","description":"Current page number (1-indexed)","example":1,"minimum":1},"limit":{"type":"number","description":"Number of items per page","example":10,"minimum":1},"total":{"type":"number","description":"Total number of items matching the search criteria","example":45,"minimum":0,"default":10},"pageCount":{"type":"number","description":"Total number of pages available","example":5,"minimum":1,"default":1}},"required":["page","limit","total","pageCount"],"title":"MetaSearchInfo"}]}},"required":["data","meta"],"title":"InflowSearchDto"}}}},"401":{"description":"User is not authorized to view inflows"}}}
+>
+  
+</StatusCodes>
+
+
+      

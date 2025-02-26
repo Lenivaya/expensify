@@ -1,0 +1,71 @@
+---
+id: inflows-controller-create
+title: "Create inflow"
+description: "Create a new inflow for the authenticated user"
+sidebar_label: "Create inflow"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVstu2zAQ/BWCl16UxE6bi29pmgIuUjRoXPRgBAUtrS0mEqnykVgV/O/dJSVZfiBN0V4MkVruzs4OR254BjY1snJSKz7hVwaEAyaYgmcm1bLQz2ypDXM5bnr8VU6mGJExb8HwhOsKjKDD0wyPT8MJe6WVM7oowPxIQ0IMrIQRJTgwlk/m9wk38NODde91VvNJE5bSACZxxkPCU0yBxeiVqKqCimKRswdLMBtu0xxKQU+urgAr68UDpI7qGILkJNhwttQ+ZmnjlC8XAfhu3zPsr9QKnDA1i4eYXoa2WxakCitbWwflG8syWApfOJZ6Y0ClNaaEtSirAqucX4xGCS+lkqUv+WR0Ohpv9ir2gKwzUq0OAF2ytABh2GCXwboqBCZVqwhFe5MCw+lU3lTawi7iISD+GenMi5pZUWCHPIC7AbVyOZ+8xZVYd6vziwvE6sQq8LcL6kbaSAu+DbIgKay0kb8Ik1AZglkJFZfHkcx5D+FZm0d+H6BMkVOsN064jE89PcIYUXNCtLPeJAPFzLsx75LYdoEVnHSBhajuKNIPTmOamMhWWtkomPPR+LDv2VYGubBsAaCY9WkK1i59gbRGlWf8v+lWZsckgpSXAnNz7zEAoR/Iuw39s9oU4hYLYoXu22DiOzwfzqMrgCfIAaavw+mrjPi5PAJ1EE0xJ06WcAxfS/GrUwQKCvinqnsqkzTgl6TWczLseAh9iGmgy31Fvjsmwm+YmknLlHbBiunaoQ873aqvVagNs7GAviQdWuu84Qs0EvQ8tN3NfTfoeefV4QYCpiP/RhcJWhTkBPysy0j5zFNv3V3yOxJz1GtXolU4NdVuJe3Dx47vT99nvL/OuXNVAEwX5Ov2k3Dd+cXWwqOp7nJyYGtdc3smgwWwFx100HJ+va5AWbmsD6y3f8Mub6f4lhqPb8ano/aKi5RERcCJslKEO6ZEuXWZrfft3cTeIf7+Y9uS5mDtzsKnINwtU1DaOLM5l9ux5jRN3GqahbDwzRSbDW0jyaaOk3wSRka9z4mjHEQWhNLwR6gJYcR6MqPCFF74YA77zrZJuhOX6IqVezF2KLjbL3ekhkX7L6DUGZ0xgnij3wkP/zHodNBZ2Gt4IdTKixXFxpw0CaJscNP39Be66sxN1QOESE+ImOlHUEhR0rbiaI1wMflvvnYpLg==
+sidebar_class_name: "post api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create inflow"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/inflows"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Create a new inflow for the authenticated user
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"amount":{"type":"number","description":"The monetary amount of the inflow in the system's default currency","example":2500,"minimum":0.01},"description":{"type":"string","description":"A clear description explaining the source or purpose of the inflow","example":"Monthly salary","minLength":3,"maxLength":255},"tags":{"description":"List of tags for categorizing and organizing the inflow","example":["salary","work"],"minItems":1,"items":{"type":"array"},"type":"array"}},"required":["amount","description","tags"],"title":"CreateInflowDto"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"The inflow has been successfully created","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"InflowDto"}}}},"401":{"description":"User is not authorized to create inflows"}}}
+>
+  
+</StatusCodes>
+
+
+      

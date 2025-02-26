@@ -1,0 +1,71 @@
+---
+id: auth-controller-sign-up
+title: "Sign up a new user"
+description: "This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned."
+sidebar_label: "Sign up a new user"
+hide_title: true
+hide_table_of_contents: true
+api: eJzNVt9PIzcQ/lcsv5STEkiugePyVHpQlVNV0EHuKkWoctaTrKlju7YXSKP932/G6002gChIfWgekl3P72++GWfNJYTCKxeVNXzMr0sVGBjprDKRCa3tfWCCGbhnVQDPomVBLQyrHJutmPP2TkllFqhQQAjCr5iHhQrRC3LIJEShdNhnF4aFqiCdeaV3dHqN46zJhAcUx8obkPu8x62DRu9cYnonVSw/WRO91Rr8n5TKxKGWE14sIYIPfDy96XEPf1cQ4s9Wrvh4nV6VB/QQfQW9RzVPKD656mNVOQ/0WWAcMJHshXNaFSmNg9tARmseihKWgp7iygG6sbNbKCIl4ynpqCCQlKozmFxHE0tHzPiTPIzCrFlrwObWMyUxBTXPwdEEHsTSafJya0sjLeDZUpnfwCxiycc/1j0+Vz7E318XEmP9EFiyYCnonk0yod/tBPuMwTj61uKNrsngRc+nWAI6RiyV/nevX4VWkgkjWdWgleyYkNIjt3YcE44/5df9wi5RiIguBXY0R6uJOCHcWy9fVw9r1dkeYs6OWVEi8Qri3W5R/wyv9cNsGKs/fv2w26Djuu51+Djd8qPbuA7QLTSdXJHgUcUU6CpNwGm0vK4bz8FZExrqvR8M6ec5tm9mUbcTC5TPf8Z69RpEmw62FMe09iaT89N3zM5ZLIGWzk52aTJ2YD48HMDxaDDow/uPs/5oKEd98WF41B+Njo4OD0coGQzeQK6zxKUcPQV73CwlN/140oQvGfq2GWgaxYIWUlpbZIArqrS0x5wNCTNBlOAHAuUHeQPhMUa+26yyAEXlVVxdEfINuDPALek37aAU8lEvP/zSEv3zt2s8zGWXMbpUEnXzy3ZFnrWAdrdVZ790FkqzCLp7IA3wBuLnpm47Y7tzgYkoM7epLxnJswcHJqj56mlvWgk7uTxHKQHUSIb7g8xbnER0RgUSvkuRGJurucq31vYuexxiveX+/+8azB2M8BAPnBYqLePKJ1I3LJpyYhGxJ/MIuVMSzVCyXs9EgInXdU3H2Hi/ath1J7wSM8J+eoMeSxCSmDVd878AVfinBpL+NcUndV1RHk9WQ91rLU6wPBdf1O1OwuXFFTF0lm/qpZVk48U9HtL3mKc/AWSduJ/O1sg/s6jEIvE0+aTPdw6aCmY=
+sidebar_class_name: "post api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Sign up a new user"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/auth/sign-up"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"description":"User sign-up details","content":{"application/json":{"schema":{"type":"object","properties":{"username":{"type":"string","description":"Unique username for identification","example":"johndoe","minLength":3},"firstName":{"type":"string","description":"User's first name (optional)","example":"John"},"lastName":{"type":"string","description":"User's last name (optional)","example":"Doe"},"email":{"type":"string","description":"Valid and unique email address","example":"user@example.com","format":"email"},"password":{"type":"string","description":"User password (min 8 characters)","example":"z1Tlxb1tuXH7","minLength":8}},"required":["username","firstName","lastName","email","password"],"title":"SignUpDto"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"User successfully registered","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","description":"Unique identifier (UUID) of the newly registered user","example":"550e8400-e29b-41d4-a716-446655440000"},"email":{"type":"string","description":"Email of the user"}},"required":["id","email"],"title":"SignUpResponseDto"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

@@ -1,0 +1,71 @@
+---
+id: users-controller-get-financial-summary
+title: "Get financial summary"
+description: "Get comprehensive financial summary including balance and statistics"
+sidebar_label: "Get financial summary"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVu9P2zAQ/Vcif9qksgYG0tRvjAFi0rRJgPahQpObXonBsYPtdGRV/vfd2UmbHy2jaJ+axvZ7d/fu/LJic7CJEbkTWrEJuwQXJTrLDaSgrFhCtBCKq0RwGdkiy7gpI6ESWcyFuo9mXOIaRFzNI+u4E9aJxLIR0zkYTpBXcwS9tWDsmVbOaCnB/LoHd9GgXgdQPJNzwzNwuJVNpncjZsDmWlnAvyt2FMf00w32oh8aoiRIA8rRZp7nUiQ+jPGDpRMrZpMUMk5PrswBMfTsARJH9IaCdiLwJYUxCPM5JDikPgvr6woItdAm81yIxaX8vsAs/sXitOPySi2k/m1bMakim4HB3V3OG9od8UwXSKwXEbIQrz88YvDMs1zi8ZM4jkcsE0pkRcYmcTUKPOfPOTTl3J8ImtMtpo9DptmmYC9z9Av4rl2L6CDqhPy+zYqtEFcV9cdTIQxgg027heznu4kKu8oJRyCsVvaL06y6Q7RW+w7Evm7WqCqKy9IKS3XZjIYzXFme0H67h/58iWNyDyHwf9fsNGxvlEGgWv82f7tUh0OBasq6OG/irFthF+mnXZzfcDRTWe6brRezaXQfQEZAr8uz5tw73UDaNP121mGirTY8o3K9dtTCIrXUUM/OxB2dvDDZb6TcImfvPulw9iav28KD/toh/i59tpRwW46tOd4YyXqA65nuBdq70TsTvxUvWIoHqwjsOD4cXg1kbRHeBkq7iBcu1Ub8gTm2T7QUgDqmuDZwUObRjnegEdQC05wzYrWAgQtX+ttkBtygomiPFYXM78kqg71SDuieqSbDRYP1hor9OmHjgtbH6ygONmaJC8u13zZM12SR4X5q+GrfpPrUr0b1w4V3PXz/9ecNSRU6L3Uu99GTLfqOrKsbVBSLctCV65Xo9McVrlJcYeXwQ1z7OjYnghFurq3LuHd0xX1c9OEyLHSPZbX5PPhfXzp1xg6e3TiXXCgStzCSyIIAU+YFwL1DCbDsKaZCm1arGbdwa2RV0eunAkwZhFlyI/iM6jclp0qBz30TrNgjlHRnJQnkJPiSy4KCGXz4VO3muDwnpahZW3dFT9a2d3FVtrAxTL/jRj+CwlBHdRCO/vuxq/4CuhOiRA==
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get financial summary"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/financial-summary"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get comprehensive financial summary including balance and statistics
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Financial summary","content":{"application/json":{"schema":{"type":"object","properties":{"currentBalance":{"description":"Current balance information","allOf":[{"type":"object","properties":{"totalInflows":{"type":"number","description":"Total amount of all inflows","example":5000,"minimum":0},"totalExpenses":{"type":"number","description":"Total amount of all expenses","example":3000,"minimum":0},"balance":{"type":"number","description":"Current balance (totalInflows - totalExpenses)","example":2000}},"required":["totalInflows","totalExpenses","balance"],"title":"BalanceDto"}]},"statistics":{"description":"Statistical analysis of financial transactions","allOf":[{"type":"object","properties":{"averageInflow":{"type":"number","description":"Average amount per inflow transaction","example":1000,"minimum":0},"averageExpense":{"type":"number","description":"Average amount per expense transaction","example":800,"minimum":0},"averageMonthlyInflow":{"type":"number","description":"Average total inflows per month","example":1000,"minimum":0},"averageMonthlyExpense":{"type":"number","description":"Average total expenses per month","example":800,"minimum":0},"totalInflowCount":{"type":"number","description":"Total number of inflow transactions","example":25,"minimum":0},"totalExpenseCount":{"type":"number","description":"Total number of expense transactions","example":50,"minimum":0}},"required":["averageInflow","averageExpense","averageMonthlyInflow","averageMonthlyExpense","totalInflowCount","totalExpenseCount"],"title":"FinancialStatisticsDto"}]}},"required":["currentBalance","statistics"],"title":"FinancialSummaryDto"}}}},"401":{"description":"User is not authorized to view this financial summary"},"404":{"description":"User not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

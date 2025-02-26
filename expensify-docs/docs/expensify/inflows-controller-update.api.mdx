@@ -1,0 +1,71 @@
+---
+id: inflows-controller-update
+title: "Update inflow"
+description: "Partially update an existing inflow by ID"
+sidebar_label: "Update inflow"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVk2P2zYQ/SsEL00AJ+vdZi++bTcp4qAFFqmDHgyjGEsji4lEKvzYtWrov3eGlGz5I9sE7cUQOcPhmzczj97JHF1mVeOV0XImH8B6BVXVitDk4FGAFrhVziu9EUoXlXkS61bM38qJNA1a4HPznE7Oo9HdG+2tqSq0f6UI5NiAhRo9Widny53UtKADKieTxa9BWaQA3gacSMUgGvAl2VxWYg1ytpO+bfiE85ZgyK5bpYPo/C8mb9njNE5GMFB7NkHTVCqLQK8+O85ydx7arD9j5hmr5bS8QhfP1iakKL2fDvUaLfkd07YoUWh8ErXR6MG2Ih0UhbHCk61nTum4cq3zWP/kRI4FhMqLLFiLOmspLm6hbiq66uZ2Op3IWmlVh1rOpq+n193JtafEnKL6FAuQi9EuFbOpgIJSOSMUE2yGgmA2wTbG0WcxQjwGJH8nTkvqDAcVp/ikfCmIK8qxBk1B1kYHJyPm31BvqIazn2kF22F1c3tLKXjYRG4vY62o1yIG8or0UeVwY6z6myGDzgnrBnRaXga6lAkh7Q2QRjDlKiKcUwUIxjW1XPrakwnWQisZ6NGaN5SPRCSsqeHfekM2tlp0jdEuNc7NdHqe4+LQCSU4sUbUwoUsQ+eKcJg5nov/qX9pxi50SaSCYssQyIGgn7X5MGn/2nCacMOaWeG5G1X3iLxzkvejPJHBoZ1/H86en7sLUEfe7PPKqxov4css/lCISEGF/+nWbqxzyyR8PeXHBPf07TkZZzyGPsa0OvTlaUe+mV5fGDQKLZQT2ngBwZc8WjR33gyK70uy9lMVg7w5D5JuijEKyiOPhXRIOqZ8G0V+jWBJKGfLFat16orl8EjEGUS6O09qn5XxlWCNkFfpane1U3nHrwDax/RyrA5X/MH9n1p8uKgfCuah35r0H78OJfrw50Lux7r0vomweaY+Hl6Td4OMHNQ/SfExA98rhkPmz0tSxy9fYWKD9cV8t21QO1W0Z7K+t4i7hzlZmZ5kuX497bUDMu5WTo9E3dMtHLp/eJN8HYTzZMT30vNDfwZ6Vj1u/VV8YeK82oojpsouZV9Z8p7RDFA5S8LGht1uDQ4/2arreJtqYdtU8EewKk0S9VSuHH9T0xRQOXwG+YuP/by9FN/CNgiUZoIfoQq8os8v2KY/Jx1XpUTIYxvvesN9uuPVgo8fDp6JdDcZTtyRwDf+Wd/xODzcLe7fxz5J/2xqk/MhC1wq/o0oTUw6DkDc28kK9CbAhn1TUC4+D/hItU4GI6Z1kQcqSPRYmC+ou25Pi+c1M9N1/wBIMIc+
+sidebar_class_name: "patch api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update inflow"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/inflows/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Partially update an existing inflow by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"amount":{"type":"number","description":"The new monetary amount for the inflow in the system's default currency","example":2500,"minimum":0.01},"description":{"type":"string","description":"Updated description explaining the source or purpose of the inflow","example":"Monthly salary with performance bonus","minLength":3,"maxLength":255},"tags":{"description":"Updated list of tags for categorizing and organizing the inflow","example":["salary","bonus","performance"],"minItems":1,"items":{"type":"array"},"type":"array"}},"title":"UpdateInflowDto"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The inflow has been successfully updated","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"InflowDto"}}}},"401":{"description":"User is not authorized to update this inflow"},"404":{"description":"Inflow not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

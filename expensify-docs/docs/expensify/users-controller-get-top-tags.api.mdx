@@ -1,0 +1,71 @@
+---
+id: users-controller-get-top-tags
+title: "Get top tags"
+description: "Get summary of top tags for both inflows and expenses"
+sidebar_label: "Get top tags"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVcFu2zAM/RVB56xxh+7SW7F1RXYa0BQ7FMWg2Eys1pZUiU6bGf73kZLcOsmKAjvtsFNikX585KOfellBKL12qK2R5/IKUISubZXfCbsWaJ1AtQlibb1YWayFNuvGPgWhTCXg2YEJEORMWgdeMcaiIpSbAD58tga9bRrwPzeAS+uWBESpTnnVAlKGPL+9m0kPwdkIc97Lj0XBP/uk6MWRFL1fEi4Y5DTlXKPLWHd+Hzi3l6GsoVX8D3cO6G27uocSubBnlqhTpdRI5HRckNpO8dT9k6bOVWs7g9xBBlbeKyakEdrwfkFCmiQF9NpsKOm4VUPjoQA8q9Y1nLvxtgTPMMNMJhoTJNO1K/DHSBZVk0lH+bDWgdvZg/5UFCc08mFs6l1+FI2L4ZUJqoynU7y8EnxGvEjgPOeYlEJ3w8CiP3baQ8UZiVPuKxOhvUCNEZJGcp3EX9Cgv6CVDJDR3tYvJ/wX8J8U8ABh8jHuS/tHmAxBGGfF6bH67D6CRmUsCtVhbb3+BRV5mdhqoC+6hrQWIiBZR0BdRl3OirM3sBhoTc1VcfMClJ3XuCPevVyB8qQdGdnAVOM23ib/Y+7kc7VlRyQHjNaHNT3MO47PyVw/YGqZnrcvhjgWuGYnS6s3lsn2xuPIR7P856v1raKtkt9+LF83vEZ0kTQN2MblyMO8jDPW693RgrxExMX3BUWZV4qcnhTZfmlvCIxxnQ3Yqmi8cevTDTJeG4fg/at5//VNkztDeMa5a5Q2rF3nG0ZP872Vcb6cO06YploTU471/UoFuPHNMPDxYwd+l+a+VV6rFY+H1KQXQFVR2l4+AKXIi7IExzJuVdNF/zi8foap5FeXLAQv4OSrPFAtoo9uZHYTbKIZM5b2AQxRnWUSyM9UiNb/N74LqZ8=
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get top tags"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/top-tags"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get summary of top tags for both inflows and expenses
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Tag summary","content":{"application/json":{"schema":{"type":"object","properties":{"inflowTags":{"description":"Top inflow tags with amounts","type":"array","items":{"type":"object","properties":{"tag":{"type":"string","description":"Tag name","example":"groceries"},"amount":{"type":"number","description":"Total amount for this tag","example":"500.00"},"type":{"type":"string","description":"Type of transaction","example":"expense","enum":["inflow","expense"]}},"required":["tag","amount","type"],"title":"TagSummaryItemDto"}},"expenseTags":{"description":"Top expense tags with amounts","type":"array","items":{"type":"object","properties":{"tag":{"type":"string","description":"Tag name","example":"groceries"},"amount":{"type":"number","description":"Total amount for this tag","example":"500.00"},"type":{"type":"string","description":"Type of transaction","example":"expense","enum":["inflow","expense"]}},"required":["tag","amount","type"],"title":"TagSummaryItemDto"}}},"required":["inflowTags","expenseTags"],"title":"TagSummaryDto"}}}},"401":{"description":"User is not authorized to view these tag statistics"},"404":{"description":"User not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

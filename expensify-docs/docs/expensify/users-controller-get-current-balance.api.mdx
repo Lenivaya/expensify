@@ -1,0 +1,71 @@
+---
+id: users-controller-get-current-balance
+title: "Get current balance"
+description: "Get user's current balance including total inflows and expenses"
+sidebar_label: "Get current balance"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVE1P3DAQ/SuWLwVp2w0tveRGKUX0VLWgHlYr5E1micGxgz1Z2Eb5752xs2yWhVaqekrs+Xrz5o07WUIovG5QOytzeQ4o2gD+TRBF6z1YFAtllC1AaFuYttT2RqBDZei8NO4hCGVLAY8N2ABBTqRrwCvOdlFSvivKFU6dRe+MAX99A3ia8n5KaSmiUV7VgOQo81knLR0oUpdk8nDfag+UCX0LE6kZY6OwIlsoKqiVzDuJ64YjAnpCJ/t+zoGhcRER2d9nGX92O716sUvKWxBauuEI1TRGF7Gb6W3gsG6/rFvcQoHch+feUaeikaSLxNHI27b1Ajx576K5jJSq2rWExS2FMk8Eky88qroxFP4xy7KJrLXVdVvLPOsnqc7Zhv9/KjSa3lOlD/uVNhT9tcbpM+UcjLkQb8UO5MNxVZpU1vfjuc92iXze7xYVDR01chI5SOszOhIDpzvOjl4WgNBBWIdCtVg5r39BSeDESsODwIpsm+Qxx/ErOTjBkvgsJdcKQJLSuI5aXoDyRFA+m7MoUd2wxNNSMGBSfeV4TWgt4iKQsHM55QUM006X/XQrS7pbpRWZb4v8YDGmsW9KDQplHoaryfDzxflaka7l15+XTGSaYYXYROAkNxdnO7CYONbL9d58nyzi5NsFWRlXshy9y4YNUgVvEOdtXMBaxd0ZVpsfmf2926nRbdfwP7xJQ6sIjzhtjKJXhHC13nCdRPpMRtLJN48Pz0hVFeFnh65bqABX3vQ9X9+34NdpGivltVowaTTyUgf+p6kulQnwh74Ovg8qPxSvYRwuleUhrJRp+US/d7BOT2Q/J68KVBlV1g2Gk6KABkchew9ZP1bf+RnrgXdgtNvPxBOzvwiHeIkel+4OLHGzQYd8ZoB9/xvs7DNL
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get current balance"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/{id}/balance"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get user's current balance including total inflows and expenses
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"User's current balance","content":{"application/json":{"schema":{"type":"object","properties":{"totalInflows":{"type":"number","description":"Total amount of all inflows","example":5000,"minimum":0},"totalExpenses":{"type":"number","description":"Total amount of all expenses","example":3000,"minimum":0},"balance":{"type":"number","description":"Current balance (totalInflows - totalExpenses)","example":2000}},"required":["totalInflows","totalExpenses","balance"],"title":"BalanceDto"}}}},"401":{"description":"User is not authorized to view this balance"},"404":{"description":"User not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

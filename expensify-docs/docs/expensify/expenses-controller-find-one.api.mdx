@@ -1,0 +1,71 @@
+---
+id: expenses-controller-find-one
+title: "Get expense by ID"
+description: "Retrieve a specific expense by its ID"
+sidebar_label: "Get expense by ID"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVE1v2zAM/SuCThvgLenQU27B2hXZZUOXYocgGBSbrtXalirRWT3D/32k5KTOx4YOO0UOKfLx6T12MgOfOm1Rm1rO5C2g07AFoYS3kOpcpwKeLdQexKYVGr1YXMlEGgtO8Z1FRreuY4b/aGp0pizB/ch1nX2pgVKtcqoCBOflbNXJmj7ois4o5OCp0Q6oBLoGEqkZglVYUMynBVRKzjqJreUbnpDV97Lv13zRW8MdOf5hOuWfw0GWBeyBZ4BKl56KpgQQauR0ZW2p0zDD5MHzne60p9k8QIo8hOOJUceOBP4EVyJz4ypFtWXTUEKfSFWZJjY7GiE5BHtaqm7KUm1KiMRQPqp7P0pUzqmW8jRC5c9xlMjGg1u8DmdjM4WQzc9AHWVzzjvUFZzDlzr4pxKBghL+q2s/FtAqKmqg/JDggb49J+OJx9DHmEhkqJF77dR9hYaI5a6X04tTwd1RbaG9qA0K1WBhnP4FmUAjthp+CiwoNghShhqXpzWGTqFGToNk4SU9pI3T2Ab7bEA5cHRcsw+iLFZ7AzJs8lph2JX3EJTLdprJydDbTzqd9ewvcNvoyfVLi29sgKjxXaPBFUzE8FcyHD7t3ujz9yVzHJ+wQLQBtq5zE572gEadt0evM4qI+dcFRRlXjFy8nw6uVSnrhOta47FSwTbDLrkBHC+psKCODLY3/qs33DAOwjNObKloNbFTXMnVIqcrueOU0mckPyKyIHAc6bqN8nDnyr7nv58acG2kequcjiKm18y05zO9Vq5KD3+B/eZ2kPpb8Sdwu91QM8NbVTb8RcdHaOPC7deUVYDKgoC6ITBPU7A4unKyGfuxqm6u+bFZ4SPfHikjVD8Lh3gJGUvzCHXf79EhfzPAvv8NR+o9QA==
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get expense by ID"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/expenses/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieve a specific expense by its ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The expense details","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"ExpenseDto"}}}},"401":{"description":"User is not authorized to view this expense"},"404":{"description":"Expense not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

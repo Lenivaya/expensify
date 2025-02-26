@@ -1,0 +1,71 @@
+---
+id: auth-controller-get-me
+title: "Get current user"
+description: "This endpoint returns the current authenticated user."
+sidebar_label: "Get current user"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVMFu2zAM/RVDZ6/Jdswt6LqiBTYMWIodgmFQbCZWq0gqRQU1DP/7SNlJvTYY0DWXWCT1+PT4pE7VECs0gYx3aqFWjYkFuDp446hAoIQuFtRAUSVE4JhOvHJkKk1QFykCXqhS+QCoBeOmZpQl11x6R+itBfy9A/oKXBQ06j0QYFSL9a9SIcTgXQRedurTfC5/f9O5HJtKm6IG0sZGBqoYm8NSr0OwwoXrZ/dRNnUqVg3stXxRG4Bh/OYeKhIGKETJDC1NPamJhMbtuGbrca8ZW6XEBX2ppLlj4q+LObk1GOnb2WypXLJWbyzHCBNwtdVvKOYzGHu2aQq1qL+kf/KXmg9k9nAOvEJ4EwRvqcHCu7r2MvLHZBBY+LXIPxF3KuVEqKMM00NP2U9psaXIkLRTdwz7mbzq5VeqCGxfQy237dQGNAKKBXvZoXdix+xZQWCDNl5MzK7NnuXwQs3E9rPMh5EPJwsfgX+I5QZXHeFHHwqbMVSOH1+OWt3+XHFwlLIhCkrIGrf1WeLxLFdPAVw02zYfdno9Tpli+f2Gs8JryHy8mI/3RFcyL8ENPtJe5xsy2FldA53utQziZYPu+ab998swno7giWbBauOygTEbexB3rWSnEullAA3TlGDXbXSEO7R9L+HHBNgOoh80msFWPELeALrO8+zUA7Ty/FQVBBneQdskzV89Ev100NdXMoXM4dnYL0aW0ceUdu0Em2nmipV/AMdUy5EEyZobsf/+ADPV2js=
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get current user"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/auth/me"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+This endpoint returns the current authenticated user.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Current user details","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"username":{"type":"string"},"firstName":{"type":"string","nullable":true},"lastName":{"type":"string","nullable":true},"email":{"type":"string"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","username","firstName","lastName","email","updatedAt","createdAt","deletedAt"],"title":"UserDto"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

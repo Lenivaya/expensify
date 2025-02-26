@@ -1,0 +1,71 @@
+---
+id: expenses-controller-remove
+title: "Delete expense"
+description: "Delete an expense by ID"
+sidebar_label: "Delete expense"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVMFu2zAM/RVDpw3wlnToKbdiyYAMOwxbih2CYFBsplZrW6pEBfUM//tISUmdJiu2nSKHFPn49B57UYIrrDKodCtmYg41IGSyzeDJQOsg23bZci5yoQ1YyVnLkvIWMeo+6hatrmuwPy00eg+UaaSVDVWxTszWvWjpg26okkIWHr2yQBXQesiF4p5GYkUxV1TQSDHrBXaGbzi0qr0Tw7Dhi85obsjxD9Mp/5wiX1VwxFxJl20B2sz5ogDndr6uu6wMszGMglBDi1xEGlOrIgw2uXdcqT9Horf3UCCPZpkGVBEHjXSGNhc7bRtJtYX3lDDkQjbax2YvBstPRzgv1RJuua0h0kX5KO/cKFFaKzvKUwiNu8RcLrwDu/w7nN6Ukvi5uQB1lM0571A1cAlfYeGfSgQKwqv8f9dhLKt11Fmi/JTgRN+Rk/HEY+hjTCQ9VMi9DpKfoyZiuev19OpchrdUO1MuazVm0mOlrfoFZYY6yS/DiqJJqCJUuT6vknqFKjsapQxv6aDwVmEXbLUFacHSccP+iMJYH33JwMmDlWazxs7BmeS0mZik9m7Sq3Jg64HdR7tunrt8ZxdEoR96JWswG+mvPB0+HR7q848VEx3fsUI0Ablqdzq87wmXate9eKJRJLv5uqQo44qRq/fTZF1ZsFi4rtEOGxm8k9ZMWmAHgs8sdrT+K6suoUd4wompJS0pdoet+X6kcC0OFFL6jCRHvFWEhSN9v5UObm09DPz3owfbRWb30qooXHq/Ujk+0/vsZO3gFaBvviV5v83+BO6wD1omdC9rz190fIAurt5hQ1kVyDJIpk+BG9qOBkdXzrbhMNbRfPFlsVqwvTyTcLTrCy2EBhcRETUhY6UfoB2GI0Dkb8Y4DL8B8QY86g==
+sidebar_class_name: "delete api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete expense"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/expenses/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Delete an expense by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The expense has been successfully deleted","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"ExpenseDto"}}}},"401":{"description":"User is not authorized to delete this expense"},"404":{"description":"Expense not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

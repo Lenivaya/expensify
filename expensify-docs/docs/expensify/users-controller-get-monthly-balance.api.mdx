@@ -1,0 +1,71 @@
+---
+id: users-controller-get-monthly-balance
+title: "Get monthly balance"
+description: "Get user's monthly balance breakdown for a specific year"
+sidebar_label: "Get monthly balance"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVFFP2zAQ/iuWXwZSoWnFw9Q3tjHEJKRpA01TVU1ueiWGJA72pSWL/N9357htaIFN2lNT++67u8/fd61cgEutrlCbUk7kJaCoHdh3ThSmxCxvxFzlqkxBzC2oh4VZl2JprFDCVZDqpU5FA8rKgTQVWMUwVwsCuiUQ95EgrMlzsL/uAK87wA8dHmVUyqoCkALlZNrKkv5QZoSz8FhrC4SFtoaB1NxepTCju+c9/6SE0NM602km0AgqJhxSMw516ijBpRkUSk5aCU+qqHKqM07GZwOJTcU1y7qYg5Xez7iwq0zpwHH4OEn453nB69eYoUop3UGJnKSqKtdpoGR47ziz7TUSKytrVUN5GqFwvXMzv4cUmSTLxKLu+gmP0guLje9TEjoU3aU4Gp2MxscUs5195JnPZW7WPSiHVpd3B1A3BlUuumgXaMYMOnH0IeUoSZJTYsvzYQVE4L9ix/C3wN9vsSPnf8eOMnsDdBxBfV9sU7kJjATtxtkVJ5WgxgDyXNSf0BCeZ8izZHSoHHaF0E6UBoWqMTNW/4YFS3alYc19OugrN+CcvYLDIEtTl4swgoO0thqbYKU5WYJkMZnOWNGo7thhnSe5eTJdZtilZJTgQ9aUHLLx3TD6/iQOO2zZkJ5NBHbVeXW2K/edBd1pc1M0qpzZiUeD+PHZ2EKRN+SXHzdya74MsQojEOMmPGzk9iIQr5fNweNub8T51yu65b66m9FpEl2oUnYh41bGYaGC/+KO4TW3t9/2a7Q7K//PVowzIjzhsMoVbTFqqLY5F+h4n8rAO8XuMU8nk4BCdGc0Aoe27Vw5uLW593z8WINtugdZKavVnHmj919ox9/0xEuVO3hjtKNvUfrH4h/26IvTbDZZye+0UnnN/+jzAZrNOvczistALYIo23h1nqZQYS/pYGP6vlgvL1g0bJue+/cUFtBfbIiYCxE35gFK77f9If/nBr3/A+jdaac=
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get monthly balance"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/users/monthly-balance/{year}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get user's monthly balance breakdown for a specific year
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"year","required":true,"in":"path","description":"Year for which to get statistics","schema":{"example":2024,"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Monthly balance breakdown","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"month":{"type":"number","description":"Month number (1-12)","example":1},"inflow":{"type":"string","description":"Total inflows for the month","example":"1000.00"},"expense":{"type":"string","description":"Total expenses for the month","example":"800.00"},"balance":{"type":"string","description":"Balance for the month","example":"200.00"}},"required":["month","inflow","expense","balance"],"title":"MonthlyBalanceDto"}}}}},"401":{"description":"User is not authorized to view these statistics"},"404":{"description":"User not found"}}}
+>
+  
+</StatusCodes>
+
+
+      

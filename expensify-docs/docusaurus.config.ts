@@ -1,6 +1,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import type * as OpenApiPlugin from "docusaurus-plugin-openapi-docs";
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -73,6 +74,7 @@ const config: Config = {
         docs: {
           routeBasePath: "docs",
           sidebarPath: "./sidebars.ts",
+          docItemComponent: "@theme/ApiItem", // Derived from docusaurus-theme-openapi
         },
         blog: false,
         theme: {
@@ -80,11 +82,71 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
+  ],
+
+  themeConfig: {
+    // Replace with your project's social card
+    image: "img/docusaurus-social-card.jpg",
+    navbar: {
+      title: "Expensify",
+      items: [
+        {
+          type: "docSidebar",
+          sidebarId: "appSidebar",
+          position: "left",
+          label: "Docs",
+          to: "/docs",
+        },
+        {
+          to: "/docs/api",
+          label: "Backend",
+          position: "left",
+        },
+        {
+          to: "/docs/app",
+          label: "Frontend",
+          position: "left",
+        },
+        {
+          href: "https://github.com/Lenivaya/expensify",
+          label: "GitHub",
+          position: "right",
+        },
+      ],
+    },
+    footer: {
+      style: "dark",
+      copyright: `Copyright © ${new Date().getFullYear()} Expensify. Built with Docusaurus.`,
+    },
+    prism: {
+      theme: prismThemes.github,
+      darkTheme: prismThemes.dracula,
+    },
+  } satisfies Preset.ThemeConfig,
+
+  plugins: [
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "openapi",
+        docsPluginId: "classic",
+        config: {
+          expensify: {
+            specPath: "../expensify-backend/openapi-spec.yaml",
+            outputDir: "docs/expensify",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+            },
+          },
+        },
+      },
+    ],
     [
       "docusaurus-plugin-typedoc",
 
       // Options
       {
+        id: "typedoc-backend",
         entryPoints: ["../expensify-backend/src/**/*.ts"],
         tsconfig: "../expensify-backend/tsconfig.json",
         out: "./docs/api",
@@ -144,6 +206,7 @@ const config: Config = {
 
       // Options
       {
+        id: "typedoc-app",
         entryPoints: ["../expensify-frontend/**/*.{tsx,ts}"],
         tsconfig: "../expensify-frontend/tsconfig.json",
         out: "./docs/app",
@@ -211,45 +274,25 @@ const config: Config = {
     ],
   ],
 
-  themeConfig: {
-    // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
-    navbar: {
-      title: "Expensify",
-      items: [
-        {
-          type: "docSidebar",
-          sidebarId: "appSidebar",
-          position: "left",
-          label: "Docs",
-          to: "/docs",
-        },
-        {
-          to: "/docs/api",
-          label: "Backend",
-          position: "left",
-        },
-        {
-          to: "/docs/app",
-          label: "Frontend",
-          position: "left",
-        },
-        {
-          href: "https://github.com/Lenivaya/expensify",
-          label: "GitHub",
-          position: "right",
-        },
-      ],
-    },
-    footer: {
-      style: "dark",
-      copyright: `Copyright © ${new Date().getFullYear()} Expensify. Built with Docusaurus.`,
-    },
-    prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
-  } satisfies Preset.ThemeConfig,
+  themes: [
+    "docusaurus-theme-openapi-docs",
+    // ... Your other themes.
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      {
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
+
+        // For Docs using Chinese, it is recomended to set:
+        // language: ["en", "zh"],
+
+        // If you're using `noIndex: true`, set `forceIgnoreNoIndex` to enable local index:
+        // forceIgnoreNoIndex: true,
+      },
+    ],
+  ],
 };
 
 export default config;

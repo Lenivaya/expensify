@@ -1,0 +1,71 @@
+---
+id: expenses-controller-get-monthly-stats
+title: "Get monthly statistics"
+description: "Get monthly expense statistics for a specific year"
+sidebar_label: "Get monthly statistics"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVMFu2zAM/RVBpxbIGidYL7kVQ1d0wIZhTbFDEAyKw9RqbUuV6Cye4X8fKSmps3QdsFwii+LjI/nITq7B505b1KaWM3kDKCpTY1G2AnYWag/Co0LtUedebIwTSngLud7oXLSgnBxJY8EpBrhdE8R1dPMfCMaZsgT34wHwcwS9IyxPLlY5VQGC83K26GRNH+Sa8Bw8N9oBgaFrYCQ1M7MKC7L5vIBKyVknsbXsUzfVCpzs+yU7ems4NtunWcZ/x/klGoOcCDOnS6iRXytrS52HZMaPnl2605DKOdWSn0ao/ODerB4hR87OcUlQRyKhnqeMR69RE9EozibvJtNzegM7VdmS3KYjWelaV00lZxM6q106T3vOoIn83w7xJYKbjXCQG7f2QtcCC+1jz4fhJpeDeBmFQIOq/HeIOT9jOEDlWrFVZQNBNljAaZTpZZZdHEfqh/1fyL1LzHBPg3qNGhlBHgmr599Ivs8mp62/95Q6pVobFKrBwjj9C9YCjdhq+HlQ/UAZDOUhb5zGNsh0RfqknGeLJasN1QOr9yB4ZkWaLgxPAUk+yJw7L8dplPyY0f04xRp3LPieVQ1uG2dh+RLyjnUXJbQPnMTIeaerUTp8NK5SJAH56fucyxSbVCDakIauNyY0L1Utctab9qSBB4u4+npLVuYVLZOLLA2LyllsjGuNx0qFMUkzPNwgR1N2FKZ7Gbr/2zkpQYQdjm2paEUQm8YFhcaqL+S+6lzgtHdSHDrNAhCVu6AU+HXXrZSHe1f2PV8/N+Da2JCtclqtuG6kgbX2fKYeb1Tp4Y28zr4lHZ+LvxHeL5SaGYVZoS86PkG7X4f9kt4VoNZBeF0yXeU5WBw4nSyufqjGm2sWBat+MMF/KCigv0qIKhNezM0T1H1/4If8zQT7/jfMgSlX
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get monthly statistics"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/expenses/stats/monthly/{year}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Get monthly expense statistics for a specific year
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"year","required":true,"in":"path","schema":{"type":"number"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Monthly statistics","content":{"application/json":{"schema":{"type":"array","items":{"type":"object","properties":{"month":{"type":"number","description":"Month number (1-12)","example":2,"minimum":1,"maximum":12},"count":{"type":"number","description":"Number of records in this month","example":15,"minimum":0},"total":{"type":"number","description":"Total monetary value for the month","example":2500.5,"minimum":0}},"required":["month","count","total"],"title":"MonthlyStats"}}}}},"401":{"description":"User is not authorized to view monthly statistics"}}}
+>
+  
+</StatusCodes>
+
+
+      

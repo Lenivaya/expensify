@@ -1,0 +1,71 @@
+---
+id: expenses-controller-find-all
+title: "Get all expenses"
+description: "Retrieve all expenses for the authenticated user with pagination and filtering options"
+sidebar_label: "Get all expenses"
+hide_title: true
+hide_table_of_contents: true
+api: eJy1VU1v2zAM/SuCTxuQrcnQXXoruq7osC+sHXYIgoGxmVitLLkSnTYz/N9Hyk7iJN2aAtuljSzp8ZF8fKqTDEPqdUna2eQk+YbkNS5QgTEKH0q0AYOaOa8o548V/7WkUyDMVBXQq3tNuSphri0IhAKbqZk2hF7buXIRNySDxJXo44nLjMOcd8hnzpJ3xqD/OdM2OzWGj5bgoUBGCMnJuE4sL/gKx0De9HhXaY8MMgMTcJBooX1XoV/ybkhzLCA5qRNalnLLVsUUfdI0gzWQ0YWmf4IUEHyaPx8qkBRnC4pgHp4PBN6DbGjCIjwWoJkIZiidFFsOvBkO5d920z/qQMrNNv3ebSp3AzIg4FApd4wlICBQlkakwCeOboIg1fsU3fQGUyl36UUCpFseEW2PyKnk02OiPKbOZ0EVQGkughIVtmVXfE9UJqTwAYrSSLjxI9Voq9QM9taS1j6JT12yCqauon5ErmRlKChtU1NlQqdXI215Sor4e4tRzSsepi+zKOa/VyVqfE9ygx2CZ5X33AIJjqo9o16MXvH84ANmL/vRR5yktrqoCv7NGbfafzLC5xaUGxFrqZii6uZvAz3cwSZHYJ7GvpZjK9rrCIc2+PhtL+pQsGfAPRE6zSDW78xV9oAUd2nI1aBgAdrA1Gxl2g856ofkAe5N7HhlUSuDaQvSZ8XTSJqiLERlVzHPSxZO0kx2wbp5ixrt3eucs736jpwMOd88Ho72lfxdDFoHZR1F63Ze/2LfJqcWGu/X4y5GxF6WVlzvZVTplNG5ZifjiRhI9CZmtDJtocO0cidOPscoY6CcF0drSAH0i9bCJxv0K7GHVuurGJ1nSG7dp0H3432cJ/7+4cd1sp7enKiMjGXgYp+3KqNny71er3fU6ddL3hVe7c7o9bDzNEhFNIJbukAFRDfrzPkCaes93A1Qb1zx/z2gXfqED3RUGuCHgblW3rS+IeUfJ9jrUM5pyLe6nkLA7940jXxu3xJpcqaDKH3z1tzicvPOLsBUEi+RR+oPR1dCP+Ts+q085HD3Gm6OTmTBViCTKark9BCyKNG6u3Oaplj22ew9T01ftxfnoinpR88rdgTYd2ywyx42FzWeuHa3aLmwa+KyjsPc/AbV2jce
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get all expenses"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/expenses"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieve all expenses for the authenticated user with pagination and filtering options
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"page","required":false,"in":"query","schema":{"type":"number"}},{"name":"limit","required":false,"in":"query","schema":{"type":"number"}},{"name":"search","required":false,"in":"query","schema":{"type":"string"}},{"name":"tags","required":false,"in":"query","schema":{"type":"array","items":{"type":"string"}}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"List of expenses with pagination metadata","content":{"application/json":{"schema":{"type":"object","properties":{"data":{"description":"Array of expense records matching the search criteria","example":"[","items":{"type":"array"},"type":"array"},"meta":{"description":"Metadata about the search results including pagination information","example":"{","allOf":[{"type":"object","properties":{"page":{"type":"number","description":"Current page number (1-indexed)","example":1,"minimum":1},"limit":{"type":"number","description":"Number of items per page","example":10,"minimum":1},"total":{"type":"number","description":"Total number of items matching the search criteria","example":45,"minimum":0,"default":10},"pageCount":{"type":"number","description":"Total number of pages available","example":5,"minimum":1,"default":1}},"required":["page","limit","total","pageCount"],"title":"MetaSearchInfo"}]}},"required":["data","meta"],"title":"ExpenseSearchDto"}}}},"401":{"description":"User is not authorized to view expenses"}}}
+>
+  
+</StatusCodes>
+
+
+      

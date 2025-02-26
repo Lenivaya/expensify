@@ -1,0 +1,71 @@
+---
+id: expenses-controller-update
+title: "Update expense"
+description: "Update an existing expense by ID"
+sidebar_label: "Update expense"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVkuP2zYQ/isEL20AZ9ebZC+6bfMAHPQQpF70YBgFLY0sJhKp8LG7qqD/3hmSkuVHNinaiyFyhsNvHt9H97wAmxvZOqkVz/h9WwgHTCgGT9I6qfb40YKywHYdW73jC65bMILcVwUeeB+t9q1Wzui6BvOXDzHQsxVGNODAWJ5teq5wgSdkgSYD37w0gBGc8bDgki5vhavQZvMKGsGznruupRPWGQTCh2EbD4J1v+miI4/TODnCAOXIJNq2lnlAev3FUnb9eWi9+wK5I6yG8nISbDjbaB+jJD/lmx0Y9Dsu17oCpuCRNVqBE6Zj8SCzWBTHpGIOHWxnHTS/WFZAKXztWO6NAZV3GA6eRNPWeMPr26vbBW+kko1veLa8Wt4MJ7ed1uMUTOxdwWa71LxaYFDsI0FpvWk19lKXYZlaO8cxRdkbnQNmVOMYsEfpKvR2RjCJuVgeoP4Oao8dy17jSjyNq1e3t4jciX2o5GWIISiBQC9WasOwT7DXRv5NSIUqmDZ7oeLyO0g3vNSaZikipc4teKW9hUrXBd8GiKuANrvBCYtfUxGFMaLjhPRoTRvSzSqRBvyd02gkswHbahp5CvZquTzPcn0AzCph2Q5AMevzHKwtfV13LFKEwP9PA4ukujAfWNlGYGzuPTog9rO5Hqn1w1FTiFvsqC5EtFmDj8p3XuaJuwuOnTGrn8OZ6nN3AerMm3xeOtnAJXy5gX8VIpSghv906zAXtk1UulTy4wKn8k01mWc8hz7HtD1M5tlMvlneXCAbxmbSMqUdE95VRC/kntNp/JBYaB2ZFaK8OY+S7gpRSkylCL20gCImXReEfQfCoDhmmy0pdByMzfQyBCYCXk/PRevD7JLQZ/w63W2ve1kMpPxgHuJrsT1c8QdRIE75eFHiBZUibS3Sx4exSx//XPOJ25VzbYBNtPp8eEHej1pyUPyow5dV60eSOGb+vC4N9NqVOszYUT9l2Z1p+mRhd59WaKXyRMvN1TLJh8hpYCk91HbXiMDf9Nim9/wgnyc0n+TnZ17+VE2HWV+HZyVQ1dQUKLZ0w8eWonsmgwpXCIosfb8TFu5NPQy0jU0wXez0gzAysgiHqZCWvnFYSlFbeAbxr58T116w74EbxUlRZR9E7WmFn1+hi/9EBmpHBaII89snw9t4x8s1HT8cPBPoYTGeuENxb92zvnMafLqn6dylPzGNLuiIEY/0zwh/A0YdUg5zH/Z6Xgu192JPvjEk9ZyYPdOrEz6EpC5WAdsRPNb6K6hhmIriaE11GYZ/ANh+fF0=
+sidebar_class_name: "put api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update expense"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/expenses/{id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Update an existing expense by ID
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[{"name":"id","required":true,"in":"path","schema":{"type":"string"}}]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"amount":{"type":"number","description":"The new monetary amount spent in the system's default currency","example":35.5,"minimum":0.01},"description":{"type":"string","description":"Updated description explaining the purpose of the expense","example":"Updated grocery list with extra items","minLength":3,"maxLength":255},"tags":{"description":"Updated list of tags for categorizing and organizing the expense","example":["food","groceries","household"],"minItems":1,"items":{"type":"array"},"type":"array"}},"title":"UpdateExpenseDto"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"The expense has been successfully updated","content":{"application/json":{"schema":{"type":"object","properties":{"id":{"type":"string","format":"uuid"},"amount":{"type":"string"},"description":{"type":"string","nullable":true},"tags":{"type":"array","items":{"type":"string"}},"userId":{"type":"string","format":"uuid"},"updatedAt":{"type":"string","format":"date-time","nullable":true},"createdAt":{"type":"string","format":"date-time"},"deletedAt":{"type":"string","format":"date-time","nullable":true}},"required":["id","amount","description","tags","userId","updatedAt","createdAt","deletedAt"],"title":"ExpenseDto"}}}},"401":{"description":"User is not authorized to update this expense"},"404":{"description":"Expense not found"}}}
+>
+  
+</StatusCodes>
+
+
+      
