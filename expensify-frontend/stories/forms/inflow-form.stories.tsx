@@ -1,8 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { InflowForm } from '@/components/forms/inflows/inflow-form'
-import { fn } from '@storybook/test'
-import { action } from '@storybook/addon-actions'
-import { within, userEvent } from '@storybook/testing-library'
 import { useState } from 'react'
 
 type InflowFormValues = {
@@ -66,13 +63,11 @@ const meta = {
 
       const handleSubmit = async (formValues: InflowFormValues) => {
         setIsSubmitting(true)
-        action('form-submitted')(formValues)
 
         try {
           // Simulate API delay
           await new Promise((resolve) => setTimeout(resolve, 1000))
           setValues(formValues)
-          action('form-submission-completed')(formValues)
 
           // Call the original onSubmit if provided
           if (context.args.onSubmit) {
@@ -100,9 +95,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Default submit handler for stories that need their own handler
+// Simple submit handler for stories
 const defaultSubmitHandler = async (values: InflowFormValues) => {
-  action('story-submit-handler')(values)
+  console.log('Form submitted:', values)
   await new Promise((resolve) => setTimeout(resolve, 1000))
 }
 
@@ -113,14 +108,6 @@ export const Create: Story = {
   args: {
     isEditing: false,
     onSubmit: defaultSubmitHandler
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement)
-    const amountInput = canvas.getByLabelText(/amount/i)
-    const descriptionInput = canvas.getByLabelText(/description/i)
-
-    await userEvent.type(amountInput, '2500.00')
-    await userEvent.type(descriptionInput, 'Monthly salary payment')
   }
 }
 
@@ -144,9 +131,9 @@ export const Edit: Story = {
  */
 export const Submitting: Story = {
   args: {
-    onSubmit: fn(async () => {
+    onSubmit: async () => {
       await new Promise((resolve) => setTimeout(resolve, 2000))
-    }),
+    },
     isSubmitting: true
   }
 }
@@ -178,17 +165,15 @@ export const CustomStyling: Story = {
  */
 export const WithErrors: Story = {
   args: {
-    onSubmit: fn(async (values) => {
-      action('form-submission-failed')(values)
+    onSubmit: async (values) => {
       console.log('Form submission failed with values:', values)
       throw new Error('Simulated API error')
-    })
+    }
   },
   parameters: {
     docs: {
       description: {
-        story:
-          'Demonstrates how the form handles submission errors. Check the Actions panel to see the error events.'
+        story: 'Demonstrates how the form handles submission errors.'
       }
     }
   }
@@ -210,7 +195,7 @@ export const WithMaxTags: Story = {
     docs: {
       description: {
         story:
-          'Shows how the form looks when the maximum number of tags (5) has been reached. Check the Actions panel to see tag-related events.'
+          'Shows how the form looks when the maximum number of tags (5) has been reached.'
       }
     }
   }

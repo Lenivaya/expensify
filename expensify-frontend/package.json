@@ -11,7 +11,8 @@
     "build-storybook": "storybook build",
     "code:prettier:format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,hbs}\"",
     "code:biome:format": "pnpm biome format --write",
-    "code:biome:fix": "pnpm biome format --write && pnpm biome lint --write"
+    "code:biome:fix": "pnpm biome format --write && pnpm biome lint --write",
+    "chromatic": "npx chromatic --project-token=chpt_b1949f5d5c87aae"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",
