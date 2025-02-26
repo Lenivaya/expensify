@@ -10,22 +10,104 @@ import {
   TrendingUpIcon
 } from 'lucide-react'
 
+/**
+ * Props for the TransactionSummary component
+ * @interface TransactionSummaryProps
+ */
 interface TransactionSummaryProps {
-  /** Type of transaction summary to display */
+  /**
+   * Type of transaction summary to display
+   * @type {'inflow' | 'expense'}
+   * @description
+   * Determines the visual style and content of the summary:
+   * - 'inflow': Green theme with upward arrows
+   * - 'expense': Red theme with downward arrows
+   */
   type: 'inflow' | 'expense'
-  /** Total amount for this transaction type */
+
+  /**
+   * Total amount for this transaction type
+   * @type {number}
+   * @description
+   * The sum of all transactions of this type.
+   * For expenses, this should be a positive number (will be displayed as negative).
+   */
   amount: number
-  /** Number of transactions */
+
+  /**
+   * Number of transactions
+   * @type {number}
+   * @description
+   * Total count of transactions of this type.
+   * Used to display transaction count in the summary.
+   */
   count: number
-  /** Optional click handler */
+
+  /**
+   * Optional click handler
+   * @type {() => void}
+   * @description
+   * When provided, makes the summary card clickable and adds hover effects.
+   * Can be used to navigate to filtered transaction views.
+   */
   onClick?: () => void
-  /** Optional compact mode for smaller displays */
+
+  /**
+   * Optional compact mode for smaller displays
+   * @type {boolean}
+   * @description
+   * When true, reduces padding and font sizes for a more compact display.
+   * Useful for mobile views or when space is limited.
+   * @default false
+   */
   compact?: boolean
 }
 
 /**
- * Displays a summary of transactions (either inflows or expenses)
- * with the total amount and transaction count
+ * A component that displays a summary of transactions
+ *
+ * @module TransactionSummary
+ * @description
+ * Renders a beautiful card displaying a summary of either inflows or expenses.
+ * Features a modern design with gradient backgrounds, icons, and hover effects.
+ * Can be used in both standard and compact modes for flexible layouts.
+ *
+ * Features:
+ * - Color-coded design (green for inflows, red for expenses)
+ * - Gradient background with hover effects
+ * - Directional icons indicating transaction type
+ * - Trend indicator icon
+ * - Transaction count display
+ * - Responsive layout
+ * - Compact mode for space-constrained scenarios
+ * - Interactive hover effects when clickable
+ *
+ * Visual Elements:
+ * - Transaction type indicator icon
+ * - Total amount display
+ * - Transaction count
+ * - Trend icon
+ * - Gradient background
+ * - Hover animations
+ *
+ * @example
+ * ```tsx
+ * // Standard usage
+ * <TransactionSummary
+ *   type="inflow"
+ *   amount={5000}
+ *   count={25}
+ *   onClick={() => navigate('/transactions?type=inflow')}
+ * />
+ *
+ * // Compact mode
+ * <TransactionSummary
+ *   type="expense"
+ *   amount={3000}
+ *   count={50}
+ *   compact={true}
+ * />
+ * ```
  */
 export function TransactionSummary({
   type,

@@ -24,6 +24,14 @@ import { Eye, EyeOff, Loader2, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import PasswordStrengthChecker from '@/components/generic/password-strength-checker/PasswordStrenghChecker'
 
+/**
+ * Schema for validating registration form data
+ * @remarks
+ * - Username must be at least 3 characters and can only contain letters, numbers, underscores, and hyphens
+ * - Email must be a valid email address
+ * - Password must be at least 8 characters
+ * - First and last names are optional
+ */
 const registerSchema = z.object({
   username: z
     .string()
@@ -44,8 +52,37 @@ const registerSchema = z.object({
   lastName: z.string().default('')
 })
 
+/**
+ * Type representing the validated form values from the registration schema
+ * @see registerSchema for validation rules
+ */
 type RegisterFormValues = z.infer<typeof registerSchema>
 
+/**
+ * A form component for user registration
+ *
+ * @description
+ * This component provides a registration form interface for new users to create an account.
+ * It includes fields for username, email, password, and optional personal information.
+ *
+ * Features:
+ * - Username validation with allowed character rules
+ * - Email validation
+ * - Password strength checking
+ * - Optional first and last name fields
+ * - Form validation with error messages
+ * - Loading states during registration
+ * - Navigation to login
+ * - Terms of service and privacy policy links
+ * - Accessible form controls with ARIA labels
+ * - Responsive design with mobile-friendly inputs
+ * - Two-section layout: Account and Personal Information
+ *
+ * @example
+ * ```tsx
+ * <RegisterForm />
+ * ```
+ */
 export function RegisterForm() {
   const router = useRouter()
 

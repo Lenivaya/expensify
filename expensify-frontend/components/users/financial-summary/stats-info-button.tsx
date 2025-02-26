@@ -7,7 +7,25 @@ import {
 import { InfoIcon } from 'lucide-react'
 
 /**
- * An info button with a hover card explaining the statistics section
+ * A button component that displays statistical information on hover
+ *
+ * @module StatsInfoButton
+ * @description
+ * Renders an information button with a hover card that explains the statistics section.
+ * The button uses a ghost variant with a muted info icon, and reveals additional
+ * information when hovered over.
+ *
+ * Features:
+ * - Hover card with delayed opening (200ms)
+ * - Glassmorphism design with backdrop blur
+ * - Accessible button with icon
+ * - Smooth hover transitions
+ * - Right-aligned content
+ *
+ * @example
+ * ```tsx
+ * <StatsInfoButton />
+ * ```
  */
 export function StatsInfoButton() {
   return (

@@ -37,92 +37,185 @@ import {
   YAxis
 } from 'recharts'
 
-// Types
+/**
+ * Represents a single data point in the balance history
+ * @interface BalanceHistoryItemDto
+ */
 type BalanceHistoryItemDto = {
   /**
-   * @description Year of the balance record
+   * Year of the balance record
+   * @type {number}
+   * @description The year for this balance history entry
    * @example 2024
    */
   year: number
+
   /**
-   * @description Month of the balance record (1-12)
+   * Month of the balance record (1-12)
+   * @type {number}
+   * @description The month number (1-12) for this balance history entry
    * @example 3
    */
   month: number
+
   /**
-   * @description Total inflows for the period
-   * @example 1500.00
+   * Total inflows for the period
+   * @type {string}
+   * @description Sum of all positive transactions in this period
+   * @example "1500.00"
    */
   inflow: string
+
   /**
-   * @description Total expenses for the period
-   * @example 1200.00
+   * Total expenses for the period
+   * @type {string}
+   * @description Sum of all negative transactions in this period
+   * @example "1200.00"
    */
   expense: string
+
   /**
-   * @description Net balance for the period (inflows - expenses)
-   * @example 300.00
+   * Net balance for the period
+   * @type {string}
+   * @description Net amount (inflows - expenses) for this period
+   * @example "300.00"
    */
   balance: string
+
   /**
-   * @description Cumulative balance up to this period
-   * @example 2500.00
+   * Cumulative balance up to this period
+   * @type {string}
+   * @description Running total of all net balances up to this period
+   * @example "2500.00"
    */
   cumulativeBalance: string
 }
 
+/**
+ * Available time range options for the chart
+ * @type {TimeRange}
+ */
 type TimeRange = '1M' | '3M' | '6M' | '1Y' | 'ALL'
 
+/**
+ * Processed data item for chart rendering
+ * @interface ChartDataItem
+ */
 type ChartDataItem = {
+  /**
+   * Formatted date string for the data point
+   * @type {string}
+   */
   date: string
+
+  /**
+   * Total inflow amount for the period
+   * @type {number}
+   */
   inflow: number
+
+  /**
+   * Total expense amount for the period
+   * @type {number}
+   */
   expense: number
+
+  /**
+   * Net balance for the period
+   * @type {number}
+   */
   balance: number
 }
 
-// Define a type for tracking visible data series
+/**
+ * Tracks which data series are currently visible
+ * @interface VisibleSeries
+ */
 type VisibleSeries = {
+  /**
+   * Whether the balance line is visible
+   * @type {boolean}
+   */
   balance: boolean
+
+  /**
+   * Whether the inflow line is visible
+   * @type {boolean}
+   */
   inflow: boolean
+
+  /**
+   * Whether the expense line is visible
+   * @type {boolean}
+   */
   expense: boolean
 }
 
+/**
+ * Props for the BalanceHistoryChart component
+ * @interface BalanceHistoryChartProps
+ */
 interface BalanceHistoryChartProps {
   /**
    * Array of balance history data points
+   * @type {BalanceHistoryItemDto[]}
+   * @description
+   * Historical financial data points containing monthly balances,
+   * inflows, and expenses. Each point represents one month's data.
    */
   balanceHistory: BalanceHistoryItemDto[]
+
   /**
    * Optional CSS class name for styling
+   * @type {string}
+   * @description Additional CSS classes to apply to the chart container
    */
   className?: string
+
   /**
    * Optional height for the chart container
+   * @type {number}
+   * @description Height in pixels for the chart container
    * @default 400
    */
   height?: number
+
   /**
    * Optional initial time range to display
+   * @type {TimeRange}
+   * @description Initial time period to show in the chart
    * @default 'ALL'
    */
   defaultTimeRange?: TimeRange
+
   /**
    * Optional flag to show/hide the time range selector
+   * @type {boolean}
+   * @description Whether to show the time range selector control
    * @default true
    */
   showTimeRangeSelector?: boolean
+
   /**
    * Optional flag to show/hide the legend
+   * @type {boolean}
+   * @description Whether to show the chart legend
    * @default true
    */
   showLegend?: boolean
+
   /**
    * Optional title for the chart
+   * @type {string}
+   * @description Title text to display above the chart
    * @default "Balance History"
    */
   title?: string
+
   /**
    * Optional description for the chart
+   * @type {string}
+   * @description Description text to display below the title
    * @default "Track your financial trends over time"
    */
   description?: string
@@ -181,13 +274,35 @@ const chartConfig = {
   }
 } satisfies ChartConfig
 
-// Sub-components
+/**
+ * Props for the TimeRangeSelector component
+ * @interface TimeRangeSelectorProps
+ */
 interface TimeRangeSelectorProps {
+  /**
+   * Currently selected time range
+   * @type {TimeRange}
+   */
   value: TimeRange
+
+  /**
+   * Handler for time range changes
+   * @type {(value: TimeRange) => void}
+   */
   onChange: (value: TimeRange) => void
+
+  /**
+   * Whether the selector is disabled
+   * @type {boolean}
+   * @default false
+   */
   disabled?: boolean
 }
 
+/**
+ * A component for selecting the chart's time range
+ * @component TimeRangeSelector
+ */
 function TimeRangeSelector({
   value,
   onChange,
@@ -218,10 +333,25 @@ function TimeRangeSelector({
   )
 }
 
+/**
+ * Props for the TrendIndicator component
+ * @interface TrendIndicatorProps
+ */
 interface TrendIndicatorProps {
+  /**
+   * Percentage change to display
+   * @type {number}
+   * @description
+   * The percentage change value. Positive values show an upward trend,
+   * negative values show a downward trend.
+   */
   percentage: number
 }
 
+/**
+ * A component that displays trend direction and percentage
+ * @component TrendIndicator
+ */
 function TrendIndicator({ percentage }: TrendIndicatorProps) {
   const isPositive = percentage > 0
   const formattedPercentage = Math.abs(percentage).toFixed(1)
@@ -244,7 +374,15 @@ function TrendIndicator({ percentage }: TrendIndicatorProps) {
   )
 }
 
+/**
+ * Props for the ChartGradients component
+ * @interface ChartGradientsProps
+ */
 interface ChartGradientsProps {
+  /**
+   * Color configuration for chart series
+   * @type {Object}
+   */
   colors: {
     balance: string
     inflow: string
@@ -252,6 +390,10 @@ interface ChartGradientsProps {
   }
 }
 
+/**
+ * A component that renders gradient definitions for the chart
+ * @component ChartGradients
+ */
 function ChartGradients({ colors }: ChartGradientsProps) {
   return (
     <defs>
@@ -380,9 +522,14 @@ function useChartData(
 }
 
 /**
- * Custom legend component that supports toggling visibility of chart elements
+ * Props for the CustomLegend component
+ * @interface CustomLegendProps
  */
 interface CustomLegendProps {
+  /**
+   * Legend items from the chart
+   * @type {Array}
+   */
   payload?: Array<{
     value: string
     type: string
@@ -394,10 +541,24 @@ interface CustomLegendProps {
       dataKey: string
     }
   }>
+
+  /**
+   * Currently visible data series
+   * @type {VisibleSeries}
+   */
   visibleSeries: VisibleSeries
+
+  /**
+   * Handler for toggling series visibility
+   * @type {(dataKey: keyof VisibleSeries) => void}
+   */
   onToggle: (dataKey: keyof VisibleSeries) => void
 }
 
+/**
+ * A custom legend component for the chart
+ * @component CustomLegend
+ */
 function CustomLegend({ payload, visibleSeries, onToggle }: CustomLegendProps) {
   if (!payload || payload.length === 0) return null
 
@@ -438,9 +599,59 @@ function CustomLegend({ payload, visibleSeries, onToggle }: CustomLegendProps) {
 }
 
 /**
- * BalanceHistoryChart component displays financial data over time with interactive features
- * including time range selection. It shows inflow, expense, and balance trends
- * using a responsive area chart.
+ * A comprehensive balance history chart component
+ *
+ * @module BalanceHistoryChart
+ * @description
+ * Renders a beautiful and interactive area chart that visualizes financial
+ * balance history over time. The chart shows inflows, expenses, and net
+ * balance with customizable time ranges and interactive features.
+ *
+ * Features:
+ * - Interactive area chart with smooth animations
+ * - Multiple time range options (1M, 3M, 6M, 1Y, ALL)
+ * - Toggleable data series (balance, inflows, expenses)
+ * - Responsive design with window resize handling
+ * - Custom tooltips with detailed information
+ * - Beautiful gradient fills
+ * - Dark mode support
+ * - Trend indicators
+ *
+ * Visual Elements:
+ * - Area chart with gradient fills
+ * - Time range selector
+ * - Interactive legend
+ * - Tooltips
+ * - Grid lines
+ * - Axis labels
+ *
+ * Interactions:
+ * - Hover over data points for details
+ * - Click legend items to toggle series
+ * - Select time range
+ * - Responsive to window resizing
+ *
+ * @example
+ * ```tsx
+ * <BalanceHistoryChart
+ *   balanceHistory={[
+ *     {
+ *       year: 2024,
+ *       month: 3,
+ *       inflow: "1500.00",
+ *       expense: "1200.00",
+ *       balance: "300.00",
+ *       cumulativeBalance: "2500.00"
+ *     },
+ *     // ... more data points
+ *   ]}
+ *   height={500}
+ *   defaultTimeRange="6M"
+ *   showLegend={true}
+ *   title="Financial History"
+ *   description="Your balance trends over time"
+ * />
+ * ```
  */
 export function BalanceHistoryChart({
   balanceHistory,

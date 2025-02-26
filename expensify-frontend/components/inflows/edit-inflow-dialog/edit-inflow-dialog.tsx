@@ -3,6 +3,16 @@ import { InflowForm } from '@/components/forms/inflows/inflow-form'
 import { FC } from 'react'
 import { InflowFormValues } from '@/components/forms/inflows/inflow-form'
 
+/**
+ * Props for the EditInflowDialog component
+ * @interface EditInflowDialogProps
+ * @property {boolean} isOpen - Whether the dialog is currently open
+ * @property {(isOpen: boolean) => void} setIsOpen - Callback to control dialog visibility
+ * @property {(values: InflowFormValues) => Promise<void>} handleSubmit - Callback when form is submitted
+ * @property {boolean} isLoading - Whether the inflow data is being loaded
+ * @property {boolean} isSubmitting - Whether the form is currently submitting
+ * @property {Partial<InflowFormValues>} [defaultValues] - Initial values for the form
+ */
 export interface EditInflowDialogProps {
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
@@ -12,6 +22,37 @@ export interface EditInflowDialogProps {
   defaultValues?: Partial<InflowFormValues>
 }
 
+/**
+ * A dialog component for editing inflow entries
+ *
+ * @module EditInflowDialog
+ * @description
+ * This component provides a modal dialog interface for editing existing inflows.
+ * It wraps the InflowForm component in a dialog context and handles loading states.
+ *
+ * Features:
+ * - Modal dialog with backdrop
+ * - Loading spinner during data fetch
+ * - Form for editing inflow details
+ * - Controlled open/close state
+ * - Responsive design
+ *
+ * @example
+ * ```tsx
+ * <EditInflowDialog
+ *   isOpen={isDialogOpen}
+ *   setIsOpen={setDialogOpen}
+ *   handleSubmit={handleUpdateInflow}
+ *   isLoading={isFetching}
+ *   isSubmitting={isUpdating}
+ *   defaultValues={{
+ *     amount: 50.00,
+ *     description: 'Salary payment',
+ *     tags: ['income', 'salary']
+ *   }}
+ * />
+ * ```
+ */
 export const EditInflowDialog: FC<EditInflowDialogProps> = ({
   isOpen,
   setIsOpen,

@@ -1,4 +1,11 @@
+/**
+ * Maximum number of tags allowed per inflow
+ */
 const MAX_TAGS = 5
+
+/**
+ * Maximum length of a single tag in characters
+ */
 const MAX_TAG_LENGTH = 20
 
 import { z } from 'zod'
@@ -38,6 +45,9 @@ import { cn } from '@/lib/utils'
 import { useCallback, useState, useEffect } from 'react'
 import { Separator } from '@/components/ui/separator'
 
+/**
+ * List of predefined tags that are suggested to users when adding tags to an inflow
+ */
 const SUGGESTED_TAGS = [
   'salary',
   'freelance',
@@ -48,6 +58,13 @@ const SUGGESTED_TAGS = [
   'other'
 ]
 
+/**
+ * Schema for validating inflow form data
+ * @remarks
+ * - Amount must be between 0.01 and 1,000,000
+ * - Description must be between 3 and 100 characters
+ * - Tags are optional but must follow specific format rules if provided
+ */
 export const inflowSchema = z.object({
   amount: z
     .number()
@@ -75,8 +92,16 @@ export const inflowSchema = z.object({
     .default([])
 })
 
+/**
+ * Type representing the validated form values from the inflow schema
+ * @see inflowSchema for validation rules
+ */
 export type InflowFormValues = z.infer<typeof inflowSchema>
 
+/**
+ * Props for the InflowForm component
+ * @interface
+ */
 export interface InflowFormProps {
   /**
    * Callback function that handles form submission
@@ -84,35 +109,83 @@ export interface InflowFormProps {
    * @returns A promise that resolves when the submission is complete
    */
   onSubmit: (values: InflowFormValues) => Promise<void>
+
   /**
-   * Optional initial values for the form
+   * Optional initial values for the form fields
+   * @remarks
+   * - If provided, the form will be pre-filled with these values
+   * - Useful for edit mode where you want to show existing inflow data
    */
   defaultValues?: Partial<InflowFormValues>
+
   /**
-   * Optional flag to indicate if this is an edit form
+   * Flag indicating if the form is in edit mode
+   * @remarks
+   * Changes the form's behavior and UI elements to reflect editing an existing inflow
    * @default false
    */
   isEditing?: boolean
+
   /**
-   * Optional flag to disable the form while submission is in progress
+   * Flag indicating if the form is currently submitting
+   * @remarks
+   * When true, disables form inputs and shows loading state
+   * @default false
    */
   isSubmitting?: boolean
+
   /**
-   * Optional className for styling the form container
+   * Optional CSS class name for styling the form container
    */
   className?: string
+
   /**
-   * Optional title for the form card
-   * If not provided, will use default based on isEditing
+   * Optional custom title for the form
+   * @remarks
+   * If not provided, defaults to "Record New Inflow" or "Edit Inflow" based on isEditing
    */
   title?: string
+
   /**
-   * Optional description for the form
-   * If not provided, will use default based on isEditing
+   * Optional custom description for the form
+   * @remarks
+   * If not provided, defaults to a context-appropriate description based on isEditing
    */
   description?: string
 }
 
+/**
+ * A form component for recording and editing monetary inflows
+ *
+ * @description
+ * This component provides a form interface for users to record or modify income and other monetary inflows.
+ * It includes fields for amount, description, and tags with real-time validation and formatting.
+ *
+ * Features:
+ * - Real-time amount formatting with currency display
+ * - Tag management with income-specific suggestions
+ * - Support for both create and edit modes
+ * - Accessible form controls with ARIA labels
+ * - Emerald-themed UI elements for positive financial transactions
+ * - Responsive design with mobile-friendly inputs
+ *
+ * @example
+ * ```tsx
+ * // Create mode
+ * <InflowForm
+ *   onSubmit={handleSubmit}
+ *   isSubmitting={isLoading}
+ * />
+ *
+ * // Edit mode
+ * <InflowForm
+ *   onSubmit={handleUpdate}
+ *   defaultValues={existingInflow}
+ *   isEditing={true}
+ *   isSubmitting={isUpdating}
+ * />
+ * ```
+ */
 export function InflowForm({
   onSubmit,
   defaultValues,

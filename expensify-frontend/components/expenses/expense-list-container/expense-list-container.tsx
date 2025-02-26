@@ -16,6 +16,14 @@ import type { ExpenseCardLayout } from '../expense-card-list/expense-card-list'
 import { ExpenseCardList } from '../expense-card-list/expense-card-list'
 import type { ExpenseCardData } from '../expense-card/expense-card'
 
+/**
+ * Metadata for pagination state and controls
+ * @interface PaginationMeta
+ * @property {number} page - Current page number (1-based)
+ * @property {number} limit - Number of items per page
+ * @property {number} total - Total number of items across all pages
+ * @property {number} pageCount - Total number of pages
+ */
 export interface PaginationMeta {
   page: number
   limit: number
@@ -23,6 +31,30 @@ export interface PaginationMeta {
   pageCount: number
 }
 
+/**
+ * Props for the ExpenseListContainer component
+ * @interface ExpenseListContainerProps
+ * @property {ExpenseCardData[]} expenses - Array of expense data to display
+ * @property {boolean} [isLoading] - Whether the container is in a loading state
+ * @property {string} [className] - Additional CSS classes to apply
+ * @property {ExpenseCardLayout} [defaultLayout] - Initial layout mode for the expense list
+ * @property {boolean} [showLayoutToggle] - Whether to show layout toggle controls
+ * @property {boolean} [showSortOptions] - Whether to show sorting options
+ * @property {Option<string>} [currentUserId] - ID of the current user for edit permissions
+ * @property {(id: string) => void} [onEdit] - Callback when edit is requested
+ * @property {(id: string) => Promise<void> | void} [onDelete] - Callback when delete is confirmed
+ * @property {(value: Option<string>) => void} onSearch - Callback when search query changes
+ * @property {(pagination: PaginationMeta) => void} [onPaginationChange] - Callback when page changes
+ * @property {PaginationMeta} [pagination] - Current pagination state
+ * @property {string} [searchPlaceholder] - Placeholder text for search input
+ * @property {React.ReactNode} [header] - Custom header content
+ * @property {React.ReactNode} [footer] - Custom footer content
+ * @property {boolean} [enableHoverEffect=true] - Whether to enable hover effects
+ * @property {'low' | 'medium' | 'high'} [hoverIntensity='high'] - Intensity of hover effects
+ * @property {string[]} [selectedTags] - Currently selected tags for filtering
+ * @property {(tag: string) => void} [onTagSelect] - Callback when a tag is selected
+ * @property {(tag: string) => void} [onTagRemove] - Callback when a tag is removed
+ */
 export interface ExpenseListContainerProps {
   expenses: ExpenseCardData[]
   isLoading?: boolean
@@ -140,6 +172,47 @@ const PaginationControls = memo(function PaginationControls({
   )
 })
 
+/**
+ * A container component that provides a complete expense management interface
+ *
+ * @module ExpenseListContainer
+ * @description
+ * This component serves as a high-level container for managing and displaying expenses.
+ * It combines search functionality, pagination, and the expense card list with additional
+ * features like tag filtering and hover effects.
+ *
+ * Features:
+ * - Search functionality for expenses
+ * - Pagination controls with dynamic page number display
+ * - Tag filtering system
+ * - Customizable layout options
+ * - Loading states
+ * - Hover effects with configurable intensity
+ * - Responsive design
+ * - Optimized performance with memoization
+ *
+ * @example
+ * ```tsx
+ * <ExpenseListContainer
+ *   expenses={expenses}
+ *   isLoading={isLoading}
+ *   currentUserId={currentUser.id}
+ *   onEdit={handleEdit}
+ *   onDelete={handleDelete}
+ *   onSearch={handleSearch}
+ *   onPaginationChange={handlePageChange}
+ *   pagination={{
+ *     page: 1,
+ *     limit: 10,
+ *     total: 100,
+ *     pageCount: 10
+ *   }}
+ *   selectedTags={selectedTags}
+ *   onTagSelect={handleTagSelect}
+ *   onTagRemove={handleTagRemove}
+ * />
+ * ```
+ */
 export function ExpenseListContainer({
   expenses,
   isLoading = false,
@@ -330,6 +403,19 @@ export function ExpenseListContainer({
   )
 }
 
-// Only memoize the entire component if it's used in a context where parent components
-// frequently re-render with the same props
+/**
+ * A memoized version of the ExpenseListContainer component
+ * @description
+ * This version of the component is wrapped in React.memo to prevent unnecessary
+ * re-renders when used in a context where parent components might frequently re-render.
+ *
+ * @example
+ * ```tsx
+ * <MemoizedExpenseListContainer
+ *   expenses={expenses}
+ *   onSearch={handleSearch}
+ *   // ... other props
+ * />
+ * ```
+ */
 export const MemoizedExpenseListContainer = memo(ExpenseListContainer)

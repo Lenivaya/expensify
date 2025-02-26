@@ -30,94 +30,211 @@ import { StatsInfoButton } from './stats-info-button'
 import { TransactionSummary } from './transaction-summary'
 import { useState } from 'react'
 
+/**
+ * Type representing the current financial balance state
+ * @interface FinanicalSummaryBalance
+ */
 type FinanicalSummaryBalance = {
   /**
-   * @description Total amount of all inflows
+   * Total amount of all inflows (income, deposits, etc.)
+   * @type {number}
+   * @description Sum of all positive financial transactions
    * @example 5000.00
    */
   totalInflows: number
+
   /**
-   * @description Total amount of all expenses
+   * Total amount of all expenses (purchases, bills, etc.)
+   * @type {number}
+   * @description Sum of all negative financial transactions
    * @example 3000.00
    */
   totalExpenses: number
+
   /**
-   * @description Current balance (inflows - expenses)
+   * Current net balance (inflows - expenses)
+   * @type {number}
+   * @description The difference between total inflows and total expenses
    * @example 2000.00
    */
   balance: number
 }
 
+/**
+ * Type representing financial statistics and metrics
+ * @interface FinancialStatisticsDto
+ */
 type FinancialStatisticsDto = {
   /**
-   * @description Average amount of inflows
+   * Average amount per inflow transaction
+   * @type {number}
+   * @description Calculated as total inflows divided by number of inflow transactions
    * @example 1000.00
    */
   averageInflow: number
+
   /**
-   * @description Average amount of expenses
+   * Average amount per expense transaction
+   * @type {number}
+   * @description Calculated as total expenses divided by number of expense transactions
    * @example 800.00
    */
   averageExpense: number
+
   /**
-   * @description Average monthly inflow
+   * Average monthly inflow amount
+   * @type {number}
+   * @description Total inflows divided by number of months in the period
    * @example 1000.00
    */
   averageMonthlyInflow: number
+
   /**
-   * @description Average monthly expense
+   * Average monthly expense amount
+   * @type {number}
+   * @description Total expenses divided by number of months in the period
    * @example 800.00
    */
   averageMonthlyExpense: number
+
   /**
-   * @description Total number of inflow transactions
+   * Total count of inflow transactions
+   * @type {number}
+   * @description Number of positive financial transactions recorded
    * @example 25
    */
   totalInflowCount: number
+
   /**
-   * @description Total number of expense transactions
+   * Total count of expense transactions
+   * @type {number}
+   * @description Number of negative financial transactions recorded
    * @example 50
    */
   totalExpenseCount: number
 }
 
+/**
+ * Complete financial summary data transfer object
+ * @interface FinancialSummaryDto
+ */
 type FinancialSummaryDto = {
+  /**
+   * Current balance information
+   * @type {FinanicalSummaryBalance}
+   */
   currentBalance: FinanicalSummaryBalance
+
+  /**
+   * Statistical metrics
+   * @type {FinancialStatisticsDto}
+   */
   statistics: FinancialStatisticsDto
 }
 
+/**
+ * Props for the FinancialSummaryCard component
+ * @interface FinancialStatisticsCardProps
+ */
 export interface FinancialStatisticsCardProps {
-  /** Financial summary data containing balance and statistics */
+  /**
+   * Financial summary data containing balance and statistics
+   * @type {FinancialSummaryDto}
+   * @description
+   * Complete financial data object containing current balance information
+   * and statistical metrics about the user's financial activity
+   */
   data: FinancialSummaryDto
-  /** Optional className for styling overrides */
+
+  /**
+   * Optional className for styling overrides
+   * @type {string}
+   * @description Additional CSS classes to apply to the component
+   */
   className?: string
-  /** Callback fired when clicking on the inflow section */
+
+  /**
+   * Callback fired when clicking on the inflow section
+   * @type {() => void}
+   * @description
+   * Handler for inflow section clicks. Can be used to navigate to
+   * detailed inflow views or open inflow-specific dialogs
+   */
   onInflowClick?: () => void
-  /** Callback fired when clicking on the expenses section */
+
+  /**
+   * Callback fired when clicking on the expenses section
+   * @type {() => void}
+   * @description
+   * Handler for expense section clicks. Can be used to navigate to
+   * detailed expense views or open expense-specific dialogs
+   */
   onExpenseClick?: () => void
-  /** Callback fired when clicking on the balance section */
+
+  /**
+   * Callback fired when clicking on the balance section
+   * @type {() => void}
+   * @description
+   * Handler for balance section clicks. Can be used to navigate to
+   * detailed balance views or open balance-specific dialogs
+   */
   onBalanceClick?: () => void
 }
 
 /**
- * A comprehensive financial summary card that displays current balance,
- * transaction totals, and financial statistics.
+ * A comprehensive financial summary card component
+ *
+ * @module FinancialSummaryCard
+ * @description
+ * Renders a beautiful and interactive card that provides a complete overview
+ * of a user's financial status. The component includes current balance,
+ * transaction summaries, and detailed statistics with a collapsible section.
  *
  * Features:
- * - Current balance with breakdown on hover
- * - Total inflows and expenses with transaction counts
- * - Average transaction statistics
+ * - Current balance display with hover breakdown
+ * - Inflow and expense summaries with transaction counts
+ * - Expense to income ratio visualization
+ * - Collapsible statistics section
  * - Interactive sections with click handlers
+ * - Tooltips for additional information
  * - Responsive design with dark mode support
- * - Collapsible statistics section for compact view
+ * - Beautiful gradients and hover effects
+ *
+ * Visual Elements:
+ * - Balance card with hover details
+ * - Progress bar for expense ratio
+ * - Transaction summary cards
+ * - Statistics section with toggle
+ * - Info tooltips
+ * - Icons and indicators
+ *
+ * States:
+ * - Collapsible statistics (showStats)
+ * - Loading states for data
+ * - Interactive hover states
+ * - Color-coded indicators based on ratios
  *
  * @example
  * ```tsx
  * <FinancialSummaryCard
- *   data={financialData}
- *   onInflowClick={() => handleInflowClick()}
- *   onExpenseClick={() => handleExpenseClick()}
- *   onBalanceClick={() => handleBalanceClick()}
+ *   data={{
+ *     currentBalance: {
+ *       totalInflows: 5000,
+ *       totalExpenses: 3000,
+ *       balance: 2000
+ *     },
+ *     statistics: {
+ *       averageInflow: 1000,
+ *       averageExpense: 600,
+ *       averageMonthlyInflow: 2500,
+ *       averageMonthlyExpense: 1500,
+ *       totalInflowCount: 25,
+ *       totalExpenseCount: 50
+ *     }
+ *   }}
+ *   onInflowClick={() => navigate('/inflows')}
+ *   onExpenseClick={() => navigate('/expenses')}
+ *   onBalanceClick={() => navigate('/balance')}
  * />
  * ```
  */

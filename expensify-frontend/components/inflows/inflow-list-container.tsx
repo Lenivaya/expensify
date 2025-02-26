@@ -16,6 +16,14 @@ import type { InflowCardLayout } from './inflow-card-list'
 import { InflowCardList } from './inflow-card-list'
 import type { InflowCardData } from './inflow-card/inflow-card'
 
+/**
+ * Metadata for pagination state and controls
+ * @interface PaginationMeta
+ * @property {number} page - Current page number (1-based)
+ * @property {number} limit - Number of items per page
+ * @property {number} total - Total number of items across all pages
+ * @property {number} pageCount - Total number of pages
+ */
 export interface PaginationMeta {
   page: number
   limit: number
@@ -23,6 +31,30 @@ export interface PaginationMeta {
   pageCount: number
 }
 
+/**
+ * Props for the InflowListContainer component
+ * @interface InflowListContainerProps
+ * @property {InflowCardData[]} inflows - Array of inflow data to display
+ * @property {boolean} [isLoading] - Whether the container is in a loading state
+ * @property {string} [className] - Additional CSS classes to apply
+ * @property {InflowCardLayout} [defaultLayout] - Initial layout mode for the inflow list
+ * @property {boolean} [showLayoutToggle] - Whether to show layout toggle controls
+ * @property {boolean} [showSortOptions] - Whether to show sorting options
+ * @property {string} [currentUserId] - ID of the current user for edit permissions
+ * @property {(id: string) => void} [onEdit] - Callback when edit is requested
+ * @property {(id: string) => Promise<void> | void} [onDelete] - Callback when delete is confirmed
+ * @property {(value: Option<string>) => void} onSearch - Callback when search query changes
+ * @property {(pagination: PaginationMeta) => void} [onPaginationChange] - Callback when page changes
+ * @property {PaginationMeta} [pagination] - Current pagination state
+ * @property {string} [searchPlaceholder] - Placeholder text for search input
+ * @property {React.ReactNode} [header] - Custom header content
+ * @property {React.ReactNode} [footer] - Custom footer content
+ * @property {boolean} [enableHoverEffect=true] - Whether to enable hover effects
+ * @property {'low' | 'medium' | 'high'} [hoverIntensity='high'] - Intensity of hover effects
+ * @property {string[]} [selectedTags] - Currently selected tags for filtering
+ * @property {(tag: string) => void} [onTagSelect] - Callback when a tag is selected
+ * @property {(tag: string) => void} [onTagRemove] - Callback when a tag is removed
+ */
 export interface InflowListContainerProps {
   inflows: InflowCardData[]
   isLoading?: boolean
@@ -71,8 +103,13 @@ const hoverStyles = {
   high: 'hover:shadow-xl hover:border-emerald-500/70 hover:shadow-emerald-500/30 hover:border-2 hover:bg-emerald-50/10 hover:-translate-y-[1px]'
 }
 
-// PaginationControls component - only memoize this since it's a complex UI element
-// that doesn't need to re-render when parent data changes
+/**
+ * Internal component for rendering pagination controls
+ * @component
+ * @description
+ * A memoized component that renders pagination controls with dynamic page numbers
+ * and handles page navigation. Only re-renders when pagination state or page numbers change.
+ */
 const PaginationControls = memo(function PaginationControls({
   paginationState,
   pageNumbers,
@@ -140,6 +177,47 @@ const PaginationControls = memo(function PaginationControls({
   )
 })
 
+/**
+ * A container component that provides a complete inflow management interface
+ *
+ * @module InflowListContainer
+ * @description
+ * This component serves as a high-level container for managing and displaying inflows.
+ * It combines search functionality, pagination, and the inflow card list with additional
+ * features like tag filtering and hover effects.
+ *
+ * Features:
+ * - Search functionality for inflows
+ * - Pagination controls with dynamic page number display
+ * - Tag filtering system
+ * - Customizable layout options
+ * - Loading states
+ * - Hover effects with configurable intensity
+ * - Responsive design
+ * - Optimized performance with memoization
+ *
+ * @example
+ * ```tsx
+ * <InflowListContainer
+ *   inflows={inflows}
+ *   isLoading={isLoading}
+ *   currentUserId={currentUser.id}
+ *   onEdit={handleEdit}
+ *   onDelete={handleDelete}
+ *   onSearch={handleSearch}
+ *   onPaginationChange={handlePageChange}
+ *   pagination={{
+ *     page: 1,
+ *     limit: 10,
+ *     total: 100,
+ *     pageCount: 10
+ *   }}
+ *   selectedTags={selectedTags}
+ *   onTagSelect={handleTagSelect}
+ *   onTagRemove={handleTagRemove}
+ * />
+ * ```
+ */
 export function InflowListContainer({
   inflows,
   isLoading = false,

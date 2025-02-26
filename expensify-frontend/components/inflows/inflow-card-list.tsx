@@ -17,11 +17,22 @@ import { Badge } from '@/components/ui/badge'
 
 /**
  * Layout options for the inflow card list
+ * @type {InflowCardLayout}
+ * @description
+ * - 'grid': Cards arranged in a responsive grid layout
+ * - 'feed': Cards stacked vertically in a feed style
+ * - 'compact': Minimalist vertical list with reduced spacing
  */
 export type InflowCardLayout = 'grid' | 'feed' | 'compact'
 
 /**
  * Sort options for inflow cards
+ * @type {InflowSortOption}
+ * @description
+ * - 'date-desc': Most recent first (default)
+ * - 'date-asc': Oldest first
+ * - 'amount-desc': Highest amount first
+ * - 'amount-asc': Lowest amount first
  */
 export type InflowSortOption =
   | 'date-desc'
@@ -32,21 +43,21 @@ export type InflowSortOption =
 /**
  * Props for the InflowCardList component
  * @interface InflowCardListProps
- * @property {InflowCardType[]} inflows - Array of inflow data to display
- * @property {boolean} [isLoading] - Loading state for the list
- * @property {string} [className] - Additional CSS classes
- * @property {InflowCardLayout} [defaultLayout='grid'] - Default layout mode
- * @property {boolean} [showLayoutToggle] - Whether to show layout toggle controls
- * @property {boolean} [showSortOptions] - Whether to show sort options
+ * @property {InflowCardData[]} inflows - Array of inflow data to display
+ * @property {boolean} [isLoading] - Whether the list is in a loading state
+ * @property {string} [className] - Additional CSS classes to apply
+ * @property {InflowCardLayout} [defaultLayout='grid'] - Initial layout mode
+ * @property {boolean} [showLayoutToggle=true] - Whether to show layout toggle controls
+ * @property {boolean} [showSortOptions=true] - Whether to show sort options
  * @property {number} [maxHeight] - Maximum height of the list container
- * @property {string} currentUserId - ID of the current user to determine authorship
- * @property {(id: string) => void} [onEdit] - Callback when an inflow is edited
- * @property {(id: string) => Promise<void> | void} [onDelete] - Callback when an inflow is deleted
+ * @property {string} currentUserId - ID of the current user for edit permissions
+ * @property {(id: string) => void} [onEdit] - Callback when edit is requested
+ * @property {(id: string) => Promise<void> | void} [onDelete] - Callback when delete is confirmed
  * @property {React.ReactNode} [header] - Custom header content
  * @property {React.ReactNode} [footer] - Custom footer content
- * @property {string[]} [selectedTags] - Array of currently selected tags for filtering
- * @property {(tag: string) => void} [onTagSelect] - Callback when a tag is selected for filtering
- * @property {(tag: string) => void} [onTagRemove] - Callback when a tag is removed from filtering
+ * @property {string[]} [selectedTags] - Currently selected tags for filtering
+ * @property {(tag: string) => void} [onTagSelect] - Callback when a tag is selected
+ * @property {(tag: string) => void} [onTagRemove] - Callback when a tag is removed
  */
 export interface InflowCardListProps {
   inflows: InflowCardData[]
@@ -67,19 +78,36 @@ export interface InflowCardListProps {
 }
 
 /**
- * InflowCardList component for displaying a list of inflow cards in various layouts
- * with edit and delete capabilities based on authorship
- * @component
+ * A flexible component for displaying a list of inflow cards with various layout and sorting options
+ *
+ * @module InflowCardList
+ * @description
+ * This component provides a customizable way to display inflow cards with support for
+ * different layouts (grid, feed, compact), sorting options, and tag filtering. It includes
+ * performance optimizations for handling large lists of inflows.
+ *
+ * Features:
+ * - Multiple layout options (grid, feed, compact)
+ * - Sorting by date and amount
+ * - Tag filtering system
+ * - Loading state with skeletons
+ * - Responsive design
+ * - Optimized rendering with memoization
+ * - Customizable header and footer
+ *
  * @example
  * ```tsx
  * <InflowCardList
- *   inflows={inflowData}
+ *   inflows={inflows}
  *   defaultLayout="grid"
  *   showLayoutToggle={true}
  *   showSortOptions={true}
- *   currentUserId={currentUserId}
- *   onEdit={(id) => handleEdit(id)}
- *   onDelete={(id) => handleDelete(id)}
+ *   currentUserId={currentUser.id}
+ *   onEdit={handleEdit}
+ *   onDelete={handleDelete}
+ *   selectedTags={['salary', 'investment']}
+ *   onTagSelect={handleTagSelect}
+ *   onTagRemove={handleTagRemove}
  * />
  * ```
  */

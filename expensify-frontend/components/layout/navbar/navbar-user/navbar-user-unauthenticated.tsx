@@ -2,6 +2,44 @@ import { Button } from '@/components/ui/button'
 import { LogIn, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 
+/**
+ * Component for rendering unauthenticated user controls in the navbar
+ *
+ * @module NavbarUserUnauthenticated
+ * @description
+ * This component displays sign-in and sign-up options for unauthenticated users
+ * in the navigation bar. It features animated buttons with hover effects and
+ * clear visual hierarchy.
+ *
+ * Features:
+ * - Animated button interactions
+ * - Gradient background on hover
+ * - Icon animations
+ * - Text rotation effects
+ * - Responsive layout
+ * - Client-side navigation with Next.js Link
+ * - Hydration warning suppression
+ *
+ * Visual Elements:
+ * - Sign in button with login icon
+ * - Sign up button with user plus icon
+ * - Separator text ("or")
+ * - Hover animations for both buttons
+ * - Gradient background container
+ *
+ * @example
+ * ```tsx
+ * // Usage in NavbarUser component
+ * export function NavbarUser() {
+ *   const { isAuthenticated } = useAuth()
+ *   return isAuthenticated ? (
+ *     <NavbarUserAuthenticated />
+ *   ) : (
+ *     <NavbarUserUnauthenticated />
+ *   )
+ * }
+ * ```
+ */
 export function NavbarUserUnauthenticated() {
   return (
     <div

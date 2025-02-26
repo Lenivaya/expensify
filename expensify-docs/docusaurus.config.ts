@@ -32,6 +32,11 @@ const possibleTags = [
   "@implements",
   "@instance",
   "@interface",
+  "@component",
+  "@summary",
+  "@remarks",
+  "@template",
+  "@module",
 ];
 
 const config: Config = {
@@ -134,6 +139,76 @@ const config: Config = {
         plugin: ["typedoc-plugin-markdown"],
       },
     ],
+    [
+      "docusaurus-plugin-typedoc",
+
+      // Options
+      {
+        entryPoints: ["../expensify-frontend/**/*.{tsx,ts}"],
+        tsconfig: "../expensify-frontend/tsconfig.json",
+        out: "./docs/app",
+        // Add these options to control what gets included
+        externalPattern: ["**/node_modules/**"],
+        excludeExternals: true,
+        excludeInternal: true,
+        excludePrivate: true,
+        excludeProtected: true,
+        disableSources: true,
+        skipErrorChecking: true,
+        // Exclude test and spec files
+        exclude: [
+          "**/main.ts", // Root main.ts
+          "**/*main.ts", // Files ending with main.ts
+          "**/*.main.ts", // Files with .main.ts extension
+          "**/main.*.ts", // Files starting with main
+          "**/*.spec.ts",
+          "**/*.test.ts",
+          "**/tests/**",
+          "**/__tests__/**",
+          "**/.storybook/**",
+          "**/next/**",
+          "**/stories/**",
+          "**/app/**",
+          "**/public/**",
+          "**/lib/api/**",
+          "**/next.config.ts",
+          "**/eslint.config.mjs",
+          "**/postcss.config.mjs",
+          "**/env.ts",
+          "**/next-env.d.ts",
+        ],
+        // Customize output
+        readme: "none",
+        sort: ["source-order"],
+        // Enable JSDoc comment processing
+        includeVersion: false,
+        commentStyle: "jsdoc",
+        jsDocCompatibility: true,
+        preserveAnchorCasing: true,
+        suppressCommentWarningsInDeclarationFiles: true,
+        // Additional settings to help with structure while preserving JSDoc
+        blockTags: possibleTags,
+        categorizeByGroup: true,
+        categoryOrder: [
+          "Controllers",
+          "Services",
+          "Models",
+          "Interfaces",
+          "Types",
+          "*",
+        ],
+        cleanOutputDir: true,
+        groupOrder: [
+          "Classes",
+          "Interfaces",
+          "Functions",
+          "Variables",
+          "TypeAliases",
+          "*",
+        ],
+        plugin: ["typedoc-plugin-markdown"],
+      },
+    ],
   ],
 
   themeConfig: {
@@ -152,6 +227,11 @@ const config: Config = {
         {
           to: "/docs/api",
           label: "Backend",
+          position: "left",
+        },
+        {
+          to: "/docs/app",
+          label: "Frontend",
           position: "left",
         },
         {

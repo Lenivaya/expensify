@@ -32,10 +32,10 @@ import { PrettyTag } from '@/components/generic/pretty-tag'
  * Data transfer object representing expense information
  * @interface ExpenseCardData
  * @property {string} id - Unique identifier for the expense
- * @property {string} amount - Pre-formatted amount from backend
+ * @property {string} amount - Pre-formatted amount from backend (e.g., "-$50.00")
  * @property {string | null} description - Optional description of the expense
  * @property {string[]} tags - Array of tags associated with the expense
- * @property {string} userId - UUID of the user who owns this expense
+ * @property {Option<string>} userId - UUID of the user who owns this expense
  * @property {string | null} updatedAt - ISO timestamp of last update
  * @property {string} createdAt - ISO timestamp of creation
  */
@@ -75,6 +75,44 @@ export interface ExpenseCardProps {
 // Memoized PrettyTag component to prevent unnecessary re-renders
 const MemoizedPrettyTag = memo(PrettyTag)
 
+/**
+ * A card component for displaying individual expense entries
+ *
+ * @module ExpenseCard
+ * @description
+ * This component displays expense information in a card format with support for
+ * various interactions like editing, deleting, and tag management. It includes
+ * features for displaying monetary amounts, dates, descriptions, and tags.
+ *
+ * Features:
+ * - Responsive card layout with hover effects
+ * - Edit and delete actions for expense owners
+ * - Tag display and interaction
+ * - Date formatting with relative and absolute time
+ * - Loading state support
+ * - Accessibility features
+ * - Delete confirmation dialog
+ * - Memoized subcomponents for performance
+ *
+ * @example
+ * ```tsx
+ * <ExpenseCard
+ *   expense={{
+ *     id: '123',
+ *     amount: '-$50.00',
+ *     description: 'Grocery shopping',
+ *     tags: ['food', 'essentials'],
+ *     userId: 'user123',
+ *     createdAt: '2024-02-25T12:00:00Z',
+ *     updatedAt: null
+ *   }}
+ *   isAuthor={true}
+ *   onEdit={(id) => handleEdit(id)}
+ *   onDelete={(id) => handleDelete(id)}
+ *   onTagClick={(tag) => handleTagFilter(tag)}
+ * />
+ * ```
+ */
 export function ExpenseCard({
   expense,
   isLoading = false,
@@ -299,5 +337,22 @@ export function ExpenseCard({
   )
 }
 
-// Export a memoized version of the component for use in lists
+/**
+ * A memoized version of the ExpenseCard component for use in lists
+ * @description
+ * This version of the component is wrapped in React.memo to prevent unnecessary
+ * re-renders when used in a list context. It should be used when the component
+ * is rendered as part of a list where parent components might frequently re-render.
+ *
+ * @example
+ * ```tsx
+ * const expenseList = expenses.map(expense => (
+ *   <MemoizedExpenseCard
+ *     key={expense.id}
+ *     expense={expense}
+ *     // ... other props
+ *   />
+ * ))
+ * ```
+ */
 export const MemoizedExpenseCard = memo(ExpenseCard)

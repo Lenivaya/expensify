@@ -1,4 +1,11 @@
+/**
+ * Maximum number of tags allowed per expense
+ */
 const MAX_TAGS = 5
+
+/**
+ * Maximum length of a single tag in characters
+ */
 const MAX_TAG_LENGTH = 20
 
 import { z } from 'zod'
@@ -38,6 +45,9 @@ import { cn } from '@/lib/utils'
 import { useCallback, useState, useEffect } from 'react'
 import { Separator } from '@/components/ui/separator'
 
+/**
+ * List of predefined tags that are suggested to users when adding tags to an expense
+ */
 const SUGGESTED_TAGS = [
   'groceries',
   'utilities',
@@ -49,6 +59,13 @@ const SUGGESTED_TAGS = [
   'bills'
 ]
 
+/**
+ * Schema for validating expense form data
+ * @remarks
+ * - Amount must be between 0.01 and 1,000,000
+ * - Description must be between 3 and 100 characters
+ * - Tags are optional but must follow specific format rules if provided
+ */
 export const expenseSchema = z.object({
   amount: z
     .number()
@@ -76,8 +93,16 @@ export const expenseSchema = z.object({
     .default([])
 })
 
+/**
+ * Type representing the validated form values from the expense schema
+ * @see expenseSchema for validation rules
+ */
 export type ExpenseFormValues = z.infer<typeof expenseSchema>
 
+/**
+ * Props for the ExpenseForm component
+ * @interface
+ */
 export interface ExpenseFormProps {
   /**
    * Callback function that handles form submission
@@ -85,35 +110,82 @@ export interface ExpenseFormProps {
    * @returns A promise that resolves when the submission is complete
    */
   onSubmit: (values: ExpenseFormValues) => Promise<void>
+
   /**
-   * Optional initial values for the form
+   * Optional initial values for the form fields
+   * @remarks
+   * - If provided, the form will be pre-filled with these values
+   * - Useful for edit mode where you want to show existing expense data
    */
   defaultValues?: Partial<ExpenseFormValues>
+
   /**
-   * Optional flag to indicate if this is an edit form
+   * Flag indicating if the form is in edit mode
+   * @remarks
+   * Changes the form's behavior and UI elements to reflect editing an existing expense
    * @default false
    */
   isEditing?: boolean
+
   /**
-   * Optional flag to disable the form while submission is in progress
+   * Flag indicating if the form is currently submitting
+   * @remarks
+   * When true, disables form inputs and shows loading state
+   * @default false
    */
   isSubmitting?: boolean
+
   /**
-   * Optional className for styling the form container
+   * Optional CSS class name for styling the form container
    */
   className?: string
+
   /**
-   * Optional title for the form card
-   * If not provided, will use default based on isEditing
+   * Optional custom title for the form
+   * @remarks
+   * If not provided, defaults to "Create New Expense" or "Edit Expense" based on isEditing
    */
   title?: string
+
   /**
-   * Optional description for the form
-   * If not provided, will use default based on isEditing
+   * Optional custom description for the form
+   * @remarks
+   * If not provided, defaults to a context-appropriate description based on isEditing
    */
   description?: string
 }
 
+/**
+ * A form component for creating and editing expenses
+ *
+ * @description
+ * This component provides a form interface for users to input or modify expense details.
+ * It includes fields for amount, description, and tags with real-time validation and formatting.
+ *
+ * Features:
+ * - Real-time amount formatting with currency display
+ * - Tag management with suggestions and validation
+ * - Support for both create and edit modes
+ * - Accessible form controls with ARIA labels
+ * - Responsive design with mobile-friendly inputs
+ *
+ * @example
+ * ```tsx
+ * // Create mode
+ * <ExpenseForm
+ *   onSubmit={handleSubmit}
+ *   isSubmitting={isLoading}
+ * />
+ *
+ * // Edit mode
+ * <ExpenseForm
+ *   onSubmit={handleUpdate}
+ *   defaultValues={existingExpense}
+ *   isEditing={true}
+ *   isSubmitting={isUpdating}
+ * />
+ * ```
+ */
 export function ExpenseForm({
   onSubmit,
   defaultValues,

@@ -25,6 +25,12 @@ import Link from 'next/link'
 import { expensifyApi } from '@/components/providers/query/query-provider'
 import { useAuthToken } from '@/lib/hooks/use-auth-token'
 
+/**
+ * Schema for validating login form data
+ * @remarks
+ * - Login (username/email) must be between 3 and 50 characters
+ * - Password must be between 8 and 50 characters
+ */
 const loginSchema = z.object({
   login: z
     .string()
@@ -36,8 +42,35 @@ const loginSchema = z.object({
     .max(50, 'Password must be less than 50 characters')
 })
 
+/**
+ * Type representing the validated form values from the login schema
+ * @see loginSchema for validation rules
+ */
 type LoginFormValues = z.infer<typeof loginSchema>
 
+/**
+ * A form component for user authentication
+ *
+ * @description
+ * This component provides a login form interface with username/email and password fields.
+ * It handles user authentication and includes error handling, loading states, and navigation.
+ *
+ * Features:
+ * - Support for both username and email login
+ * - Password visibility toggle
+ * - Form validation with error messages
+ * - Loading states during authentication
+ * - "Forgot password" link
+ * - Navigation to registration
+ * - Terms of service and privacy policy links
+ * - Accessible form controls with ARIA labels
+ * - Responsive design with mobile-friendly inputs
+ *
+ * @example
+ * ```tsx
+ * <LoginForm />
+ * ```
+ */
 export function LoginForm() {
   const router = useRouter()
 

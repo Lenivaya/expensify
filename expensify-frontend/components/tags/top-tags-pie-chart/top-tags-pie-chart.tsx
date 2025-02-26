@@ -39,7 +39,15 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 
-// Define extended chart data type with fill property
+/**
+ * Extended chart data type with fill property
+ * @interface ChartDataItem
+ * @property {string} tag - The tag name
+ * @property {string} type - Transaction type (inflow/expense)
+ * @property {number} amount - Total amount for this tag
+ * @property {number} percentage - Percentage of total this tag represents
+ * @property {string} fill - Color to use for this segment
+ */
 interface ChartDataItem {
   tag: string
   type: string
@@ -48,20 +56,56 @@ interface ChartDataItem {
   fill: string
 }
 
-// Custom legend item component
+/**
+ * Props for the CustomLegendItem component
+ * @interface CustomLegendItemProps
+ * @property {string} color - Color for the legend item
+ * @property {string} value - Display value
+ * @property {string} tag - Tag name
+ * @property {number} amount - Monetary amount
+ * @property {number} percentage - Percentage of total
+ */
+interface CustomLegendItemProps {
+  color: string
+  value: string
+  tag: string
+  amount: number
+  percentage: number
+}
+
+/**
+ * Custom legend item component for the pie chart
+ *
+ * @module CustomLegendItem
+ * @description
+ * Renders a single legend item with tag information, amount, and percentage.
+ * Includes visual elements like color indicator and badge.
+ *
+ * Features:
+ * - Color indicator square
+ * - Tag name with truncation
+ * - Percentage badge
+ * - Formatted monetary amount
+ * - Responsive layout
+ *
+ * @example
+ * ```tsx
+ * <CustomLegendItem
+ *   color="#3B82F6"
+ *   value="Groceries"
+ *   tag="Groceries"
+ *   amount={1234.56}
+ *   percentage={25.5}
+ * />
+ * ```
+ */
 const CustomLegendItem = ({
   color,
   value,
   tag,
   amount,
   percentage
-}: {
-  color: string
-  value: string
-  tag: string
-  amount: number
-  percentage: number
-}) => {
+}: CustomLegendItemProps) => {
   return (
     <div className='flex items-center gap-3 p-2 rounded-md transition-colors w-full'>
       <div
@@ -88,6 +132,53 @@ const CustomLegendItem = ({
   )
 }
 
+/**
+ * Interactive pie chart component for displaying tag distribution
+ *
+ * @module TopTagsPieChart
+ * @description
+ * A comprehensive pie chart component for visualizing the distribution of tags
+ * across transactions. Supports filtering by type, searching, and interactive
+ * hover states.
+ *
+ * Features:
+ * - Interactive pie segments with hover effects
+ * - Filterable by transaction type (all/inflow/expense)
+ * - Searchable tags with smooth transitions
+ * - Custom legend with detailed information
+ * - Percentage thresholds for labels and segments
+ * - Responsive design
+ * - Memoized calculations for performance
+ * - Accessible controls and information
+ *
+ * Chart Features:
+ * - Active segment highlighting
+ * - Animated transitions
+ * - Custom tooltips
+ * - Color-coded segments
+ * - Percentage calculations
+ * - Minimum threshold filtering
+ *
+ * User Interface:
+ * - Type filter tabs with icons
+ * - Search input with clear button
+ * - Interactive legend
+ * - Title and description
+ * - Empty state handling
+ *
+ * @example
+ * ```tsx
+ * <TopTagsPieChart
+ *   tagStats={[
+ *     { tag: "Groceries", amount: 500, type: "expense" },
+ *     { tag: "Salary", amount: 5000, type: "inflow" }
+ *   ]}
+ *   showLegend={true}
+ *   labelMinPercentage={5}
+ *   pieMinPercentage={1}
+ * />
+ * ```
+ */
 export function TopTagsPieChart({
   tagStats,
   className,

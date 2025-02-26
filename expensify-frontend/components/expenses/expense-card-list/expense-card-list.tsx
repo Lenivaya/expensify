@@ -16,12 +16,56 @@ import type React from 'react'
 import { Badge } from '@/components/ui/badge'
 
 /**
+ * A flexible component for displaying a list of expense cards with various layout and sorting options
+ *
+ * @module ExpenseCardList
+ * @description
+ * This component provides a customizable way to display expense cards with support for
+ * different layouts (grid, feed, compact), sorting options, and tag filtering. It includes
+ * performance optimizations for handling large lists of expenses.
+ *
+ * Features:
+ * - Multiple layout options (grid, feed, compact)
+ * - Sorting by date and amount
+ * - Tag filtering system
+ * - Loading state with skeletons
+ * - Responsive design
+ * - Optimized rendering with memoization
+ * - Customizable header and footer
+ *
+ * @example
+ * ```tsx
+ * <ExpenseCardList
+ *   expenses={expenses}
+ *   defaultLayout="grid"
+ *   showLayoutToggle={true}
+ *   showSortOptions={true}
+ *   currentUserId="user123"
+ *   onEdit={handleEdit}
+ *   onDelete={handleDelete}
+ *   selectedTags={['food', 'bills']}
+ *   onTagSelect={handleTagSelect}
+ *   onTagRemove={handleTagRemove}
+ * />
+ * ```
+ */
+
+/**
  * Layout options for the expense card list
+ * @description
+ * - 'grid': Displays expenses in a responsive grid layout
+ * - 'feed': Shows expenses in a single column feed
+ * - 'compact': Minimal layout with reduced spacing and styling
  */
 export type ExpenseCardLayout = 'grid' | 'feed' | 'compact'
 
 /**
  * Sort options for expense cards
+ * @description
+ * - 'date-desc': Newest expenses first
+ * - 'date-asc': Oldest expenses first
+ * - 'amount-desc': Highest amount first
+ * - 'amount-asc': Lowest amount first
  */
 export type ExpenseSortOption =
   | 'date-desc'
@@ -31,6 +75,21 @@ export type ExpenseSortOption =
 
 /**
  * Props for the ExpenseCardList component
+ * @interface ExpenseCardListProps
+ * @property {ExpenseCardData[]} expenses - Array of expense data to display
+ * @property {boolean} [isLoading] - Whether the list is in a loading state
+ * @property {string} [className] - Additional CSS classes to apply
+ * @property {ExpenseCardLayout} [defaultLayout='grid'] - Initial layout mode
+ * @property {boolean} [showLayoutToggle=true] - Whether to show layout toggle controls
+ * @property {boolean} [showSortOptions=true] - Whether to show sorting options
+ * @property {Option<string>} [currentUserId] - ID of the current user for edit permissions
+ * @property {(id: string) => void} [onEdit] - Callback when edit is requested
+ * @property {(id: string) => Promise<void> | void} [onDelete] - Callback when delete is confirmed
+ * @property {React.ReactNode} [header] - Custom header content
+ * @property {React.ReactNode} [footer] - Custom footer content
+ * @property {string[]} [selectedTags] - Currently selected tags for filtering
+ * @property {(tag: string) => void} [onTagSelect] - Callback when a tag is selected
+ * @property {(tag: string) => void} [onTagRemove] - Callback when a tag is removed
  */
 export interface ExpenseCardListProps {
   expenses: ExpenseCardData[]

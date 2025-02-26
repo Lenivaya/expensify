@@ -44,8 +44,12 @@ import { useState, useCallback, useMemo, memo } from 'react'
 /**
  * Data transfer object representing inflow information
  * @interface InflowCardData
+ * @description
+ * Represents the core data structure for an inflow entry, including
+ * financial details, metadata, and timestamps.
+ *
  * @property {string} id - Unique identifier for the inflow
- * @property {string} amount - Pre-formatted amount from backend
+ * @property {string} amount - Pre-formatted amount from backend (e.g., "$1,234.56")
  * @property {string | null} description - Optional description of the inflow
  * @property {string[]} tags - Array of tags associated with the inflow
  * @property {string} userId - UUID of the user who owns this inflow
@@ -65,7 +69,11 @@ export type InflowCardData = {
 /**
  * Props for the InflowCard component
  * @interface InflowCardProps
- * @property {InflowData} inflow - The inflow data to display
+ * @description
+ * Props that define the behavior and appearance of an inflow card, including
+ * data display, interaction handlers, and visual states.
+ *
+ * @property {InflowCardData} inflow - The inflow data to display
  * @property {boolean} [isLoading] - Whether the card is in a loading state
  * @property {string} [className] - Additional CSS classes to apply to the card
  * @property {boolean} [isAuthor] - Whether the current user is the author (controls edit/delete permissions)
@@ -89,15 +97,41 @@ export interface InflowCardProps {
 const MemoizedPrettyTag = memo(PrettyTag)
 
 /**
- * InflowCard component displays inflow information in a card format with edit and delete capabilities
- * @component
+ * A card component for displaying individual inflow entries
+ *
+ * @module InflowCard
+ * @description
+ * This component displays inflow information in a card format with interactive
+ * features like editing, deletion, and tag management. It includes optimizations
+ * for performance and a rich set of user interactions.
+ *
+ * Features:
+ * - Responsive layout with flexible width
+ * - Edit and delete capabilities for authors
+ * - Interactive tags with click handling
+ * - Loading state with skeleton UI
+ * - Relative and absolute timestamp display
+ * - Optimized rendering with memoization
+ * - Accessible tooltips and hover cards
+ * - Delete confirmation dialog
+ * - Visual feedback for user interactions
+ *
  * @example
  * ```tsx
  * <InflowCard
- *   inflow={inflowData}
- *   isAuthor={isAuthor}
- *   onEdit={(id) => handleEdit(id)}
- *   onDelete={(id) => handleDelete(id)}
+ *   inflow={{
+ *     id: '123',
+ *     amount: '$1,000.00',
+ *     description: 'Monthly salary',
+ *     tags: ['income', 'salary'],
+ *     userId: 'user123',
+ *     createdAt: '2024-02-25T12:00:00Z',
+ *     updatedAt: null
+ *   }}
+ *   isAuthor={true}
+ *   onEdit={handleEdit}
+ *   onDelete={handleDelete}
+ *   onTagClick={handleTagClick}
  * />
  * ```
  */

@@ -8,16 +8,68 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import type { FinanicalSummaryBalance } from './types'
 
+/**
+ * Props for the BalanceSection component
+ * @interface BalanceSectionProps
+ */
 interface BalanceSectionProps {
-  /** Balance data containing total inflows, expenses and current balance */
+  /**
+   * Balance data containing total inflows, expenses and current balance
+   * @type {FinanicalSummaryBalance}
+   * @description
+   * Object containing the user's financial balance information including:
+   * - Total inflows (positive transactions)
+   * - Total expenses (negative transactions)
+   * - Current balance (net amount)
+   */
   balance: FinanicalSummaryBalance
-  /** Optional click handler for the balance section */
+
+  /**
+   * Optional click handler for the balance section
+   * @type {() => void}
+   * @description
+   * When provided, makes the balance section clickable and adds hover effects.
+   * Can be used to navigate to detailed balance view or trigger other actions.
+   */
   onClick?: () => void
 }
 
 /**
- * Displays the current balance with a hover card showing the breakdown
- * of total inflows and expenses
+ * A component that displays the current balance with detailed breakdown
+ *
+ * @module BalanceSection
+ * @description
+ * Renders a beautiful card displaying the current balance with a hover card
+ * showing the breakdown of total inflows and expenses. The component features
+ * a modern glassmorphism design with gradient backgrounds and hover effects.
+ *
+ * Features:
+ * - Gradient background with glassmorphism effect
+ * - Hover card with delayed opening (200ms)
+ * - Responsive layout
+ * - Interactive hover effects when clickable
+ * - Color-coded currency displays
+ * - Detailed balance breakdown on hover
+ * - Smooth animations and transitions
+ *
+ * Visual Elements:
+ * - Current balance display
+ * - Total inflows (positive transactions)
+ * - Total expenses (negative transactions)
+ * - Color indicators for positive/negative amounts
+ * - Gradient backgrounds and borders
+ *
+ * @example
+ * ```tsx
+ * <BalanceSection
+ *   balance={{
+ *     totalInflows: 5000,
+ *     totalExpenses: 3000,
+ *     balance: 2000
+ *   }}
+ *   onClick={() => navigate('/detailed-balance')}
+ * />
+ * ```
  */
 export function BalanceSection({ balance, onClick }: BalanceSectionProps) {
   return (
