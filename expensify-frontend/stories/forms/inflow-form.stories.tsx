@@ -20,7 +20,6 @@ const meta = {
   title: 'Forms/Inflows/InflowForm',
   component: InflowForm,
   parameters: {
-    chromatic: { disable: true, disableSnapshot: true },
     layout: 'centered',
     docs: {
       description: {

@@ -19,7 +19,6 @@ const meta = {
   title: 'Forms/Expenses/ExpenseForm',
   component: ExpenseForm,
   parameters: {
-    chromatic: { disable: true, disableSnapshot: true },
     layout: 'centered',
     docs: {
       description: {
