@@ -1,4 +1,4 @@
-# expensify-frontend
+# Frontend
 
 ## Modules
 

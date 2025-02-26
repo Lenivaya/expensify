@@ -1,4 +1,4 @@
-# expensify-backend
+# Backend
 
 ## Modules
 

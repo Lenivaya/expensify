@@ -108,6 +108,11 @@ const config: Config = {
           position: "left",
         },
         {
+          to: "/docs/expensify/auth-controller-sign-in",
+          label: "API",
+          position: "left",
+        },
+        {
           href: "https://github.com/Lenivaya/expensify",
           label: "GitHub",
           position: "right",
@@ -131,7 +136,7 @@ const config: Config = {
         id: "openapi",
         docsPluginId: "classic",
         config: {
-          expensify: {
+          ExpensifyOpenApi: {
             specPath: "../expensify-backend/openapi-spec.yaml",
             outputDir: "docs/expensify",
             sidebarOptions: {
@@ -147,6 +152,7 @@ const config: Config = {
       // Options
       {
         id: "typedoc-backend",
+        name: "Backend",
         entryPoints: ["../expensify-backend/src/**/*.ts"],
         tsconfig: "../expensify-backend/tsconfig.json",
         out: "./docs/api",
@@ -207,6 +213,7 @@ const config: Config = {
       // Options
       {
         id: "typedoc-app",
+        name: "Frontend",
         entryPoints: ["../expensify-frontend/**/*.{tsx,ts}"],
         tsconfig: "../expensify-frontend/tsconfig.json",
         out: "./docs/app",
