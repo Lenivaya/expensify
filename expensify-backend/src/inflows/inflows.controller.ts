@@ -35,6 +35,11 @@ import { InflowSearchDto } from './dto/inflow-search.dto'
 import { TagStatistics } from 'src/common/dto/tag-stats.dto'
 import { MonthlyStats } from 'src/common/dto/month-stats.dto'
 
+/**
+ * Controller handling all inflow-related HTTP endpoints.
+ * Provides REST API endpoints for managing income transactions.
+ * All endpoints require authentication via JWT.
+ */
 @ApiTags('Inflows')
 @Controller('inflows')
 @UseGuards(JwtAuthGuard)
@@ -43,6 +48,12 @@ import { MonthlyStats } from 'src/common/dto/month-stats.dto'
 export class InflowsController {
   constructor(private readonly inflowsService: InflowsService) {}
 
+  /**
+   * Creates a new inflow record
+   * @param request - The HTTP request containing the authenticated user
+   * @param createInflowDto - The inflow data to create
+   * @returns The created inflow record
+   */
   @Post()
   @HttpCode(201)
   @ApiOperation({
@@ -64,6 +75,15 @@ export class InflowsController {
     return await this.inflowsService.create(request.user.id, createInflowDto)
   }
 
+  /**
+   * Retrieves all inflows with optional filtering and pagination
+   * @param request - The HTTP request containing the authenticated user
+   * @param page - Page number for pagination
+   * @param limit - Number of items per page
+   * @param search - Search term for filtering
+   * @param tags - Array of tags to filter by
+   * @returns Paginated list of inflows
+   */
   @Get()
   @ApiOperation({
     summary: 'Get all inflows',
@@ -112,6 +132,12 @@ export class InflowsController {
     })
   }
 
+  /**
+   * Retrieves a specific inflow by ID
+   * @param request - The HTTP request containing the authenticated user
+   * @param id - The ID of the inflow to retrieve
+   * @returns The requested inflow record
+   */
   @Get(':id')
   @ApiOperation({
     summary: 'Get inflow by ID',
@@ -134,6 +160,13 @@ export class InflowsController {
     return await this.inflowsService.findById(request.user.id, id)
   }
 
+  /**
+   * Updates an existing inflow record
+   * @param request - The HTTP request containing the authenticated user
+   * @param id - The ID of the inflow to update
+   * @param updateInflowDto - The data to update
+   * @returns The updated inflow record
+   */
   @Patch(':id')
   @ApiOperation({
     summary: 'Update inflow',
@@ -161,6 +194,12 @@ export class InflowsController {
     )
   }
 
+  /**
+   * Deletes an inflow record
+   * @param request - The HTTP request containing the authenticated user
+   * @param id - The ID of the inflow to delete
+   * @returns The deleted inflow record
+   */
   @Delete(':id')
   @ApiOperation({
     summary: 'Delete inflow',
@@ -183,6 +222,11 @@ export class InflowsController {
     return await this.inflowsService.remove(request.user.id, id)
   }
 
+  /**
+   * Retrieves the total amount of all inflows
+   * @param request - The HTTP request containing the authenticated user
+   * @returns The total amount of all inflows
+   */
   @Get('stats/total')
   @ApiOperation({
     summary: 'Get total inflow',
@@ -199,6 +243,11 @@ export class InflowsController {
     return await this.inflowsService.getTotalInflow(request.user.id)
   }
 
+  /**
+   * Retrieves statistics about inflow tags
+   * @param request - The HTTP request containing the authenticated user
+   * @returns Array of tag statistics
+   */
   @Get('stats/tags')
   @ApiOperation({
     summary: 'Get tag statistics',
@@ -216,6 +265,12 @@ export class InflowsController {
     return await this.inflowsService.getTagStats(request.user.id)
   }
 
+  /**
+   * Retrieves monthly statistics for a specific year
+   * @param request - The HTTP request containing the authenticated user
+   * @param year - The year to get statistics for
+   * @returns Array of monthly statistics
+   */
   @Get('stats/monthly/:year')
   @ApiOperation({
     summary: 'Get monthly statistics',

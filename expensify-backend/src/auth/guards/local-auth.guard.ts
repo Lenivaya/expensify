@@ -1,6 +1,27 @@
 import { Injectable } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 
+/**
+ * Guard that implements local (username/password) authentication.
+ *
+ * @description
+ * This guard extends Passport's local authentication guard to protect routes
+ * that require username/password authentication. It is typically used for
+ * login endpoints where users provide their credentials.
+ *
+ * Features:
+ * - Implements username/password authentication
+ * - Integrates with LocalStrategy for credential validation
+ * - Automatically handles authentication failures
+ *
+ * @example
+ * // Login endpoint using local authentication
+ * @UseGuards(LocalAuthGuard)
+ * @Post('login')
+ * async login(@Request() req) {
+ *   return this.authService.login(req.user);
+ * }
+ */
 @Injectable()
 export class LocalAuthGuard extends AuthGuard('local') {}
 

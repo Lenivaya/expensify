@@ -1,0 +1,3 @@
+# Variable: inflowInsertSchema
+
+> `const` **inflowInsertSchema**: `ZodObject`\<`Omit`\<\{ `updatedAt`: `ZodOptional`\<`ZodNullable`\<`ZodDate`\>\>; `createdAt`: `ZodOptional`\<`ZodDate`\>; `deletedAt`: `ZodOptional`\<`ZodNullable`\<`ZodDate`\>\>; `id`: `ZodOptional`\<`ZodString`\>; `amount`: `ZodString`; `description`: `ZodOptional`\<`ZodNullable`\<`ZodString`\>\>; `tags`: `ZodOptional`\<`ZodArray`\<`ZodString`, `"many"`\>\>; `userId`: `ZodString`; \}, `"updatedAt"` \| `"createdAt"` \| `"deletedAt"`\>, `"strip"`, `ZodTypeAny`, \{ `id`: `string`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; `userId`: `string`; \}, \{ `id`: `string`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; `userId`: `string`; \}\>

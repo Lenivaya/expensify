@@ -12,6 +12,10 @@ import { TagStatistics } from 'src/common/dto/tag-stats.dto'
 import { MonthlyStats } from 'src/common/dto/month-stats.dto'
 import { UsersService } from 'src/users/users.service'
 
+/**
+ * Service responsible for managing inflow (income) operations.
+ * Handles CRUD operations, statistics, and data aggregation for inflows.
+ */
 @Injectable()
 export class InflowsService {
   constructor(
@@ -19,6 +23,12 @@ export class InflowsService {
     private readonly usersService: UsersService
   ) {}
 
+  /**
+   * Creates a new inflow record for a user
+   * @param userId - The ID of the user creating the inflow
+   * @param createInflowDto - The inflow data to create
+   * @returns The created inflow record
+   */
   async create(
     userId: string,
     createInflowDto: CreateInflowDto
@@ -38,6 +48,16 @@ export class InflowsService {
     return inflow
   }
 
+  /**
+   * Retrieves all inflows for a user with optional filtering and pagination
+   * @param userId - The ID of the user
+   * @param params - Optional search parameters
+   * @param params.search - Search term for filtering by description or tags
+   * @param params.tags - Array of tags to filter by
+   * @param params.page - Page number for pagination
+   * @param params.limit - Number of items per page
+   * @returns Paginated list of inflows matching the criteria
+   */
   async findAll(
     userId: string,
     params?: {
@@ -109,6 +129,13 @@ export class InflowsService {
     }
   }
 
+  /**
+   * Finds a specific inflow by ID for a user
+   * @param userId - The ID of the user
+   * @param id - The ID of the inflow to find
+   * @returns The found inflow record
+   * @throws NotFoundException if the inflow doesn't exist
+   */
   async findById(userId: string, id: string) {
     const [inflow] = await this.drizzleService.db
       .select()
@@ -122,6 +149,14 @@ export class InflowsService {
     return inflow
   }
 
+  /**
+   * Updates an existing inflow record
+   * @param userId - The ID of the user
+   * @param id - The ID of the inflow to update
+   * @param updateInflowDto - The data to update
+   * @returns The updated inflow record
+   * @throws NotFoundException if the inflow doesn't exist
+   */
   async update(userId: string, id: string, updateInflowDto: UpdateInflowDto) {
     const [inflow] = await this.drizzleService.db
       .update(inflows)
@@ -147,6 +182,13 @@ export class InflowsService {
     return inflow
   }
 
+  /**
+   * Removes an inflow record
+   * @param userId - The ID of the user
+   * @param id - The ID of the inflow to remove
+   * @returns The removed inflow record
+   * @throws NotFoundException if the inflow doesn't exist
+   */
   async remove(userId: string, id: string) {
     const [inflow] = await this.drizzleService.db
       .delete(inflows)
@@ -162,6 +204,11 @@ export class InflowsService {
     return inflow
   }
 
+  /**
+   * Calculates the total amount of all inflows for a user
+   * @param userId - The ID of the user
+   * @returns The total amount of all inflows
+   */
   async getTotalInflow(userId: string) {
     const [result] = await this.drizzleService.db
       .select({
@@ -173,6 +220,11 @@ export class InflowsService {
     return result.total || 0
   }
 
+  /**
+   * Retrieves statistics about inflow tags
+   * @param userId - The ID of the user
+   * @returns Array of tag statistics including usage count and total amount
+   */
   async getTagStats(userId: string): Promise<TagStatistics[]> {
     const result = await this.drizzleService.db
       .select({
@@ -188,6 +240,12 @@ export class InflowsService {
     return result
   }
 
+  /**
+   * Retrieves monthly statistics for inflows in a specific year
+   * @param userId - The ID of the user
+   * @param year - The year to get statistics for
+   * @returns Array of monthly statistics
+   */
   async getMonthlyStats(userId: string, year: number): Promise<MonthlyStats[]> {
     const result = await this.drizzleService.db
       .select({

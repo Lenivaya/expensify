@@ -4,18 +4,80 @@ import { IsNotEmpty } from 'class-validator'
 import { MetaSearchInfo } from '../../common/dto/meta-search-info.dto'
 import { InflowDto } from './inflow.dto'
 
+/**
+ * Data Transfer Object for inflow search results.
+ *
+ * @description
+ * This DTO represents the paginated search results for inflow records.
+ * It includes both the actual inflow data and metadata about the search results
+ * such as pagination information and total count.
+ *
+ * @example
+ * {
+ *   data: [
+ *     {
+ *       id: '1',
+ *       amount: 2500.0,
+ *       description: 'Monthly salary',
+ *       tags: ['salary'],
+ *       createdAt: '2024-02-26T10:00:00Z',
+ *       updatedAt: '2024-02-26T10:00:00Z'
+ *     }
+ *   ],
+ *   meta: {
+ *     total: 1,
+ *     page: 1,
+ *     limit: 10
+ *   }
+ * }
+ */
 @Exclude()
 export class InflowSearchDto {
+  /**
+   * Array of inflow records that match the search criteria.
+   * Contains the full inflow information for each matching record.
+   * The array may be empty if no records match the search criteria.
+   *
+   * @type {InflowDto[]}
+   * @required
+   * @example [
+   *   {
+   *     id: '1',
+   *     amount: 2500.0,
+   *     description: 'Monthly salary',
+   *     tags: ['salary'],
+   *     createdAt: '2024-02-26T10:00:00Z',
+   *     updatedAt: '2024-02-26T10:00:00Z'
+   *   }
+   * ]
+   */
   @Expose()
   @ApiProperty({
-    description: 'List of expenses found'
+    description: 'Array of inflow records matching the search criteria',
+    type: [InflowDto],
+    isArray: true
   })
   @IsNotEmpty()
   data: InflowDto[]
 
+  /**
+   * Metadata about the search results, including pagination information.
+   * Contains total count of matching records, current page number,
+   * and number of records per page (limit).
+   *
+   * @type {MetaSearchInfo}
+   * @required
+   * @example {
+   *   total: 1,
+   *   page: 1,
+   *   limit: 10
+   * }
+   */
   @Expose()
   @ApiProperty({
-    description: 'Meta information about search results'
+    description:
+      'Metadata about the search results including pagination information',
+    type: MetaSearchInfo
   })
   @IsNotEmpty()
   meta: MetaSearchInfo

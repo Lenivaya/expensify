@@ -1,0 +1,3 @@
+# Variable: expenseSelectSchema
+
+> `const` **expenseSelectSchema**: `BuildSchema`\<`"select"`, \{ `updatedAt`: `PgColumn`\<\{\}, \{\}, \{\}\>; `createdAt`: `PgColumn`\<\{\}, \{\}, \{\}\>; `deletedAt`: `PgColumn`\<\{\}, \{\}, \{\}\>; `id`: `PgColumn`\<\{\}, \{\}, \{\}\>; `amount`: `PgColumn`\<\{\}, \{\}, \{\}\>; `description`: `PgColumn`\<\{\}, \{\}, \{\}\>; `tags`: `PgColumn`\<\{\}, \{\}, \{\}\>; `userId`: `PgColumn`\<\{\}, \{\}, \{\}\>; \}, \{ `createdAt`: `ZodEffects`\<`ZodDateString`, `Date`, `string`\>; `updatedAt`: `ZodNullable`\<`ZodEffects`\<`ZodDateString`, `Date`, `string`\>\>; `deletedAt`: `ZodNullable`\<`ZodEffects`\<`ZodDateString`, `Date`, `string`\>\>; \}\>

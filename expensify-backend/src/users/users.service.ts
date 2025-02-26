@@ -16,8 +16,19 @@ import { Inject } from '@nestjs/common'
 import { FinancialSummaryDto } from './dto/financial-summary.dto'
 import { BalanceDto } from './dto/balance.dto'
 
+/**
+ * Service responsible for handling user-related business logic in the Expensify application.
+ *
+ * This service provides methods for managing user profiles and retrieving financial data
+ * associated with users, including balance information, financial summaries, and transaction statistics.
+ * It implements caching strategies to optimize performance for frequently accessed data.
+ */
 @Injectable()
 export class UsersService {
+  /**
+   * Cache key constants used for storing and retrieving cached data.
+   * These keys are used as part of the cache key generation to ensure unique cache entries.
+   */
   private static readonly CACHE_KEYS = {
     PROFILE: 'profile',
     BALANCE: 'balance',
@@ -26,18 +37,49 @@ export class UsersService {
     HISTORY: 'history'
   } as const
 
+  /**
+   * Default cache time-to-live in seconds.
+   * Cached data will expire after this duration.
+   */
   private readonly CACHE_TTL = 300 // 5 minutes in seconds
+
+  /**
+   * Prefix used for all user-related cache keys to avoid collisions with other cached data.
+   */
   private readonly CACHE_PREFIX = 'user:'
 
+  /**
+   * Creates an instance of the UsersService.
+   *
+   * @param drizzleService - Service for database operations using Drizzle ORM
+   * @param cacheManager - Cache manager for storing and retrieving cached data
+   */
   constructor(
     private readonly drizzleService: DrizzleService,
     @Inject(CACHE_MANAGER) private cacheManager: Cache
   ) {}
 
+  /**
+   * Generates a cache key for a specific user and data type.
+   *
+   * @param key - The type of data being cached (e.g., 'profile', 'balance')
+   * @param userId - The ID of the user the data belongs to
+   * @param suffix - Optional additional identifier for the cached data
+   * @returns A unique cache key string
+   */
   private getCacheKey(key: string, userId: string, suffix?: string): string {
     return `${this.CACHE_PREFIX}${userId}:${key}${suffix ? `:${suffix}` : ''}`
   }
 
+  /**
+   * Retrieves data from cache if available, or fetches it using the provided function and caches it.
+   *
+   * @param key - The type of data being cached
+   * @param userId - The ID of the user the data belongs to
+   * @param fetchData - Function to fetch the data if not found in cache
+   * @param suffix - Optional additional identifier for the cached data
+   * @returns The requested data, either from cache or freshly fetched
+   */
   private async getCachedData<T>(
     key: string,
     userId: string,
@@ -55,6 +97,12 @@ export class UsersService {
     return data
   }
 
+  /**
+   * Invalidates all cached data for a specific user.
+   * This should be called whenever user data is modified to ensure fresh data is fetched.
+   *
+   * @param userId - The ID of the user whose cache should be invalidated
+   */
   async invalidateUserStatsCache(userId: string) {
     const keys = Object.values(UsersService.CACHE_KEYS)
     await Promise.all(
@@ -62,6 +110,12 @@ export class UsersService {
     )
   }
 
+  /**
+   * Finds a user by their ID.
+   *
+   * @param id - The ID of the user to find
+   * @returns The user object if found, or undefined if not found
+   */
   async findById(id: string) {
     return this.getCachedData(UsersService.CACHE_KEYS.PROFILE, id, async () => {
       const [user] = await this.drizzleService.db
@@ -72,6 +126,12 @@ export class UsersService {
     })
   }
 
+  /**
+   * Finds a user by their login (either email or username).
+   *
+   * @param login - The email or username to search for
+   * @returns The user object if found, or undefined if not found
+   */
   async findByLogin(login: string) {
     const [user] = await this.drizzleService.db
       .select()
@@ -80,6 +140,12 @@ export class UsersService {
     return user
   }
 
+  /**
+   * Finds a user by their email address.
+   *
+   * @param email - The email address to search for
+   * @returns The user object if found, or undefined if not found
+   */
   async findByEmail(email: string) {
     const [user] = await this.drizzleService.db
       .select()
@@ -88,6 +154,14 @@ export class UsersService {
     return user
   }
 
+  /**
+   * Updates a user's profile information.
+   *
+   * @param id - The ID of the user to update
+   * @param updatedUser - The new user data to apply
+   * @returns The updated user object
+   * @throws NotFoundException if the user is not found
+   */
   async updateUser(id: string, updatedUser: UserUpdateDto) {
     const updatedUsers = await this.drizzleService.db
       .update(users)
@@ -119,6 +193,12 @@ export class UsersService {
     return user
   }
 
+  /**
+   * Deletes a user account.
+   *
+   * @param id - The ID of the user to delete
+   * @throws NotFoundException if the user is not found
+   */
   async deleteUser(id: string) {
     const deletedUsers = await this.drizzleService.db
       .delete(users)
@@ -147,6 +227,12 @@ export class UsersService {
     )
   }
 
+  /**
+   * Retrieves the current balance for a user.
+   *
+   * @param userId - The ID of the user to get the balance for
+   * @returns A BalanceDto containing total inflows, expenses, and net balance
+   */
   async getCurrentBalance(userId: string): Promise<BalanceDto> {
     return this.getCachedData(
       UsersService.CACHE_KEYS.BALANCE,
@@ -174,6 +260,13 @@ export class UsersService {
     )
   }
 
+  /**
+   * Retrieves the monthly balance breakdown for a specific year.
+   *
+   * @param userId - The ID of the user to get the monthly balance for
+   * @param year - The year for which to retrieve monthly balance data
+   * @returns An array of monthly balance records for the specified year
+   */
   async getMonthlyBalance(userId: string, year: number) {
     const cacheKey = this.getCacheKey(
       UsersService.CACHE_KEYS.MONTHLY,
@@ -235,6 +328,12 @@ export class UsersService {
     return monthlyBalance
   }
 
+  /**
+   * Retrieves a comprehensive financial summary for a user.
+   *
+   * @param userId - The ID of the user to get the financial summary for
+   * @returns A FinancialSummaryDto containing current balance and statistical analysis
+   */
   async getFinancialSummary(userId: string): Promise<FinancialSummaryDto> {
     const [currentBalance, [inflowCount], [expenseCount], [statistics]] =
       await Promise.all([
@@ -305,6 +404,12 @@ export class UsersService {
     }
   }
 
+  /**
+   * Retrieves a summary of the top tags used by a user.
+   *
+   * @param userId - The ID of the user to get the tag summary for
+   * @returns An object containing arrays of top inflow and expense tags with amounts
+   */
   async getTopTags(userId: string) {
     const cacheKey = this.getCacheKey(UsersService.CACHE_KEYS.TAGS, userId)
     const cachedTags = await this.cacheManager.get(cacheKey)
@@ -350,6 +455,12 @@ export class UsersService {
     return result
   }
 
+  /**
+   * Retrieves the complete balance history for a user.
+   *
+   * @param userId - The ID of the user to get the balance history for
+   * @returns An array of balance history records with cumulative totals
+   */
   async getBalanceHistory(userId: string): Promise<BalanceHistoryItemDto[]> {
     const cacheKey = this.getCacheKey(UsersService.CACHE_KEYS.HISTORY, userId)
     const cachedHistory = await this.cacheManager.get(cacheKey)
