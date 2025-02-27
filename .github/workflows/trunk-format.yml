@@ -1,4 +1,4 @@
-name: Format
+name: Format Code
 
 on:
   push:
@@ -6,6 +6,8 @@ on:
       - main
     tags-ignore: ["v[0-9]+.[0-9]+.[0-9]+*"]
     paths:
+      - "expensify-backend/**"
+      - "expensify-frontend/**"
       - "**.ts"
       - "**.tsx"
       - "**.js"
@@ -15,56 +17,78 @@ on:
       - ".github/workflows/**.yml"
 
 jobs:
-  format:
+  format-backend:
+    name: Format Backend Code
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
       id-token: write
-
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-
       - uses: pnpm/action-setup@v2
         with:
           version: 10
           run_install: false
-
-      - name: Setup Node.js
+      - name: Setup Node.js for Backend
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
-          cache-dependency-path: |
-            expensify-frontend/pnpm-lock.yaml
-            expensify-backend/pnpm-lock.yaml
-
-      # Backend formatting
+          cache-dependency-path: "expensify-backend/pnpm-lock.yaml"
       - name: Install backend dependencies
         working-directory: ./expensify-backend
         run: pnpm install
-
       - name: Run Backend Prettier Format
         working-directory: ./expensify-backend
         run: pnpm code:prettier:format
-
-      # Frontend formatting
-      - name: Install frontend dependencies
-        working-directory: ./expensify-frontend
-        run: pnpm install
-
-      - name: Run Frontend Prettier Format
-        working-directory: ./expensify-frontend
-        run: pnpm code:prettier:format
-
-      - name: Commit changes
+      - name: Commit backend changes
         if: success()
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "style: format code"
-          git push
+          if ! git diff --quiet || ! git diff --staged --quiet; then
+            git commit -m "style: format backend code"
+          fi
+          git push || (git pull --rebase && git push)
+
+  format-frontend:
+    name: Format Frontend Code
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10
+          run_install: false
+      - name: Setup Node.js for Frontend
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+          cache-dependency-path: "expensify-frontend/pnpm-lock.yaml"
+      - name: Install frontend dependencies
+        working-directory: ./expensify-frontend
+        run: pnpm install
+      - name: Run Frontend Prettier Format
+        working-directory: ./expensify-frontend
+        run: pnpm code:prettier:format
+      - name: Commit frontend changes
+        if: success()
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          if ! git diff --quiet || ! git diff --staged --quiet; then
+            git commit -m "style: format frontend code"
+          fi
+          git push || (git pull --rebase && git push)

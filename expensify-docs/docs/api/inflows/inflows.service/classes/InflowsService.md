@@ -175,7 +175,7 @@ NotFoundException if the inflow doesn't exist
 
 ### remove()
 
-> **remove**(`userId`, `id`): `Promise`\<\{ `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; `userId`: `string`; \}\>
+> **remove**(`userId`, `id`): `Promise`\<\{ `userId`: `string`; `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; \}\>
 
 Removes an inflow record
 
@@ -195,7 +195,7 @@ The ID of the inflow to remove
 
 #### Returns
 
-`Promise`\<\{ `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; `userId`: `string`; \}\>
+`Promise`\<\{ `userId`: `string`; `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; \}\>
 
 The removed inflow record
 

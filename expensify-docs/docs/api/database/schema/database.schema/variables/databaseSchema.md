@@ -15,3 +15,11 @@
 ### inflows
 
 > **inflows**: `PgTableWithColumns`\<\{\}\>
+
+### userConsent
+
+> **userConsent**: `PgTableWithColumns`\<\{\}\>
+
+### userActivity
+
+> **userActivity**: `PgTableWithColumns`\<\{\}\>

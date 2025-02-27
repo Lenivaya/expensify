@@ -160,7 +160,7 @@ The updated inflow record
 
 ### remove()
 
-> **remove**(`request`, `id`): `Promise`\<\{ `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; `userId`: `string`; \}\>
+> **remove**(`request`, `id`): `Promise`\<\{ `userId`: `string`; `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; \}\>
 
 Deletes an inflow record
 
@@ -180,7 +180,7 @@ The ID of the inflow to delete
 
 #### Returns
 
-`Promise`\<\{ `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; `userId`: `string`; \}\>
+`Promise`\<\{ `userId`: `string`; `id`: `string`; `updatedAt`: `null` \| `Date`; `createdAt`: `Date`; `deletedAt`: `null` \| `Date`; `amount`: `string`; `description`: `null` \| `string`; `tags`: `string`[]; \}\>
 
 The deleted inflow record
 

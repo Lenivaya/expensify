@@ -19,7 +19,7 @@ class YourService {
     return await this.drizzleService.db.query.users.findFirst({
       where: (users, { eq }) => eq(users.id, id)
     });
-  }
+ }
 }
 ```
 
@@ -47,7 +47,7 @@ The PostgreSQL connection pool
 
 ### db
 
-> **db**: `NodePgDatabase`\<\{ `users`: `PgTableWithColumns`\<\{\}\>; `expenses`: `PgTableWithColumns`\<\{\}\>; `inflows`: `PgTableWithColumns`\<\{\}\>; \}\>
+> **db**: `NodePgDatabase`\<\{ `users`: `PgTableWithColumns`\<\{\}\>; `expenses`: `PgTableWithColumns`\<\{\}\>; `inflows`: `PgTableWithColumns`\<\{\}\>; `userConsent`: `PgTableWithColumns`\<\{\}\>; `userActivity`: `PgTableWithColumns`\<\{\}\>; \}\>
 
 The Drizzle ORM database instance.
 Provides type-safe access to all database operations.

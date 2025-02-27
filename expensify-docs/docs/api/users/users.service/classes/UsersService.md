@@ -155,7 +155,7 @@ NotFoundException if the user is not found
 
 ### deleteUser()
 
-> **deleteUser**(`id`): `Promise`\<`void`\>
+> **deleteUser**(`id`): `Promise`\<\{ `message`: `string`; `deletedUserId`: `string`; \}\>
 
 Deletes a user account.
 
@@ -169,7 +169,7 @@ The ID of the user to delete
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<\{ `message`: `string`; `deletedUserId`: `string`; \}\>
 
 #### Throws
 

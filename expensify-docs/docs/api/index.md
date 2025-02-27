@@ -2,6 +2,12 @@
 
 ## Modules
 
+- [analytics/analytics.controller](analytics/analytics.controller/index.md)
+- [analytics/analytics.module](analytics/analytics.module/index.md)
+- [analytics/analytics.service](analytics/analytics.service/index.md)
+- [analytics/dto/tracking-consent.dto](analytics/dto/tracking-consent.dto/index.md)
+- [analytics/dto/user-activity.dto](analytics/dto/user-activity.dto/index.md)
+- [analytics/enums/activity-type.enum](analytics/enums/activity-type.enum/index.md)
 - [app.controller](app.controller/index.md)
 - [app.module](app.module/index.md)
 - [app.service](app.service/index.md)
@@ -28,8 +34,9 @@
 - [database/database.module-definition](database/database.module-definition/index.md)
 - [database/database.module](database/database.module/index.md)
 - [database/drizzle.service](database/drizzle.service/index.md)
+- [database/schema/analytics.schema](database/schema/analytics.schema/index.md)
 - [database/schema/column.helpers](database/schema/column.helpers/index.md)
-- [database/schema/database-schema](database/schema/database-schema/index.md)
+- [database/schema/database.schema](database/schema/database.schema/index.md)
 - [database/schema/expenses.schema](database/schema/expenses.schema/index.md)
 - [database/schema/inflows.schema](database/schema/inflows.schema/index.md)
 - [database/schema/users.schema](database/schema/users.schema/index.md)

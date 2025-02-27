@@ -46,45 +46,8 @@ such as pagination information and total count.
 
 > **data**: [`ExpenseDto`](../../expense.dto/classes/ExpenseDto.md)[]
 
-Array of expense records that match the search criteria.
-Contains the full expense information for each matching record.
-The array may be empty if no records match the search criteria.
-
-#### Required
-
-#### Example
-
-```ts
-[
-  {
-    id: '1',
-    amount: 29.99,
-    description: 'Grocery shopping',
-    tags: ['food', 'groceries'],
-    createdAt: '2024-02-26T10:00:00Z',
-    updatedAt: '2024-02-26T10:00:00Z'
-  }
-]
-```
-
 ***
 
 ### meta
 
 > **meta**: [`MetaSearchInfo`](../../../../common/dto/meta-search-info.dto/classes/MetaSearchInfo.md)
-
-Metadata about the search results, including pagination information.
-Contains total count of matching records, current page number,
-and number of records per page (limit).
-
-#### Required
-
-#### Example
-
-```ts
-{
-   *   total: 1,
-   *   page: 1,
-   *   limit: 10
-   * }
-```

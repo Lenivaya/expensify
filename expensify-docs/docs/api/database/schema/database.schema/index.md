@@ -1,4 +1,4 @@
-# database/schema/database-schema
+# database/schema/database.schema
 
 ## Variables
 
