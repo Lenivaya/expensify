@@ -28,7 +28,7 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
           run_install: false
@@ -38,7 +38,6 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
-          cache-dependency-path: "expensify-backend/pnpm-lock.yaml"
 
       - name: Install dependencies
         working-directory: ./expensify-backend
@@ -74,7 +73,7 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
           run_install: false
@@ -84,7 +83,6 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
-          cache-dependency-path: "expensify-frontend/pnpm-lock.yaml"
 
       - name: Install dependencies
         working-directory: ./expensify-frontend
