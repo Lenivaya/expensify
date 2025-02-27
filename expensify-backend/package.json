@@ -86,6 +86,7 @@
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^15.15.0",
     "jest": "^29.7.0",
+    "license-compliance": "^3.0.1",
     "prettier": "^3.5.1",
     "prettier-config-standard": "^7.0.0",
     "source-map-support": "^0.5.21",

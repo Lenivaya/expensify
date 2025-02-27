@@ -3,6 +3,8 @@ dev-container:
 
 backend-dev:
   cd ./expensify-backend/ && pnpm start:dev
+backend-license-check:
+  cd ./expensify-backend/ && pnpm license-compliance --production > license-report.txt
 
 frontend-dev:
   cd ./expensify-frontend/ && pnpm dev
@@ -13,6 +15,10 @@ frontend-api-client-from-spec:
 frontend-sync-mds:
   cp EULA.md ./expensify-frontend/public
   cp PRIVACY_POLICY.md ./expensify-frontend/public
+frontend-license-check:
+  cd ./expensify-frontend/ && pnpm license-compliance --production > license-report.txt
+
+gen-license-reports: backend-license-check frontend-license-check
 
 docs-dev:
   cd ./expensify-docs/ && pnpm start

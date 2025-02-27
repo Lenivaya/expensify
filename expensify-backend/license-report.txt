@@ -1,0 +1,7 @@
+Licenses
+├─ MIT: 31
+├─ Apache-2.0: 5
+├─ (Apache-2.0 OR MIT): 1
+├─ BSD-2-Clause: 1
+└─ BSD-3-Clause: 1
+
