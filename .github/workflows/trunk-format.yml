@@ -38,6 +38,7 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
+          cache-dependency-path: "expensify-backend/pnpm-lock.yaml"
 
       - name: Install dependencies
         working-directory: ./expensify-backend
@@ -83,6 +84,7 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
+          cache-dependency-path: "expensify-frontend/pnpm-lock.yaml"
 
       - name: Install dependencies
         working-directory: ./expensify-frontend
