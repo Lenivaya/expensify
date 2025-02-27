@@ -38,7 +38,7 @@ interface EnhancedCardProps extends React.ComponentProps<typeof Card> {
 function EnhancedCard({
   className,
   enableHoverEffect = true,
-  glassEffect = true,
+  glassEffect = false,
   hoverIntensity = 'medium',
   children,
   ...props

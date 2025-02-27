@@ -5,6 +5,7 @@ import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
 import { Navbar } from '@/components/layout/navbar/navbar'
 import { QueryProvider } from '@/components/providers/query/query-provider'
+import { CookiePopupProvider } from '@/components/providers/cookie/cookie-popup'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,8 +33,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased`}
       >
         <QueryProvider>
-          <Navbar />
-          {children}
+          <CookiePopupProvider>
+            <Navbar />
+            {children}
+          </CookiePopupProvider>
         </QueryProvider>
         <Toaster />
       </body>

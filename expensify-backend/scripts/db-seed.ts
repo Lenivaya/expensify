@@ -2,7 +2,7 @@ import { seed } from 'drizzle-seed'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 import 'dotenv/config'
-import { databaseSchema } from '../src/database/schema/database-schema'
+import { databaseSchema } from '../src/database/schema/database.schema'
 import * as bcrypt from 'bcrypt'
 import { eq } from 'drizzle-orm'
 

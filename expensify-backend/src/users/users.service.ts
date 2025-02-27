@@ -200,31 +200,30 @@ export class UsersService {
    * @throws NotFoundException if the user is not found
    */
   async deleteUser(id: string) {
-    const deletedUsers = await this.drizzleService.db
-      .delete(users)
-      .where(eq(users.id, id))
-      .returning()
+    // Start a transaction to ensure all deletions succeed or none do
+    return await this.drizzleService.db.transaction(async (tx) => {
+      // Delete financial records
+      await tx.delete(expenses).where(eq(expenses.userId, id))
+      await tx.delete(inflows).where(eq(inflows.userId, id))
 
-    if (deletedUsers.length === 0) {
-      throw new NotFoundException('User not found')
-    }
+      // Finally delete the user
+      const deletedUsers = await tx
+        .delete(users)
+        .where(eq(users.id, id))
+        .returning()
 
-    // Clear all user-related cache
-    await this.cacheManager.del(
-      this.getCacheKey(UsersService.CACHE_KEYS.PROFILE, id)
-    )
-    await this.cacheManager.del(
-      this.getCacheKey(UsersService.CACHE_KEYS.BALANCE, id)
-    )
-    await this.cacheManager.del(
-      this.getCacheKey(UsersService.CACHE_KEYS.MONTHLY, id)
-    )
-    await this.cacheManager.del(
-      this.getCacheKey(UsersService.CACHE_KEYS.TAGS, id)
-    )
-    await this.cacheManager.del(
-      this.getCacheKey(UsersService.CACHE_KEYS.HISTORY, id)
-    )
+      if (deletedUsers.length === 0) {
+        throw new NotFoundException('User not found')
+      }
+
+      // Clear all user-related cache
+      await this.invalidateUserStatsCache(id)
+
+      return {
+        message: 'User and all associated data successfully deleted',
+        deletedUserId: id
+      }
+    })
   }
 
   /**

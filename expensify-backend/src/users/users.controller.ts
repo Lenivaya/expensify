@@ -23,7 +23,8 @@ import {
   ApiOperation,
   ApiParam,
   ApiTags,
-  ApiUnauthorizedResponse
+  ApiUnauthorizedResponse,
+  ApiResponse
 } from '@nestjs/swagger'
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard'
 import { RequestWithUser } from 'src/auth/interfaces/request-with-user'
@@ -106,15 +107,35 @@ export class UsersController {
    * @throws NotFoundException if the user is not found
    */
   @Delete(':id')
-  @HttpCode(204)
+  @HttpCode(200)
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({
-    summary: 'Deletes user',
-    description: 'Deletes a user account. This operation cannot be undone.'
+    summary: 'Delete user account and all associated data',
+    description: `Permanently deletes a user account and all associated data including:
+    - Personal information
+    - Financial records (expenses and inflows)
+    - Analytics data and consent settings
+    - Activity history
+
+    This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.`
   })
-  @ApiNoContentResponse({
-    description: 'User successfully deleted'
+  @ApiResponse({
+    status: 200,
+    description: 'User and all associated data successfully deleted',
+    schema: {
+      type: 'object',
+      properties: {
+        message: {
+          type: 'string',
+          example: 'User and all associated data successfully deleted'
+        },
+        deletedUserId: {
+          type: 'string',
+          example: 'user123'
+        }
+      }
+    }
   })
   @ApiUnauthorizedResponse({
     description: 'User is not authorized to delete this account'
@@ -124,7 +145,7 @@ export class UsersController {
   })
   async deleteUser(@Req() request: RequestWithUser, @Param('id') id: string) {
     if (request.user.id !== id) throw new UnauthorizedException()
-    await this.usersService.deleteUser(id)
+    return await this.usersService.deleteUser(id)
   }
 
   /**

@@ -10,6 +10,7 @@ import { patchNestJsSwagger } from 'nestjs-zod'
 import { apiReference } from '@scalar/nestjs-api-reference'
 import { writeFile } from 'fs/promises'
 import * as yaml from 'js-yaml'
+import cookie from '@fastify/cookie'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,6 +20,14 @@ async function bootstrap() {
       logger: ['error', 'warn', 'log', 'debug', 'verbose']
     }
   )
+
+  // Register cookie plugin
+  await app.register(cookie, {
+    secret: process.env.COOKIE_SECRET || 'your-secret-key', // You should set this in your environment variables
+    hook: 'onRequest',
+    parseOptions: {}
+  })
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

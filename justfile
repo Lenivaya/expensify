@@ -10,6 +10,9 @@ frontend-dev-storybook:
   cd ./expensify-frontend/ && pnpm storybook
 frontend-api-client-from-spec:
   cd ./expensify-frontend/ && pnpm openapi-qraft --plugin tanstack-query-react --plugin openapi-typescript ../expensify-backend/openapi-spec.yaml --output-dir lib/api
+frontend-sync-mds:
+  cp EULA.md ./expensify-frontend/public
+  cp PRIVACY_POLICY.md ./expensify-frontend/public
 
 docs-dev:
   cd ./expensify-docs/ && pnpm start

@@ -1,12 +1,3 @@
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogOverlay,
-  DialogPortal,
-  DialogClose
-} from '@/components/ui/dialog'
 import {
   ExpenseForm,
   ExpenseFormValues
@@ -16,10 +7,18 @@ import {
   InflowFormValues
 } from '@/components/forms/inflows/inflow-form'
 import { expensifyApi } from '@/components/providers/query/query-provider'
-import { DollarSign, HandCoins, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogOverlay,
+  DialogPortal,
+  DialogTrigger
+} from '@/components/ui/dialog'
+import { cn } from '@/lib/utils'
+import { DollarSign, HandCoins } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { toast } from 'sonner'
-import { cn } from '@/lib/utils'
 
 export function ExpensifyFloatingButtons({
   className

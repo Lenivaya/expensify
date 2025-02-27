@@ -2,7 +2,9 @@ import { Inject, Injectable } from '@nestjs/common'
 import type { Pool } from 'pg'
 import { CONNECTION_POOL } from './database.module-definition'
 import { drizzle, type NodePgDatabase } from 'drizzle-orm/node-postgres'
-import { databaseSchema } from './schema/database-schema'
+import { databaseSchema } from './schema/database.schema'
+
+type DatabaseSchema = typeof databaseSchema
 
 /**
  * Service that provides access to the Drizzle ORM instance.
@@ -21,7 +23,7 @@ import { databaseSchema } from './schema/database-schema'
  *     return await this.drizzleService.db.query.users.findFirst({
  *       where: (users, { eq }) => eq(users.id, id)
  *     });
- *   }
+ *  }
  * }
  */
 @Injectable()
@@ -31,9 +33,9 @@ export class DrizzleService {
    * Provides type-safe access to all database operations.
    *
    * @public
-   * @type {NodePgDatabase<typeof databaseSchema>}
+   * @type {NodePgDatabase<DatabaseSchema>}
    */
-  public db: NodePgDatabase<typeof databaseSchema>
+  public db: NodePgDatabase<DatabaseSchema>
 
   /**
    * Creates a new DrizzleService instance.

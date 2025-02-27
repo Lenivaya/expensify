@@ -3,19 +3,22 @@
  * Do not make direct changes to the file.
  */
 
-import { AuthService, authService } from './AuthService'
-import { UsersService, usersService } from './UsersService'
-import { ExpensesService, expensesService } from './ExpensesService'
-import { InflowsService, inflowsService } from './InflowsService'
+import { AuthService, authService } from "./AuthService";
+import { UsersService, usersService } from "./UsersService";
+import { ExpensesService, expensesService } from "./ExpensesService";
+import { InflowsService, inflowsService } from "./InflowsService";
+import { AnalyticsService, analyticsService } from "./AnalyticsService";
 export type Services = {
-  auth: AuthService
-  users: UsersService
-  expenses: ExpensesService
-  inflows: InflowsService
-}
+    auth: AuthService;
+    users: UsersService;
+    expenses: ExpensesService;
+    inflows: InflowsService;
+    analytics: AnalyticsService;
+};
 export const services = {
-  auth: authService,
-  users: usersService,
-  expenses: expensesService,
-  inflows: inflowsService
-} as const
+    auth: authService,
+    users: usersService,
+    expenses: expensesService,
+    inflows: inflowsService,
+    analytics: analyticsService
+} as const;

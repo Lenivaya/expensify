@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module'
 import { ExpensesModule } from './expenses/expenses.module'
 import { InflowsModule } from './inflows/inflows.module'
 import { CommonModule } from './common/common.module'
+import { AnalyticsModule } from './analytics/analytics.module'
 
 /**
  * Root module of the application that configures and bootstraps the entire app.
@@ -25,7 +26,8 @@ import { CommonModule } from './common/common.module'
         POSTGRES_PASSWORD: Joi.string().required(),
         POSTGRES_DB: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
-        JWT_TOKEN_TTL: Joi.string().required()
+        JWT_TOKEN_TTL: Joi.string().required(),
+        COOKIE_SECRET: Joi.string().required()
       })
     }),
     DatabaseModule.forRootAsync({
@@ -42,7 +44,8 @@ import { CommonModule } from './common/common.module'
     UsersModule,
     ExpensesModule,
     InflowsModule,
-    CommonModule
+    CommonModule,
+    AnalyticsModule
   ],
   controllers: [AppController],
   providers: [AppService]

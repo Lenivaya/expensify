@@ -100,7 +100,14 @@ paths:
       tags: &ref_1
         - Users
     delete:
-      description: Deletes a user account. This operation cannot be undone.
+      description: |-
+        Permanently deletes a user account and all associated data including:
+            - Personal information
+            - Financial records (expenses and inflows)
+            - Analytics data and consent settings
+            - Activity history
+
+            This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
       operationId: UsersController_deleteUser
       parameters:
         - name: id
@@ -109,15 +116,26 @@ paths:
           schema:
             type: string
       responses:
-        '204':
-          description: User successfully deleted
+        '200':
+          description: User and all associated data successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User and all associated data successfully deleted
+                  deletedUserId:
+                    type: string
+                    example: user123
         '401':
           description: User is not authorized to delete this account
         '404':
           description: User not found
       security:
         - bearer: []
-      summary: Deletes user
+      summary: Delete user account and all associated data
       tags: *ref_1
   /users/{id}/balance:
     get:
@@ -635,6 +653,61 @@ paths:
       security: *ref_4
       summary: Get monthly statistics
       tags: *ref_5
+  /analytics/consent:
+    get:
+      description: Retrieves the current cookie and tracking consent settings for the user
+      operationId: AnalyticsController_getConsent
+      parameters: []
+      responses:
+        '200':
+          description: User consent settings retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrackingConsentDto'
+      security: &ref_6
+        - bearer: []
+      summary: Get user consent settings
+      tags: &ref_7
+        - Analytics
+    post:
+      description: Updates the user's cookie and tracking consent preferences
+      operationId: AnalyticsController_updateConsent
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrackingConsentDto'
+      responses:
+        '200':
+          description: Consent settings updated successfully
+        '201':
+          description: ''
+      security: *ref_6
+      summary: Update consent settings
+      tags: *ref_7
+  /analytics/track:
+    post:
+      description: Records a user activity based on consent settings
+      operationId: AnalyticsController_trackActivity
+      parameters: []
+      requestBody:
+        required: true
+        description: Activity details to track
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserActivityDto'
+      responses:
+        '201':
+          description: Activity tracked successfully
+        '403':
+          description: Activity tracking not allowed due to consent settings
+      security: *ref_6
+      summary: Track user activity
+      tags: *ref_7
 info:
   title: Expensify
   description: Expensify API
@@ -1246,3 +1319,69 @@ components:
           items:
             type: array
           type: array
+    TrackingConsentDto:
+      type: object
+      properties:
+        analytics:
+          type: boolean
+          description: Consent for analytics and usage tracking
+          example: false
+          default: false
+        social:
+          type: boolean
+          description: Consent for social media features and sharing
+          example: false
+          default: false
+        advertising:
+          type: boolean
+          description: Consent for personalized advertising
+          example: false
+          default: false
+      required:
+        - analytics
+        - social
+        - advertising
+    ActivityType:
+      type: string
+      enum:
+        - AUTH
+        - ERROR
+        - PAGE_VIEW
+        - EXPENSE_CREATED
+        - BUDGET_UPDATED
+        - SOCIAL_SHARE
+        - SOCIAL_LIKE
+        - SOCIAL_COMMENT
+        - AD_INTERACTION
+        - AD_CLICK
+        - AD_IMPRESSION
+    UserActivityDto:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: ID of the user performing the activity
+          example: user123
+        timestamp:
+          format: date-time
+          type: string
+          description: Timestamp when the activity occurred
+          example: '2024-03-15T12:00:00Z'
+        action:
+          description: Type of activity performed
+          example: PAGE_VIEW
+          allOf:
+            - $ref: '#/components/schemas/ActivityType'
+        metadata:
+          type: object
+          description: Additional data related to the activity
+          example:
+            page: /dashboard
+            amount: 100
+            category: food
+          additionalProperties: true
+      required:
+        - userId
+        - timestamp
+        - action
+        - metadata

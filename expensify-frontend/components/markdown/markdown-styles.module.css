@@ -1,0 +1,91 @@
+@reference "../../app/globals.css";
+
+.markdown {
+  @apply text-base md:text-lg leading-relaxed text-foreground;
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+  @apply my-4 md:my-6 text-muted-foreground;
+}
+
+.markdown h1 {
+  @apply text-3xl md:text-4xl font-bold mt-6 md:mt-8 mb-4 md:mb-6 leading-tight text-foreground;
+  @apply border-b border-border pb-3 md:pb-4;
+}
+
+.markdown h2 {
+  @apply text-2xl md:text-3xl font-semibold mt-8 md:mt-12 mb-3 md:mb-4 leading-snug text-foreground;
+  @apply border-b border-border/50 pb-2;
+}
+
+.markdown h3 {
+  @apply text-xl md:text-2xl font-medium mt-6 md:mt-8 mb-3 md:mb-4 leading-snug text-foreground/90;
+}
+
+.markdown a {
+  @apply text-primary hover:text-primary/80 underline-offset-4 hover:underline transition-colors;
+  @apply break-words;
+}
+
+.markdown blockquote {
+  @apply pl-4 border-l-4 border-primary/30 bg-secondary/50 rounded-sm py-2 pr-4;
+  @apply text-muted-foreground italic text-sm md:text-base;
+}
+
+.markdown ul {
+  @apply list-disc pl-5 md:pl-6 text-muted-foreground;
+}
+
+.markdown ol {
+  @apply list-decimal pl-5 md:pl-6 text-muted-foreground;
+}
+
+.markdown code {
+  @apply bg-secondary px-1.5 py-0.5 rounded-sm text-xs md:text-sm font-mono text-primary;
+  @apply break-words;
+}
+
+.markdown pre {
+  @apply bg-secondary text-muted-foreground p-3 md:p-4 rounded-md overflow-x-auto my-4 md:my-6;
+  @apply border border-border text-sm md:text-base;
+}
+
+.markdown pre code {
+  @apply bg-transparent p-0 text-foreground;
+  @apply break-normal;
+}
+
+.markdown table {
+  @apply w-full my-4 md:my-6 border-collapse text-sm md:text-base;
+  @apply overflow-x-auto block md:table;
+}
+
+.markdown th,
+.markdown td {
+  @apply border border-border px-2 md:px-4 py-1 md:py-2;
+  @apply min-w-[8rem] md:min-w-0;
+}
+
+.markdown th {
+  @apply bg-secondary font-semibold text-foreground;
+}
+
+.markdown hr {
+  @apply my-6 md:my-8 border-border;
+}
+
+/* Last updated text */
+.markdown > p:first-of-type {
+  @apply text-xs md:text-sm text-muted-foreground mt-0 italic;
+}
+
+/* Lists within lists */
+.markdown ul ul,
+.markdown ol ol,
+.markdown ul ol,
+.markdown ol ul {
+  @apply my-0 ml-4;
+}

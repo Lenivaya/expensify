@@ -3,1515 +3,632 @@
  * Do not make direct changes to the file.
  */
 
-import type { paths } from '../schema'
-import type {
-  AreAllOptional,
-  InvalidateQueryFilters,
-  MutationFiltersByMutationKey,
-  MutationFiltersByParameters,
-  MutationVariables,
-  OperationInfiniteData,
-  PartialParameters,
-  QueryFiltersByParameters,
-  QueryFiltersByQueryKey,
-  QueryFnOptionsByParameters,
-  QueryFnOptionsByQueryKey,
-  RequestFnResponse,
-  ServiceOperationEnsureInfiniteQueryDataOptions,
-  ServiceOperationEnsureQueryDataOptions,
-  ServiceOperationFetchInfiniteQueryOptions,
-  ServiceOperationFetchQueryOptions,
-  ServiceOperationInfiniteQueryKey,
-  ServiceOperationMutationFnOptions,
-  ServiceOperationMutationKey,
-  ServiceOperationQueryKey,
-  ServiceOperationUseMutationOptions,
-  UseQueryOptionsForUseQueries,
-  UseQueryOptionsForUseSuspenseQuery,
-  WithOptional
-} from '@openapi-qraft/tanstack-query-react-types'
-import type {
-  DefinedInitialDataInfiniteOptions,
-  DefinedInitialDataOptions,
-  DefinedUseInfiniteQueryResult,
-  DefinedUseQueryResult,
-  UndefinedInitialDataInfiniteOptions,
-  UndefinedInitialDataOptions,
-  UseInfiniteQueryResult,
-  UseMutationResult,
-  UseQueryResult,
-  UseSuspenseInfiniteQueryOptions,
-  UseSuspenseInfiniteQueryResult,
-  UseSuspenseQueryOptions,
-  UseSuspenseQueryResult
-} from '@tanstack/react-query'
-import type {
-  CancelOptions,
-  InfiniteQueryPageParamsOptions,
-  InvalidateOptions,
-  Mutation,
-  MutationState,
-  NoInfer,
-  QueryState,
-  RefetchOptions,
-  ResetOptions,
-  SetDataOptions,
-  Updater
-} from '@tanstack/query-core'
+import type { paths } from "../schema";
+import type { AreAllOptional, InvalidateQueryFilters, MutationFiltersByMutationKey, MutationFiltersByParameters, MutationVariables, OperationInfiniteData, PartialParameters, QueryFiltersByParameters, QueryFiltersByQueryKey, QueryFnOptionsByParameters, QueryFnOptionsByQueryKey, RequestFnResponse, ServiceOperationEnsureInfiniteQueryDataOptions, ServiceOperationEnsureQueryDataOptions, ServiceOperationFetchInfiniteQueryOptions, ServiceOperationFetchQueryOptions, ServiceOperationInfiniteQueryKey, ServiceOperationMutationFnOptions, ServiceOperationMutationKey, ServiceOperationQueryKey, ServiceOperationUseMutationOptions, UseQueryOptionsForUseQueries, UseQueryOptionsForUseSuspenseQuery, WithOptional } from "@openapi-qraft/tanstack-query-react-types";
+import type { DefinedInitialDataInfiniteOptions, DefinedInitialDataOptions, DefinedUseInfiniteQueryResult, DefinedUseQueryResult, UndefinedInitialDataInfiniteOptions, UndefinedInitialDataOptions, UseInfiniteQueryResult, UseMutationResult, UseQueryResult, UseSuspenseInfiniteQueryOptions, UseSuspenseInfiniteQueryResult, UseSuspenseQueryOptions, UseSuspenseQueryResult } from "@tanstack/react-query";
+import type { CancelOptions, InfiniteQueryPageParamsOptions, InvalidateOptions, Mutation, MutationState, NoInfer, QueryState, RefetchOptions, ResetOptions, SetDataOptions, Updater } from "@tanstack/query-core";
 export interface AuthService {
-  /**
-   * @summary Sign in a user
-   * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
-   */
-  authControllerSignIn: {
     /**
      * @summary Sign in a user
      * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
      */
-    getMutationKey(
-      parameters: AuthControllerSignInParameters | void
-    ): ServiceOperationMutationKey<
-      AuthControllerSignInSchema,
-      AuthControllerSignInParameters
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation({})
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation()
-     * mutate({
-     *     body: bodyPayload
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends AuthControllerSignInBody,
-      TContext = unknown
-    >(
-      parameters: AuthControllerSignInParameters,
-      options?: ServiceOperationUseMutationOptions<
-        AuthControllerSignInSchema,
-        AuthControllerSignInData,
-        AuthControllerSignInParameters,
-        TVariables,
-        AuthControllerSignInError,
-        TContext
-      >
-    ): UseMutationResult<
-      AuthControllerSignInData,
-      AuthControllerSignInError | Error,
-      AreAllOptional<TVariables> extends true ? TVariables | void : TVariables,
-      TContext
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation({})
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation()
-     * mutate({
-     *     body: bodyPayload
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends MutationVariables<
-        AuthControllerSignInBody,
-        AuthControllerSignInParameters
-      >,
-      TContext = unknown
-    >(
-      parameters: void,
-      options?: ServiceOperationUseMutationOptions<
-        AuthControllerSignInSchema,
-        AuthControllerSignInData,
-        AuthControllerSignInParameters,
-        TVariables,
-        AuthControllerSignInError,
-        TContext
-      >
-    ): UseMutationResult<
-      AuthControllerSignInData,
-      AuthControllerSignInError | Error,
-      TVariables,
-      TContext
-    >
-    /**
-     * Returns the count of currently in-progress mutations.
-     *
-     * @summary Sign in a user
-     * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-     * @example Check how many mutations are currently in progress for the specified service method.
-     * ```ts
-     * const authControllerSignInTotal = qraft.authService.authControllerSignIn.useIsMutating()
-     * ```
-     * @example Check how many mutations are currently in progress with the specified parameters.
-     * ```ts
-     * const authControllerSignInTotal = qraft.authService.authControllerSignIn.useIsMutating({
-     *     parameters: {}
-     * })
-     * ```
-     */
-    useIsMutating<TContext = unknown>(
-      filters?:
-        | MutationFiltersByParameters<
-            AuthControllerSignInBody,
-            AuthControllerSignInData,
-            AuthControllerSignInParameters,
-            AuthControllerSignInError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            AuthControllerSignInSchema,
-            AuthControllerSignInBody,
-            AuthControllerSignInData,
-            AuthControllerSignInParameters,
-            AuthControllerSignInError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Sign in a user
-     * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
-     */
-    isMutating<TContext>(
-      filters?:
-        | MutationFiltersByParameters<
-            AuthControllerSignInBody,
-            AuthControllerSignInData,
-            AuthControllerSignInParameters,
-            AuthControllerSignInError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            AuthControllerSignInSchema,
-            AuthControllerSignInBody,
-            AuthControllerSignInData,
-            AuthControllerSignInParameters,
-            AuthControllerSignInError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Sign in a user
-     * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
-     */
-    (
-      options: ServiceOperationMutationFnOptions<
-        AuthControllerSignInBody,
-        AuthControllerSignInParameters
-      >,
-      client?: (
-        schema: AuthControllerSignInSchema,
-        options: ServiceOperationMutationFnOptions<
-          AuthControllerSignInBody,
-          AuthControllerSignInParameters
-        >
-      ) => Promise<
-        RequestFnResponse<AuthControllerSignInData, AuthControllerSignInError>
-      >
-    ): Promise<
-      RequestFnResponse<AuthControllerSignInData, AuthControllerSignInError>
-    >
-    /**
-     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-     *
-     * @summary Sign in a user
-     * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-     * @example Get all variables of all running mutations.
-     * ```ts
-     * const authControllerSignInPendingMutationVariables = qraft.authService.authControllerSignIn.useMutationState({
-     *     filters: {
-     *         status: "pending"
-     *     },
-     *     select: mutation => mutation.state.variables
-     * })
-     * ```
-     * @example Get all data for specific mutations via the `parameters`.
-     * ```ts
-     * const authControllerSignInMutationData = qraft.authService.authControllerSignIn.useMutationState({
-     *     filters: {
-     *         parameters: {}
-     *     },
-     *     select: mutation => mutation.state.data
-     * })
-     * ```
-     */
-    useMutationState<
-      TContext = unknown,
-      TResult = MutationState<
-        AuthControllerSignInData,
-        AuthControllerSignInError,
-        MutationVariables<
-          AuthControllerSignInBody,
-          AuthControllerSignInParameters
-        >,
-        TContext
-      >
-    >(options?: {
-      filters?:
-        | MutationFiltersByParameters<
-            AuthControllerSignInBody,
-            AuthControllerSignInData,
-            AuthControllerSignInParameters,
-            AuthControllerSignInError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            AuthControllerSignInSchema,
-            AuthControllerSignInBody,
-            AuthControllerSignInData,
-            AuthControllerSignInParameters,
-            AuthControllerSignInError,
-            TContext
-          >
-      select?: (
-        mutation: Mutation<
-          AuthControllerSignInData,
-          AuthControllerSignInError,
-          MutationVariables<
-            AuthControllerSignInBody,
-            AuthControllerSignInParameters
-          >,
-          TContext
-        >
-      ) => TResult
-    }): Array<TResult>
-    schema: AuthControllerSignInSchema
-    types: {
-      parameters: AuthControllerSignInParameters
-      data: AuthControllerSignInData
-      error: AuthControllerSignInError
-      body: AuthControllerSignInBody
-    }
-  }
-  /**
-   * @summary Sign up a new user
-   * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
-   */
-  authControllerSignUp: {
+    authControllerSignIn: {
+        /**
+         * @summary Sign in a user
+         * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
+         */
+        getMutationKey(parameters: AuthControllerSignInParameters | void): ServiceOperationMutationKey<AuthControllerSignInSchema, AuthControllerSignInParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends AuthControllerSignInBody, TContext = unknown>(parameters: AuthControllerSignInParameters, options?: ServiceOperationUseMutationOptions<AuthControllerSignInSchema, AuthControllerSignInData, AuthControllerSignInParameters, TVariables, AuthControllerSignInError | Error, TContext>): UseMutationResult<AuthControllerSignInData, AuthControllerSignInError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignIn.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<AuthControllerSignInBody, AuthControllerSignInParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<AuthControllerSignInSchema, AuthControllerSignInData, AuthControllerSignInParameters, TVariables, AuthControllerSignInError | Error, TContext>): UseMutationResult<AuthControllerSignInData, AuthControllerSignInError | Error, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Sign in a user
+         * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const authControllerSignInTotal = qraft.authService.authControllerSignIn.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const authControllerSignInTotal = qraft.authService.authControllerSignIn.useIsMutating({
+         *     parameters: {}
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<AuthControllerSignInBody, AuthControllerSignInData, AuthControllerSignInParameters, AuthControllerSignInError | Error, TContext> | MutationFiltersByMutationKey<AuthControllerSignInSchema, AuthControllerSignInBody, AuthControllerSignInData, AuthControllerSignInParameters, AuthControllerSignInError | Error, TContext>): number;
+        /**
+         * @summary Sign in a user
+         * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
+         */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<AuthControllerSignInBody, AuthControllerSignInData, AuthControllerSignInParameters, AuthControllerSignInError | Error, TContext> | MutationFiltersByMutationKey<AuthControllerSignInSchema, AuthControllerSignInBody, AuthControllerSignInData, AuthControllerSignInParameters, AuthControllerSignInError | Error, TContext>): number;
+        /**
+         * @summary Sign in a user
+         * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
+         */
+        (options: ServiceOperationMutationFnOptions<AuthControllerSignInBody, AuthControllerSignInParameters>, client?: (schema: AuthControllerSignInSchema, options: ServiceOperationMutationFnOptions<AuthControllerSignInBody, AuthControllerSignInParameters>) => Promise<RequestFnResponse<AuthControllerSignInData, AuthControllerSignInError>>): Promise<RequestFnResponse<AuthControllerSignInData, AuthControllerSignInError>>;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Sign in a user
+         * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const authControllerSignInPendingMutationVariables = qraft.authService.authControllerSignIn.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const authControllerSignInMutationData = qraft.authService.authControllerSignIn.useMutationState({
+         *     filters: {
+         *         parameters: {}
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<AuthControllerSignInData, AuthControllerSignInError | Error, MutationVariables<AuthControllerSignInBody, AuthControllerSignInParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<AuthControllerSignInBody, AuthControllerSignInData, AuthControllerSignInParameters, AuthControllerSignInError | Error, TContext> | MutationFiltersByMutationKey<AuthControllerSignInSchema, AuthControllerSignInBody, AuthControllerSignInData, AuthControllerSignInParameters, AuthControllerSignInError | Error, TContext>;
+            select?: (mutation: Mutation<AuthControllerSignInData, AuthControllerSignInError | Error, MutationVariables<AuthControllerSignInBody, AuthControllerSignInParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        schema: AuthControllerSignInSchema;
+        types: {
+            parameters: AuthControllerSignInParameters;
+            data: AuthControllerSignInData;
+            error: AuthControllerSignInError;
+            body: AuthControllerSignInBody;
+        };
+    };
     /**
      * @summary Sign up a new user
      * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
      */
-    getMutationKey(
-      parameters: AuthControllerSignUpParameters | void
-    ): ServiceOperationMutationKey<
-      AuthControllerSignUpSchema,
-      AuthControllerSignUpParameters
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation({})
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation()
-     * mutate({
-     *     body: bodyPayload
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends AuthControllerSignUpBody,
-      TContext = unknown
-    >(
-      parameters: AuthControllerSignUpParameters,
-      options?: ServiceOperationUseMutationOptions<
-        AuthControllerSignUpSchema,
-        AuthControllerSignUpData,
-        AuthControllerSignUpParameters,
-        TVariables,
-        AuthControllerSignUpError,
-        TContext
-      >
-    ): UseMutationResult<
-      AuthControllerSignUpData,
-      AuthControllerSignUpError | Error,
-      AreAllOptional<TVariables> extends true ? TVariables | void : TVariables,
-      TContext
-    >
-    /**
-     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-     * Handles loading state, optimistic updates, and error handling.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-     * @example Mutation with predefined parameters, e.g., for updating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation({})
-     * mutate(body);
-     * ```
-     * @example Mutation without predefined parameters, e.g., for creating
-     * ```ts
-     * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation()
-     * mutate({
-     *     body: bodyPayload
-     * });
-     * ```
-     */
-    useMutation<
-      TVariables extends MutationVariables<
-        AuthControllerSignUpBody,
-        AuthControllerSignUpParameters
-      >,
-      TContext = unknown
-    >(
-      parameters: void,
-      options?: ServiceOperationUseMutationOptions<
-        AuthControllerSignUpSchema,
-        AuthControllerSignUpData,
-        AuthControllerSignUpParameters,
-        TVariables,
-        AuthControllerSignUpError,
-        TContext
-      >
-    ): UseMutationResult<
-      AuthControllerSignUpData,
-      AuthControllerSignUpError | Error,
-      TVariables,
-      TContext
-    >
-    /**
-     * Returns the count of currently in-progress mutations.
-     *
-     * @summary Sign up a new user
-     * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-     * @example Check how many mutations are currently in progress for the specified service method.
-     * ```ts
-     * const authControllerSignUpTotal = qraft.authService.authControllerSignUp.useIsMutating()
-     * ```
-     * @example Check how many mutations are currently in progress with the specified parameters.
-     * ```ts
-     * const authControllerSignUpTotal = qraft.authService.authControllerSignUp.useIsMutating({
-     *     parameters: {}
-     * })
-     * ```
-     */
-    useIsMutating<TContext = unknown>(
-      filters?:
-        | MutationFiltersByParameters<
-            AuthControllerSignUpBody,
-            AuthControllerSignUpData,
-            AuthControllerSignUpParameters,
-            AuthControllerSignUpError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            AuthControllerSignUpSchema,
-            AuthControllerSignUpBody,
-            AuthControllerSignUpData,
-            AuthControllerSignUpParameters,
-            AuthControllerSignUpError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Sign up a new user
-     * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
-     */
-    isMutating<TContext>(
-      filters?:
-        | MutationFiltersByParameters<
-            AuthControllerSignUpBody,
-            AuthControllerSignUpData,
-            AuthControllerSignUpParameters,
-            AuthControllerSignUpError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            AuthControllerSignUpSchema,
-            AuthControllerSignUpBody,
-            AuthControllerSignUpData,
-            AuthControllerSignUpParameters,
-            AuthControllerSignUpError,
-            TContext
-          >
-    ): number
-    /**
-     * @summary Sign up a new user
-     * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
-     */
-    (
-      options: ServiceOperationMutationFnOptions<
-        AuthControllerSignUpBody,
-        AuthControllerSignUpParameters
-      >,
-      client?: (
-        schema: AuthControllerSignUpSchema,
-        options: ServiceOperationMutationFnOptions<
-          AuthControllerSignUpBody,
-          AuthControllerSignUpParameters
-        >
-      ) => Promise<
-        RequestFnResponse<AuthControllerSignUpData, AuthControllerSignUpError>
-      >
-    ): Promise<
-      RequestFnResponse<AuthControllerSignUpData, AuthControllerSignUpError>
-    >
-    /**
-     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-     *
-     * @summary Sign up a new user
-     * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-     * @example Get all variables of all running mutations.
-     * ```ts
-     * const authControllerSignUpPendingMutationVariables = qraft.authService.authControllerSignUp.useMutationState({
-     *     filters: {
-     *         status: "pending"
-     *     },
-     *     select: mutation => mutation.state.variables
-     * })
-     * ```
-     * @example Get all data for specific mutations via the `parameters`.
-     * ```ts
-     * const authControllerSignUpMutationData = qraft.authService.authControllerSignUp.useMutationState({
-     *     filters: {
-     *         parameters: {}
-     *     },
-     *     select: mutation => mutation.state.data
-     * })
-     * ```
-     */
-    useMutationState<
-      TContext = unknown,
-      TResult = MutationState<
-        AuthControllerSignUpData,
-        AuthControllerSignUpError,
-        MutationVariables<
-          AuthControllerSignUpBody,
-          AuthControllerSignUpParameters
-        >,
-        TContext
-      >
-    >(options?: {
-      filters?:
-        | MutationFiltersByParameters<
-            AuthControllerSignUpBody,
-            AuthControllerSignUpData,
-            AuthControllerSignUpParameters,
-            AuthControllerSignUpError,
-            TContext
-          >
-        | MutationFiltersByMutationKey<
-            AuthControllerSignUpSchema,
-            AuthControllerSignUpBody,
-            AuthControllerSignUpData,
-            AuthControllerSignUpParameters,
-            AuthControllerSignUpError,
-            TContext
-          >
-      select?: (
-        mutation: Mutation<
-          AuthControllerSignUpData,
-          AuthControllerSignUpError,
-          MutationVariables<
-            AuthControllerSignUpBody,
-            AuthControllerSignUpParameters
-          >,
-          TContext
-        >
-      ) => TResult
-    }): Array<TResult>
-    schema: AuthControllerSignUpSchema
-    types: {
-      parameters: AuthControllerSignUpParameters
-      data: AuthControllerSignUpData
-      error: AuthControllerSignUpError
-      body: AuthControllerSignUpBody
-    }
-  }
-  /**
-   * @summary Get current user
-   * @description This endpoint returns the current authenticated user.
-   */
-  authControllerGetMe: {
+    authControllerSignUp: {
+        /**
+         * @summary Sign up a new user
+         * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
+         */
+        getMutationKey(parameters: AuthControllerSignUpParameters | void): ServiceOperationMutationKey<AuthControllerSignUpSchema, AuthControllerSignUpParameters>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends AuthControllerSignUpBody, TContext = unknown>(parameters: AuthControllerSignUpParameters, options?: ServiceOperationUseMutationOptions<AuthControllerSignUpSchema, AuthControllerSignUpData, AuthControllerSignUpParameters, TVariables, AuthControllerSignUpError | Error, TContext>): UseMutationResult<AuthControllerSignUpData, AuthControllerSignUpError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
+        /**
+         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+         * Handles loading state, optimistic updates, and error handling.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+         * @example Mutation with predefined parameters, e.g., for updating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation({})
+         * mutate(body);
+         * ```
+         * @example Mutation without predefined parameters, e.g., for creating
+         * ```ts
+         * const { mutate, isPending } = qraft.authService.authControllerSignUp.useMutation()
+         * mutate({
+         *     body: bodyPayload
+         * });
+         * ```
+         */
+        useMutation<TVariables extends MutationVariables<AuthControllerSignUpBody, AuthControllerSignUpParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<AuthControllerSignUpSchema, AuthControllerSignUpData, AuthControllerSignUpParameters, TVariables, AuthControllerSignUpError | Error, TContext>): UseMutationResult<AuthControllerSignUpData, AuthControllerSignUpError | Error, TVariables, TContext>;
+        /**
+         * Returns the count of currently in-progress mutations.
+         *
+         * @summary Sign up a new user
+         * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+         * @example Check how many mutations are currently in progress for the specified service method.
+         * ```ts
+         * const authControllerSignUpTotal = qraft.authService.authControllerSignUp.useIsMutating()
+         * ```
+         * @example Check how many mutations are currently in progress with the specified parameters.
+         * ```ts
+         * const authControllerSignUpTotal = qraft.authService.authControllerSignUp.useIsMutating({
+         *     parameters: {}
+         * })
+         * ```
+         */
+        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<AuthControllerSignUpBody, AuthControllerSignUpData, AuthControllerSignUpParameters, AuthControllerSignUpError | Error, TContext> | MutationFiltersByMutationKey<AuthControllerSignUpSchema, AuthControllerSignUpBody, AuthControllerSignUpData, AuthControllerSignUpParameters, AuthControllerSignUpError | Error, TContext>): number;
+        /**
+         * @summary Sign up a new user
+         * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
+         */
+        isMutating<TContext>(filters?: MutationFiltersByParameters<AuthControllerSignUpBody, AuthControllerSignUpData, AuthControllerSignUpParameters, AuthControllerSignUpError | Error, TContext> | MutationFiltersByMutationKey<AuthControllerSignUpSchema, AuthControllerSignUpBody, AuthControllerSignUpData, AuthControllerSignUpParameters, AuthControllerSignUpError | Error, TContext>): number;
+        /**
+         * @summary Sign up a new user
+         * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
+         */
+        (options: ServiceOperationMutationFnOptions<AuthControllerSignUpBody, AuthControllerSignUpParameters>, client?: (schema: AuthControllerSignUpSchema, options: ServiceOperationMutationFnOptions<AuthControllerSignUpBody, AuthControllerSignUpParameters>) => Promise<RequestFnResponse<AuthControllerSignUpData, AuthControllerSignUpError>>): Promise<RequestFnResponse<AuthControllerSignUpData, AuthControllerSignUpError>>;
+        /**
+         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+         *
+         * @summary Sign up a new user
+         * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+         * @example Get all variables of all running mutations.
+         * ```ts
+         * const authControllerSignUpPendingMutationVariables = qraft.authService.authControllerSignUp.useMutationState({
+         *     filters: {
+         *         status: "pending"
+         *     },
+         *     select: mutation => mutation.state.variables
+         * })
+         * ```
+         * @example Get all data for specific mutations via the `parameters`.
+         * ```ts
+         * const authControllerSignUpMutationData = qraft.authService.authControllerSignUp.useMutationState({
+         *     filters: {
+         *         parameters: {}
+         *     },
+         *     select: mutation => mutation.state.data
+         * })
+         * ```
+         */
+        useMutationState<TContext = unknown, TResult = MutationState<AuthControllerSignUpData, AuthControllerSignUpError | Error, MutationVariables<AuthControllerSignUpBody, AuthControllerSignUpParameters>, TContext>>(options?: {
+            filters?: MutationFiltersByParameters<AuthControllerSignUpBody, AuthControllerSignUpData, AuthControllerSignUpParameters, AuthControllerSignUpError | Error, TContext> | MutationFiltersByMutationKey<AuthControllerSignUpSchema, AuthControllerSignUpBody, AuthControllerSignUpData, AuthControllerSignUpParameters, AuthControllerSignUpError | Error, TContext>;
+            select?: (mutation: Mutation<AuthControllerSignUpData, AuthControllerSignUpError | Error, MutationVariables<AuthControllerSignUpBody, AuthControllerSignUpParameters>, TContext>) => TResult;
+        }): Array<TResult>;
+        schema: AuthControllerSignUpSchema;
+        types: {
+            parameters: AuthControllerSignUpParameters;
+            data: AuthControllerSignUpData;
+            error: AuthControllerSignUpError;
+            body: AuthControllerSignUpBody;
+        };
+    };
     /**
      * @summary Get current user
      * @description This endpoint returns the current authenticated user.
      */
-    cancelQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >,
-      options?: CancelOptions
-    ): Promise<void>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getQueryKey(
-      parameters: AuthControllerGetMeParameters | void
-    ): ServiceOperationQueryKey<
-      AuthControllerGetMeSchema,
-      AuthControllerGetMeParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query without parameters
-     * ```ts
-     * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
-     * ```
-     */
-    useQuery<TData = AuthControllerGetMeData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          TData,
-          ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<TData, AuthControllerGetMeError | Error>
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query without parameters
-     * ```ts
-     * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
-     * ```
-     */
-    useQuery<TData = AuthControllerGetMeData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options: Omit<
-        DefinedInitialDataOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          TData,
-          ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<TData, AuthControllerGetMeError | Error>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    fetchInfiniteQuery<TPageParam extends AuthControllerGetMeParameters>(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        AuthControllerGetMeSchema,
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters,
-        TPageParam,
-        AuthControllerGetMeError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters
-      >
-    >
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    prefetchInfiniteQuery<TPageParam extends AuthControllerGetMeParameters>(
-      options: ServiceOperationFetchInfiniteQueryOptions<
-        AuthControllerGetMeSchema,
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters,
-        TPageParam,
-        AuthControllerGetMeError
-      >
-    ): Promise<void>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    ensureInfiniteQueryData<TPageParam extends AuthControllerGetMeParameters>(
-      options: ServiceOperationEnsureInfiniteQueryDataOptions<
-        AuthControllerGetMeSchema,
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters,
-        TPageParam,
-        AuthControllerGetMeError
-      >
-    ): Promise<
-      OperationInfiniteData<
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters
-      >
-    >
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    fetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        AuthControllerGetMeSchema,
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters,
-        AuthControllerGetMeError
-      > | void
-    ): Promise<AuthControllerGetMeData>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    prefetchQuery(
-      options: ServiceOperationFetchQueryOptions<
-        AuthControllerGetMeSchema,
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters,
-        AuthControllerGetMeError
-      > | void
-    ): Promise<void>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    ensureQueryData(
-      options: ServiceOperationEnsureQueryDataOptions<
-        AuthControllerGetMeSchema,
-        AuthControllerGetMeData,
-        AuthControllerGetMeParameters,
-        AuthControllerGetMeError
-      > | void
-    ): Promise<AuthControllerGetMeData>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getInfiniteQueryData(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void)
-    ):
-      | OperationInfiniteData<
-          AuthControllerGetMeData,
-          AuthControllerGetMeParameters
-        >
-      | undefined
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getQueriesData<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-    ): TInfinite extends true
-      ? Array<
-          [
-            queryKey: ServiceOperationInfiniteQueryKey<
-              AuthControllerGetMeSchema,
-              AuthControllerGetMeParameters
-            >,
-            data:
-              | NoInfer<
-                  OperationInfiniteData<
-                    AuthControllerGetMeData,
-                    AuthControllerGetMeParameters
-                  >
-                >
-              | undefined
-          ]
-        >
-      : Array<
-          [
-            queryKey: ServiceOperationQueryKey<
-              AuthControllerGetMeSchema,
-              AuthControllerGetMeParameters
-            >,
+    authControllerGetMe: {
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>, options?: CancelOptions): Promise<void>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getQueryKey(parameters: AuthControllerGetMeParameters | void): ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
+         * ```
+         */
+        useQuery<TData = AuthControllerGetMeData>(parameters: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options?: Omit<UndefinedInitialDataOptions<AuthControllerGetMeData, AuthControllerGetMeError, TData, ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>>, "queryKey">): UseQueryResult<TData, AuthControllerGetMeError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
+         * ```
+         */
+        useQuery<TData = AuthControllerGetMeData>(parameters: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options: Omit<DefinedInitialDataOptions<AuthControllerGetMeData, AuthControllerGetMeError, TData, ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>>, "queryKey">): DefinedUseQueryResult<TData, AuthControllerGetMeError | Error>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        fetchInfiniteQuery<TPageParam extends AuthControllerGetMeParameters>(options: ServiceOperationFetchInfiniteQueryOptions<AuthControllerGetMeSchema, AuthControllerGetMeData, AuthControllerGetMeParameters, TPageParam, AuthControllerGetMeError>): Promise<OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters>>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        prefetchInfiniteQuery<TPageParam extends AuthControllerGetMeParameters>(options: ServiceOperationFetchInfiniteQueryOptions<AuthControllerGetMeSchema, AuthControllerGetMeData, AuthControllerGetMeParameters, TPageParam, AuthControllerGetMeError>): Promise<void>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        ensureInfiniteQueryData<TPageParam extends AuthControllerGetMeParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<AuthControllerGetMeSchema, AuthControllerGetMeData, AuthControllerGetMeParameters, TPageParam, AuthControllerGetMeError>): Promise<OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters>>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        fetchQuery(options: ServiceOperationFetchQueryOptions<AuthControllerGetMeSchema, AuthControllerGetMeData, AuthControllerGetMeParameters, AuthControllerGetMeError> | void): Promise<AuthControllerGetMeData>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        prefetchQuery(options: ServiceOperationFetchQueryOptions<AuthControllerGetMeSchema, AuthControllerGetMeData, AuthControllerGetMeParameters, AuthControllerGetMeError> | void): Promise<void>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<AuthControllerGetMeSchema, AuthControllerGetMeData, AuthControllerGetMeParameters, AuthControllerGetMeError> | void): Promise<AuthControllerGetMeData>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void)): OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters> | undefined;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>): TInfinite extends true ? Array<[
+            queryKey: ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>,
+            data: NoInfer<OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters>> | undefined
+        ]> : Array<[
+            queryKey: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>,
             data: AuthControllerGetMeData | undefined
-          ]
-        >
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getQueryData(
-      parameters:
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void)
-    ): AuthControllerGetMeData | undefined
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getQueryState(
-      parameters:
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void)
-    ): QueryState<AuthControllerGetMeData, AuthControllerGetMeError> | undefined
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getInfiniteQueryState(
-      parameters:
-        | AuthControllerGetMeParameters
-        | ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | void
-    ):
-      | QueryState<
-          OperationInfiniteData<
-            AuthControllerGetMeData,
-            AuthControllerGetMeParameters
-          >,
-          AuthControllerGetMeError
-        >
-      | undefined
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    invalidateQueries<TInfinite extends boolean = false>(
-      filters?: InvalidateQueryFilters<
-        AuthControllerGetMeSchema,
-        AuthControllerGetMeData,
-        TInfinite,
-        AuthControllerGetMeParameters,
-        AuthControllerGetMeError
-      >,
-      options?: InvalidateOptions
-    ): Promise<void>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    isFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-    ): number
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    <
-      TMeta extends Record<string, any>,
-      TSignal extends AbortSignal = AbortSignal
-    >(
-      options:
-        | QueryFnOptionsByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters,
-            TMeta,
-            TSignal
-          >
-        | (QueryFnOptionsByParameters<
-            AuthControllerGetMeParameters,
-            TMeta,
-            TSignal
-          > | void),
-      client?: (
-        schema: AuthControllerGetMeSchema,
-        options: {
-          parameters: AuthControllerGetMeParameters
-          signal?: TSignal
-          meta?: TMeta
-        }
-      ) => Promise<
-        RequestFnResponse<AuthControllerGetMeData, AuthControllerGetMeError>
-      >
-    ): Promise<
-      RequestFnResponse<AuthControllerGetMeData, AuthControllerGetMeError>
-    >
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    refetchQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >,
-      options?: RefetchOptions
-    ): Promise<void>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    removeQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-    ): void
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    resetQueries<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >,
-      options?: ResetOptions
-    ): Promise<void>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    setInfiniteQueryData(
-      parameters:
-        | AuthControllerGetMeParameters
-        | ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >,
-      updater: Updater<
-        | NoInfer<
-            OperationInfiniteData<
-              AuthControllerGetMeData,
-              AuthControllerGetMeParameters
-            >
-          >
-        | undefined,
-        | NoInfer<
-            OperationInfiniteData<
-              AuthControllerGetMeData,
-              AuthControllerGetMeParameters
-            >
-          >
-        | undefined
-      >,
-      options?: SetDataOptions
-    ):
-      | OperationInfiniteData<
-          AuthControllerGetMeData,
-          AuthControllerGetMeParameters
-        >
-      | undefined
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    setQueriesData<TInfinite extends boolean = false>(
-      filters:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >,
-      updater: Updater<
-        NoInfer<AuthControllerGetMeData> | undefined,
-        NoInfer<AuthControllerGetMeData> | undefined
-      >,
-      options?: SetDataOptions
-    ): Array<AuthControllerGetMeData | undefined>
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    setQueryData(
-      parameters:
-        | (AuthControllerGetMeParameters | undefined)
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >,
-      updater: Updater<
-        NoInfer<AuthControllerGetMeData> | undefined,
-        NoInfer<AuthControllerGetMeData> | undefined
-      >,
-      options?: SetDataOptions
-    ): AuthControllerGetMeData | undefined
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getInfiniteQueryKey(
-      parameters: AuthControllerGetMeParameters | void
-    ): ServiceOperationInfiniteQueryKey<
-      AuthControllerGetMeSchema,
-      AuthControllerGetMeParameters
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.authService.authControllerGetMe.useInfiniteQuery({}, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends AuthControllerGetMeParameters,
-      TData = AuthControllerGetMeData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options: Omit<
-        UndefinedInitialDataInfiniteOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          OperationInfiniteData<TData, AuthControllerGetMeParameters>,
-          ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          AuthControllerGetMeData,
-          PartialParameters<TPageParam>
-        >
-    ): UseInfiniteQueryResult<
-      OperationInfiniteData<TData, AuthControllerGetMeParameters>,
-      AuthControllerGetMeError | Error
-    >
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-     *
-     * @example Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.authService.authControllerGetMe.useInfiniteQuery({}, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useInfiniteQuery<
-      TPageParam extends AuthControllerGetMeParameters,
-      TData = AuthControllerGetMeData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options: Omit<
-        DefinedInitialDataInfiniteOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          OperationInfiniteData<TData, AuthControllerGetMeParameters>,
-          ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          AuthControllerGetMeData,
-          PartialParameters<TPageParam>
-        >
-    ): DefinedUseInfiniteQueryResult<
-      OperationInfiniteData<TData, AuthControllerGetMeParameters>,
-      AuthControllerGetMeError | Error
-    >
-    /**
-     * Monitors the number of queries currently fetching, matching the provided filters.
-     * Useful for creating loading indicators or performing actions based on active requests.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-     * @example Checks the total number of queries fetching from the specified service method,
-     * both normal and infinite. If no parameters are provided, no filtering is applied.
-     * ```ts
-     * const authControllerGetMeTotal = qraft.authService.authControllerGetMe.useIsFetching()
-     * ```
-     */
-    useIsFetching<TInfinite extends boolean = false>(
-      filters?:
-        | QueryFiltersByParameters<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-        | QueryFiltersByQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeData,
-            TInfinite,
-            AuthControllerGetMeParameters,
-            AuthControllerGetMeError
-          >
-    ): number
-    /**
-     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-     *
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-     * ```ts
-     * const authControllerGetMeResults = qraft.authService.authControllerGetMe.useQueries({
-     *     queries: [
-     *         {},
-     *         {}
-     *     ]
-     * });
-     * authControllerGetMeResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-     * ```
-     * @example Combined results. Only the data will be returned.
-     * ```ts
-     * const authControllerGetMeCombinedResults = qraft.authService.authControllerGetMe.useQueries({
-     *     combine: results => results.map(result => result.data),
-     *     queries: [
-     *         {},
-     *         {}
-     *     ]
-     * });
-     * authControllerGetMeCombinedResults.forEach(data => console.log({ data }));
-     * ```
-     */
-    useQueries<
-      T extends Array<
-        UseQueryOptionsForUseQueries<
-          AuthControllerGetMeSchema,
-          AuthControllerGetMeParameters,
-          AuthControllerGetMeData,
-          AuthControllerGetMeError
-        >
-      >,
-      TCombinedResult = Array<
-        UseQueryResult<AuthControllerGetMeData, AuthControllerGetMeError>
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          UseQueryResult<AuthControllerGetMeData, AuthControllerGetMeError>
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    getQueryKey(
-      parameters: AuthControllerGetMeParameters | void
-    ): ServiceOperationQueryKey<
-      AuthControllerGetMeSchema,
-      AuthControllerGetMeParameters
-    >
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query without parameters
-     * ```ts
-     * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
-     * ```
-     */
-    useQuery<TData = AuthControllerGetMeData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options?: Omit<
-        UndefinedInitialDataOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          TData,
-          ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseQueryResult<TData, AuthControllerGetMeError | Error>
-    /**
-     * Performs asynchronous data fetching, manages loading states and error handling.
-     *
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-     * @example Query without parameters
-     * ```ts
-     * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
-     * ```
-     */
-    useQuery<TData = AuthControllerGetMeData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options: Omit<
-        DefinedInitialDataOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          TData,
-          ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): DefinedUseQueryResult<TData, AuthControllerGetMeError | Error>
-    /**
-     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-     * Manages paginated data and provides utilities for fetching additional pages.
-     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-     *
-     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-     *
-     * @example Suspense Infinite Query
-     * ```ts
-     * const { data, isLoading, fetchNextPage } = qraft.authService.authControllerGetMe.useSuspenseInfiniteQuery({}, {
-     *     initialPageParam: {},
-     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-     * })
-     *
-     * console.log(data);
-     * fetchNextPage(); // Fetch the next page
-     * ```
-     */
-    useSuspenseInfiniteQuery<
-      TPageParam extends AuthControllerGetMeParameters,
-      TData = AuthControllerGetMeData
-    >(
-      parameters:
-        | ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options: Omit<
-        UseSuspenseInfiniteQueryOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          OperationInfiniteData<TData, AuthControllerGetMeParameters>,
-          AuthControllerGetMeData,
-          ServiceOperationInfiniteQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >,
-          PartialParameters<TPageParam>
-        >,
-        | 'queryKey'
-        | 'getPreviousPageParam'
-        | 'getNextPageParam'
-        | 'initialPageParam'
-      > &
-        InfiniteQueryPageParamsOptions<
-          AuthControllerGetMeData,
-          PartialParameters<TPageParam>
-        >
-    ): UseSuspenseInfiniteQueryResult<
-      OperationInfiniteData<TData, AuthControllerGetMeParameters>,
-      AuthControllerGetMeError | Error
-    >
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    useSuspenseQueries<
-      T extends Array<
-        UseQueryOptionsForUseSuspenseQuery<
-          AuthControllerGetMeSchema,
-          AuthControllerGetMeParameters,
-          AuthControllerGetMeData,
-          AuthControllerGetMeError
-        >
-      >,
-      TCombinedResult = Array<
-        UseSuspenseQueryResult<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError
-        >
-      >
-    >(options: {
-      queries: T
-      combine?: (
-        results: Array<
-          WithOptional<
-            UseSuspenseQueryResult<
-              AuthControllerGetMeData,
-              AuthControllerGetMeError
-            >,
-            'data'
-          >
-        >
-      ) => TCombinedResult
-    }): TCombinedResult
-    /**
-     * @summary Get current user
-     * @description This endpoint returns the current authenticated user.
-     */
-    useSuspenseQuery<TData = AuthControllerGetMeData>(
-      parameters:
-        | ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        | (AuthControllerGetMeParameters | void),
-      options?: Omit<
-        UseSuspenseQueryOptions<
-          AuthControllerGetMeData,
-          AuthControllerGetMeError,
-          TData,
-          ServiceOperationQueryKey<
-            AuthControllerGetMeSchema,
-            AuthControllerGetMeParameters
-          >
-        >,
-        'queryKey'
-      >
-    ): UseSuspenseQueryResult<TData, AuthControllerGetMeError | Error>
-    schema: AuthControllerGetMeSchema
-    types: {
-      parameters: AuthControllerGetMeParameters
-      data: AuthControllerGetMeData
-      error: AuthControllerGetMeError
-    }
-  }
+        ]>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getQueryData(parameters: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void)): AuthControllerGetMeData | undefined;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getQueryState(parameters: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void)): QueryState<AuthControllerGetMeData, AuthControllerGetMeError> | undefined;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getInfiniteQueryState(parameters: AuthControllerGetMeParameters | ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | void): QueryState<OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters>, AuthControllerGetMeError> | undefined;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>, options?: InvalidateOptions): Promise<void>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>): number;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<AuthControllerGetMeParameters, TMeta, TSignal> | void), client?: (schema: AuthControllerGetMeSchema, options: {
+            parameters: AuthControllerGetMeParameters;
+            signal?: TSignal;
+            meta?: TMeta;
+        }) => Promise<RequestFnResponse<AuthControllerGetMeData, AuthControllerGetMeError>>): Promise<RequestFnResponse<AuthControllerGetMeData, AuthControllerGetMeError>>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>, options?: RefetchOptions): Promise<void>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>): void;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>, options?: ResetOptions): Promise<void>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        setInfiniteQueryData(parameters: AuthControllerGetMeParameters | ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>, updater: Updater<NoInfer<OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters>> | undefined, NoInfer<OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<AuthControllerGetMeData, AuthControllerGetMeParameters> | undefined;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>, updater: Updater<NoInfer<AuthControllerGetMeData> | undefined, NoInfer<AuthControllerGetMeData> | undefined>, options?: SetDataOptions): Array<AuthControllerGetMeData | undefined>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        setQueryData(parameters: (AuthControllerGetMeParameters | undefined) | ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>, updater: Updater<NoInfer<AuthControllerGetMeData> | undefined, NoInfer<AuthControllerGetMeData> | undefined>, options?: SetDataOptions): AuthControllerGetMeData | undefined;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getInfiniteQueryKey(parameters: AuthControllerGetMeParameters | void): ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.authService.authControllerGetMe.useInfiniteQuery({}, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends AuthControllerGetMeParameters, TData = AuthControllerGetMeData>(parameters: ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options: Omit<UndefinedInitialDataInfiniteOptions<AuthControllerGetMeData, AuthControllerGetMeError, OperationInfiniteData<TData, AuthControllerGetMeParameters>, ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<AuthControllerGetMeData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, AuthControllerGetMeParameters>, AuthControllerGetMeError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+         *
+         * @example Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.authService.authControllerGetMe.useInfiniteQuery({}, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useInfiniteQuery<TPageParam extends AuthControllerGetMeParameters, TData = AuthControllerGetMeData>(parameters: ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options: Omit<DefinedInitialDataInfiniteOptions<AuthControllerGetMeData, AuthControllerGetMeError, OperationInfiniteData<TData, AuthControllerGetMeParameters>, ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<AuthControllerGetMeData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, AuthControllerGetMeParameters>, AuthControllerGetMeError | Error>;
+        /**
+         * Monitors the number of queries currently fetching, matching the provided filters.
+         * Useful for creating loading indicators or performing actions based on active requests.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+         * @example Checks the total number of queries fetching from the specified service method,
+         * both normal and infinite. If no parameters are provided, no filtering is applied.
+         * ```ts
+         * const authControllerGetMeTotal = qraft.authService.authControllerGetMe.useIsFetching()
+         * ```
+         */
+        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError> | QueryFiltersByQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeData, TInfinite, AuthControllerGetMeParameters, AuthControllerGetMeError>): number;
+        /**
+         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+         *
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+         * ```ts
+         * const authControllerGetMeResults = qraft.authService.authControllerGetMe.useQueries({
+         *     queries: [
+         *         {},
+         *         {}
+         *     ]
+         * });
+         * authControllerGetMeResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+         * ```
+         * @example Combined results. Only the data will be returned.
+         * ```ts
+         * const authControllerGetMeCombinedResults = qraft.authService.authControllerGetMe.useQueries({
+         *     combine: results => results.map(result => result.data),
+         *     queries: [
+         *         {},
+         *         {}
+         *     ]
+         * });
+         * authControllerGetMeCombinedResults.forEach(data => console.log({ data }));
+         * ```
+         */
+        useQueries<T extends Array<UseQueryOptionsForUseQueries<AuthControllerGetMeSchema, AuthControllerGetMeParameters, AuthControllerGetMeData, AuthControllerGetMeError>>, TCombinedResult = Array<UseQueryResult<AuthControllerGetMeData, AuthControllerGetMeError>>>(options: {
+            queries: T;
+            combine?: (results: Array<UseQueryResult<AuthControllerGetMeData, AuthControllerGetMeError>>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        getQueryKey(parameters: AuthControllerGetMeParameters | void): ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
+         * ```
+         */
+        useQuery<TData = AuthControllerGetMeData>(parameters: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options?: Omit<UndefinedInitialDataOptions<AuthControllerGetMeData, AuthControllerGetMeError, TData, ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>>, "queryKey">): UseQueryResult<TData, AuthControllerGetMeError | Error>;
+        /**
+         * Performs asynchronous data fetching, manages loading states and error handling.
+         *
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+         * @example Query without parameters
+         * ```ts
+         * const { data, isLoading } = qraft.authService.authControllerGetMe.useQuery()
+         * ```
+         */
+        useQuery<TData = AuthControllerGetMeData>(parameters: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options: Omit<DefinedInitialDataOptions<AuthControllerGetMeData, AuthControllerGetMeError, TData, ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>>, "queryKey">): DefinedUseQueryResult<TData, AuthControllerGetMeError | Error>;
+        /**
+         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+         * Manages paginated data and provides utilities for fetching additional pages.
+         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+         *
+         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+         *
+         * @example Suspense Infinite Query
+         * ```ts
+         * const { data, isLoading, fetchNextPage } = qraft.authService.authControllerGetMe.useSuspenseInfiniteQuery({}, {
+         *     initialPageParam: {},
+         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+         * })
+         *
+         * console.log(data);
+         * fetchNextPage(); // Fetch the next page
+         * ```
+         */
+        useSuspenseInfiniteQuery<TPageParam extends AuthControllerGetMeParameters, TData = AuthControllerGetMeData>(parameters: ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options: Omit<UseSuspenseInfiniteQueryOptions<AuthControllerGetMeData, AuthControllerGetMeError, OperationInfiniteData<TData, AuthControllerGetMeParameters>, AuthControllerGetMeData, ServiceOperationInfiniteQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<AuthControllerGetMeData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, AuthControllerGetMeParameters>, AuthControllerGetMeError | Error>;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<AuthControllerGetMeSchema, AuthControllerGetMeParameters, AuthControllerGetMeData, AuthControllerGetMeError>>, TCombinedResult = Array<UseSuspenseQueryResult<AuthControllerGetMeData, AuthControllerGetMeError>>>(options: {
+            queries: T;
+            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<AuthControllerGetMeData, AuthControllerGetMeError>, "data">>) => TCombinedResult;
+        }): TCombinedResult;
+        /**
+         * @summary Get current user
+         * @description This endpoint returns the current authenticated user.
+         */
+        useSuspenseQuery<TData = AuthControllerGetMeData>(parameters: ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters> | (AuthControllerGetMeParameters | void), options?: Omit<UseSuspenseQueryOptions<AuthControllerGetMeData, AuthControllerGetMeError, TData, ServiceOperationQueryKey<AuthControllerGetMeSchema, AuthControllerGetMeParameters>>, "queryKey">): UseSuspenseQueryResult<TData, AuthControllerGetMeError | Error>;
+        schema: AuthControllerGetMeSchema;
+        types: {
+            parameters: AuthControllerGetMeParameters;
+            data: AuthControllerGetMeData;
+            error: AuthControllerGetMeError;
+        };
+    };
 }
 export const authService: {
-  /**
-   * @summary Sign in a user
-   * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
-   */
-  authControllerSignIn: {
-    schema: {
-      method: 'post'
-      url: '/auth/sign-in'
-      mediaType: ['application/json']
-    }
-  }
-  /**
-   * @summary Sign up a new user
-   * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
-   */
-  authControllerSignUp: {
-    schema: {
-      method: 'post'
-      url: '/auth/sign-up'
-      mediaType: ['application/json']
-    }
-  }
-  /**
-   * @summary Get current user
-   * @description This endpoint returns the current authenticated user.
-   */
-  authControllerGetMe: {
-    schema: {
-      method: 'get'
-      url: '/auth/me'
-      security: ['bearer']
-    }
-  }
+    /**
+     * @summary Sign in a user
+     * @description This endpoint allows a user to sign in by providing valid credentials. On successful authentication, a token is generated and returned.
+     */
+    authControllerSignIn: {
+        schema: {
+            method: "post";
+            url: "/auth/sign-in";
+            mediaType: [
+                "application/json"
+            ];
+        };
+    };
+    /**
+     * @summary Sign up a new user
+     * @description This endpoint allows a new user to sign up by providing necessary registration details. On successful registration, user details are returned.
+     */
+    authControllerSignUp: {
+        schema: {
+            method: "post";
+            url: "/auth/sign-up";
+            mediaType: [
+                "application/json"
+            ];
+        };
+    };
+    /**
+     * @summary Get current user
+     * @description This endpoint returns the current authenticated user.
+     */
+    authControllerGetMe: {
+        schema: {
+            method: "get";
+            url: "/auth/me";
+            security: [
+                "bearer"
+            ];
+        };
+    };
 } = {
-  authControllerSignIn: {
-    schema: {
-      method: 'post',
-      url: '/auth/sign-in',
-      mediaType: ['application/json']
+    authControllerSignIn: {
+        schema: {
+            method: "post",
+            url: "/auth/sign-in",
+            mediaType: ["application/json"]
+        }
+    },
+    authControllerSignUp: {
+        schema: {
+            method: "post",
+            url: "/auth/sign-up",
+            mediaType: ["application/json"]
+        }
+    },
+    authControllerGetMe: {
+        schema: {
+            method: "get",
+            url: "/auth/me",
+            security: ["bearer"]
+        }
     }
-  },
-  authControllerSignUp: {
-    schema: {
-      method: 'post',
-      url: '/auth/sign-up',
-      mediaType: ['application/json']
-    }
-  },
-  authControllerGetMe: {
-    schema: {
-      method: 'get',
-      url: '/auth/me',
-      security: ['bearer']
-    }
-  }
-}
+};
 type AuthControllerSignInSchema = {
-  method: 'post'
-  url: '/auth/sign-in'
-  mediaType: ['application/json']
-}
-type AuthControllerSignInParameters = {}
-type AuthControllerSignInData =
-  paths['/auth/sign-in']['post']['responses']['200']['content']['application/json']
-type AuthControllerSignInError = unknown
-type AuthControllerSignInBody = NonNullable<
-  paths['/auth/sign-in']['post']['requestBody']
->['content']['application/json']
+    method: "post";
+    url: "/auth/sign-in";
+    mediaType: [
+        "application/json"
+    ];
+};
+type AuthControllerSignInParameters = {};
+type AuthControllerSignInData = paths["/auth/sign-in"]["post"]["responses"]["200"]["content"]["application/json"];
+type AuthControllerSignInError = unknown;
+type AuthControllerSignInBody = NonNullable<paths["/auth/sign-in"]["post"]["requestBody"]>["content"]["application/json"];
 type AuthControllerSignUpSchema = {
-  method: 'post'
-  url: '/auth/sign-up'
-  mediaType: ['application/json']
-}
-type AuthControllerSignUpParameters = {}
-type AuthControllerSignUpData =
-  paths['/auth/sign-up']['post']['responses']['201']['content']['application/json']
-type AuthControllerSignUpError = unknown
-type AuthControllerSignUpBody = NonNullable<
-  paths['/auth/sign-up']['post']['requestBody']
->['content']['application/json']
+    method: "post";
+    url: "/auth/sign-up";
+    mediaType: [
+        "application/json"
+    ];
+};
+type AuthControllerSignUpParameters = {};
+type AuthControllerSignUpData = paths["/auth/sign-up"]["post"]["responses"]["201"]["content"]["application/json"];
+type AuthControllerSignUpError = unknown;
+type AuthControllerSignUpBody = NonNullable<paths["/auth/sign-up"]["post"]["requestBody"]>["content"]["application/json"];
 type AuthControllerGetMeSchema = {
-  method: 'get'
-  url: '/auth/me'
-  security: ['bearer']
-}
-type AuthControllerGetMeParameters = undefined
-type AuthControllerGetMeData =
-  paths['/auth/me']['get']['responses']['200']['content']['application/json']
-type AuthControllerGetMeError = unknown
+    method: "get";
+    url: "/auth/me";
+    security: [
+        "bearer"
+    ];
+};
+type AuthControllerGetMeParameters = undefined;
+type AuthControllerGetMeData = paths["/auth/me"]["get"]["responses"]["200"]["content"]["application/json"];
+type AuthControllerGetMeError = unknown;

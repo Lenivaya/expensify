@@ -75,7 +75,7 @@ export default async function Home() {
               <Link
                 key={card.title}
                 href={card.href}
-                className='transition-transform duration-300 hover:scale-[1.02]'
+                className='transition-transform duration-300'
               >
                 <FeatureCard {...card} />
               </Link>
