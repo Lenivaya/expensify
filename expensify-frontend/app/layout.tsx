@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from '@/components/ui/sonner'
 import { Navbar } from '@/components/layout/navbar/navbar'
+import { Footer } from '@/components/layout/footer'
 import { QueryProvider } from '@/components/providers/query/query-provider'
 import { CookiePopupProvider } from '@/components/providers/cookie/cookie-popup'
 
@@ -30,12 +31,13 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning={true} className='dark'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased flex flex-col`}
       >
         <QueryProvider>
           <CookiePopupProvider>
             <Navbar />
-            {children}
+            <main className='flex-1'>{children}</main>
+            <Footer />
           </CookiePopupProvider>
         </QueryProvider>
         <Toaster />
