@@ -37,7 +37,6 @@ interface BalanceSectionProps {
 /**
  * A component that displays the current balance with detailed breakdown
  *
- * @module BalanceSection
  * @description
  * Renders a beautiful card displaying the current balance with a hover card
  * showing the breakdown of total inflows and expenses. The component features

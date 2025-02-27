@@ -36,7 +36,7 @@ Hashes the provided data using a secure hashing algorithm.
 
 The plain text data or buffer to hash
 
-`string` | `Buffer`
+`string` | `Buffer`\<`ArrayBufferLike`\>
 
 #### Returns
 
@@ -58,7 +58,7 @@ Compares plain text data with a hashed value.
 
 The plain text data or buffer to compare
 
-`string` | `Buffer`
+`string` | `Buffer`\<`ArrayBufferLike`\>
 
 ##### encrypted
 

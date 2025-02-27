@@ -18,7 +18,6 @@ import { Badge } from '@/components/ui/badge'
 /**
  * A flexible component for displaying a list of expense cards with various layout and sorting options
  *
- * @module ExpenseCardList
  * @description
  * This component provides a customizable way to display expense cards with support for
  * different layouts (grid, feed, compact), sorting options, and tag filtering. It includes
@@ -315,7 +314,7 @@ export const ExpenseCardList: React.FC<ExpenseCardListProps> = ({
   return (
     <div className={cn('flex flex-col h-full', className)}>
       {/* List Header with Controls */}
-      <div className='flex items-center justify-between sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-2'>
+      <div className='flex items-center justify-between sticky top-0 z-10 backdrop-blur p-2'>
         {header || <div />}
         <div className='flex items-center gap-2'>
           {showSortOptions && (

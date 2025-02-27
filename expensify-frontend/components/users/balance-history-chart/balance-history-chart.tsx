@@ -309,7 +309,7 @@ function TimeRangeSelector({
   disabled = false
 }: TimeRangeSelectorProps) {
   return (
-    <div className='absolute right-4 top-4'>
+    <div>
       <Select
         value={value}
         onValueChange={(value) => onChange(value as TimeRange)}
@@ -601,7 +601,6 @@ function CustomLegend({ payload, visibleSeries, onToggle }: CustomLegendProps) {
 /**
  * A comprehensive balance history chart component
  *
- * @module BalanceHistoryChart
  * @description
  * Renders a beautiful and interactive area chart that visualizes financial
  * balance history over time. The chart shows inflows, expenses, and net
@@ -749,18 +748,27 @@ export function BalanceHistoryChart({
       className={cn('w-full h-full', className)}
       hoverIntensity='high'
     >
-      <EnhancedCardHeader className='items-center pb-0 space-y-1 pt-4'>
-        <div className='flex items-center gap-2'>
-          <LineChart className='h-5 w-5 text-primary/70' aria-hidden='true' />
-          <EnhancedCardTitle>{title}</EnhancedCardTitle>
+      <EnhancedCardHeader className='pb-0 pt-4 relative isolate'>
+        <div className='flex justify-between items-start w-full'>
+          <div className='space-y-1'>
+            <div className='flex items-center gap-2'>
+              <LineChart
+                className='h-5 w-5 text-primary/70'
+                aria-hidden='true'
+              />
+              <EnhancedCardTitle>{title}</EnhancedCardTitle>
+            </div>
+            <EnhancedCardDescription>{description}</EnhancedCardDescription>
+          </div>
+          {showTimeRangeSelector && (
+            <div className='relative z-20'>
+              <TimeRangeSelector
+                value={timeRange}
+                onChange={handleTimeRangeChange}
+              />
+            </div>
+          )}
         </div>
-        <EnhancedCardDescription>{description}</EnhancedCardDescription>
-        {showTimeRangeSelector && (
-          <TimeRangeSelector
-            value={timeRange}
-            onChange={handleTimeRangeChange}
-          />
-        )}
       </EnhancedCardHeader>
 
       <EnhancedCardContent className='flex-1 px-4 pb-3 pt-2'>

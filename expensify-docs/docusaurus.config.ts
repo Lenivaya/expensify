@@ -130,6 +130,8 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   plugins: [
+    // ["@cmfcmf/docusaurus-search-local"],
+    require.resolve("docusaurus-lunr-search"),
     [
       "docusaurus-plugin-openapi-docs",
       {
@@ -284,21 +286,21 @@ const config: Config = {
   themes: [
     "docusaurus-theme-openapi-docs",
     // ... Your other themes.
-    [
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
-      {
-        // ... Your options.
-        // `hashed` is recommended as long-term-cache of index file is possible.
-        hashed: true,
-
-        // For Docs using Chinese, it is recomended to set:
-        // language: ["en", "zh"],
-
-        // If you're using `noIndex: true`, set `forceIgnoreNoIndex` to enable local index:
-        // forceIgnoreNoIndex: true,
-      },
-    ],
+    // [
+    //   require.resolve("@easyops-cn/docusaurus-search-local"),
+    //   /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+    //   {
+    //     // ... Your options.
+    //     // `hashed` is recommended as long-term-cache of index file is possible.
+    //     hashed: true,
+    //
+    //     // For Docs using Chinese, it is recomended to set:
+    //     // language: ["en", "zh"],
+    //
+    //     // If you're using `noIndex: true`, set `forceIgnoreNoIndex` to enable local index:
+    //     // forceIgnoreNoIndex: true,
+    //   },
+    // ],
   ],
 };
 

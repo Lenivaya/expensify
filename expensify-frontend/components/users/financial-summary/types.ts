@@ -1,5 +1,4 @@
 /**
- * @module FinancialSummaryTypes
  * @description
  * Type definitions for the financial summary components. These types represent
  * the core data structures used across the financial summary feature, including

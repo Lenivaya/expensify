@@ -5,7 +5,6 @@ import Link from 'next/link'
 /**
  * Component for rendering unauthenticated user controls in the navbar
  *
- * @module NavbarUserUnauthenticated
  * @description
  * This component displays sign-in and sign-up options for unauthenticated users
  * in the navigation bar. It features animated buttons with hover effects and

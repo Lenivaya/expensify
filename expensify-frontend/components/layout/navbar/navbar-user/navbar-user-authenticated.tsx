@@ -1,10 +1,5 @@
 'use client'
 
-/**
- * @module NavbarUserAuthenticated
- * @description This module contains components for rendering the authenticated user's navbar dropdown menu.
- */
-
 import type React from 'react'
 import {
   DropdownMenu,

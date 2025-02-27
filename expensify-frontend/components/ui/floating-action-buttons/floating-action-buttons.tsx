@@ -21,9 +21,13 @@ import { useCallback, useState } from 'react'
 import { toast } from 'sonner'
 
 export function ExpensifyFloatingButtons({
-  className
+  className,
+  onInflowAdd,
+  onExpenseAdd
 }: {
   className?: string
+  onInflowAdd?: () => Promise<void>
+  onExpenseAdd?: () => Promise<void>
 }) {
   return (
     <div
@@ -32,13 +36,17 @@ export function ExpensifyFloatingButtons({
         className
       )}
     >
-      <AddInflowFloatingButton />
-      <AddExpenseFloatingButton />
+      <AddInflowFloatingButton onInflowAdd={onInflowAdd} />
+      <AddExpenseFloatingButton onExpenseAdd={onExpenseAdd} />
     </div>
   )
 }
 
-function AddInflowFloatingButton() {
+function AddInflowFloatingButton({
+  onInflowAdd
+}: {
+  onInflowAdd?: () => Promise<void>
+}) {
   const [open, setOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
 
@@ -53,10 +61,13 @@ function AddInflowFloatingButton() {
   const handleSubmit = useCallback(
     async (values: InflowFormValues) => {
       await createInflow.mutateAsync(values)
+      if (onInflowAdd) {
+        await onInflowAdd()
+      }
       toast('Inflow recorded successfully')
       setOpen(false)
     },
-    [createInflow, setOpen]
+    [createInflow, onInflowAdd, setOpen]
   )
 
   return (
@@ -84,7 +95,7 @@ function AddInflowFloatingButton() {
       <DialogPortal>
         <DialogOverlay className='bg-transparent data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:duration-300 data-[state=closed]:duration-200' />
         <DialogContent className='sm:max-w-[425px] bg-transparent p-0 gap-0 border-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=open]:duration-300 data-[state=closed]:duration-200'>
-          <div className='relative px-6 pt-10 pb-4 bg-gradient-to-b from-[#0B0E14]/10 to-[#0B0E14]/5 backdrop-blur-[3px] rounded-xl shadow-lg'>
+          <div className='relative px-6 pt-10 pb-4 bg-gradient-to-b  rounded-xl shadow-lg'>
             <InflowForm onSubmit={handleSubmit} />
           </div>
         </DialogContent>
@@ -93,7 +104,11 @@ function AddInflowFloatingButton() {
   )
 }
 
-function AddExpenseFloatingButton() {
+function AddExpenseFloatingButton({
+  onExpenseAdd
+}: {
+  onExpenseAdd?: () => Promise<void>
+}) {
   const [open, setOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
 
@@ -106,10 +121,13 @@ function AddExpenseFloatingButton() {
   const handleSubmit = useCallback(
     async (values: ExpenseFormValues) => {
       await createExpense.mutateAsync(values)
+      if (onExpenseAdd) {
+        await onExpenseAdd()
+      }
       toast('Expense created successfully')
       setOpen(false)
     },
-    [createExpense, setOpen]
+    [createExpense, onExpenseAdd, setOpen]
   )
 
   return (
@@ -138,9 +156,7 @@ function AddExpenseFloatingButton() {
       <DialogPortal>
         <DialogOverlay className='bg-transparent data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=open]:duration-300 data-[state=closed]:duration-200' />
         <DialogContent className='sm:max-w-[425px] bg-transparent p-0 gap-0 border-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=open]:duration-300 data-[state=closed]:duration-200'>
-          <div className='relative px-6 pt-10 pb-4 bg-gradient-to-b from-[#0B0E14]/10 to-[#0B0E14]/5 backdrop-blur-[3px] rounded-xl shadow-lg'>
-            <ExpenseForm onSubmit={handleSubmit} />
-          </div>
+          <ExpenseForm onSubmit={handleSubmit} />
         </DialogContent>
       </DialogPortal>
     </Dialog>

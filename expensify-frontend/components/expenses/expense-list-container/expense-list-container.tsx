@@ -175,7 +175,6 @@ const PaginationControls = memo(function PaginationControls({
 /**
  * A container component that provides a complete expense management interface
  *
- * @module ExpenseListContainer
  * @description
  * This component serves as a high-level container for managing and displaying expenses.
  * It combines search functionality, pagination, and the expense card list with additional

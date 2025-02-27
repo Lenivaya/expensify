@@ -77,7 +77,6 @@ interface QueryProviderProps {
 /**
  * Application-wide provider for React Query functionality
  *
- * @module QueryProvider
  * @description
  * This component provides React Query context to the entire application,
  * enabling data fetching, caching, and state management features.

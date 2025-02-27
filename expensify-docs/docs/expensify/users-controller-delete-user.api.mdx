@@ -1,11 +1,11 @@
 ---
 id: users-controller-delete-user
-title: "Deletes user"
-description: "Deletes a user account. This operation cannot be undone."
-sidebar_label: "Deletes user"
+title: "Delete user account and all associated data"
+description: "Permanently deletes a user account and all associated data including:"
+sidebar_label: "Delete user account and all associated data"
 hide_title: true
 hide_table_of_contents: true
-api: eJylk01v2zAMhv+KoNMGBEk69OTbsKZAhx2GLcUOQTAwNlMLVSRXooJ6hv77SMvNmmHZpSdL/HhJPqIH3WCsg+nIeKcrfYMWCaMClSIGBXXtk6O5WrcmKt9hAAlUNTjnSe1QJdd4h3M90yfvXcNC95weP3lHwVuL4WczCouVQzsIcOBriLraDNrxhVNMw66AT8kEZAkKCWfaSFcdUMu+WLd4AF0NmvpOMiIF4x50zltJjJ13EaP4Pyyv5XM+mxRXMdU1xrhP1vaqNNXoPNPXy6sLGTy4zAqJWh/ML2wU+SlTkWCZIBWVS3VFYs9hXIzjItYpGOrH8XcIgbFUm63MQfAgVApAzQYG1XpBWmqO+BhHpRfyRHExmCYLHAzHAnT7R/+7ECtIXqoMBaPgm0yz6XDrwwGI7Z9/rNk4MW6JurFn4/Z+ZG/IimP13KGLZt9z7PnAJ4/6+PWOvdJX8VzNl3yveS2g5kqD6HY+0gGcSE+L8LKEqWzLmfgwZqOjty3rNBzhMy06C7xl3EkKVgoUvBs94uXYiheTmbbcp5iHYQcR74PNWcxPCUNfqB8hGNgJHH7VxkQ588PtwUb8zxjvvk07/15d6mwyghPYR7BJbnx8xL78OHmbX23KzerLar1ivyztq//lrwcf+/ynNM84Rqz9I7qcT5VI7lIs5993+nFD
+api: eJztVE1vEzEQ/SuWTyCFJgVOe6toi0AcqtKKQ6mQ4510DY692LOlYbX/nTfeTVsoqRDiSC5Zz8ebrzfT65qyTa5lF4Ou9AmltQkU2G9UTZ6YsjKqy5SUsTZ2gZUJtTLeK5NztM4w1ao2bJQL1ne1C1fVx6Dwe6YAlmMwHqpVBK7E2OqOXTAB7l4lsjHVWT2hm5ZCloCIABcfv+WnW/sD4GzY2TwGExMbYY2EMjEjbL41teyuHW9U4zLHtPk4BT3DG1VIFsqaECKrJaku1DHQnjpASQX6m8MXFO29VlAymSSp0oVUI3WCITfq9eHJKUr42rlEaxjnPT3TEb6l2jc1enqO7uVXMXCK3lP6NPZVpDBtTTJrPFPW1UWvAx5wcTVUEyogOHU0004G1BpuoMu2obXRVa9504pH5oQe6GG4FMfcSm+y6J8vFvL385jPy0B3DDJ31lLOq87fkkDSQbsZBQqYaVvvbKlw/jkLYv8wo7j8TJalxCT9YDfmswa0uaKHqc803Zh16+mv8htmevoUX+n7Y/hC6P3nL9Au+c30y8X+jiaBMkIU03ETk/uOHDhOQRWPhCproQvKyx0oArGCGfKEXSbbJRC0THxJJoEJ1cWljI7NlRBh5IyGANxoorBojFkYAwZUei415Hnv6kH4QOl6y6Eueej7USTKnxN6X+Tq/PQdVNcmObP042hGj7GElek8Zq0b5raaz320xjcxc/ViAULtwHQ1COJWDiBDYeK20vdCjjHItt6JMTKNSTSbPo7LrYD87YczCKcpSiKle3JMynQdl1kelbPhVpsHWd1q1MHJGykWHRo1+3uLidG4BwAT3BbVYeEFetrCw3HMf3L9fo3d363L/5v6T27qRAOmG5633uAYYmaF6v20EhdlrTNsK9xPsE/4KuK+XyLUefLDIOKvHSXZvcs7+pe9qV2WbyzbyvhMj0z0yel0mp+qXZlNQhM2Zct8Jy98fqHNeN+HS1g1ZOqy/P2kOMBpa/mey4NTO9w/CodH747OjmAu9+neyftlo0qA32aE1hSLs/iFwjDcJsjylhyH4QfRhtE4
 sidebar_class_name: "delete api-method"
 info_path: docs/expensify/expensify
 custom_edit_url: null
@@ -22,7 +22,7 @@ import Heading from "@theme/Heading";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Deletes user"}
+  children={"Delete user account and all associated data"}
 >
 </Heading>
 
@@ -36,7 +36,13 @@ import Heading from "@theme/Heading";
 
 
 
-Deletes a user account. This operation cannot be undone.
+Permanently deletes a user account and all associated data including:
+    - Personal information
+    - Financial records (expenses and inflows)
+    - Analytics data and consent settings
+    - Activity history
+
+    This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
 
 <Heading
   id={"request"}
@@ -62,7 +68,7 @@ Deletes a user account. This operation cannot be undone.
 <StatusCodes
   id={undefined}
   label={undefined}
-  responses={{"204":{"description":"User successfully deleted"},"401":{"description":"User is not authorized to delete this account"},"404":{"description":"User not found"}}}
+  responses={{"200":{"description":"User and all associated data successfully deleted","content":{"application/json":{"schema":{"type":"object","properties":{"message":{"type":"string","example":"User and all associated data successfully deleted"},"deletedUserId":{"type":"string","example":"user123"}}}}}},"401":{"description":"User is not authorized to delete this account"},"404":{"description":"User not found"}}}
 >
   
 </StatusCodes>

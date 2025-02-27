@@ -1,0 +1,71 @@
+---
+id: analytics-controller-track-activity
+title: "Track user activity"
+description: "Records a user activity based on consent settings"
+sidebar_label: "Track user activity"
+hide_title: true
+hide_table_of_contents: true
+api: eJydVm1z2jgQ/isafSbFkN4Xvrnga2mTwBjT3lyGYYQtQI2wfJKchPH4v3dXfg20vbmbySTWSrvaZ/fZRylowk2sRWaFSumEhjxWOjGEkdxwTVhsxbOwZ7JjhidEpSRWqeGpJYZbK9KDoQOqMq4Z+s8TiOCnTJ6tiM1UpVYrKbneWs3iJ7+OBR4Z0+zELdeGTh43A6r5Pzk39oNKznRSuKXQHKJZnfPBRYpNHJJwy4Q0xCriLoDAkJ2F7DAIyzIpYpfX8LtBz4Ka+MhPDL/sOeMQS+2+89hiRhpRWMEN7iJ2BNOeM1YDWHqZynxG1J7YI6+qBRH2Sp/gpLOxDjB/ZadMYiQ8OBrf0nJArTgBaNjAi9CRQeI0YZbf4Ba4/f72qPEnL0eevrmSqDjONZawf/fYG7+/8W5vRn9Eo/HE8+Dnb0wEvaoCXVwA1yPANmoN8CLs0v8YbL/Og29gZVIu9tDU68rxND/BBvXX0SdYBmG4COFv3zn4axk8rILtNAz8KJiB5cN69jGItuvlrDasFtO5f7ddffLDoFvezb/0VtPF/X3wEIHBn23nD1EQ+tNovnioDNO7+fRLvXe/DIPVCrc2V8X9HXYrrEPeUBEP03IDpQRWM+jgTzl2QeMkEfjJJEEHormEzieOzb8gTwGDc8CQw4SZ404xjcmwk8qR8iPPgwGAGAelYYyAUSpx3W0vWvZIjpNVloPerD02tO8zsyVHD9qmK8AaPJoizKyiZVnFNBnKhJulsTe6ZlY7w25wAbXJ45gbs8+lPGPS773bf/PCMUuVJUA59QIhkpxj8a4ECjMyHMYBq4nM3HGmuUblKREKOxjHy0a3EB9gPSpUs0wZJw/MHrHurDk0bBQHCvBc6RjIhpZwqKhM5VXHV85O1uEdbD0zLdhOVjWqPCrAe5ZL1IGjtdlkOJQqZvIIWUxuPc/7VUyRAGSxFxAEOrDpAK9Q8apLGti1DGL7atOg/viz0aDP36JOfTARV0RU0bBT6qCjZaOXrbq9Ebef604nO280oD9A/53tkKVI98pNX03R4DXjqRH781Xt2h3iL+fYEuhjtTN659WPCeQIwTAuMuHEnEqmzFUvQgq8fScv7yi6F+l/Pa11Cyx/tcNMMpHibDiaFTUnH2nLSTzvWAn9R8bgZlFg+LWWZYlmaB5WC9/choBuDsCBs8QNRUGfOBZ0WiV+47QNj8scU7l6Vsv+uCwXK2TOrn7ITypBH81ewIi/J9T9v4DejpPOVlDJ0kNeNbuKiQVnOeJrZfSCq/03hqXnXoYA2Z2I1BNPSxzDCpDFNap0Wf4AB+0JaQ==
+sidebar_class_name: "post api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Track user activity"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/analytics/track"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Records a user activity based on consent settings
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"description":"Activity details to track","content":{"application/json":{"schema":{"type":"object","properties":{"userId":{"type":"string","description":"ID of the user performing the activity","example":"user123"},"timestamp":{"format":"date-time","type":"string","description":"Timestamp when the activity occurred","example":"2024-03-15T12:00:00Z"},"action":{"description":"Type of activity performed","example":"PAGE_VIEW","allOf":[{"type":"string","enum":["AUTH","ERROR","PAGE_VIEW","EXPENSE_CREATED","BUDGET_UPDATED","SOCIAL_SHARE","SOCIAL_LIKE","SOCIAL_COMMENT","AD_INTERACTION","AD_CLICK","AD_IMPRESSION"],"description":"Type of activity performed","title":"ActivityType"}]},"metadata":{"type":"object","description":"Additional data related to the activity","example":{"page":"/dashboard","amount":100,"category":"food"},"additionalProperties":true}},"required":["userId","timestamp","action","metadata"],"title":"UserActivityDto"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"201":{"description":"Activity tracked successfully"},"403":{"description":"Activity tracking not allowed due to consent settings"}}}
+>
+  
+</StatusCodes>
+
+
+      

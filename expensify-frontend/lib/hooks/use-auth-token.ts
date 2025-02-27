@@ -7,7 +7,6 @@ import { useLocalStorage, useReadLocalStorage } from 'usehooks-ts'
 /**
  * Hook to check if an authentication token is present in local storage
  *
- * @module useIsAuthTokenPresent
  * @description
  * A React hook that monitors the presence of an authentication token in local storage.
  * It provides real-time updates when the token status changes.
@@ -50,7 +49,6 @@ export const useIsAuthTokenPresent = () => {
 /**
  * Hook for managing authentication token in local storage
  *
- * @module useAuthToken
  * @description
  * A React hook that provides functionality to read, write, and remove
  * the authentication token from local storage. It uses a tuple return

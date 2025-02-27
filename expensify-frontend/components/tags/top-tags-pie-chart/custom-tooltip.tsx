@@ -17,7 +17,6 @@ interface CustomTooltipProps {
 /**
  * A custom tooltip component for the pie chart
  *
- * @module CustomTooltip
  * @description
  * This component renders a styled tooltip for the pie chart segments.
  * It displays the segment name and formatted monetary value with a

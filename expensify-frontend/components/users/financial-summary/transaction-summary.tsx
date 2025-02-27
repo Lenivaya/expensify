@@ -66,7 +66,6 @@ interface TransactionSummaryProps {
 /**
  * A component that displays a summary of transactions
  *
- * @module TransactionSummary
  * @description
  * Renders a beautiful card displaying a summary of either inflows or expenses.
  * Features a modern design with gradient backgrounds, icons, and hover effects.

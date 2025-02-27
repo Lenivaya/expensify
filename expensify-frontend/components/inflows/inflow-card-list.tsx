@@ -80,7 +80,6 @@ export interface InflowCardListProps {
 /**
  * A flexible component for displaying a list of inflow cards with various layout and sorting options
  *
- * @module InflowCardList
  * @description
  * This component provides a customizable way to display inflow cards with support for
  * different layouts (grid, feed, compact), sorting options, and tag filtering. It includes
@@ -313,7 +312,7 @@ export const InflowCardList: React.FC<InflowCardListProps> = ({
   return (
     <div className={cn('flex flex-col h-full', className)}>
       {/* List Header with Controls */}
-      <div className='flex items-center justify-between sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-2'>
+      <div className='flex items-center justify-between sticky top-0 z-10 backdrop-blur p-2'>
         {header || <div />}
         <div className='flex items-center gap-2'>
           {showSortOptions && (

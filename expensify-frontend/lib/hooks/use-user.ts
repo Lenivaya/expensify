@@ -4,7 +4,6 @@ import { useIsAuthTokenPresent } from './use-auth-token'
 /**
  * Hook to fetch and manage the current user's data
  *
- * @module useUser
  * @description
  * A React hook that provides access to the currently authenticated user's data.
  * It automatically fetches user data when authenticated and provides loading

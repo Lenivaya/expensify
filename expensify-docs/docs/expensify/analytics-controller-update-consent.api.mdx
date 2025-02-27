@@ -1,0 +1,71 @@
+---
+id: analytics-controller-update-consent
+title: "Update consent settings"
+description: "Updates the user's cookie and tracking consent preferences"
+sidebar_label: "Update consent settings"
+hide_title: true
+hide_table_of_contents: true
+api: eJylVcFu2zAM/RVDl12yJe1uuXVdB3QYsKJJsUNRDIxNx2pkyZPkrp7hfx8pyU6ybNiKXZKIEsnHx0emFwW63MrGS6PFUtw1BXh0ma8wax3aVy7LjdlJzEAXmbeQ76Tekk071D5rLJZoUefoxEyYBi1woOuCQl1oUJ2Xubs02lujFNqvbQh/Gb3JowELNXq0TizvH2bC4rcWnX9nik4s+3CUFimaty3OBKX17EhX0DRK5iHb/NEx9l64vMIa+JfvGiQIZvOIechjGZuXBJN9R2QHTzfGKARNb48JSViz0ths8gtktA62OFFCjvgMdaMoWAnKIQcqoVU+nYeZcCaXoF6YNDplNRYSshLBtxYjAFeB/cfMUDxx+Y6fvyw90UbsgpI/sMgOw/w16zA76N/9AekTEce4qP1eeo4n1onUBOS9N2IYYkDXsC107nyx4K/fY3foPUVwWZQcsdXmpFJXtkp1gkKdL85OvQUncZi3VnpS4H0vNggWLatzYICwZaXutc2oScCVYcU3xkVR+4pO86nieT4JnkbqKaq9F60lLYg+moaTLqyCPbu7/URXT9Rq2KhYePSI6BPlovK+Wc7nyuSgKsKxfLsgev4QUxaERpaSghCtD/uSVzxBMclYeBqroJdomqUfH4ytgXN//LImYxIVAwk08lTe7uf5alTL0fwl6YyTkY5Hch01LHVpgniTSK6eG9ROlt1JldNNdnFzzeQR4/Hm7A1zwmsEcl4jjJO7VkNYIBpCnXEJTktulNKvefr9Pvq/vZmY8/js540CqVmfQR19EtPx+IxyosZxq/m67zfg8M6qYWAzsW67uFJH5QQJkwNCEfTcix12cWC4htdrBsHPVctgTvbrcKj0m88rbvkm7enaFOxj4TsZ+ZMmif8O2DuIKdh6oUBvW9qadB9jMv/QcoX7pXQssoA0XYHuDhBSyeHF2uxQDzw/sSDPZ4JLwX8C+qxpRQ==
+sidebar_class_name: "post api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update consent settings"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/analytics/consent"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Updates the user's cookie and tracking consent preferences
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{"required":true,"content":{"application/json":{"schema":{"type":"object","properties":{"analytics":{"type":"boolean","description":"Consent for analytics and usage tracking","example":false,"default":false},"social":{"type":"boolean","description":"Consent for social media features and sharing","example":false,"default":false},"advertising":{"type":"boolean","description":"Consent for personalized advertising","example":false,"default":false}},"required":["analytics","social","advertising"],"title":"TrackingConsentDto"}}}}}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"Consent settings updated successfully"},"201":{"description":""}}}
+>
+  
+</StatusCodes>
+
+
+      

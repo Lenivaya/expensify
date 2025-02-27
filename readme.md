@@ -2,6 +2,55 @@
 
 A modern, full-stack expense tracking application that helps users manage their finances effectively.
 
+<!--toc:start-->
+
+- [Expensify](#expensify)
+  - [Video demo](#video-demo)
+    - [Overall usage](#overall-usage)
+    - [OpenAPI reference (Scalar)](#openapi-reference-scalar)
+    - [OpenAPI reference (Swagger)](#openapi-reference-swagger)
+    - [Docusaurus documentation](#docusaurus-documentation)
+    - [Storybook](#storybook)
+  - [Features](#features)
+  - [Basic Setup and Commands](#basic-setup-and-commands)
+  - [Configuration](#configuration)
+    - [Core Configuration Files](#core-configuration-files)
+  - [Tech Stack](#tech-stack)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+    - [Docs](#docs)
+  - [Project Structure](#project-structure)
+  - [Documentation](#documentation)
+  - [Getting Started](#getting-started)
+  - [Legal](#legal)
+  - [License](#license)
+  - [Author](#author)
+  <!--toc:end-->
+
+## Video demo
+
+### Overall usage
+
+[![YouTube demo](http://i.ytimg.com/vi/hXr6pItBF1o/hqdefault.jpg)](https://www.youtube.com/watch?v=hXr6pItBF1o)
+
+_(click on images, it'll open a video)_
+
+### OpenAPI reference (Scalar)
+
+<https://github.com/user-attachments/assets/3c362231-5b90-4e67-a739-a3c9a268b0a9>
+
+### OpenAPI reference (Swagger)
+
+<https://github.com/user-attachments/assets/0aecdeba-b792-423e-a358-c53fb98f94f7>
+
+### Docusaurus documentation
+
+<https://github.com/user-attachments/assets/32811028-ec3a-4893-b802-e6eedced462f>
+
+### Storybook
+
+<https://github.com/user-attachments/assets/5f5a1603-409e-4421-9991-c3dfefd5949d>
+
 ## Features
 
 - **Expense Tracking**: Record and categorize your expenses with ease
@@ -61,18 +110,18 @@ Built with Docusaurus.
 
 ## Project Structure
 
-```
+```sh
 expensify/
 ├── expensify-backend/    # NestJS backend application
 ├── expensify-frontend/   # Next.js frontend application
-└── expensify-docs/      # Docusaurus documentation
+└── expensify-docs/       # Docusaurus documentation
 ```
 
 ## Documentation
 
 - [Frontend Readme](./expensify-frontend/README.md)
 - [Backend Readme](./expensify-backend/README.md)
-- [System Readme](./expensify-docs/README.md)
+- [Docs Readme](./expensify-docs/README.md)
 
 ## Getting Started
 
@@ -90,10 +139,12 @@ expensify/
 
 This project is licensed under the BSD 3-Clause - see the [LICENSE](./LICENSE) file for details.
 
+License reports are available in the respective project directories. [Backend license-reports](./expensify-backend/license-report.txt), [Frontend](./expensify-frontend/license-report.txt)
+
 ## Author
 
 - [Lenivaya](https://github.com/Lenivaya)
 
 ---
 
-© 2024 Expensify. All rights reserved.
+© 2025 Expensify. All rights reserved.
