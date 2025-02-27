@@ -3,646 +3,1554 @@
  * Do not make direct changes to the file.
  */
 
-import type { paths } from "../schema";
-import type { AreAllOptional, InvalidateQueryFilters, MutationFiltersByMutationKey, MutationFiltersByParameters, MutationVariables, OperationInfiniteData, PartialParameters, QueryFiltersByParameters, QueryFiltersByQueryKey, QueryFnOptionsByParameters, QueryFnOptionsByQueryKey, RequestFnResponse, ServiceOperationEnsureInfiniteQueryDataOptions, ServiceOperationEnsureQueryDataOptions, ServiceOperationFetchInfiniteQueryOptions, ServiceOperationFetchQueryOptions, ServiceOperationInfiniteQueryKey, ServiceOperationMutationFnOptions, ServiceOperationMutationKey, ServiceOperationQueryKey, ServiceOperationUseMutationOptions, UseQueryOptionsForUseQueries, UseQueryOptionsForUseSuspenseQuery, WithOptional } from "@openapi-qraft/tanstack-query-react-types";
-import type { CancelOptions, InfiniteQueryPageParamsOptions, InvalidateOptions, Mutation, MutationState, NoInfer, QueryState, RefetchOptions, ResetOptions, SetDataOptions, Updater } from "@tanstack/query-core";
-import type { DefinedInitialDataInfiniteOptions, DefinedInitialDataOptions, DefinedUseInfiniteQueryResult, DefinedUseQueryResult, UndefinedInitialDataInfiniteOptions, UndefinedInitialDataOptions, UseInfiniteQueryResult, UseMutationResult, UseQueryResult, UseSuspenseInfiniteQueryOptions, UseSuspenseInfiniteQueryResult, UseSuspenseQueryOptions, UseSuspenseQueryResult } from "@tanstack/react-query";
+import type { paths } from '../schema'
+import type {
+  AreAllOptional,
+  InvalidateQueryFilters,
+  MutationFiltersByMutationKey,
+  MutationFiltersByParameters,
+  MutationVariables,
+  OperationInfiniteData,
+  PartialParameters,
+  QueryFiltersByParameters,
+  QueryFiltersByQueryKey,
+  QueryFnOptionsByParameters,
+  QueryFnOptionsByQueryKey,
+  RequestFnResponse,
+  ServiceOperationEnsureInfiniteQueryDataOptions,
+  ServiceOperationEnsureQueryDataOptions,
+  ServiceOperationFetchInfiniteQueryOptions,
+  ServiceOperationFetchQueryOptions,
+  ServiceOperationInfiniteQueryKey,
+  ServiceOperationMutationFnOptions,
+  ServiceOperationMutationKey,
+  ServiceOperationQueryKey,
+  ServiceOperationUseMutationOptions,
+  UseQueryOptionsForUseQueries,
+  UseQueryOptionsForUseSuspenseQuery,
+  WithOptional
+} from '@openapi-qraft/tanstack-query-react-types'
+import type {
+  CancelOptions,
+  InfiniteQueryPageParamsOptions,
+  InvalidateOptions,
+  Mutation,
+  MutationState,
+  NoInfer,
+  QueryState,
+  RefetchOptions,
+  ResetOptions,
+  SetDataOptions,
+  Updater
+} from '@tanstack/query-core'
+import type {
+  DefinedInitialDataInfiniteOptions,
+  DefinedInitialDataOptions,
+  DefinedUseInfiniteQueryResult,
+  DefinedUseQueryResult,
+  UndefinedInitialDataInfiniteOptions,
+  UndefinedInitialDataOptions,
+  UseInfiniteQueryResult,
+  UseMutationResult,
+  UseQueryResult,
+  UseSuspenseInfiniteQueryOptions,
+  UseSuspenseInfiniteQueryResult,
+  UseSuspenseQueryOptions,
+  UseSuspenseQueryResult
+} from '@tanstack/react-query'
 export interface AnalyticsService {
+  /**
+   * @summary Get user consent settings
+   * @description Retrieves the current cookie and tracking consent settings for the user
+   */
+  analyticsControllerGetConsent: {
     /**
      * @summary Get user consent settings
      * @description Retrieves the current cookie and tracking consent settings for the user
      */
-    analyticsControllerGetConsent: {
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>, options?: CancelOptions): Promise<void>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getQueryKey(parameters: AnalyticsControllerGetConsentParameters | void): ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
-         * ```
-         */
-        useQuery<TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options?: Omit<UndefinedInitialDataOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, TData, ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>>, "queryKey">): UseQueryResult<TData, AnalyticsControllerGetConsentError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
-         * ```
-         */
-        useQuery<TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options: Omit<DefinedInitialDataOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, TData, ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>>, "queryKey">): DefinedUseQueryResult<TData, AnalyticsControllerGetConsentError | Error>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        fetchInfiniteQuery<TPageParam extends AnalyticsControllerGetConsentParameters>(options: ServiceOperationFetchInfiniteQueryOptions<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters, TPageParam, AnalyticsControllerGetConsentError>): Promise<OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters>>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        prefetchInfiniteQuery<TPageParam extends AnalyticsControllerGetConsentParameters>(options: ServiceOperationFetchInfiniteQueryOptions<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters, TPageParam, AnalyticsControllerGetConsentError>): Promise<void>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        ensureInfiniteQueryData<TPageParam extends AnalyticsControllerGetConsentParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters, TPageParam, AnalyticsControllerGetConsentError>): Promise<OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters>>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | void): Promise<AnalyticsControllerGetConsentData>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | void): Promise<void>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | void): Promise<AnalyticsControllerGetConsentData>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void)): OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters> | undefined;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>): TInfinite extends true ? Array<[
-            queryKey: ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>,
-            data: NoInfer<OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters>> | undefined
-        ]> : Array<[
-            queryKey: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>,
+    cancelQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >,
+      options?: CancelOptions
+    ): Promise<void>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getQueryKey(
+      parameters: AnalyticsControllerGetConsentParameters | void
+    ): ServiceOperationQueryKey<
+      AnalyticsControllerGetConsentSchema,
+      AnalyticsControllerGetConsentParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
+     * ```
+     */
+    useQuery<TData = AnalyticsControllerGetConsentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          TData,
+          ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, AnalyticsControllerGetConsentError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
+     * ```
+     */
+    useQuery<TData = AnalyticsControllerGetConsentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          TData,
+          ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, AnalyticsControllerGetConsentError | Error>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    fetchInfiniteQuery<
+      TPageParam extends AnalyticsControllerGetConsentParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        AnalyticsControllerGetConsentSchema,
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters,
+        TPageParam,
+        AnalyticsControllerGetConsentError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters
+      >
+    >
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    prefetchInfiniteQuery<
+      TPageParam extends AnalyticsControllerGetConsentParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        AnalyticsControllerGetConsentSchema,
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters,
+        TPageParam,
+        AnalyticsControllerGetConsentError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    ensureInfiniteQueryData<
+      TPageParam extends AnalyticsControllerGetConsentParameters
+    >(
+      options: ServiceOperationEnsureInfiniteQueryDataOptions<
+        AnalyticsControllerGetConsentSchema,
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters,
+        TPageParam,
+        AnalyticsControllerGetConsentError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters
+      >
+    >
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    fetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        AnalyticsControllerGetConsentSchema,
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters,
+        AnalyticsControllerGetConsentError
+      > | void
+    ): Promise<AnalyticsControllerGetConsentData>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    prefetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        AnalyticsControllerGetConsentSchema,
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters,
+        AnalyticsControllerGetConsentError
+      > | void
+    ): Promise<void>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    ensureQueryData(
+      options: ServiceOperationEnsureQueryDataOptions<
+        AnalyticsControllerGetConsentSchema,
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentParameters,
+        AnalyticsControllerGetConsentError
+      > | void
+    ): Promise<AnalyticsControllerGetConsentData>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getInfiniteQueryData(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void)
+    ):
+      | OperationInfiniteData<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentParameters
+        >
+      | undefined
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getQueriesData<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+    ): TInfinite extends true
+      ? Array<
+          [
+            queryKey: ServiceOperationInfiniteQueryKey<
+              AnalyticsControllerGetConsentSchema,
+              AnalyticsControllerGetConsentParameters
+            >,
+            data:
+              | NoInfer<
+                  OperationInfiniteData<
+                    AnalyticsControllerGetConsentData,
+                    AnalyticsControllerGetConsentParameters
+                  >
+                >
+              | undefined
+          ]
+        >
+      : Array<
+          [
+            queryKey: ServiceOperationQueryKey<
+              AnalyticsControllerGetConsentSchema,
+              AnalyticsControllerGetConsentParameters
+            >,
             data: AnalyticsControllerGetConsentData | undefined
-        ]>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getQueryData(parameters: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void)): AnalyticsControllerGetConsentData | undefined;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getQueryState(parameters: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void)): QueryState<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError> | undefined;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getInfiniteQueryState(parameters: AnalyticsControllerGetConsentParameters | ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | void): QueryState<OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters>, AnalyticsControllerGetConsentError> | undefined;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>, options?: InvalidateOptions): Promise<void>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>): number;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<AnalyticsControllerGetConsentParameters, TMeta, TSignal> | void), client?: (schema: AnalyticsControllerGetConsentSchema, options: {
-            parameters: AnalyticsControllerGetConsentParameters;
-            signal?: TSignal;
-            meta?: TMeta;
-        }) => Promise<RequestFnResponse<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>>): Promise<RequestFnResponse<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>, options?: RefetchOptions): Promise<void>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>): void;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>, options?: ResetOptions): Promise<void>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        setInfiniteQueryData(parameters: AnalyticsControllerGetConsentParameters | ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>, updater: Updater<NoInfer<OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters>> | undefined, NoInfer<OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentParameters> | undefined;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>, updater: Updater<NoInfer<AnalyticsControllerGetConsentData> | undefined, NoInfer<AnalyticsControllerGetConsentData> | undefined>, options?: SetDataOptions): Array<AnalyticsControllerGetConsentData | undefined>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        setQueryData(parameters: (AnalyticsControllerGetConsentParameters | undefined) | ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>, updater: Updater<NoInfer<AnalyticsControllerGetConsentData> | undefined, NoInfer<AnalyticsControllerGetConsentData> | undefined>, options?: SetDataOptions): AnalyticsControllerGetConsentData | undefined;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getInfiniteQueryKey(parameters: AnalyticsControllerGetConsentParameters | void): ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.analyticsService.analyticsControllerGetConsent.useInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends AnalyticsControllerGetConsentParameters, TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options: Omit<UndefinedInitialDataInfiniteOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>, ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<AnalyticsControllerGetConsentData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>, AnalyticsControllerGetConsentError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.analyticsService.analyticsControllerGetConsent.useInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends AnalyticsControllerGetConsentParameters, TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options: Omit<DefinedInitialDataInfiniteOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>, ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<AnalyticsControllerGetConsentData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>, AnalyticsControllerGetConsentError | Error>;
-        /**
-         * Monitors the number of queries currently fetching, matching the provided filters.
-         * Useful for creating loading indicators or performing actions based on active requests.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-         * @example Checks the total number of queries fetching from the specified service method,
-         * both normal and infinite. If no parameters are provided, no filtering is applied.
-         * ```ts
-         * const analyticsControllerGetConsentTotal = qraft.analyticsService.analyticsControllerGetConsent.useIsFetching()
-         * ```
-         */
-        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError> | QueryFiltersByQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentData, TInfinite, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentError>): number;
-        /**
-         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-         *
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-         * ```ts
-         * const analyticsControllerGetConsentResults = qraft.analyticsService.analyticsControllerGetConsent.useQueries({
-         *     queries: [
-         *         {},
-         *         {}
-         *     ]
-         * });
-         * analyticsControllerGetConsentResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-         * ```
-         * @example Combined results. Only the data will be returned.
-         * ```ts
-         * const analyticsControllerGetConsentCombinedResults = qraft.analyticsService.analyticsControllerGetConsent.useQueries({
-         *     combine: results => results.map(result => result.data),
-         *     queries: [
-         *         {},
-         *         {}
-         *     ]
-         * });
-         * analyticsControllerGetConsentCombinedResults.forEach(data => console.log({ data }));
-         * ```
-         */
-        useQueries<T extends Array<UseQueryOptionsForUseQueries<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>>, TCombinedResult = Array<UseQueryResult<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>>>(options: {
-            queries: T;
-            combine?: (results: Array<UseQueryResult<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        getQueryKey(parameters: AnalyticsControllerGetConsentParameters | void): ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
-         * ```
-         */
-        useQuery<TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options?: Omit<UndefinedInitialDataOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, TData, ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>>, "queryKey">): UseQueryResult<TData, AnalyticsControllerGetConsentError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
-         * ```
-         */
-        useQuery<TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options: Omit<DefinedInitialDataOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, TData, ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>>, "queryKey">): DefinedUseQueryResult<TData, AnalyticsControllerGetConsentError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-         *
-         * @example Suspense Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.analyticsService.analyticsControllerGetConsent.useSuspenseInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useSuspenseInfiniteQuery<TPageParam extends AnalyticsControllerGetConsentParameters, TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options: Omit<UseSuspenseInfiniteQueryOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>, AnalyticsControllerGetConsentData, ServiceOperationInfiniteQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<AnalyticsControllerGetConsentData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>, AnalyticsControllerGetConsentError | Error>;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters, AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>>, TCombinedResult = Array<UseSuspenseQueryResult<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>>>(options: {
-            queries: T;
-            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError>, "data">>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get user consent settings
-         * @description Retrieves the current cookie and tracking consent settings for the user
-         */
-        useSuspenseQuery<TData = AnalyticsControllerGetConsentData>(parameters: ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters> | (AnalyticsControllerGetConsentParameters | void), options?: Omit<UseSuspenseQueryOptions<AnalyticsControllerGetConsentData, AnalyticsControllerGetConsentError, TData, ServiceOperationQueryKey<AnalyticsControllerGetConsentSchema, AnalyticsControllerGetConsentParameters>>, "queryKey">): UseSuspenseQueryResult<TData, AnalyticsControllerGetConsentError | Error>;
-        schema: AnalyticsControllerGetConsentSchema;
-        types: {
-            parameters: AnalyticsControllerGetConsentParameters;
-            data: AnalyticsControllerGetConsentData;
-            error: AnalyticsControllerGetConsentError;
-        };
-    };
+          ]
+        >
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getQueryData(
+      parameters:
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void)
+    ): AnalyticsControllerGetConsentData | undefined
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getQueryState(
+      parameters:
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void)
+    ):
+      | QueryState<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError
+        >
+      | undefined
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getInfiniteQueryState(
+      parameters:
+        | AnalyticsControllerGetConsentParameters
+        | ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | void
+    ):
+      | QueryState<
+          OperationInfiniteData<
+            AnalyticsControllerGetConsentData,
+            AnalyticsControllerGetConsentParameters
+          >,
+          AnalyticsControllerGetConsentError
+        >
+      | undefined
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    invalidateQueries<TInfinite extends boolean = false>(
+      filters?: InvalidateQueryFilters<
+        AnalyticsControllerGetConsentSchema,
+        AnalyticsControllerGetConsentData,
+        TInfinite,
+        AnalyticsControllerGetConsentParameters,
+        AnalyticsControllerGetConsentError
+      >,
+      options?: InvalidateOptions
+    ): Promise<void>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    isFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+    ): number
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    <
+      TMeta extends Record<string, any>,
+      TSignal extends AbortSignal = AbortSignal
+    >(
+      options:
+        | QueryFnOptionsByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters,
+            TMeta,
+            TSignal
+          >
+        | (QueryFnOptionsByParameters<
+            AnalyticsControllerGetConsentParameters,
+            TMeta,
+            TSignal
+          > | void),
+      client?: (
+        schema: AnalyticsControllerGetConsentSchema,
+        options: {
+          parameters: AnalyticsControllerGetConsentParameters
+          signal?: TSignal
+          meta?: TMeta
+        }
+      ) => Promise<
+        RequestFnResponse<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        AnalyticsControllerGetConsentData,
+        AnalyticsControllerGetConsentError
+      >
+    >
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    refetchQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >,
+      options?: RefetchOptions
+    ): Promise<void>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    removeQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+    ): void
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    resetQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >,
+      options?: ResetOptions
+    ): Promise<void>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    setInfiniteQueryData(
+      parameters:
+        | AnalyticsControllerGetConsentParameters
+        | ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >,
+      updater: Updater<
+        | NoInfer<
+            OperationInfiniteData<
+              AnalyticsControllerGetConsentData,
+              AnalyticsControllerGetConsentParameters
+            >
+          >
+        | undefined,
+        | NoInfer<
+            OperationInfiniteData<
+              AnalyticsControllerGetConsentData,
+              AnalyticsControllerGetConsentParameters
+            >
+          >
+        | undefined
+      >,
+      options?: SetDataOptions
+    ):
+      | OperationInfiniteData<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentParameters
+        >
+      | undefined
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    setQueriesData<TInfinite extends boolean = false>(
+      filters:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >,
+      updater: Updater<
+        NoInfer<AnalyticsControllerGetConsentData> | undefined,
+        NoInfer<AnalyticsControllerGetConsentData> | undefined
+      >,
+      options?: SetDataOptions
+    ): Array<AnalyticsControllerGetConsentData | undefined>
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    setQueryData(
+      parameters:
+        | (AnalyticsControllerGetConsentParameters | undefined)
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >,
+      updater: Updater<
+        NoInfer<AnalyticsControllerGetConsentData> | undefined,
+        NoInfer<AnalyticsControllerGetConsentData> | undefined
+      >,
+      options?: SetDataOptions
+    ): AnalyticsControllerGetConsentData | undefined
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getInfiniteQueryKey(
+      parameters: AnalyticsControllerGetConsentParameters | void
+    ): ServiceOperationInfiniteQueryKey<
+      AnalyticsControllerGetConsentSchema,
+      AnalyticsControllerGetConsentParameters
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.analyticsService.analyticsControllerGetConsent.useInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends AnalyticsControllerGetConsentParameters,
+      TData = AnalyticsControllerGetConsentData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options: Omit<
+        UndefinedInitialDataInfiniteOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>,
+          ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          AnalyticsControllerGetConsentData,
+          PartialParameters<TPageParam>
+        >
+    ): UseInfiniteQueryResult<
+      OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>,
+      AnalyticsControllerGetConsentError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.analyticsService.analyticsControllerGetConsent.useInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends AnalyticsControllerGetConsentParameters,
+      TData = AnalyticsControllerGetConsentData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options: Omit<
+        DefinedInitialDataInfiniteOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>,
+          ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          AnalyticsControllerGetConsentData,
+          PartialParameters<TPageParam>
+        >
+    ): DefinedUseInfiniteQueryResult<
+      OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>,
+      AnalyticsControllerGetConsentError | Error
+    >
+    /**
+     * Monitors the number of queries currently fetching, matching the provided filters.
+     * Useful for creating loading indicators or performing actions based on active requests.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+     * @example Checks the total number of queries fetching from the specified service method,
+     * both normal and infinite. If no parameters are provided, no filtering is applied.
+     * ```ts
+     * const analyticsControllerGetConsentTotal = qraft.analyticsService.analyticsControllerGetConsent.useIsFetching()
+     * ```
+     */
+    useIsFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+        | QueryFiltersByQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentData,
+            TInfinite,
+            AnalyticsControllerGetConsentParameters,
+            AnalyticsControllerGetConsentError
+          >
+    ): number
+    /**
+     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+     *
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+     * ```ts
+     * const analyticsControllerGetConsentResults = qraft.analyticsService.analyticsControllerGetConsent.useQueries({
+     *     queries: [
+     *         {},
+     *         {}
+     *     ]
+     * });
+     * analyticsControllerGetConsentResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+     * ```
+     * @example Combined results. Only the data will be returned.
+     * ```ts
+     * const analyticsControllerGetConsentCombinedResults = qraft.analyticsService.analyticsControllerGetConsent.useQueries({
+     *     combine: results => results.map(result => result.data),
+     *     queries: [
+     *         {},
+     *         {}
+     *     ]
+     * });
+     * analyticsControllerGetConsentCombinedResults.forEach(data => console.log({ data }));
+     * ```
+     */
+    useQueries<
+      T extends Array<
+        UseQueryOptionsForUseQueries<
+          AnalyticsControllerGetConsentSchema,
+          AnalyticsControllerGetConsentParameters,
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError
+        >
+      >,
+      TCombinedResult = Array<
+        UseQueryResult<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          UseQueryResult<
+            AnalyticsControllerGetConsentData,
+            AnalyticsControllerGetConsentError
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    getQueryKey(
+      parameters: AnalyticsControllerGetConsentParameters | void
+    ): ServiceOperationQueryKey<
+      AnalyticsControllerGetConsentSchema,
+      AnalyticsControllerGetConsentParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
+     * ```
+     */
+    useQuery<TData = AnalyticsControllerGetConsentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          TData,
+          ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, AnalyticsControllerGetConsentError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.analyticsService.analyticsControllerGetConsent.useQuery()
+     * ```
+     */
+    useQuery<TData = AnalyticsControllerGetConsentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          TData,
+          ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, AnalyticsControllerGetConsentError | Error>
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+     *
+     * @example Suspense Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.analyticsService.analyticsControllerGetConsent.useSuspenseInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useSuspenseInfiniteQuery<
+      TPageParam extends AnalyticsControllerGetConsentParameters,
+      TData = AnalyticsControllerGetConsentData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options: Omit<
+        UseSuspenseInfiniteQueryOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>,
+          AnalyticsControllerGetConsentData,
+          ServiceOperationInfiniteQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          AnalyticsControllerGetConsentData,
+          PartialParameters<TPageParam>
+        >
+    ): UseSuspenseInfiniteQueryResult<
+      OperationInfiniteData<TData, AnalyticsControllerGetConsentParameters>,
+      AnalyticsControllerGetConsentError | Error
+    >
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    useSuspenseQueries<
+      T extends Array<
+        UseQueryOptionsForUseSuspenseQuery<
+          AnalyticsControllerGetConsentSchema,
+          AnalyticsControllerGetConsentParameters,
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError
+        >
+      >,
+      TCombinedResult = Array<
+        UseSuspenseQueryResult<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          WithOptional<
+            UseSuspenseQueryResult<
+              AnalyticsControllerGetConsentData,
+              AnalyticsControllerGetConsentError
+            >,
+            'data'
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get user consent settings
+     * @description Retrieves the current cookie and tracking consent settings for the user
+     */
+    useSuspenseQuery<TData = AnalyticsControllerGetConsentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        | (AnalyticsControllerGetConsentParameters | void),
+      options?: Omit<
+        UseSuspenseQueryOptions<
+          AnalyticsControllerGetConsentData,
+          AnalyticsControllerGetConsentError,
+          TData,
+          ServiceOperationQueryKey<
+            AnalyticsControllerGetConsentSchema,
+            AnalyticsControllerGetConsentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseSuspenseQueryResult<TData, AnalyticsControllerGetConsentError | Error>
+    schema: AnalyticsControllerGetConsentSchema
+    types: {
+      parameters: AnalyticsControllerGetConsentParameters
+      data: AnalyticsControllerGetConsentData
+      error: AnalyticsControllerGetConsentError
+    }
+  }
+  /**
+   * @summary Update consent settings
+   * @description Updates the user's cookie and tracking consent preferences
+   */
+  analyticsControllerUpdateConsent: {
     /**
      * @summary Update consent settings
      * @description Updates the user's cookie and tracking consent preferences
      */
-    analyticsControllerUpdateConsent: {
-        /**
-         * @summary Update consent settings
-         * @description Updates the user's cookie and tracking consent preferences
-         */
-        getMutationKey(parameters: AnalyticsControllerUpdateConsentParameters | void): ServiceOperationMutationKey<AnalyticsControllerUpdateConsentSchema, AnalyticsControllerUpdateConsentParameters>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation({})
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation()
-         * mutate({
-         *     body: bodyPayload
-         * });
-         * ```
-         */
-        useMutation<TVariables extends AnalyticsControllerUpdateConsentBody, TContext = unknown>(parameters: AnalyticsControllerUpdateConsentParameters, options?: ServiceOperationUseMutationOptions<AnalyticsControllerUpdateConsentSchema, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, TVariables, AnalyticsControllerUpdateConsentError | Error, TContext>): UseMutationResult<AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation({})
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation()
-         * mutate({
-         *     body: bodyPayload
-         * });
-         * ```
-         */
-        useMutation<TVariables extends MutationVariables<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<AnalyticsControllerUpdateConsentSchema, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, TVariables, AnalyticsControllerUpdateConsentError | Error, TContext>): UseMutationResult<AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentError | Error, TVariables, TContext>;
-        /**
-         * Returns the count of currently in-progress mutations.
-         *
-         * @summary Update consent settings
-         * @description Updates the user's cookie and tracking consent preferences
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-         * @example Check how many mutations are currently in progress for the specified service method.
-         * ```ts
-         * const analyticsControllerUpdateConsentTotal = qraft.analyticsService.analyticsControllerUpdateConsent.useIsMutating()
-         * ```
-         * @example Check how many mutations are currently in progress with the specified parameters.
-         * ```ts
-         * const analyticsControllerUpdateConsentTotal = qraft.analyticsService.analyticsControllerUpdateConsent.useIsMutating({
-         *     parameters: {}
-         * })
-         * ```
-         */
-        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, AnalyticsControllerUpdateConsentError | Error, TContext> | MutationFiltersByMutationKey<AnalyticsControllerUpdateConsentSchema, AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, AnalyticsControllerUpdateConsentError | Error, TContext>): number;
-        /**
-         * @summary Update consent settings
-         * @description Updates the user's cookie and tracking consent preferences
-         */
-        isMutating<TContext>(filters?: MutationFiltersByParameters<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, AnalyticsControllerUpdateConsentError | Error, TContext> | MutationFiltersByMutationKey<AnalyticsControllerUpdateConsentSchema, AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, AnalyticsControllerUpdateConsentError | Error, TContext>): number;
-        /**
-         * @summary Update consent settings
-         * @description Updates the user's cookie and tracking consent preferences
-         */
-        (options: ServiceOperationMutationFnOptions<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentParameters>, client?: (schema: AnalyticsControllerUpdateConsentSchema, options: ServiceOperationMutationFnOptions<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentParameters>) => Promise<RequestFnResponse<AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentError>>): Promise<RequestFnResponse<AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentError>>;
-        /**
-         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-         *
-         * @summary Update consent settings
-         * @description Updates the user's cookie and tracking consent preferences
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-         * @example Get all variables of all running mutations.
-         * ```ts
-         * const analyticsControllerUpdateConsentPendingMutationVariables = qraft.analyticsService.analyticsControllerUpdateConsent.useMutationState({
-         *     filters: {
-         *         status: "pending"
-         *     },
-         *     select: mutation => mutation.state.variables
-         * })
-         * ```
-         * @example Get all data for specific mutations via the `parameters`.
-         * ```ts
-         * const analyticsControllerUpdateConsentMutationData = qraft.analyticsService.analyticsControllerUpdateConsent.useMutationState({
-         *     filters: {
-         *         parameters: {}
-         *     },
-         *     select: mutation => mutation.state.data
-         * })
-         * ```
-         */
-        useMutationState<TContext = unknown, TResult = MutationState<AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentError | Error, MutationVariables<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentParameters>, TContext>>(options?: {
-            filters?: MutationFiltersByParameters<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, AnalyticsControllerUpdateConsentError | Error, TContext> | MutationFiltersByMutationKey<AnalyticsControllerUpdateConsentSchema, AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentParameters, AnalyticsControllerUpdateConsentError | Error, TContext>;
-            select?: (mutation: Mutation<AnalyticsControllerUpdateConsentData, AnalyticsControllerUpdateConsentError | Error, MutationVariables<AnalyticsControllerUpdateConsentBody, AnalyticsControllerUpdateConsentParameters>, TContext>) => TResult;
-        }): Array<TResult>;
-        schema: AnalyticsControllerUpdateConsentSchema;
-        types: {
-            parameters: AnalyticsControllerUpdateConsentParameters;
-            data: AnalyticsControllerUpdateConsentData;
-            error: AnalyticsControllerUpdateConsentError;
-            body: AnalyticsControllerUpdateConsentBody;
-        };
-    };
+    getMutationKey(
+      parameters: AnalyticsControllerUpdateConsentParameters | void
+    ): ServiceOperationMutationKey<
+      AnalyticsControllerUpdateConsentSchema,
+      AnalyticsControllerUpdateConsentParameters
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation({})
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation()
+     * mutate({
+     *     body: bodyPayload
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends AnalyticsControllerUpdateConsentBody,
+      TContext = unknown
+    >(
+      parameters: AnalyticsControllerUpdateConsentParameters,
+      options?: ServiceOperationUseMutationOptions<
+        AnalyticsControllerUpdateConsentSchema,
+        AnalyticsControllerUpdateConsentData,
+        AnalyticsControllerUpdateConsentParameters,
+        TVariables,
+        AnalyticsControllerUpdateConsentError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      AnalyticsControllerUpdateConsentData,
+      AnalyticsControllerUpdateConsentError | Error,
+      AreAllOptional<TVariables> extends true ? TVariables | void : TVariables,
+      TContext
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation({})
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerUpdateConsent.useMutation()
+     * mutate({
+     *     body: bodyPayload
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends MutationVariables<
+        AnalyticsControllerUpdateConsentBody,
+        AnalyticsControllerUpdateConsentParameters
+      >,
+      TContext = unknown
+    >(
+      parameters: void,
+      options?: ServiceOperationUseMutationOptions<
+        AnalyticsControllerUpdateConsentSchema,
+        AnalyticsControllerUpdateConsentData,
+        AnalyticsControllerUpdateConsentParameters,
+        TVariables,
+        AnalyticsControllerUpdateConsentError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      AnalyticsControllerUpdateConsentData,
+      AnalyticsControllerUpdateConsentError | Error,
+      TVariables,
+      TContext
+    >
+    /**
+     * Returns the count of currently in-progress mutations.
+     *
+     * @summary Update consent settings
+     * @description Updates the user's cookie and tracking consent preferences
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+     * @example Check how many mutations are currently in progress for the specified service method.
+     * ```ts
+     * const analyticsControllerUpdateConsentTotal = qraft.analyticsService.analyticsControllerUpdateConsent.useIsMutating()
+     * ```
+     * @example Check how many mutations are currently in progress with the specified parameters.
+     * ```ts
+     * const analyticsControllerUpdateConsentTotal = qraft.analyticsService.analyticsControllerUpdateConsent.useIsMutating({
+     *     parameters: {}
+     * })
+     * ```
+     */
+    useIsMutating<TContext = unknown>(
+      filters?:
+        | MutationFiltersByParameters<
+            AnalyticsControllerUpdateConsentBody,
+            AnalyticsControllerUpdateConsentData,
+            AnalyticsControllerUpdateConsentParameters,
+            AnalyticsControllerUpdateConsentError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            AnalyticsControllerUpdateConsentSchema,
+            AnalyticsControllerUpdateConsentBody,
+            AnalyticsControllerUpdateConsentData,
+            AnalyticsControllerUpdateConsentParameters,
+            AnalyticsControllerUpdateConsentError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Update consent settings
+     * @description Updates the user's cookie and tracking consent preferences
+     */
+    isMutating<TContext>(
+      filters?:
+        | MutationFiltersByParameters<
+            AnalyticsControllerUpdateConsentBody,
+            AnalyticsControllerUpdateConsentData,
+            AnalyticsControllerUpdateConsentParameters,
+            AnalyticsControllerUpdateConsentError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            AnalyticsControllerUpdateConsentSchema,
+            AnalyticsControllerUpdateConsentBody,
+            AnalyticsControllerUpdateConsentData,
+            AnalyticsControllerUpdateConsentParameters,
+            AnalyticsControllerUpdateConsentError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Update consent settings
+     * @description Updates the user's cookie and tracking consent preferences
+     */
+    (
+      options: ServiceOperationMutationFnOptions<
+        AnalyticsControllerUpdateConsentBody,
+        AnalyticsControllerUpdateConsentParameters
+      >,
+      client?: (
+        schema: AnalyticsControllerUpdateConsentSchema,
+        options: ServiceOperationMutationFnOptions<
+          AnalyticsControllerUpdateConsentBody,
+          AnalyticsControllerUpdateConsentParameters
+        >
+      ) => Promise<
+        RequestFnResponse<
+          AnalyticsControllerUpdateConsentData,
+          AnalyticsControllerUpdateConsentError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        AnalyticsControllerUpdateConsentData,
+        AnalyticsControllerUpdateConsentError
+      >
+    >
+    /**
+     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+     *
+     * @summary Update consent settings
+     * @description Updates the user's cookie and tracking consent preferences
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+     * @example Get all variables of all running mutations.
+     * ```ts
+     * const analyticsControllerUpdateConsentPendingMutationVariables = qraft.analyticsService.analyticsControllerUpdateConsent.useMutationState({
+     *     filters: {
+     *         status: "pending"
+     *     },
+     *     select: mutation => mutation.state.variables
+     * })
+     * ```
+     * @example Get all data for specific mutations via the `parameters`.
+     * ```ts
+     * const analyticsControllerUpdateConsentMutationData = qraft.analyticsService.analyticsControllerUpdateConsent.useMutationState({
+     *     filters: {
+     *         parameters: {}
+     *     },
+     *     select: mutation => mutation.state.data
+     * })
+     * ```
+     */
+    useMutationState<
+      TContext = unknown,
+      TResult = MutationState<
+        AnalyticsControllerUpdateConsentData,
+        AnalyticsControllerUpdateConsentError | Error,
+        MutationVariables<
+          AnalyticsControllerUpdateConsentBody,
+          AnalyticsControllerUpdateConsentParameters
+        >,
+        TContext
+      >
+    >(options?: {
+      filters?:
+        | MutationFiltersByParameters<
+            AnalyticsControllerUpdateConsentBody,
+            AnalyticsControllerUpdateConsentData,
+            AnalyticsControllerUpdateConsentParameters,
+            AnalyticsControllerUpdateConsentError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            AnalyticsControllerUpdateConsentSchema,
+            AnalyticsControllerUpdateConsentBody,
+            AnalyticsControllerUpdateConsentData,
+            AnalyticsControllerUpdateConsentParameters,
+            AnalyticsControllerUpdateConsentError | Error,
+            TContext
+          >
+      select?: (
+        mutation: Mutation<
+          AnalyticsControllerUpdateConsentData,
+          AnalyticsControllerUpdateConsentError | Error,
+          MutationVariables<
+            AnalyticsControllerUpdateConsentBody,
+            AnalyticsControllerUpdateConsentParameters
+          >,
+          TContext
+        >
+      ) => TResult
+    }): Array<TResult>
+    schema: AnalyticsControllerUpdateConsentSchema
+    types: {
+      parameters: AnalyticsControllerUpdateConsentParameters
+      data: AnalyticsControllerUpdateConsentData
+      error: AnalyticsControllerUpdateConsentError
+      body: AnalyticsControllerUpdateConsentBody
+    }
+  }
+  /**
+   * @summary Track user activity
+   * @description Records a user activity based on consent settings
+   */
+  analyticsControllerTrackActivity: {
     /**
      * @summary Track user activity
      * @description Records a user activity based on consent settings
      */
-    analyticsControllerTrackActivity: {
-        /**
-         * @summary Track user activity
-         * @description Records a user activity based on consent settings
-         */
-        getMutationKey(parameters: AnalyticsControllerTrackActivityParameters | void): ServiceOperationMutationKey<AnalyticsControllerTrackActivitySchema, AnalyticsControllerTrackActivityParameters>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation({})
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation()
-         * mutate({
-         *     body: bodyPayload
-         * });
-         * ```
-         */
-        useMutation<TVariables extends AnalyticsControllerTrackActivityBody, TContext = unknown>(parameters: AnalyticsControllerTrackActivityParameters, options?: ServiceOperationUseMutationOptions<AnalyticsControllerTrackActivitySchema, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, TVariables, AnalyticsControllerTrackActivityError | Error, TContext>): UseMutationResult<AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation({})
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation()
-         * mutate({
-         *     body: bodyPayload
-         * });
-         * ```
-         */
-        useMutation<TVariables extends MutationVariables<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<AnalyticsControllerTrackActivitySchema, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, TVariables, AnalyticsControllerTrackActivityError | Error, TContext>): UseMutationResult<AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityError | Error, TVariables, TContext>;
-        /**
-         * Returns the count of currently in-progress mutations.
-         *
-         * @summary Track user activity
-         * @description Records a user activity based on consent settings
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-         * @example Check how many mutations are currently in progress for the specified service method.
-         * ```ts
-         * const analyticsControllerTrackActivityTotal = qraft.analyticsService.analyticsControllerTrackActivity.useIsMutating()
-         * ```
-         * @example Check how many mutations are currently in progress with the specified parameters.
-         * ```ts
-         * const analyticsControllerTrackActivityTotal = qraft.analyticsService.analyticsControllerTrackActivity.useIsMutating({
-         *     parameters: {}
-         * })
-         * ```
-         */
-        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, AnalyticsControllerTrackActivityError | Error, TContext> | MutationFiltersByMutationKey<AnalyticsControllerTrackActivitySchema, AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, AnalyticsControllerTrackActivityError | Error, TContext>): number;
-        /**
-         * @summary Track user activity
-         * @description Records a user activity based on consent settings
-         */
-        isMutating<TContext>(filters?: MutationFiltersByParameters<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, AnalyticsControllerTrackActivityError | Error, TContext> | MutationFiltersByMutationKey<AnalyticsControllerTrackActivitySchema, AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, AnalyticsControllerTrackActivityError | Error, TContext>): number;
-        /**
-         * @summary Track user activity
-         * @description Records a user activity based on consent settings
-         */
-        (options: ServiceOperationMutationFnOptions<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityParameters>, client?: (schema: AnalyticsControllerTrackActivitySchema, options: ServiceOperationMutationFnOptions<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityParameters>) => Promise<RequestFnResponse<AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityError>>): Promise<RequestFnResponse<AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityError>>;
-        /**
-         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-         *
-         * @summary Track user activity
-         * @description Records a user activity based on consent settings
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-         * @example Get all variables of all running mutations.
-         * ```ts
-         * const analyticsControllerTrackActivityPendingMutationVariables = qraft.analyticsService.analyticsControllerTrackActivity.useMutationState({
-         *     filters: {
-         *         status: "pending"
-         *     },
-         *     select: mutation => mutation.state.variables
-         * })
-         * ```
-         * @example Get all data for specific mutations via the `parameters`.
-         * ```ts
-         * const analyticsControllerTrackActivityMutationData = qraft.analyticsService.analyticsControllerTrackActivity.useMutationState({
-         *     filters: {
-         *         parameters: {}
-         *     },
-         *     select: mutation => mutation.state.data
-         * })
-         * ```
-         */
-        useMutationState<TContext = unknown, TResult = MutationState<AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityError | Error, MutationVariables<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityParameters>, TContext>>(options?: {
-            filters?: MutationFiltersByParameters<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, AnalyticsControllerTrackActivityError | Error, TContext> | MutationFiltersByMutationKey<AnalyticsControllerTrackActivitySchema, AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityParameters, AnalyticsControllerTrackActivityError | Error, TContext>;
-            select?: (mutation: Mutation<AnalyticsControllerTrackActivityData, AnalyticsControllerTrackActivityError | Error, MutationVariables<AnalyticsControllerTrackActivityBody, AnalyticsControllerTrackActivityParameters>, TContext>) => TResult;
-        }): Array<TResult>;
-        schema: AnalyticsControllerTrackActivitySchema;
-        types: {
-            parameters: AnalyticsControllerTrackActivityParameters;
-            data: AnalyticsControllerTrackActivityData;
-            error: AnalyticsControllerTrackActivityError;
-            body: AnalyticsControllerTrackActivityBody;
-        };
-    };
+    getMutationKey(
+      parameters: AnalyticsControllerTrackActivityParameters | void
+    ): ServiceOperationMutationKey<
+      AnalyticsControllerTrackActivitySchema,
+      AnalyticsControllerTrackActivityParameters
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation({})
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation()
+     * mutate({
+     *     body: bodyPayload
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends AnalyticsControllerTrackActivityBody,
+      TContext = unknown
+    >(
+      parameters: AnalyticsControllerTrackActivityParameters,
+      options?: ServiceOperationUseMutationOptions<
+        AnalyticsControllerTrackActivitySchema,
+        AnalyticsControllerTrackActivityData,
+        AnalyticsControllerTrackActivityParameters,
+        TVariables,
+        AnalyticsControllerTrackActivityError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      AnalyticsControllerTrackActivityData,
+      AnalyticsControllerTrackActivityError | Error,
+      AreAllOptional<TVariables> extends true ? TVariables | void : TVariables,
+      TContext
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation({})
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.analyticsService.analyticsControllerTrackActivity.useMutation()
+     * mutate({
+     *     body: bodyPayload
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends MutationVariables<
+        AnalyticsControllerTrackActivityBody,
+        AnalyticsControllerTrackActivityParameters
+      >,
+      TContext = unknown
+    >(
+      parameters: void,
+      options?: ServiceOperationUseMutationOptions<
+        AnalyticsControllerTrackActivitySchema,
+        AnalyticsControllerTrackActivityData,
+        AnalyticsControllerTrackActivityParameters,
+        TVariables,
+        AnalyticsControllerTrackActivityError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      AnalyticsControllerTrackActivityData,
+      AnalyticsControllerTrackActivityError | Error,
+      TVariables,
+      TContext
+    >
+    /**
+     * Returns the count of currently in-progress mutations.
+     *
+     * @summary Track user activity
+     * @description Records a user activity based on consent settings
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+     * @example Check how many mutations are currently in progress for the specified service method.
+     * ```ts
+     * const analyticsControllerTrackActivityTotal = qraft.analyticsService.analyticsControllerTrackActivity.useIsMutating()
+     * ```
+     * @example Check how many mutations are currently in progress with the specified parameters.
+     * ```ts
+     * const analyticsControllerTrackActivityTotal = qraft.analyticsService.analyticsControllerTrackActivity.useIsMutating({
+     *     parameters: {}
+     * })
+     * ```
+     */
+    useIsMutating<TContext = unknown>(
+      filters?:
+        | MutationFiltersByParameters<
+            AnalyticsControllerTrackActivityBody,
+            AnalyticsControllerTrackActivityData,
+            AnalyticsControllerTrackActivityParameters,
+            AnalyticsControllerTrackActivityError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            AnalyticsControllerTrackActivitySchema,
+            AnalyticsControllerTrackActivityBody,
+            AnalyticsControllerTrackActivityData,
+            AnalyticsControllerTrackActivityParameters,
+            AnalyticsControllerTrackActivityError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Track user activity
+     * @description Records a user activity based on consent settings
+     */
+    isMutating<TContext>(
+      filters?:
+        | MutationFiltersByParameters<
+            AnalyticsControllerTrackActivityBody,
+            AnalyticsControllerTrackActivityData,
+            AnalyticsControllerTrackActivityParameters,
+            AnalyticsControllerTrackActivityError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            AnalyticsControllerTrackActivitySchema,
+            AnalyticsControllerTrackActivityBody,
+            AnalyticsControllerTrackActivityData,
+            AnalyticsControllerTrackActivityParameters,
+            AnalyticsControllerTrackActivityError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Track user activity
+     * @description Records a user activity based on consent settings
+     */
+    (
+      options: ServiceOperationMutationFnOptions<
+        AnalyticsControllerTrackActivityBody,
+        AnalyticsControllerTrackActivityParameters
+      >,
+      client?: (
+        schema: AnalyticsControllerTrackActivitySchema,
+        options: ServiceOperationMutationFnOptions<
+          AnalyticsControllerTrackActivityBody,
+          AnalyticsControllerTrackActivityParameters
+        >
+      ) => Promise<
+        RequestFnResponse<
+          AnalyticsControllerTrackActivityData,
+          AnalyticsControllerTrackActivityError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        AnalyticsControllerTrackActivityData,
+        AnalyticsControllerTrackActivityError
+      >
+    >
+    /**
+     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+     *
+     * @summary Track user activity
+     * @description Records a user activity based on consent settings
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+     * @example Get all variables of all running mutations.
+     * ```ts
+     * const analyticsControllerTrackActivityPendingMutationVariables = qraft.analyticsService.analyticsControllerTrackActivity.useMutationState({
+     *     filters: {
+     *         status: "pending"
+     *     },
+     *     select: mutation => mutation.state.variables
+     * })
+     * ```
+     * @example Get all data for specific mutations via the `parameters`.
+     * ```ts
+     * const analyticsControllerTrackActivityMutationData = qraft.analyticsService.analyticsControllerTrackActivity.useMutationState({
+     *     filters: {
+     *         parameters: {}
+     *     },
+     *     select: mutation => mutation.state.data
+     * })
+     * ```
+     */
+    useMutationState<
+      TContext = unknown,
+      TResult = MutationState<
+        AnalyticsControllerTrackActivityData,
+        AnalyticsControllerTrackActivityError | Error,
+        MutationVariables<
+          AnalyticsControllerTrackActivityBody,
+          AnalyticsControllerTrackActivityParameters
+        >,
+        TContext
+      >
+    >(options?: {
+      filters?:
+        | MutationFiltersByParameters<
+            AnalyticsControllerTrackActivityBody,
+            AnalyticsControllerTrackActivityData,
+            AnalyticsControllerTrackActivityParameters,
+            AnalyticsControllerTrackActivityError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            AnalyticsControllerTrackActivitySchema,
+            AnalyticsControllerTrackActivityBody,
+            AnalyticsControllerTrackActivityData,
+            AnalyticsControllerTrackActivityParameters,
+            AnalyticsControllerTrackActivityError | Error,
+            TContext
+          >
+      select?: (
+        mutation: Mutation<
+          AnalyticsControllerTrackActivityData,
+          AnalyticsControllerTrackActivityError | Error,
+          MutationVariables<
+            AnalyticsControllerTrackActivityBody,
+            AnalyticsControllerTrackActivityParameters
+          >,
+          TContext
+        >
+      ) => TResult
+    }): Array<TResult>
+    schema: AnalyticsControllerTrackActivitySchema
+    types: {
+      parameters: AnalyticsControllerTrackActivityParameters
+      data: AnalyticsControllerTrackActivityData
+      error: AnalyticsControllerTrackActivityError
+      body: AnalyticsControllerTrackActivityBody
+    }
+  }
 }
 export const analyticsService: {
-    /**
-     * @summary Get user consent settings
-     * @description Retrieves the current cookie and tracking consent settings for the user
-     */
-    analyticsControllerGetConsent: {
-        schema: {
-            method: "get";
-            url: "/analytics/consent";
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Update consent settings
-     * @description Updates the user's cookie and tracking consent preferences
-     */
-    analyticsControllerUpdateConsent: {
-        schema: {
-            method: "post";
-            url: "/analytics/consent";
-            mediaType: [
-                "application/json"
-            ];
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Track user activity
-     * @description Records a user activity based on consent settings
-     */
-    analyticsControllerTrackActivity: {
-        schema: {
-            method: "post";
-            url: "/analytics/track";
-            mediaType: [
-                "application/json"
-            ];
-            security: [
-                "bearer"
-            ];
-        };
-    };
-} = {
-    analyticsControllerGetConsent: {
-        schema: {
-            method: "get",
-            url: "/analytics/consent",
-            security: ["bearer"]
-        }
-    },
-    analyticsControllerUpdateConsent: {
-        schema: {
-            method: "post",
-            url: "/analytics/consent",
-            mediaType: ["application/json"],
-            security: ["bearer"]
-        }
-    },
-    analyticsControllerTrackActivity: {
-        schema: {
-            method: "post",
-            url: "/analytics/track",
-            mediaType: ["application/json"],
-            security: ["bearer"]
-        }
+  /**
+   * @summary Get user consent settings
+   * @description Retrieves the current cookie and tracking consent settings for the user
+   */
+  analyticsControllerGetConsent: {
+    schema: {
+      method: 'get'
+      url: '/analytics/consent'
+      security: ['bearer']
     }
-};
+  }
+  /**
+   * @summary Update consent settings
+   * @description Updates the user's cookie and tracking consent preferences
+   */
+  analyticsControllerUpdateConsent: {
+    schema: {
+      method: 'post'
+      url: '/analytics/consent'
+      mediaType: ['application/json']
+      security: ['bearer']
+    }
+  }
+  /**
+   * @summary Track user activity
+   * @description Records a user activity based on consent settings
+   */
+  analyticsControllerTrackActivity: {
+    schema: {
+      method: 'post'
+      url: '/analytics/track'
+      mediaType: ['application/json']
+      security: ['bearer']
+    }
+  }
+} = {
+  analyticsControllerGetConsent: {
+    schema: {
+      method: 'get',
+      url: '/analytics/consent',
+      security: ['bearer']
+    }
+  },
+  analyticsControllerUpdateConsent: {
+    schema: {
+      method: 'post',
+      url: '/analytics/consent',
+      mediaType: ['application/json'],
+      security: ['bearer']
+    }
+  },
+  analyticsControllerTrackActivity: {
+    schema: {
+      method: 'post',
+      url: '/analytics/track',
+      mediaType: ['application/json'],
+      security: ['bearer']
+    }
+  }
+}
 type AnalyticsControllerGetConsentSchema = {
-    method: "get";
-    url: "/analytics/consent";
-    security: [
-        "bearer"
-    ];
-};
-type AnalyticsControllerGetConsentParameters = undefined;
-type AnalyticsControllerGetConsentData = paths["/analytics/consent"]["get"]["responses"]["200"]["content"]["application/json"];
-type AnalyticsControllerGetConsentError = unknown;
+  method: 'get'
+  url: '/analytics/consent'
+  security: ['bearer']
+}
+type AnalyticsControllerGetConsentParameters = undefined
+type AnalyticsControllerGetConsentData =
+  paths['/analytics/consent']['get']['responses']['200']['content']['application/json']
+type AnalyticsControllerGetConsentError = unknown
 type AnalyticsControllerUpdateConsentSchema = {
-    method: "post";
-    url: "/analytics/consent";
-    mediaType: [
-        "application/json"
-    ];
-    security: [
-        "bearer"
-    ];
-};
-type AnalyticsControllerUpdateConsentParameters = {};
-type AnalyticsControllerUpdateConsentData = unknown;
-type AnalyticsControllerUpdateConsentError = unknown;
-type AnalyticsControllerUpdateConsentBody = NonNullable<paths["/analytics/consent"]["post"]["requestBody"]>["content"]["application/json"];
+  method: 'post'
+  url: '/analytics/consent'
+  mediaType: ['application/json']
+  security: ['bearer']
+}
+type AnalyticsControllerUpdateConsentParameters = {}
+type AnalyticsControllerUpdateConsentData = unknown
+type AnalyticsControllerUpdateConsentError = unknown
+type AnalyticsControllerUpdateConsentBody = NonNullable<
+  paths['/analytics/consent']['post']['requestBody']
+>['content']['application/json']
 type AnalyticsControllerTrackActivitySchema = {
-    method: "post";
-    url: "/analytics/track";
-    mediaType: [
-        "application/json"
-    ];
-    security: [
-        "bearer"
-    ];
-};
-type AnalyticsControllerTrackActivityParameters = {};
-type AnalyticsControllerTrackActivityData = unknown;
-type AnalyticsControllerTrackActivityError = unknown;
-type AnalyticsControllerTrackActivityBody = NonNullable<paths["/analytics/track"]["post"]["requestBody"]>["content"]["application/json"];
+  method: 'post'
+  url: '/analytics/track'
+  mediaType: ['application/json']
+  security: ['bearer']
+}
+type AnalyticsControllerTrackActivityParameters = {}
+type AnalyticsControllerTrackActivityData = unknown
+type AnalyticsControllerTrackActivityError = unknown
+type AnalyticsControllerTrackActivityBody = NonNullable<
+  paths['/analytics/track']['post']['requestBody']
+>['content']['application/json']

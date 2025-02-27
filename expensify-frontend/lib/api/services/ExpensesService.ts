@@ -3,2343 +3,5809 @@
  * Do not make direct changes to the file.
  */
 
-import type { paths } from "../schema";
-import type { AreAllOptional, InvalidateQueryFilters, MutationFiltersByMutationKey, MutationFiltersByParameters, MutationVariables, OperationInfiniteData, PartialParameters, QueryFiltersByParameters, QueryFiltersByQueryKey, QueryFnOptionsByParameters, QueryFnOptionsByQueryKey, RequestFnResponse, ServiceOperationEnsureInfiniteQueryDataOptions, ServiceOperationEnsureQueryDataOptions, ServiceOperationFetchInfiniteQueryOptions, ServiceOperationFetchQueryOptions, ServiceOperationInfiniteQueryKey, ServiceOperationMutationFnOptions, ServiceOperationMutationKey, ServiceOperationQueryKey, ServiceOperationUseMutationOptions, UseQueryOptionsForUseQueries, UseQueryOptionsForUseSuspenseQuery, WithOptional } from "@openapi-qraft/tanstack-query-react-types";
-import type { DefinedInitialDataInfiniteOptions, DefinedInitialDataOptions, DefinedUseInfiniteQueryResult, DefinedUseQueryResult, UndefinedInitialDataInfiniteOptions, UndefinedInitialDataOptions, UseInfiniteQueryResult, UseMutationResult, UseQueryResult, UseSuspenseInfiniteQueryOptions, UseSuspenseInfiniteQueryResult, UseSuspenseQueryOptions, UseSuspenseQueryResult } from "@tanstack/react-query";
-import type { CancelOptions, InfiniteQueryPageParamsOptions, InvalidateOptions, Mutation, MutationState, NoInfer, QueryState, RefetchOptions, ResetOptions, SetDataOptions, Updater } from "@tanstack/query-core";
+import type { paths } from '../schema'
+import type {
+  AreAllOptional,
+  InvalidateQueryFilters,
+  MutationFiltersByMutationKey,
+  MutationFiltersByParameters,
+  MutationVariables,
+  OperationInfiniteData,
+  PartialParameters,
+  QueryFiltersByParameters,
+  QueryFiltersByQueryKey,
+  QueryFnOptionsByParameters,
+  QueryFnOptionsByQueryKey,
+  RequestFnResponse,
+  ServiceOperationEnsureInfiniteQueryDataOptions,
+  ServiceOperationEnsureQueryDataOptions,
+  ServiceOperationFetchInfiniteQueryOptions,
+  ServiceOperationFetchQueryOptions,
+  ServiceOperationInfiniteQueryKey,
+  ServiceOperationMutationFnOptions,
+  ServiceOperationMutationKey,
+  ServiceOperationQueryKey,
+  ServiceOperationUseMutationOptions,
+  UseQueryOptionsForUseQueries,
+  UseQueryOptionsForUseSuspenseQuery,
+  WithOptional
+} from '@openapi-qraft/tanstack-query-react-types'
+import type {
+  DefinedInitialDataInfiniteOptions,
+  DefinedInitialDataOptions,
+  DefinedUseInfiniteQueryResult,
+  DefinedUseQueryResult,
+  UndefinedInitialDataInfiniteOptions,
+  UndefinedInitialDataOptions,
+  UseInfiniteQueryResult,
+  UseMutationResult,
+  UseQueryResult,
+  UseSuspenseInfiniteQueryOptions,
+  UseSuspenseInfiniteQueryResult,
+  UseSuspenseQueryOptions,
+  UseSuspenseQueryResult
+} from '@tanstack/react-query'
+import type {
+  CancelOptions,
+  InfiniteQueryPageParamsOptions,
+  InvalidateOptions,
+  Mutation,
+  MutationState,
+  NoInfer,
+  QueryState,
+  RefetchOptions,
+  ResetOptions,
+  SetDataOptions,
+  Updater
+} from '@tanstack/query-core'
 export interface ExpensesService {
+  /**
+   * @summary Create expense
+   * @description Create a new expense for the authenticated user
+   */
+  expensesControllerCreate: {
     /**
      * @summary Create expense
      * @description Create a new expense for the authenticated user
      */
-    expensesControllerCreate: {
-        /**
-         * @summary Create expense
-         * @description Create a new expense for the authenticated user
-         */
-        getMutationKey(parameters: ExpensesControllerCreateParameters | void): ServiceOperationMutationKey<ExpensesControllerCreateSchema, ExpensesControllerCreateParameters>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation({})
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation()
-         * mutate({
-         *     body: bodyPayload
-         * });
-         * ```
-         */
-        useMutation<TVariables extends ExpensesControllerCreateBody, TContext = unknown>(parameters: ExpensesControllerCreateParameters, options?: ServiceOperationUseMutationOptions<ExpensesControllerCreateSchema, ExpensesControllerCreateData, ExpensesControllerCreateParameters, TVariables, ExpensesControllerCreateError | Error, TContext>): UseMutationResult<ExpensesControllerCreateData, ExpensesControllerCreateError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation({})
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation()
-         * mutate({
-         *     body: bodyPayload
-         * });
-         * ```
-         */
-        useMutation<TVariables extends MutationVariables<ExpensesControllerCreateBody, ExpensesControllerCreateParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<ExpensesControllerCreateSchema, ExpensesControllerCreateData, ExpensesControllerCreateParameters, TVariables, ExpensesControllerCreateError | Error, TContext>): UseMutationResult<ExpensesControllerCreateData, ExpensesControllerCreateError | Error, TVariables, TContext>;
-        /**
-         * Returns the count of currently in-progress mutations.
-         *
-         * @summary Create expense
-         * @description Create a new expense for the authenticated user
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-         * @example Check how many mutations are currently in progress for the specified service method.
-         * ```ts
-         * const expensesControllerCreateTotal = qraft.expensesService.expensesControllerCreate.useIsMutating()
-         * ```
-         * @example Check how many mutations are currently in progress with the specified parameters.
-         * ```ts
-         * const expensesControllerCreateTotal = qraft.expensesService.expensesControllerCreate.useIsMutating({
-         *     parameters: {}
-         * })
-         * ```
-         */
-        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<ExpensesControllerCreateBody, ExpensesControllerCreateData, ExpensesControllerCreateParameters, ExpensesControllerCreateError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerCreateSchema, ExpensesControllerCreateBody, ExpensesControllerCreateData, ExpensesControllerCreateParameters, ExpensesControllerCreateError | Error, TContext>): number;
-        /**
-         * @summary Create expense
-         * @description Create a new expense for the authenticated user
-         */
-        isMutating<TContext>(filters?: MutationFiltersByParameters<ExpensesControllerCreateBody, ExpensesControllerCreateData, ExpensesControllerCreateParameters, ExpensesControllerCreateError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerCreateSchema, ExpensesControllerCreateBody, ExpensesControllerCreateData, ExpensesControllerCreateParameters, ExpensesControllerCreateError | Error, TContext>): number;
-        /**
-         * @summary Create expense
-         * @description Create a new expense for the authenticated user
-         */
-        (options: ServiceOperationMutationFnOptions<ExpensesControllerCreateBody, ExpensesControllerCreateParameters>, client?: (schema: ExpensesControllerCreateSchema, options: ServiceOperationMutationFnOptions<ExpensesControllerCreateBody, ExpensesControllerCreateParameters>) => Promise<RequestFnResponse<ExpensesControllerCreateData, ExpensesControllerCreateError>>): Promise<RequestFnResponse<ExpensesControllerCreateData, ExpensesControllerCreateError>>;
-        /**
-         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-         *
-         * @summary Create expense
-         * @description Create a new expense for the authenticated user
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-         * @example Get all variables of all running mutations.
-         * ```ts
-         * const expensesControllerCreatePendingMutationVariables = qraft.expensesService.expensesControllerCreate.useMutationState({
-         *     filters: {
-         *         status: "pending"
-         *     },
-         *     select: mutation => mutation.state.variables
-         * })
-         * ```
-         * @example Get all data for specific mutations via the `parameters`.
-         * ```ts
-         * const expensesControllerCreateMutationData = qraft.expensesService.expensesControllerCreate.useMutationState({
-         *     filters: {
-         *         parameters: {}
-         *     },
-         *     select: mutation => mutation.state.data
-         * })
-         * ```
-         */
-        useMutationState<TContext = unknown, TResult = MutationState<ExpensesControllerCreateData, ExpensesControllerCreateError | Error, MutationVariables<ExpensesControllerCreateBody, ExpensesControllerCreateParameters>, TContext>>(options?: {
-            filters?: MutationFiltersByParameters<ExpensesControllerCreateBody, ExpensesControllerCreateData, ExpensesControllerCreateParameters, ExpensesControllerCreateError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerCreateSchema, ExpensesControllerCreateBody, ExpensesControllerCreateData, ExpensesControllerCreateParameters, ExpensesControllerCreateError | Error, TContext>;
-            select?: (mutation: Mutation<ExpensesControllerCreateData, ExpensesControllerCreateError | Error, MutationVariables<ExpensesControllerCreateBody, ExpensesControllerCreateParameters>, TContext>) => TResult;
-        }): Array<TResult>;
-        schema: ExpensesControllerCreateSchema;
-        types: {
-            parameters: ExpensesControllerCreateParameters;
-            data: ExpensesControllerCreateData;
-            error: ExpensesControllerCreateError;
-            body: ExpensesControllerCreateBody;
-        };
-    };
+    getMutationKey(
+      parameters: ExpensesControllerCreateParameters | void
+    ): ServiceOperationMutationKey<
+      ExpensesControllerCreateSchema,
+      ExpensesControllerCreateParameters
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation({})
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation()
+     * mutate({
+     *     body: bodyPayload
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends ExpensesControllerCreateBody,
+      TContext = unknown
+    >(
+      parameters: ExpensesControllerCreateParameters,
+      options?: ServiceOperationUseMutationOptions<
+        ExpensesControllerCreateSchema,
+        ExpensesControllerCreateData,
+        ExpensesControllerCreateParameters,
+        TVariables,
+        ExpensesControllerCreateError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      ExpensesControllerCreateData,
+      ExpensesControllerCreateError | Error,
+      AreAllOptional<TVariables> extends true ? TVariables | void : TVariables,
+      TContext
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation({})
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerCreate.useMutation()
+     * mutate({
+     *     body: bodyPayload
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends MutationVariables<
+        ExpensesControllerCreateBody,
+        ExpensesControllerCreateParameters
+      >,
+      TContext = unknown
+    >(
+      parameters: void,
+      options?: ServiceOperationUseMutationOptions<
+        ExpensesControllerCreateSchema,
+        ExpensesControllerCreateData,
+        ExpensesControllerCreateParameters,
+        TVariables,
+        ExpensesControllerCreateError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      ExpensesControllerCreateData,
+      ExpensesControllerCreateError | Error,
+      TVariables,
+      TContext
+    >
+    /**
+     * Returns the count of currently in-progress mutations.
+     *
+     * @summary Create expense
+     * @description Create a new expense for the authenticated user
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+     * @example Check how many mutations are currently in progress for the specified service method.
+     * ```ts
+     * const expensesControllerCreateTotal = qraft.expensesService.expensesControllerCreate.useIsMutating()
+     * ```
+     * @example Check how many mutations are currently in progress with the specified parameters.
+     * ```ts
+     * const expensesControllerCreateTotal = qraft.expensesService.expensesControllerCreate.useIsMutating({
+     *     parameters: {}
+     * })
+     * ```
+     */
+    useIsMutating<TContext = unknown>(
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerCreateBody,
+            ExpensesControllerCreateData,
+            ExpensesControllerCreateParameters,
+            ExpensesControllerCreateError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerCreateSchema,
+            ExpensesControllerCreateBody,
+            ExpensesControllerCreateData,
+            ExpensesControllerCreateParameters,
+            ExpensesControllerCreateError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Create expense
+     * @description Create a new expense for the authenticated user
+     */
+    isMutating<TContext>(
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerCreateBody,
+            ExpensesControllerCreateData,
+            ExpensesControllerCreateParameters,
+            ExpensesControllerCreateError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerCreateSchema,
+            ExpensesControllerCreateBody,
+            ExpensesControllerCreateData,
+            ExpensesControllerCreateParameters,
+            ExpensesControllerCreateError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Create expense
+     * @description Create a new expense for the authenticated user
+     */
+    (
+      options: ServiceOperationMutationFnOptions<
+        ExpensesControllerCreateBody,
+        ExpensesControllerCreateParameters
+      >,
+      client?: (
+        schema: ExpensesControllerCreateSchema,
+        options: ServiceOperationMutationFnOptions<
+          ExpensesControllerCreateBody,
+          ExpensesControllerCreateParameters
+        >
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerCreateData,
+          ExpensesControllerCreateError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerCreateData,
+        ExpensesControllerCreateError
+      >
+    >
+    /**
+     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+     *
+     * @summary Create expense
+     * @description Create a new expense for the authenticated user
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+     * @example Get all variables of all running mutations.
+     * ```ts
+     * const expensesControllerCreatePendingMutationVariables = qraft.expensesService.expensesControllerCreate.useMutationState({
+     *     filters: {
+     *         status: "pending"
+     *     },
+     *     select: mutation => mutation.state.variables
+     * })
+     * ```
+     * @example Get all data for specific mutations via the `parameters`.
+     * ```ts
+     * const expensesControllerCreateMutationData = qraft.expensesService.expensesControllerCreate.useMutationState({
+     *     filters: {
+     *         parameters: {}
+     *     },
+     *     select: mutation => mutation.state.data
+     * })
+     * ```
+     */
+    useMutationState<
+      TContext = unknown,
+      TResult = MutationState<
+        ExpensesControllerCreateData,
+        ExpensesControllerCreateError | Error,
+        MutationVariables<
+          ExpensesControllerCreateBody,
+          ExpensesControllerCreateParameters
+        >,
+        TContext
+      >
+    >(options?: {
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerCreateBody,
+            ExpensesControllerCreateData,
+            ExpensesControllerCreateParameters,
+            ExpensesControllerCreateError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerCreateSchema,
+            ExpensesControllerCreateBody,
+            ExpensesControllerCreateData,
+            ExpensesControllerCreateParameters,
+            ExpensesControllerCreateError | Error,
+            TContext
+          >
+      select?: (
+        mutation: Mutation<
+          ExpensesControllerCreateData,
+          ExpensesControllerCreateError | Error,
+          MutationVariables<
+            ExpensesControllerCreateBody,
+            ExpensesControllerCreateParameters
+          >,
+          TContext
+        >
+      ) => TResult
+    }): Array<TResult>
+    schema: ExpensesControllerCreateSchema
+    types: {
+      parameters: ExpensesControllerCreateParameters
+      data: ExpensesControllerCreateData
+      error: ExpensesControllerCreateError
+      body: ExpensesControllerCreateBody
+    }
+  }
+  /**
+   * @summary Get all expenses
+   * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+   */
+  expensesControllerFindAll: {
     /**
      * @summary Get all expenses
      * @description Retrieve all expenses for the authenticated user with pagination and filtering options
      */
-    expensesControllerFindAll: {
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>, options?: CancelOptions): Promise<void>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getQueryKey(parameters: ExpensesControllerFindAllParameters | void): ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
-         * ```
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
-         *     query: {
-         *         page: page
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindAllData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, TData, ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerFindAllError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
-         * ```
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
-         *     query: {
-         *         page: page
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindAllData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options: Omit<DefinedInitialDataOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, TData, ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerFindAllError | Error>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        fetchInfiniteQuery<TPageParam extends ExpensesControllerFindAllParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, ExpensesControllerFindAllParameters, TPageParam, ExpensesControllerFindAllError>): Promise<OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters>>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        prefetchInfiniteQuery<TPageParam extends ExpensesControllerFindAllParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, ExpensesControllerFindAllParameters, TPageParam, ExpensesControllerFindAllError>): Promise<void>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        ensureInfiniteQueryData<TPageParam extends ExpensesControllerFindAllParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, ExpensesControllerFindAllParameters, TPageParam, ExpensesControllerFindAllError>): Promise<OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters>>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | void): Promise<ExpensesControllerFindAllData>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | void): Promise<void>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | void): Promise<ExpensesControllerFindAllData>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void)): OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters> | undefined;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>): TInfinite extends true ? Array<[
-            queryKey: ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>,
-            data: NoInfer<OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters>> | undefined
-        ]> : Array<[
-            queryKey: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>,
+    cancelQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >,
+      options?: CancelOptions
+    ): Promise<void>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getQueryKey(
+      parameters: ExpensesControllerFindAllParameters | void
+    ): ServiceOperationQueryKey<
+      ExpensesControllerFindAllSchema,
+      ExpensesControllerFindAllParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
+     * ```
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
+     *     query: {
+     *         page: page
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindAllData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerFindAllError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
+     * ```
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
+     *     query: {
+     *         page: page
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindAllData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, ExpensesControllerFindAllError | Error>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    fetchInfiniteQuery<TPageParam extends ExpensesControllerFindAllParameters>(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerFindAllSchema,
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters,
+        TPageParam,
+        ExpensesControllerFindAllError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters
+      >
+    >
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    prefetchInfiniteQuery<
+      TPageParam extends ExpensesControllerFindAllParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerFindAllSchema,
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters,
+        TPageParam,
+        ExpensesControllerFindAllError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    ensureInfiniteQueryData<
+      TPageParam extends ExpensesControllerFindAllParameters
+    >(
+      options: ServiceOperationEnsureInfiniteQueryDataOptions<
+        ExpensesControllerFindAllSchema,
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters,
+        TPageParam,
+        ExpensesControllerFindAllError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters
+      >
+    >
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    fetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerFindAllSchema,
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters,
+        ExpensesControllerFindAllError
+      > | void
+    ): Promise<ExpensesControllerFindAllData>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    prefetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerFindAllSchema,
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters,
+        ExpensesControllerFindAllError
+      > | void
+    ): Promise<void>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    ensureQueryData(
+      options: ServiceOperationEnsureQueryDataOptions<
+        ExpensesControllerFindAllSchema,
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllParameters,
+        ExpensesControllerFindAllError
+      > | void
+    ): Promise<ExpensesControllerFindAllData>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getInfiniteQueryData(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void)
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllParameters
+        >
+      | undefined
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getQueriesData<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+    ): TInfinite extends true
+      ? Array<
+          [
+            queryKey: ServiceOperationInfiniteQueryKey<
+              ExpensesControllerFindAllSchema,
+              ExpensesControllerFindAllParameters
+            >,
+            data:
+              | NoInfer<
+                  OperationInfiniteData<
+                    ExpensesControllerFindAllData,
+                    ExpensesControllerFindAllParameters
+                  >
+                >
+              | undefined
+          ]
+        >
+      : Array<
+          [
+            queryKey: ServiceOperationQueryKey<
+              ExpensesControllerFindAllSchema,
+              ExpensesControllerFindAllParameters
+            >,
             data: ExpensesControllerFindAllData | undefined
-        ]>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getQueryData(parameters: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void)): ExpensesControllerFindAllData | undefined;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getQueryState(parameters: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void)): QueryState<ExpensesControllerFindAllData, ExpensesControllerFindAllError> | undefined;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getInfiniteQueryState(parameters: ExpensesControllerFindAllParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | void): QueryState<OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters>, ExpensesControllerFindAllError> | undefined;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>, options?: InvalidateOptions): Promise<void>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>): number;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ExpensesControllerFindAllParameters, TMeta, TSignal> | void), client?: (schema: ExpensesControllerFindAllSchema, options: {
-            parameters: ExpensesControllerFindAllParameters;
-            signal?: TSignal;
-            meta?: TMeta;
-        }) => Promise<RequestFnResponse<ExpensesControllerFindAllData, ExpensesControllerFindAllError>>): Promise<RequestFnResponse<ExpensesControllerFindAllData, ExpensesControllerFindAllError>>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>, options?: RefetchOptions): Promise<void>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>): void;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>, options?: ResetOptions): Promise<void>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        setInfiniteQueryData(parameters: ExpensesControllerFindAllParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>, updater: Updater<NoInfer<OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters>> | undefined, NoInfer<OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ExpensesControllerFindAllData, ExpensesControllerFindAllParameters> | undefined;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>, updater: Updater<NoInfer<ExpensesControllerFindAllData> | undefined, NoInfer<ExpensesControllerFindAllData> | undefined>, options?: SetDataOptions): Array<ExpensesControllerFindAllData | undefined>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        setQueryData(parameters: (ExpensesControllerFindAllParameters | undefined) | ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>, updater: Updater<NoInfer<ExpensesControllerFindAllData> | undefined, NoInfer<ExpensesControllerFindAllData> | undefined>, options?: SetDataOptions): ExpensesControllerFindAllData | undefined;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getInfiniteQueryKey(parameters: ExpensesControllerFindAllParameters | void): ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindAll.useInfiniteQuery({}, {
-         *     initialPageParam: {
-         *         query: {
-         *             page: initialPage
-         *         }
-         *     },
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerFindAllParameters, TData = ExpensesControllerFindAllData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options: Omit<UndefinedInitialDataInfiniteOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, OperationInfiniteData<TData, ExpensesControllerFindAllParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerFindAllData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerFindAllParameters>, ExpensesControllerFindAllError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindAll.useInfiniteQuery({}, {
-         *     initialPageParam: {
-         *         query: {
-         *             page: initialPage
-         *         }
-         *     },
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerFindAllParameters, TData = ExpensesControllerFindAllData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options: Omit<DefinedInitialDataInfiniteOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, OperationInfiniteData<TData, ExpensesControllerFindAllParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerFindAllData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerFindAllParameters>, ExpensesControllerFindAllError | Error>;
-        /**
-         * Monitors the number of queries currently fetching, matching the provided filters.
-         * Useful for creating loading indicators or performing actions based on active requests.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-         * @example Checks the total number of queries fetching from the specified service method,
-         * both normal and infinite. If no parameters are provided, no filtering is applied.
-         * ```ts
-         * const expensesControllerFindAllTotal = qraft.expensesService.expensesControllerFindAll.useIsFetching()
-         * ```
-         * @example Checks the number of normal queries fetching with the specified parameters.
-         * ```ts
-         * const expensesControllerFindAllByParametersTotal = qraft.expensesService.expensesControllerFindAll.useIsFetching({
-         *     infinite: false,
-         *     parameters: {
-         *         query: {
-         *             page: page
-         *         }
-         *     }
-         * })
-         * ```
-         */
-        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError> | QueryFiltersByQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllData, TInfinite, ExpensesControllerFindAllParameters, ExpensesControllerFindAllError>): number;
-        /**
-         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-         *
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-         * ```ts
-         * const expensesControllerFindAllResults = qraft.expensesService.expensesControllerFindAll.useQueries({
-         *     queries: [
-         *         {
-         *             query: {
-         *                 page: page1
-         *             }
-         *         },
-         *         {
-         *             query: {
-         *                 page: page2
-         *             }
-         *         }
-         *     ]
-         * });
-         * expensesControllerFindAllResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-         * ```
-         * @example Combined results. Only the data will be returned.
-         * ```ts
-         * const expensesControllerFindAllCombinedResults = qraft.expensesService.expensesControllerFindAll.useQueries({
-         *     combine: results => results.map(result => result.data),
-         *     queries: [
-         *         {
-         *             query: {
-         *                 page: page1
-         *             }
-         *         },
-         *         {
-         *             query: {
-         *                 page: page2
-         *             }
-         *         }
-         *     ]
-         * });
-         * expensesControllerFindAllCombinedResults.forEach(data => console.log({ data }));
-         * ```
-         */
-        useQueries<T extends Array<UseQueryOptionsForUseQueries<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters, ExpensesControllerFindAllData, ExpensesControllerFindAllError>>, TCombinedResult = Array<UseQueryResult<ExpensesControllerFindAllData, ExpensesControllerFindAllError>>>(options: {
-            queries: T;
-            combine?: (results: Array<UseQueryResult<ExpensesControllerFindAllData, ExpensesControllerFindAllError>>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        getQueryKey(parameters: ExpensesControllerFindAllParameters | void): ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
-         * ```
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
-         *     query: {
-         *         page: page
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindAllData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, TData, ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerFindAllError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
-         * ```
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
-         *     query: {
-         *         page: page
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindAllData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options: Omit<DefinedInitialDataOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, TData, ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerFindAllError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-         *
-         * @example Suspense Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindAll.useSuspenseInfiniteQuery({}, {
-         *     initialPageParam: {
-         *         query: {
-         *             page: initialPage
-         *         }
-         *     },
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useSuspenseInfiniteQuery<TPageParam extends ExpensesControllerFindAllParameters, TData = ExpensesControllerFindAllData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options: Omit<UseSuspenseInfiniteQueryOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, OperationInfiniteData<TData, ExpensesControllerFindAllParameters>, ExpensesControllerFindAllData, ServiceOperationInfiniteQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerFindAllData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerFindAllParameters>, ExpensesControllerFindAllError | Error>;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters, ExpensesControllerFindAllData, ExpensesControllerFindAllError>>, TCombinedResult = Array<UseSuspenseQueryResult<ExpensesControllerFindAllData, ExpensesControllerFindAllError>>>(options: {
-            queries: T;
-            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<ExpensesControllerFindAllData, ExpensesControllerFindAllError>, "data">>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get all expenses
-         * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-         */
-        useSuspenseQuery<TData = ExpensesControllerFindAllData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters> | (ExpensesControllerFindAllParameters | void), options?: Omit<UseSuspenseQueryOptions<ExpensesControllerFindAllData, ExpensesControllerFindAllError, TData, ServiceOperationQueryKey<ExpensesControllerFindAllSchema, ExpensesControllerFindAllParameters>>, "queryKey">): UseSuspenseQueryResult<TData, ExpensesControllerFindAllError | Error>;
-        schema: ExpensesControllerFindAllSchema;
-        types: {
-            parameters: ExpensesControllerFindAllParameters;
-            data: ExpensesControllerFindAllData;
-            error: ExpensesControllerFindAllError;
-        };
-    };
+          ]
+        >
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getQueryData(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void)
+    ): ExpensesControllerFindAllData | undefined
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getQueryState(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void)
+    ):
+      | QueryState<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError
+        >
+      | undefined
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getInfiniteQueryState(
+      parameters:
+        | ExpensesControllerFindAllParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | void
+    ):
+      | QueryState<
+          OperationInfiniteData<
+            ExpensesControllerFindAllData,
+            ExpensesControllerFindAllParameters
+          >,
+          ExpensesControllerFindAllError
+        >
+      | undefined
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    invalidateQueries<TInfinite extends boolean = false>(
+      filters?: InvalidateQueryFilters<
+        ExpensesControllerFindAllSchema,
+        ExpensesControllerFindAllData,
+        TInfinite,
+        ExpensesControllerFindAllParameters,
+        ExpensesControllerFindAllError
+      >,
+      options?: InvalidateOptions
+    ): Promise<void>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    isFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+    ): number
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    <
+      TMeta extends Record<string, any>,
+      TSignal extends AbortSignal = AbortSignal
+    >(
+      options:
+        | QueryFnOptionsByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters,
+            TMeta,
+            TSignal
+          >
+        | (QueryFnOptionsByParameters<
+            ExpensesControllerFindAllParameters,
+            TMeta,
+            TSignal
+          > | void),
+      client?: (
+        schema: ExpensesControllerFindAllSchema,
+        options: {
+          parameters: ExpensesControllerFindAllParameters
+          signal?: TSignal
+          meta?: TMeta
+        }
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerFindAllData,
+        ExpensesControllerFindAllError
+      >
+    >
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    refetchQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >,
+      options?: RefetchOptions
+    ): Promise<void>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    removeQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+    ): void
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    resetQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >,
+      options?: ResetOptions
+    ): Promise<void>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    setInfiniteQueryData(
+      parameters:
+        | ExpensesControllerFindAllParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >,
+      updater: Updater<
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerFindAllData,
+              ExpensesControllerFindAllParameters
+            >
+          >
+        | undefined,
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerFindAllData,
+              ExpensesControllerFindAllParameters
+            >
+          >
+        | undefined
+      >,
+      options?: SetDataOptions
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllParameters
+        >
+      | undefined
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    setQueriesData<TInfinite extends boolean = false>(
+      filters:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerFindAllData> | undefined,
+        NoInfer<ExpensesControllerFindAllData> | undefined
+      >,
+      options?: SetDataOptions
+    ): Array<ExpensesControllerFindAllData | undefined>
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    setQueryData(
+      parameters:
+        | (ExpensesControllerFindAllParameters | undefined)
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerFindAllData> | undefined,
+        NoInfer<ExpensesControllerFindAllData> | undefined
+      >,
+      options?: SetDataOptions
+    ): ExpensesControllerFindAllData | undefined
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getInfiniteQueryKey(
+      parameters: ExpensesControllerFindAllParameters | void
+    ): ServiceOperationInfiniteQueryKey<
+      ExpensesControllerFindAllSchema,
+      ExpensesControllerFindAllParameters
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindAll.useInfiniteQuery({}, {
+     *     initialPageParam: {
+     *         query: {
+     *             page: initialPage
+     *         }
+     *     },
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerFindAllParameters,
+      TData = ExpensesControllerFindAllData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options: Omit<
+        UndefinedInitialDataInfiniteOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          OperationInfiniteData<TData, ExpensesControllerFindAllParameters>,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerFindAllData,
+          PartialParameters<TPageParam>
+        >
+    ): UseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerFindAllParameters>,
+      ExpensesControllerFindAllError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindAll.useInfiniteQuery({}, {
+     *     initialPageParam: {
+     *         query: {
+     *             page: initialPage
+     *         }
+     *     },
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerFindAllParameters,
+      TData = ExpensesControllerFindAllData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options: Omit<
+        DefinedInitialDataInfiniteOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          OperationInfiniteData<TData, ExpensesControllerFindAllParameters>,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerFindAllData,
+          PartialParameters<TPageParam>
+        >
+    ): DefinedUseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerFindAllParameters>,
+      ExpensesControllerFindAllError | Error
+    >
+    /**
+     * Monitors the number of queries currently fetching, matching the provided filters.
+     * Useful for creating loading indicators or performing actions based on active requests.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+     * @example Checks the total number of queries fetching from the specified service method,
+     * both normal and infinite. If no parameters are provided, no filtering is applied.
+     * ```ts
+     * const expensesControllerFindAllTotal = qraft.expensesService.expensesControllerFindAll.useIsFetching()
+     * ```
+     * @example Checks the number of normal queries fetching with the specified parameters.
+     * ```ts
+     * const expensesControllerFindAllByParametersTotal = qraft.expensesService.expensesControllerFindAll.useIsFetching({
+     *     infinite: false,
+     *     parameters: {
+     *         query: {
+     *             page: page
+     *         }
+     *     }
+     * })
+     * ```
+     */
+    useIsFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllData,
+            TInfinite,
+            ExpensesControllerFindAllParameters,
+            ExpensesControllerFindAllError
+          >
+    ): number
+    /**
+     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+     *
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+     * ```ts
+     * const expensesControllerFindAllResults = qraft.expensesService.expensesControllerFindAll.useQueries({
+     *     queries: [
+     *         {
+     *             query: {
+     *                 page: page1
+     *             }
+     *         },
+     *         {
+     *             query: {
+     *                 page: page2
+     *             }
+     *         }
+     *     ]
+     * });
+     * expensesControllerFindAllResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+     * ```
+     * @example Combined results. Only the data will be returned.
+     * ```ts
+     * const expensesControllerFindAllCombinedResults = qraft.expensesService.expensesControllerFindAll.useQueries({
+     *     combine: results => results.map(result => result.data),
+     *     queries: [
+     *         {
+     *             query: {
+     *                 page: page1
+     *             }
+     *         },
+     *         {
+     *             query: {
+     *                 page: page2
+     *             }
+     *         }
+     *     ]
+     * });
+     * expensesControllerFindAllCombinedResults.forEach(data => console.log({ data }));
+     * ```
+     */
+    useQueries<
+      T extends Array<
+        UseQueryOptionsForUseQueries<
+          ExpensesControllerFindAllSchema,
+          ExpensesControllerFindAllParameters,
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError
+        >
+      >,
+      TCombinedResult = Array<
+        UseQueryResult<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          UseQueryResult<
+            ExpensesControllerFindAllData,
+            ExpensesControllerFindAllError
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    getQueryKey(
+      parameters: ExpensesControllerFindAllParameters | void
+    ): ServiceOperationQueryKey<
+      ExpensesControllerFindAllSchema,
+      ExpensesControllerFindAllParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
+     * ```
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
+     *     query: {
+     *         page: page
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindAllData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerFindAllError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery()
+     * ```
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindAll.useQuery({
+     *     query: {
+     *         page: page
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindAllData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, ExpensesControllerFindAllError | Error>
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+     *
+     * @example Suspense Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindAll.useSuspenseInfiniteQuery({}, {
+     *     initialPageParam: {
+     *         query: {
+     *             page: initialPage
+     *         }
+     *     },
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useSuspenseInfiniteQuery<
+      TPageParam extends ExpensesControllerFindAllParameters,
+      TData = ExpensesControllerFindAllData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options: Omit<
+        UseSuspenseInfiniteQueryOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          OperationInfiniteData<TData, ExpensesControllerFindAllParameters>,
+          ExpensesControllerFindAllData,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerFindAllData,
+          PartialParameters<TPageParam>
+        >
+    ): UseSuspenseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerFindAllParameters>,
+      ExpensesControllerFindAllError | Error
+    >
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    useSuspenseQueries<
+      T extends Array<
+        UseQueryOptionsForUseSuspenseQuery<
+          ExpensesControllerFindAllSchema,
+          ExpensesControllerFindAllParameters,
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError
+        >
+      >,
+      TCombinedResult = Array<
+        UseSuspenseQueryResult<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          WithOptional<
+            UseSuspenseQueryResult<
+              ExpensesControllerFindAllData,
+              ExpensesControllerFindAllError
+            >,
+            'data'
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get all expenses
+     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+     */
+    useSuspenseQuery<TData = ExpensesControllerFindAllData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        | (ExpensesControllerFindAllParameters | void),
+      options?: Omit<
+        UseSuspenseQueryOptions<
+          ExpensesControllerFindAllData,
+          ExpensesControllerFindAllError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindAllSchema,
+            ExpensesControllerFindAllParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseSuspenseQueryResult<TData, ExpensesControllerFindAllError | Error>
+    schema: ExpensesControllerFindAllSchema
+    types: {
+      parameters: ExpensesControllerFindAllParameters
+      data: ExpensesControllerFindAllData
+      error: ExpensesControllerFindAllError
+    }
+  }
+  /**
+   * @summary Get expense by ID
+   * @description Retrieve a specific expense by its ID
+   */
+  expensesControllerFindOne: {
     /**
      * @summary Get expense by ID
      * @description Retrieve a specific expense by its ID
      */
-    expensesControllerFindOne: {
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>, options?: CancelOptions): Promise<void>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getQueryKey(parameters: ExpensesControllerFindOneParameters): ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindOneData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, TData, ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerFindOneError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindOneData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options: Omit<DefinedInitialDataOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, TData, ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerFindOneError | Error>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        fetchInfiniteQuery<TPageParam extends ExpensesControllerFindOneParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, ExpensesControllerFindOneParameters, TPageParam, ExpensesControllerFindOneError>): Promise<OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters>>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        prefetchInfiniteQuery<TPageParam extends ExpensesControllerFindOneParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, ExpensesControllerFindOneParameters, TPageParam, ExpensesControllerFindOneError>): Promise<void>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        ensureInfiniteQueryData<TPageParam extends ExpensesControllerFindOneParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, ExpensesControllerFindOneParameters, TPageParam, ExpensesControllerFindOneError>): Promise<OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters>>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>): Promise<ExpensesControllerFindOneData>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>): Promise<void>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>): Promise<ExpensesControllerFindOneData>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters)): OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters> | undefined;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>): TInfinite extends true ? Array<[
-            queryKey: ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>,
-            data: NoInfer<OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters>> | undefined
-        ]> : Array<[
-            queryKey: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>,
+    cancelQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >,
+      options?: CancelOptions
+    ): Promise<void>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getQueryKey(
+      parameters: ExpensesControllerFindOneParameters
+    ): ServiceOperationQueryKey<
+      ExpensesControllerFindOneSchema,
+      ExpensesControllerFindOneParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindOneData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerFindOneError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindOneData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, ExpensesControllerFindOneError | Error>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    fetchInfiniteQuery<TPageParam extends ExpensesControllerFindOneParameters>(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerFindOneSchema,
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters,
+        TPageParam,
+        ExpensesControllerFindOneError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters
+      >
+    >
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    prefetchInfiniteQuery<
+      TPageParam extends ExpensesControllerFindOneParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerFindOneSchema,
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters,
+        TPageParam,
+        ExpensesControllerFindOneError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    ensureInfiniteQueryData<
+      TPageParam extends ExpensesControllerFindOneParameters
+    >(
+      options: ServiceOperationEnsureInfiniteQueryDataOptions<
+        ExpensesControllerFindOneSchema,
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters,
+        TPageParam,
+        ExpensesControllerFindOneError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters
+      >
+    >
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    fetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerFindOneSchema,
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters,
+        ExpensesControllerFindOneError
+      >
+    ): Promise<ExpensesControllerFindOneData>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    prefetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerFindOneSchema,
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters,
+        ExpensesControllerFindOneError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    ensureQueryData(
+      options: ServiceOperationEnsureQueryDataOptions<
+        ExpensesControllerFindOneSchema,
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneParameters,
+        ExpensesControllerFindOneError
+      >
+    ): Promise<ExpensesControllerFindOneData>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getInfiniteQueryData(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneParameters
+        >
+      | undefined
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getQueriesData<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+    ): TInfinite extends true
+      ? Array<
+          [
+            queryKey: ServiceOperationInfiniteQueryKey<
+              ExpensesControllerFindOneSchema,
+              ExpensesControllerFindOneParameters
+            >,
+            data:
+              | NoInfer<
+                  OperationInfiniteData<
+                    ExpensesControllerFindOneData,
+                    ExpensesControllerFindOneParameters
+                  >
+                >
+              | undefined
+          ]
+        >
+      : Array<
+          [
+            queryKey: ServiceOperationQueryKey<
+              ExpensesControllerFindOneSchema,
+              ExpensesControllerFindOneParameters
+            >,
             data: ExpensesControllerFindOneData | undefined
-        ]>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getQueryData(parameters: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters)): ExpensesControllerFindOneData | undefined;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getQueryState(parameters: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters)): QueryState<ExpensesControllerFindOneData, ExpensesControllerFindOneError> | undefined;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getInfiniteQueryState(parameters: ExpensesControllerFindOneParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>): QueryState<OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters>, ExpensesControllerFindOneError> | undefined;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>, options?: InvalidateOptions): Promise<void>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>): number;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ExpensesControllerFindOneParameters, TMeta, TSignal>), client?: (schema: ExpensesControllerFindOneSchema, options: {
-            parameters: ExpensesControllerFindOneParameters;
-            signal?: TSignal;
-            meta?: TMeta;
-        }) => Promise<RequestFnResponse<ExpensesControllerFindOneData, ExpensesControllerFindOneError>>): Promise<RequestFnResponse<ExpensesControllerFindOneData, ExpensesControllerFindOneError>>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>, options?: RefetchOptions): Promise<void>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>): void;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>, options?: ResetOptions): Promise<void>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        setInfiniteQueryData(parameters: ExpensesControllerFindOneParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>, updater: Updater<NoInfer<OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters>> | undefined, NoInfer<OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ExpensesControllerFindOneData, ExpensesControllerFindOneParameters> | undefined;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>, updater: Updater<NoInfer<ExpensesControllerFindOneData> | undefined, NoInfer<ExpensesControllerFindOneData> | undefined>, options?: SetDataOptions): Array<ExpensesControllerFindOneData | undefined>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        setQueryData(parameters: (ExpensesControllerFindOneParameters) | ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>, updater: Updater<NoInfer<ExpensesControllerFindOneData> | undefined, NoInfer<ExpensesControllerFindOneData> | undefined>, options?: SetDataOptions): ExpensesControllerFindOneData | undefined;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getInfiniteQueryKey(parameters: ExpensesControllerFindOneParameters): ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindOne.useInfiniteQuery({
-         *     path: {
-         *         id: id
-         *     }
-         * }, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerFindOneParameters, TData = ExpensesControllerFindOneData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options: Omit<UndefinedInitialDataInfiniteOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, OperationInfiniteData<TData, ExpensesControllerFindOneParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerFindOneData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerFindOneParameters>, ExpensesControllerFindOneError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindOne.useInfiniteQuery({
-         *     path: {
-         *         id: id
-         *     }
-         * }, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerFindOneParameters, TData = ExpensesControllerFindOneData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options: Omit<DefinedInitialDataInfiniteOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, OperationInfiniteData<TData, ExpensesControllerFindOneParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerFindOneData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerFindOneParameters>, ExpensesControllerFindOneError | Error>;
-        /**
-         * Monitors the number of queries currently fetching, matching the provided filters.
-         * Useful for creating loading indicators or performing actions based on active requests.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-         * @example Checks the total number of queries fetching from the specified service method,
-         * both normal and infinite. If no parameters are provided, no filtering is applied.
-         * ```ts
-         * const expensesControllerFindOneTotal = qraft.expensesService.expensesControllerFindOne.useIsFetching()
-         * ```
-         * @example Checks the number of normal queries fetching with the specified parameters.
-         * ```ts
-         * const expensesControllerFindOneByParametersTotal = qraft.expensesService.expensesControllerFindOne.useIsFetching({
-         *     infinite: false,
-         *     parameters: {
-         *         path: {
-         *             id: id
-         *         }
-         *     }
-         * })
-         * ```
-         */
-        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError> | QueryFiltersByQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneData, TInfinite, ExpensesControllerFindOneParameters, ExpensesControllerFindOneError>): number;
-        /**
-         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-         *
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-         * ```ts
-         * const expensesControllerFindOneResults = qraft.expensesService.expensesControllerFindOne.useQueries({
-         *     queries: [
-         *         {
-         *             path: {
-         *                 id: id1
-         *             }
-         *         },
-         *         {
-         *             path: {
-         *                 id: id2
-         *             }
-         *         }
-         *     ]
-         * });
-         * expensesControllerFindOneResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-         * ```
-         * @example Combined results. Only the data will be returned.
-         * ```ts
-         * const expensesControllerFindOneCombinedResults = qraft.expensesService.expensesControllerFindOne.useQueries({
-         *     combine: results => results.map(result => result.data),
-         *     queries: [
-         *         {
-         *             path: {
-         *                 id: id1
-         *             }
-         *         },
-         *         {
-         *             path: {
-         *                 id: id2
-         *             }
-         *         }
-         *     ]
-         * });
-         * expensesControllerFindOneCombinedResults.forEach(data => console.log({ data }));
-         * ```
-         */
-        useQueries<T extends Array<UseQueryOptionsForUseQueries<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters, ExpensesControllerFindOneData, ExpensesControllerFindOneError>>, TCombinedResult = Array<UseQueryResult<ExpensesControllerFindOneData, ExpensesControllerFindOneError>>>(options: {
-            queries: T;
-            combine?: (results: Array<UseQueryResult<ExpensesControllerFindOneData, ExpensesControllerFindOneError>>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        getQueryKey(parameters: ExpensesControllerFindOneParameters): ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindOneData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, TData, ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerFindOneError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerFindOneData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options: Omit<DefinedInitialDataOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, TData, ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerFindOneError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-         *
-         * @example Suspense Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindOne.useSuspenseInfiniteQuery({
-         *     path: {
-         *         id: id
-         *     }
-         * }, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useSuspenseInfiniteQuery<TPageParam extends ExpensesControllerFindOneParameters, TData = ExpensesControllerFindOneData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options: Omit<UseSuspenseInfiniteQueryOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, OperationInfiniteData<TData, ExpensesControllerFindOneParameters>, ExpensesControllerFindOneData, ServiceOperationInfiniteQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerFindOneData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerFindOneParameters>, ExpensesControllerFindOneError | Error>;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters, ExpensesControllerFindOneData, ExpensesControllerFindOneError>>, TCombinedResult = Array<UseSuspenseQueryResult<ExpensesControllerFindOneData, ExpensesControllerFindOneError>>>(options: {
-            queries: T;
-            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<ExpensesControllerFindOneData, ExpensesControllerFindOneError>, "data">>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get expense by ID
-         * @description Retrieve a specific expense by its ID
-         */
-        useSuspenseQuery<TData = ExpensesControllerFindOneData>(parameters: ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters> | (ExpensesControllerFindOneParameters), options?: Omit<UseSuspenseQueryOptions<ExpensesControllerFindOneData, ExpensesControllerFindOneError, TData, ServiceOperationQueryKey<ExpensesControllerFindOneSchema, ExpensesControllerFindOneParameters>>, "queryKey">): UseSuspenseQueryResult<TData, ExpensesControllerFindOneError | Error>;
-        schema: ExpensesControllerFindOneSchema;
-        types: {
-            parameters: ExpensesControllerFindOneParameters;
-            data: ExpensesControllerFindOneData;
-            error: ExpensesControllerFindOneError;
-        };
-    };
+          ]
+        >
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getQueryData(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters
+    ): ExpensesControllerFindOneData | undefined
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getQueryState(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters
+    ):
+      | QueryState<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError
+        >
+      | undefined
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getInfiniteQueryState(
+      parameters:
+        | ExpensesControllerFindOneParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+    ):
+      | QueryState<
+          OperationInfiniteData<
+            ExpensesControllerFindOneData,
+            ExpensesControllerFindOneParameters
+          >,
+          ExpensesControllerFindOneError
+        >
+      | undefined
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    invalidateQueries<TInfinite extends boolean = false>(
+      filters?: InvalidateQueryFilters<
+        ExpensesControllerFindOneSchema,
+        ExpensesControllerFindOneData,
+        TInfinite,
+        ExpensesControllerFindOneParameters,
+        ExpensesControllerFindOneError
+      >,
+      options?: InvalidateOptions
+    ): Promise<void>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    isFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+    ): number
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    <
+      TMeta extends Record<string, any>,
+      TSignal extends AbortSignal = AbortSignal
+    >(
+      options:
+        | QueryFnOptionsByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters,
+            TMeta,
+            TSignal
+          >
+        | QueryFnOptionsByParameters<
+            ExpensesControllerFindOneParameters,
+            TMeta,
+            TSignal
+          >,
+      client?: (
+        schema: ExpensesControllerFindOneSchema,
+        options: {
+          parameters: ExpensesControllerFindOneParameters
+          signal?: TSignal
+          meta?: TMeta
+        }
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerFindOneData,
+        ExpensesControllerFindOneError
+      >
+    >
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    refetchQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >,
+      options?: RefetchOptions
+    ): Promise<void>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    removeQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+    ): void
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    resetQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >,
+      options?: ResetOptions
+    ): Promise<void>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    setInfiniteQueryData(
+      parameters:
+        | ExpensesControllerFindOneParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >,
+      updater: Updater<
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerFindOneData,
+              ExpensesControllerFindOneParameters
+            >
+          >
+        | undefined,
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerFindOneData,
+              ExpensesControllerFindOneParameters
+            >
+          >
+        | undefined
+      >,
+      options?: SetDataOptions
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneParameters
+        >
+      | undefined
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    setQueriesData<TInfinite extends boolean = false>(
+      filters:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerFindOneData> | undefined,
+        NoInfer<ExpensesControllerFindOneData> | undefined
+      >,
+      options?: SetDataOptions
+    ): Array<ExpensesControllerFindOneData | undefined>
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    setQueryData(
+      parameters:
+        | ExpensesControllerFindOneParameters
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerFindOneData> | undefined,
+        NoInfer<ExpensesControllerFindOneData> | undefined
+      >,
+      options?: SetDataOptions
+    ): ExpensesControllerFindOneData | undefined
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getInfiniteQueryKey(
+      parameters: ExpensesControllerFindOneParameters
+    ): ServiceOperationInfiniteQueryKey<
+      ExpensesControllerFindOneSchema,
+      ExpensesControllerFindOneParameters
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindOne.useInfiniteQuery({
+     *     path: {
+     *         id: id
+     *     }
+     * }, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerFindOneParameters,
+      TData = ExpensesControllerFindOneData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options: Omit<
+        UndefinedInitialDataInfiniteOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          OperationInfiniteData<TData, ExpensesControllerFindOneParameters>,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerFindOneData,
+          PartialParameters<TPageParam>
+        >
+    ): UseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerFindOneParameters>,
+      ExpensesControllerFindOneError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindOne.useInfiniteQuery({
+     *     path: {
+     *         id: id
+     *     }
+     * }, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerFindOneParameters,
+      TData = ExpensesControllerFindOneData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options: Omit<
+        DefinedInitialDataInfiniteOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          OperationInfiniteData<TData, ExpensesControllerFindOneParameters>,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerFindOneData,
+          PartialParameters<TPageParam>
+        >
+    ): DefinedUseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerFindOneParameters>,
+      ExpensesControllerFindOneError | Error
+    >
+    /**
+     * Monitors the number of queries currently fetching, matching the provided filters.
+     * Useful for creating loading indicators or performing actions based on active requests.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+     * @example Checks the total number of queries fetching from the specified service method,
+     * both normal and infinite. If no parameters are provided, no filtering is applied.
+     * ```ts
+     * const expensesControllerFindOneTotal = qraft.expensesService.expensesControllerFindOne.useIsFetching()
+     * ```
+     * @example Checks the number of normal queries fetching with the specified parameters.
+     * ```ts
+     * const expensesControllerFindOneByParametersTotal = qraft.expensesService.expensesControllerFindOne.useIsFetching({
+     *     infinite: false,
+     *     parameters: {
+     *         path: {
+     *             id: id
+     *         }
+     *     }
+     * })
+     * ```
+     */
+    useIsFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneData,
+            TInfinite,
+            ExpensesControllerFindOneParameters,
+            ExpensesControllerFindOneError
+          >
+    ): number
+    /**
+     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+     *
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+     * ```ts
+     * const expensesControllerFindOneResults = qraft.expensesService.expensesControllerFindOne.useQueries({
+     *     queries: [
+     *         {
+     *             path: {
+     *                 id: id1
+     *             }
+     *         },
+     *         {
+     *             path: {
+     *                 id: id2
+     *             }
+     *         }
+     *     ]
+     * });
+     * expensesControllerFindOneResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+     * ```
+     * @example Combined results. Only the data will be returned.
+     * ```ts
+     * const expensesControllerFindOneCombinedResults = qraft.expensesService.expensesControllerFindOne.useQueries({
+     *     combine: results => results.map(result => result.data),
+     *     queries: [
+     *         {
+     *             path: {
+     *                 id: id1
+     *             }
+     *         },
+     *         {
+     *             path: {
+     *                 id: id2
+     *             }
+     *         }
+     *     ]
+     * });
+     * expensesControllerFindOneCombinedResults.forEach(data => console.log({ data }));
+     * ```
+     */
+    useQueries<
+      T extends Array<
+        UseQueryOptionsForUseQueries<
+          ExpensesControllerFindOneSchema,
+          ExpensesControllerFindOneParameters,
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError
+        >
+      >,
+      TCombinedResult = Array<
+        UseQueryResult<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          UseQueryResult<
+            ExpensesControllerFindOneData,
+            ExpensesControllerFindOneError
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    getQueryKey(
+      parameters: ExpensesControllerFindOneParameters
+    ): ServiceOperationQueryKey<
+      ExpensesControllerFindOneSchema,
+      ExpensesControllerFindOneParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindOneData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerFindOneError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerFindOne.useQuery({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerFindOneData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, ExpensesControllerFindOneError | Error>
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+     *
+     * @example Suspense Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerFindOne.useSuspenseInfiniteQuery({
+     *     path: {
+     *         id: id
+     *     }
+     * }, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useSuspenseInfiniteQuery<
+      TPageParam extends ExpensesControllerFindOneParameters,
+      TData = ExpensesControllerFindOneData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options: Omit<
+        UseSuspenseInfiniteQueryOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          OperationInfiniteData<TData, ExpensesControllerFindOneParameters>,
+          ExpensesControllerFindOneData,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerFindOneData,
+          PartialParameters<TPageParam>
+        >
+    ): UseSuspenseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerFindOneParameters>,
+      ExpensesControllerFindOneError | Error
+    >
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    useSuspenseQueries<
+      T extends Array<
+        UseQueryOptionsForUseSuspenseQuery<
+          ExpensesControllerFindOneSchema,
+          ExpensesControllerFindOneParameters,
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError
+        >
+      >,
+      TCombinedResult = Array<
+        UseSuspenseQueryResult<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          WithOptional<
+            UseSuspenseQueryResult<
+              ExpensesControllerFindOneData,
+              ExpensesControllerFindOneError
+            >,
+            'data'
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get expense by ID
+     * @description Retrieve a specific expense by its ID
+     */
+    useSuspenseQuery<TData = ExpensesControllerFindOneData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        | ExpensesControllerFindOneParameters,
+      options?: Omit<
+        UseSuspenseQueryOptions<
+          ExpensesControllerFindOneData,
+          ExpensesControllerFindOneError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerFindOneSchema,
+            ExpensesControllerFindOneParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseSuspenseQueryResult<TData, ExpensesControllerFindOneError | Error>
+    schema: ExpensesControllerFindOneSchema
+    types: {
+      parameters: ExpensesControllerFindOneParameters
+      data: ExpensesControllerFindOneData
+      error: ExpensesControllerFindOneError
+    }
+  }
+  /**
+   * @summary Update expense
+   * @description Update an existing expense by ID
+   */
+  expensesControllerUpdate: {
     /**
      * @summary Update expense
      * @description Update an existing expense by ID
      */
-    expensesControllerUpdate: {
-        /**
-         * @summary Update expense
-         * @description Update an existing expense by ID
-         */
-        getMutationKey(parameters: ExpensesControllerUpdateParameters | void): ServiceOperationMutationKey<ExpensesControllerUpdateSchema, ExpensesControllerUpdateParameters>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation()
-         * mutate({
-         *     body: bodyPayload,
-         *     path: {
-         *         id: id
-         *     }
-         * });
-         * ```
-         */
-        useMutation<TVariables extends ExpensesControllerUpdateBody, TContext = unknown>(parameters: ExpensesControllerUpdateParameters, options?: ServiceOperationUseMutationOptions<ExpensesControllerUpdateSchema, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, TVariables, ExpensesControllerUpdateError | Error, TContext>): UseMutationResult<ExpensesControllerUpdateData, ExpensesControllerUpdateError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation()
-         * mutate({
-         *     body: bodyPayload,
-         *     path: {
-         *         id: id
-         *     }
-         * });
-         * ```
-         */
-        useMutation<TVariables extends MutationVariables<ExpensesControllerUpdateBody, ExpensesControllerUpdateParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<ExpensesControllerUpdateSchema, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, TVariables, ExpensesControllerUpdateError | Error, TContext>): UseMutationResult<ExpensesControllerUpdateData, ExpensesControllerUpdateError | Error, TVariables, TContext>;
-        /**
-         * Returns the count of currently in-progress mutations.
-         *
-         * @summary Update expense
-         * @description Update an existing expense by ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-         * @example Check how many mutations are currently in progress for the specified service method.
-         * ```ts
-         * const expensesControllerUpdateTotal = qraft.expensesService.expensesControllerUpdate.useIsMutating()
-         * ```
-         * @example Check how many mutations are currently in progress with the specified parameters.
-         * ```ts
-         * const expensesControllerUpdateTotal = qraft.expensesService.expensesControllerUpdate.useIsMutating({
-         *     parameters: {
-         *         path: {
-         *             id: id
-         *         }
-         *     }
-         * })
-         * ```
-         */
-        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<ExpensesControllerUpdateBody, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, ExpensesControllerUpdateError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerUpdateSchema, ExpensesControllerUpdateBody, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, ExpensesControllerUpdateError | Error, TContext>): number;
-        /**
-         * @summary Update expense
-         * @description Update an existing expense by ID
-         */
-        isMutating<TContext>(filters?: MutationFiltersByParameters<ExpensesControllerUpdateBody, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, ExpensesControllerUpdateError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerUpdateSchema, ExpensesControllerUpdateBody, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, ExpensesControllerUpdateError | Error, TContext>): number;
-        /**
-         * @summary Update expense
-         * @description Update an existing expense by ID
-         */
-        (options: ServiceOperationMutationFnOptions<ExpensesControllerUpdateBody, ExpensesControllerUpdateParameters>, client?: (schema: ExpensesControllerUpdateSchema, options: ServiceOperationMutationFnOptions<ExpensesControllerUpdateBody, ExpensesControllerUpdateParameters>) => Promise<RequestFnResponse<ExpensesControllerUpdateData, ExpensesControllerUpdateError>>): Promise<RequestFnResponse<ExpensesControllerUpdateData, ExpensesControllerUpdateError>>;
-        /**
-         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-         *
-         * @summary Update expense
-         * @description Update an existing expense by ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-         * @example Get all variables of all running mutations.
-         * ```ts
-         * const expensesControllerUpdatePendingMutationVariables = qraft.expensesService.expensesControllerUpdate.useMutationState({
-         *     filters: {
-         *         status: "pending"
-         *     },
-         *     select: mutation => mutation.state.variables
-         * })
-         * ```
-         * @example Get all data for specific mutations via the `parameters`.
-         * ```ts
-         * const expensesControllerUpdateMutationData = qraft.expensesService.expensesControllerUpdate.useMutationState({
-         *     filters: {
-         *         parameters: {
-         *             path: {
-         *                 id: id
-         *             }
-         *         }
-         *     },
-         *     select: mutation => mutation.state.data
-         * })
-         * ```
-         */
-        useMutationState<TContext = unknown, TResult = MutationState<ExpensesControllerUpdateData, ExpensesControllerUpdateError | Error, MutationVariables<ExpensesControllerUpdateBody, ExpensesControllerUpdateParameters>, TContext>>(options?: {
-            filters?: MutationFiltersByParameters<ExpensesControllerUpdateBody, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, ExpensesControllerUpdateError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerUpdateSchema, ExpensesControllerUpdateBody, ExpensesControllerUpdateData, ExpensesControllerUpdateParameters, ExpensesControllerUpdateError | Error, TContext>;
-            select?: (mutation: Mutation<ExpensesControllerUpdateData, ExpensesControllerUpdateError | Error, MutationVariables<ExpensesControllerUpdateBody, ExpensesControllerUpdateParameters>, TContext>) => TResult;
-        }): Array<TResult>;
-        schema: ExpensesControllerUpdateSchema;
-        types: {
-            parameters: ExpensesControllerUpdateParameters;
-            data: ExpensesControllerUpdateData;
-            error: ExpensesControllerUpdateError;
-            body: ExpensesControllerUpdateBody;
-        };
-    };
+    getMutationKey(
+      parameters: ExpensesControllerUpdateParameters | void
+    ): ServiceOperationMutationKey<
+      ExpensesControllerUpdateSchema,
+      ExpensesControllerUpdateParameters
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation()
+     * mutate({
+     *     body: bodyPayload,
+     *     path: {
+     *         id: id
+     *     }
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends ExpensesControllerUpdateBody,
+      TContext = unknown
+    >(
+      parameters: ExpensesControllerUpdateParameters,
+      options?: ServiceOperationUseMutationOptions<
+        ExpensesControllerUpdateSchema,
+        ExpensesControllerUpdateData,
+        ExpensesControllerUpdateParameters,
+        TVariables,
+        ExpensesControllerUpdateError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      ExpensesControllerUpdateData,
+      ExpensesControllerUpdateError | Error,
+      AreAllOptional<TVariables> extends true ? TVariables | void : TVariables,
+      TContext
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerUpdate.useMutation()
+     * mutate({
+     *     body: bodyPayload,
+     *     path: {
+     *         id: id
+     *     }
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends MutationVariables<
+        ExpensesControllerUpdateBody,
+        ExpensesControllerUpdateParameters
+      >,
+      TContext = unknown
+    >(
+      parameters: void,
+      options?: ServiceOperationUseMutationOptions<
+        ExpensesControllerUpdateSchema,
+        ExpensesControllerUpdateData,
+        ExpensesControllerUpdateParameters,
+        TVariables,
+        ExpensesControllerUpdateError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      ExpensesControllerUpdateData,
+      ExpensesControllerUpdateError | Error,
+      TVariables,
+      TContext
+    >
+    /**
+     * Returns the count of currently in-progress mutations.
+     *
+     * @summary Update expense
+     * @description Update an existing expense by ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+     * @example Check how many mutations are currently in progress for the specified service method.
+     * ```ts
+     * const expensesControllerUpdateTotal = qraft.expensesService.expensesControllerUpdate.useIsMutating()
+     * ```
+     * @example Check how many mutations are currently in progress with the specified parameters.
+     * ```ts
+     * const expensesControllerUpdateTotal = qraft.expensesService.expensesControllerUpdate.useIsMutating({
+     *     parameters: {
+     *         path: {
+     *             id: id
+     *         }
+     *     }
+     * })
+     * ```
+     */
+    useIsMutating<TContext = unknown>(
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerUpdateBody,
+            ExpensesControllerUpdateData,
+            ExpensesControllerUpdateParameters,
+            ExpensesControllerUpdateError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerUpdateSchema,
+            ExpensesControllerUpdateBody,
+            ExpensesControllerUpdateData,
+            ExpensesControllerUpdateParameters,
+            ExpensesControllerUpdateError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Update expense
+     * @description Update an existing expense by ID
+     */
+    isMutating<TContext>(
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerUpdateBody,
+            ExpensesControllerUpdateData,
+            ExpensesControllerUpdateParameters,
+            ExpensesControllerUpdateError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerUpdateSchema,
+            ExpensesControllerUpdateBody,
+            ExpensesControllerUpdateData,
+            ExpensesControllerUpdateParameters,
+            ExpensesControllerUpdateError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Update expense
+     * @description Update an existing expense by ID
+     */
+    (
+      options: ServiceOperationMutationFnOptions<
+        ExpensesControllerUpdateBody,
+        ExpensesControllerUpdateParameters
+      >,
+      client?: (
+        schema: ExpensesControllerUpdateSchema,
+        options: ServiceOperationMutationFnOptions<
+          ExpensesControllerUpdateBody,
+          ExpensesControllerUpdateParameters
+        >
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerUpdateData,
+          ExpensesControllerUpdateError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerUpdateData,
+        ExpensesControllerUpdateError
+      >
+    >
+    /**
+     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+     *
+     * @summary Update expense
+     * @description Update an existing expense by ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+     * @example Get all variables of all running mutations.
+     * ```ts
+     * const expensesControllerUpdatePendingMutationVariables = qraft.expensesService.expensesControllerUpdate.useMutationState({
+     *     filters: {
+     *         status: "pending"
+     *     },
+     *     select: mutation => mutation.state.variables
+     * })
+     * ```
+     * @example Get all data for specific mutations via the `parameters`.
+     * ```ts
+     * const expensesControllerUpdateMutationData = qraft.expensesService.expensesControllerUpdate.useMutationState({
+     *     filters: {
+     *         parameters: {
+     *             path: {
+     *                 id: id
+     *             }
+     *         }
+     *     },
+     *     select: mutation => mutation.state.data
+     * })
+     * ```
+     */
+    useMutationState<
+      TContext = unknown,
+      TResult = MutationState<
+        ExpensesControllerUpdateData,
+        ExpensesControllerUpdateError | Error,
+        MutationVariables<
+          ExpensesControllerUpdateBody,
+          ExpensesControllerUpdateParameters
+        >,
+        TContext
+      >
+    >(options?: {
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerUpdateBody,
+            ExpensesControllerUpdateData,
+            ExpensesControllerUpdateParameters,
+            ExpensesControllerUpdateError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerUpdateSchema,
+            ExpensesControllerUpdateBody,
+            ExpensesControllerUpdateData,
+            ExpensesControllerUpdateParameters,
+            ExpensesControllerUpdateError | Error,
+            TContext
+          >
+      select?: (
+        mutation: Mutation<
+          ExpensesControllerUpdateData,
+          ExpensesControllerUpdateError | Error,
+          MutationVariables<
+            ExpensesControllerUpdateBody,
+            ExpensesControllerUpdateParameters
+          >,
+          TContext
+        >
+      ) => TResult
+    }): Array<TResult>
+    schema: ExpensesControllerUpdateSchema
+    types: {
+      parameters: ExpensesControllerUpdateParameters
+      data: ExpensesControllerUpdateData
+      error: ExpensesControllerUpdateError
+      body: ExpensesControllerUpdateBody
+    }
+  }
+  /**
+   * @summary Delete expense
+   * @description Delete an expense by ID
+   */
+  expensesControllerRemove: {
     /**
      * @summary Delete expense
      * @description Delete an expense by ID
      */
-    expensesControllerRemove: {
-        /**
-         * @summary Delete expense
-         * @description Delete an expense by ID
-         */
-        getMutationKey(parameters: ExpensesControllerRemoveParameters | void): ServiceOperationMutationKey<ExpensesControllerRemoveSchema, ExpensesControllerRemoveParameters>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation()
-         * mutate({
-         *     body: bodyPayload,
-         *     path: {
-         *         id: id
-         *     }
-         * });
-         * ```
-         */
-        useMutation<TVariables extends ExpensesControllerRemoveBody, TContext = unknown>(parameters: ExpensesControllerRemoveParameters, options?: ServiceOperationUseMutationOptions<ExpensesControllerRemoveSchema, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, TVariables, ExpensesControllerRemoveError | Error, TContext>): UseMutationResult<ExpensesControllerRemoveData, ExpensesControllerRemoveError | Error, AreAllOptional<TVariables> extends true ? TVariables | void : TVariables, TContext>;
-        /**
-         * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
-         * Handles loading state, optimistic updates, and error handling.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
-         * @example Mutation with predefined parameters, e.g., for updating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation({
-         *     path: {
-         *         id: id
-         *     }
-         * })
-         * mutate(body);
-         * ```
-         * @example Mutation without predefined parameters, e.g., for creating
-         * ```ts
-         * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation()
-         * mutate({
-         *     body: bodyPayload,
-         *     path: {
-         *         id: id
-         *     }
-         * });
-         * ```
-         */
-        useMutation<TVariables extends MutationVariables<ExpensesControllerRemoveBody, ExpensesControllerRemoveParameters>, TContext = unknown>(parameters: void, options?: ServiceOperationUseMutationOptions<ExpensesControllerRemoveSchema, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, TVariables, ExpensesControllerRemoveError | Error, TContext>): UseMutationResult<ExpensesControllerRemoveData, ExpensesControllerRemoveError | Error, TVariables, TContext>;
-        /**
-         * Returns the count of currently in-progress mutations.
-         *
-         * @summary Delete expense
-         * @description Delete an expense by ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
-         * @example Check how many mutations are currently in progress for the specified service method.
-         * ```ts
-         * const expensesControllerRemoveTotal = qraft.expensesService.expensesControllerRemove.useIsMutating()
-         * ```
-         * @example Check how many mutations are currently in progress with the specified parameters.
-         * ```ts
-         * const expensesControllerRemoveTotal = qraft.expensesService.expensesControllerRemove.useIsMutating({
-         *     parameters: {
-         *         path: {
-         *             id: id
-         *         }
-         *     }
-         * })
-         * ```
-         */
-        useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<ExpensesControllerRemoveBody, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, ExpensesControllerRemoveError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerRemoveSchema, ExpensesControllerRemoveBody, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, ExpensesControllerRemoveError | Error, TContext>): number;
-        /**
-         * @summary Delete expense
-         * @description Delete an expense by ID
-         */
-        isMutating<TContext>(filters?: MutationFiltersByParameters<ExpensesControllerRemoveBody, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, ExpensesControllerRemoveError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerRemoveSchema, ExpensesControllerRemoveBody, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, ExpensesControllerRemoveError | Error, TContext>): number;
-        /**
-         * @summary Delete expense
-         * @description Delete an expense by ID
-         */
-        (options: ServiceOperationMutationFnOptions<ExpensesControllerRemoveBody, ExpensesControllerRemoveParameters>, client?: (schema: ExpensesControllerRemoveSchema, options: ServiceOperationMutationFnOptions<ExpensesControllerRemoveBody, ExpensesControllerRemoveParameters>) => Promise<RequestFnResponse<ExpensesControllerRemoveData, ExpensesControllerRemoveError>>): Promise<RequestFnResponse<ExpensesControllerRemoveData, ExpensesControllerRemoveError>>;
-        /**
-         * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
-         *
-         * @summary Delete expense
-         * @description Delete an expense by ID
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
-         * @example Get all variables of all running mutations.
-         * ```ts
-         * const expensesControllerRemovePendingMutationVariables = qraft.expensesService.expensesControllerRemove.useMutationState({
-         *     filters: {
-         *         status: "pending"
-         *     },
-         *     select: mutation => mutation.state.variables
-         * })
-         * ```
-         * @example Get all data for specific mutations via the `parameters`.
-         * ```ts
-         * const expensesControllerRemoveMutationData = qraft.expensesService.expensesControllerRemove.useMutationState({
-         *     filters: {
-         *         parameters: {
-         *             path: {
-         *                 id: id
-         *             }
-         *         }
-         *     },
-         *     select: mutation => mutation.state.data
-         * })
-         * ```
-         */
-        useMutationState<TContext = unknown, TResult = MutationState<ExpensesControllerRemoveData, ExpensesControllerRemoveError | Error, MutationVariables<ExpensesControllerRemoveBody, ExpensesControllerRemoveParameters>, TContext>>(options?: {
-            filters?: MutationFiltersByParameters<ExpensesControllerRemoveBody, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, ExpensesControllerRemoveError | Error, TContext> | MutationFiltersByMutationKey<ExpensesControllerRemoveSchema, ExpensesControllerRemoveBody, ExpensesControllerRemoveData, ExpensesControllerRemoveParameters, ExpensesControllerRemoveError | Error, TContext>;
-            select?: (mutation: Mutation<ExpensesControllerRemoveData, ExpensesControllerRemoveError | Error, MutationVariables<ExpensesControllerRemoveBody, ExpensesControllerRemoveParameters>, TContext>) => TResult;
-        }): Array<TResult>;
-        schema: ExpensesControllerRemoveSchema;
-        types: {
-            parameters: ExpensesControllerRemoveParameters;
-            data: ExpensesControllerRemoveData;
-            error: ExpensesControllerRemoveError;
-            body: ExpensesControllerRemoveBody;
-        };
-    };
+    getMutationKey(
+      parameters: ExpensesControllerRemoveParameters | void
+    ): ServiceOperationMutationKey<
+      ExpensesControllerRemoveSchema,
+      ExpensesControllerRemoveParameters
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation()
+     * mutate({
+     *     body: bodyPayload,
+     *     path: {
+     *         id: id
+     *     }
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends ExpensesControllerRemoveBody,
+      TContext = unknown
+    >(
+      parameters: ExpensesControllerRemoveParameters,
+      options?: ServiceOperationUseMutationOptions<
+        ExpensesControllerRemoveSchema,
+        ExpensesControllerRemoveData,
+        ExpensesControllerRemoveParameters,
+        TVariables,
+        ExpensesControllerRemoveError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      ExpensesControllerRemoveData,
+      ExpensesControllerRemoveError | Error,
+      AreAllOptional<TVariables> extends true ? TVariables | void : TVariables,
+      TContext
+    >
+    /**
+     * Enables performing asynchronous data mutation operations such as POST, PUT, PATCH, or DELETE requests.
+     * Handles loading state, optimistic updates, and error handling.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutation|`useMutation(...)` documentation}
+     * @example Mutation with predefined parameters, e.g., for updating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation({
+     *     path: {
+     *         id: id
+     *     }
+     * })
+     * mutate(body);
+     * ```
+     * @example Mutation without predefined parameters, e.g., for creating
+     * ```ts
+     * const { mutate, isPending } = qraft.expensesService.expensesControllerRemove.useMutation()
+     * mutate({
+     *     body: bodyPayload,
+     *     path: {
+     *         id: id
+     *     }
+     * });
+     * ```
+     */
+    useMutation<
+      TVariables extends MutationVariables<
+        ExpensesControllerRemoveBody,
+        ExpensesControllerRemoveParameters
+      >,
+      TContext = unknown
+    >(
+      parameters: void,
+      options?: ServiceOperationUseMutationOptions<
+        ExpensesControllerRemoveSchema,
+        ExpensesControllerRemoveData,
+        ExpensesControllerRemoveParameters,
+        TVariables,
+        ExpensesControllerRemoveError | Error,
+        TContext
+      >
+    ): UseMutationResult<
+      ExpensesControllerRemoveData,
+      ExpensesControllerRemoveError | Error,
+      TVariables,
+      TContext
+    >
+    /**
+     * Returns the count of currently in-progress mutations.
+     *
+     * @summary Delete expense
+     * @description Delete an expense by ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
+     * @example Check how many mutations are currently in progress for the specified service method.
+     * ```ts
+     * const expensesControllerRemoveTotal = qraft.expensesService.expensesControllerRemove.useIsMutating()
+     * ```
+     * @example Check how many mutations are currently in progress with the specified parameters.
+     * ```ts
+     * const expensesControllerRemoveTotal = qraft.expensesService.expensesControllerRemove.useIsMutating({
+     *     parameters: {
+     *         path: {
+     *             id: id
+     *         }
+     *     }
+     * })
+     * ```
+     */
+    useIsMutating<TContext = unknown>(
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerRemoveBody,
+            ExpensesControllerRemoveData,
+            ExpensesControllerRemoveParameters,
+            ExpensesControllerRemoveError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerRemoveSchema,
+            ExpensesControllerRemoveBody,
+            ExpensesControllerRemoveData,
+            ExpensesControllerRemoveParameters,
+            ExpensesControllerRemoveError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Delete expense
+     * @description Delete an expense by ID
+     */
+    isMutating<TContext>(
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerRemoveBody,
+            ExpensesControllerRemoveData,
+            ExpensesControllerRemoveParameters,
+            ExpensesControllerRemoveError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerRemoveSchema,
+            ExpensesControllerRemoveBody,
+            ExpensesControllerRemoveData,
+            ExpensesControllerRemoveParameters,
+            ExpensesControllerRemoveError | Error,
+            TContext
+          >
+    ): number
+    /**
+     * @summary Delete expense
+     * @description Delete an expense by ID
+     */
+    (
+      options: ServiceOperationMutationFnOptions<
+        ExpensesControllerRemoveBody,
+        ExpensesControllerRemoveParameters
+      >,
+      client?: (
+        schema: ExpensesControllerRemoveSchema,
+        options: ServiceOperationMutationFnOptions<
+          ExpensesControllerRemoveBody,
+          ExpensesControllerRemoveParameters
+        >
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerRemoveData,
+          ExpensesControllerRemoveError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerRemoveData,
+        ExpensesControllerRemoveError
+      >
+    >
+    /**
+     * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
+     *
+     * @summary Delete expense
+     * @description Delete an expense by ID
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
+     * @example Get all variables of all running mutations.
+     * ```ts
+     * const expensesControllerRemovePendingMutationVariables = qraft.expensesService.expensesControllerRemove.useMutationState({
+     *     filters: {
+     *         status: "pending"
+     *     },
+     *     select: mutation => mutation.state.variables
+     * })
+     * ```
+     * @example Get all data for specific mutations via the `parameters`.
+     * ```ts
+     * const expensesControllerRemoveMutationData = qraft.expensesService.expensesControllerRemove.useMutationState({
+     *     filters: {
+     *         parameters: {
+     *             path: {
+     *                 id: id
+     *             }
+     *         }
+     *     },
+     *     select: mutation => mutation.state.data
+     * })
+     * ```
+     */
+    useMutationState<
+      TContext = unknown,
+      TResult = MutationState<
+        ExpensesControllerRemoveData,
+        ExpensesControllerRemoveError | Error,
+        MutationVariables<
+          ExpensesControllerRemoveBody,
+          ExpensesControllerRemoveParameters
+        >,
+        TContext
+      >
+    >(options?: {
+      filters?:
+        | MutationFiltersByParameters<
+            ExpensesControllerRemoveBody,
+            ExpensesControllerRemoveData,
+            ExpensesControllerRemoveParameters,
+            ExpensesControllerRemoveError | Error,
+            TContext
+          >
+        | MutationFiltersByMutationKey<
+            ExpensesControllerRemoveSchema,
+            ExpensesControllerRemoveBody,
+            ExpensesControllerRemoveData,
+            ExpensesControllerRemoveParameters,
+            ExpensesControllerRemoveError | Error,
+            TContext
+          >
+      select?: (
+        mutation: Mutation<
+          ExpensesControllerRemoveData,
+          ExpensesControllerRemoveError | Error,
+          MutationVariables<
+            ExpensesControllerRemoveBody,
+            ExpensesControllerRemoveParameters
+          >,
+          TContext
+        >
+      ) => TResult
+    }): Array<TResult>
+    schema: ExpensesControllerRemoveSchema
+    types: {
+      parameters: ExpensesControllerRemoveParameters
+      data: ExpensesControllerRemoveData
+      error: ExpensesControllerRemoveError
+      body: ExpensesControllerRemoveBody
+    }
+  }
+  /**
+   * @summary Get total spent
+   * @description Get the total amount spent across all expenses
+   */
+  expensesControllerGetTotalSpent: {
     /**
      * @summary Get total spent
      * @description Get the total amount spent across all expenses
      */
-    expensesControllerGetTotalSpent: {
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>, options?: CancelOptions): Promise<void>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getQueryKey(parameters: ExpensesControllerGetTotalSpentParameters | void): ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, TData, ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerGetTotalSpentError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options: Omit<DefinedInitialDataOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, TData, ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerGetTotalSpentError | Error>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        fetchInfiniteQuery<TPageParam extends ExpensesControllerGetTotalSpentParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters, TPageParam, ExpensesControllerGetTotalSpentError>): Promise<OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters>>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        prefetchInfiniteQuery<TPageParam extends ExpensesControllerGetTotalSpentParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters, TPageParam, ExpensesControllerGetTotalSpentError>): Promise<void>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        ensureInfiniteQueryData<TPageParam extends ExpensesControllerGetTotalSpentParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters, TPageParam, ExpensesControllerGetTotalSpentError>): Promise<OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters>>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | void): Promise<ExpensesControllerGetTotalSpentData>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | void): Promise<void>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | void): Promise<ExpensesControllerGetTotalSpentData>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void)): OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters> | undefined;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>): TInfinite extends true ? Array<[
-            queryKey: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>,
-            data: NoInfer<OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters>> | undefined
-        ]> : Array<[
-            queryKey: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>,
+    cancelQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >,
+      options?: CancelOptions
+    ): Promise<void>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getQueryKey(
+      parameters: ExpensesControllerGetTotalSpentParameters | void
+    ): ServiceOperationQueryKey<
+      ExpensesControllerGetTotalSpentSchema,
+      ExpensesControllerGetTotalSpentParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTotalSpentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerGetTotalSpentError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTotalSpentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<
+      TData,
+      ExpensesControllerGetTotalSpentError | Error
+    >
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    fetchInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTotalSpentParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerGetTotalSpentSchema,
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters,
+        TPageParam,
+        ExpensesControllerGetTotalSpentError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters
+      >
+    >
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    prefetchInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTotalSpentParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerGetTotalSpentSchema,
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters,
+        TPageParam,
+        ExpensesControllerGetTotalSpentError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    ensureInfiniteQueryData<
+      TPageParam extends ExpensesControllerGetTotalSpentParameters
+    >(
+      options: ServiceOperationEnsureInfiniteQueryDataOptions<
+        ExpensesControllerGetTotalSpentSchema,
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters,
+        TPageParam,
+        ExpensesControllerGetTotalSpentError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters
+      >
+    >
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    fetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerGetTotalSpentSchema,
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters,
+        ExpensesControllerGetTotalSpentError
+      > | void
+    ): Promise<ExpensesControllerGetTotalSpentData>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    prefetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerGetTotalSpentSchema,
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters,
+        ExpensesControllerGetTotalSpentError
+      > | void
+    ): Promise<void>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    ensureQueryData(
+      options: ServiceOperationEnsureQueryDataOptions<
+        ExpensesControllerGetTotalSpentSchema,
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentParameters,
+        ExpensesControllerGetTotalSpentError
+      > | void
+    ): Promise<ExpensesControllerGetTotalSpentData>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getInfiniteQueryData(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void)
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentParameters
+        >
+      | undefined
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getQueriesData<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+    ): TInfinite extends true
+      ? Array<
+          [
+            queryKey: ServiceOperationInfiniteQueryKey<
+              ExpensesControllerGetTotalSpentSchema,
+              ExpensesControllerGetTotalSpentParameters
+            >,
+            data:
+              | NoInfer<
+                  OperationInfiniteData<
+                    ExpensesControllerGetTotalSpentData,
+                    ExpensesControllerGetTotalSpentParameters
+                  >
+                >
+              | undefined
+          ]
+        >
+      : Array<
+          [
+            queryKey: ServiceOperationQueryKey<
+              ExpensesControllerGetTotalSpentSchema,
+              ExpensesControllerGetTotalSpentParameters
+            >,
             data: ExpensesControllerGetTotalSpentData | undefined
-        ]>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getQueryData(parameters: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void)): ExpensesControllerGetTotalSpentData | undefined;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getQueryState(parameters: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void)): QueryState<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError> | undefined;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getInfiniteQueryState(parameters: ExpensesControllerGetTotalSpentParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | void): QueryState<OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters>, ExpensesControllerGetTotalSpentError> | undefined;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>, options?: InvalidateOptions): Promise<void>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>): number;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ExpensesControllerGetTotalSpentParameters, TMeta, TSignal> | void), client?: (schema: ExpensesControllerGetTotalSpentSchema, options: {
-            parameters: ExpensesControllerGetTotalSpentParameters;
-            signal?: TSignal;
-            meta?: TMeta;
-        }) => Promise<RequestFnResponse<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>>): Promise<RequestFnResponse<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>, options?: RefetchOptions): Promise<void>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>): void;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>, options?: ResetOptions): Promise<void>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        setInfiniteQueryData(parameters: ExpensesControllerGetTotalSpentParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>, updater: Updater<NoInfer<OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters>> | undefined, NoInfer<OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentParameters> | undefined;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>, updater: Updater<NoInfer<ExpensesControllerGetTotalSpentData> | undefined, NoInfer<ExpensesControllerGetTotalSpentData> | undefined>, options?: SetDataOptions): Array<ExpensesControllerGetTotalSpentData | undefined>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        setQueryData(parameters: (ExpensesControllerGetTotalSpentParameters | undefined) | ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>, updater: Updater<NoInfer<ExpensesControllerGetTotalSpentData> | undefined, NoInfer<ExpensesControllerGetTotalSpentData> | undefined>, options?: SetDataOptions): ExpensesControllerGetTotalSpentData | undefined;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getInfiniteQueryKey(parameters: ExpensesControllerGetTotalSpentParameters | void): ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTotalSpent.useInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerGetTotalSpentParameters, TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options: Omit<UndefinedInitialDataInfiniteOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetTotalSpentData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>, ExpensesControllerGetTotalSpentError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTotalSpent.useInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerGetTotalSpentParameters, TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options: Omit<DefinedInitialDataInfiniteOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetTotalSpentData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>, ExpensesControllerGetTotalSpentError | Error>;
-        /**
-         * Monitors the number of queries currently fetching, matching the provided filters.
-         * Useful for creating loading indicators or performing actions based on active requests.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-         * @example Checks the total number of queries fetching from the specified service method,
-         * both normal and infinite. If no parameters are provided, no filtering is applied.
-         * ```ts
-         * const expensesControllerGetTotalSpentTotal = qraft.expensesService.expensesControllerGetTotalSpent.useIsFetching()
-         * ```
-         */
-        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError> | QueryFiltersByQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentData, TInfinite, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentError>): number;
-        /**
-         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-         *
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-         * ```ts
-         * const expensesControllerGetTotalSpentResults = qraft.expensesService.expensesControllerGetTotalSpent.useQueries({
-         *     queries: [
-         *         {},
-         *         {}
-         *     ]
-         * });
-         * expensesControllerGetTotalSpentResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-         * ```
-         * @example Combined results. Only the data will be returned.
-         * ```ts
-         * const expensesControllerGetTotalSpentCombinedResults = qraft.expensesService.expensesControllerGetTotalSpent.useQueries({
-         *     combine: results => results.map(result => result.data),
-         *     queries: [
-         *         {},
-         *         {}
-         *     ]
-         * });
-         * expensesControllerGetTotalSpentCombinedResults.forEach(data => console.log({ data }));
-         * ```
-         */
-        useQueries<T extends Array<UseQueryOptionsForUseQueries<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>>, TCombinedResult = Array<UseQueryResult<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>>>(options: {
-            queries: T;
-            combine?: (results: Array<UseQueryResult<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        getQueryKey(parameters: ExpensesControllerGetTotalSpentParameters | void): ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, TData, ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerGetTotalSpentError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options: Omit<DefinedInitialDataOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, TData, ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerGetTotalSpentError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-         *
-         * @example Suspense Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTotalSpent.useSuspenseInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useSuspenseInfiniteQuery<TPageParam extends ExpensesControllerGetTotalSpentParameters, TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options: Omit<UseSuspenseInfiniteQueryOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>, ExpensesControllerGetTotalSpentData, ServiceOperationInfiniteQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetTotalSpentData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>, ExpensesControllerGetTotalSpentError | Error>;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters, ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>>, TCombinedResult = Array<UseSuspenseQueryResult<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>>>(options: {
-            queries: T;
-            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError>, "data">>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get total spent
-         * @description Get the total amount spent across all expenses
-         */
-        useSuspenseQuery<TData = ExpensesControllerGetTotalSpentData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters> | (ExpensesControllerGetTotalSpentParameters | void), options?: Omit<UseSuspenseQueryOptions<ExpensesControllerGetTotalSpentData, ExpensesControllerGetTotalSpentError, TData, ServiceOperationQueryKey<ExpensesControllerGetTotalSpentSchema, ExpensesControllerGetTotalSpentParameters>>, "queryKey">): UseSuspenseQueryResult<TData, ExpensesControllerGetTotalSpentError | Error>;
-        schema: ExpensesControllerGetTotalSpentSchema;
-        types: {
-            parameters: ExpensesControllerGetTotalSpentParameters;
-            data: ExpensesControllerGetTotalSpentData;
-            error: ExpensesControllerGetTotalSpentError;
-        };
-    };
+          ]
+        >
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getQueryData(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void)
+    ): ExpensesControllerGetTotalSpentData | undefined
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getQueryState(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void)
+    ):
+      | QueryState<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError
+        >
+      | undefined
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getInfiniteQueryState(
+      parameters:
+        | ExpensesControllerGetTotalSpentParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | void
+    ):
+      | QueryState<
+          OperationInfiniteData<
+            ExpensesControllerGetTotalSpentData,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+          ExpensesControllerGetTotalSpentError
+        >
+      | undefined
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    invalidateQueries<TInfinite extends boolean = false>(
+      filters?: InvalidateQueryFilters<
+        ExpensesControllerGetTotalSpentSchema,
+        ExpensesControllerGetTotalSpentData,
+        TInfinite,
+        ExpensesControllerGetTotalSpentParameters,
+        ExpensesControllerGetTotalSpentError
+      >,
+      options?: InvalidateOptions
+    ): Promise<void>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    isFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+    ): number
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    <
+      TMeta extends Record<string, any>,
+      TSignal extends AbortSignal = AbortSignal
+    >(
+      options:
+        | QueryFnOptionsByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters,
+            TMeta,
+            TSignal
+          >
+        | (QueryFnOptionsByParameters<
+            ExpensesControllerGetTotalSpentParameters,
+            TMeta,
+            TSignal
+          > | void),
+      client?: (
+        schema: ExpensesControllerGetTotalSpentSchema,
+        options: {
+          parameters: ExpensesControllerGetTotalSpentParameters
+          signal?: TSignal
+          meta?: TMeta
+        }
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerGetTotalSpentData,
+        ExpensesControllerGetTotalSpentError
+      >
+    >
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    refetchQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >,
+      options?: RefetchOptions
+    ): Promise<void>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    removeQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+    ): void
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    resetQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >,
+      options?: ResetOptions
+    ): Promise<void>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    setInfiniteQueryData(
+      parameters:
+        | ExpensesControllerGetTotalSpentParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+      updater: Updater<
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerGetTotalSpentData,
+              ExpensesControllerGetTotalSpentParameters
+            >
+          >
+        | undefined,
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerGetTotalSpentData,
+              ExpensesControllerGetTotalSpentParameters
+            >
+          >
+        | undefined
+      >,
+      options?: SetDataOptions
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentParameters
+        >
+      | undefined
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    setQueriesData<TInfinite extends boolean = false>(
+      filters:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerGetTotalSpentData> | undefined,
+        NoInfer<ExpensesControllerGetTotalSpentData> | undefined
+      >,
+      options?: SetDataOptions
+    ): Array<ExpensesControllerGetTotalSpentData | undefined>
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    setQueryData(
+      parameters:
+        | (ExpensesControllerGetTotalSpentParameters | undefined)
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerGetTotalSpentData> | undefined,
+        NoInfer<ExpensesControllerGetTotalSpentData> | undefined
+      >,
+      options?: SetDataOptions
+    ): ExpensesControllerGetTotalSpentData | undefined
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getInfiniteQueryKey(
+      parameters: ExpensesControllerGetTotalSpentParameters | void
+    ): ServiceOperationInfiniteQueryKey<
+      ExpensesControllerGetTotalSpentSchema,
+      ExpensesControllerGetTotalSpentParameters
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTotalSpent.useInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTotalSpentParameters,
+      TData = ExpensesControllerGetTotalSpentData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options: Omit<
+        UndefinedInitialDataInfiniteOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          OperationInfiniteData<
+            TData,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetTotalSpentData,
+          PartialParameters<TPageParam>
+        >
+    ): UseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>,
+      ExpensesControllerGetTotalSpentError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTotalSpent.useInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTotalSpentParameters,
+      TData = ExpensesControllerGetTotalSpentData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options: Omit<
+        DefinedInitialDataInfiniteOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          OperationInfiniteData<
+            TData,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetTotalSpentData,
+          PartialParameters<TPageParam>
+        >
+    ): DefinedUseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>,
+      ExpensesControllerGetTotalSpentError | Error
+    >
+    /**
+     * Monitors the number of queries currently fetching, matching the provided filters.
+     * Useful for creating loading indicators or performing actions based on active requests.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+     * @example Checks the total number of queries fetching from the specified service method,
+     * both normal and infinite. If no parameters are provided, no filtering is applied.
+     * ```ts
+     * const expensesControllerGetTotalSpentTotal = qraft.expensesService.expensesControllerGetTotalSpent.useIsFetching()
+     * ```
+     */
+    useIsFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentData,
+            TInfinite,
+            ExpensesControllerGetTotalSpentParameters,
+            ExpensesControllerGetTotalSpentError
+          >
+    ): number
+    /**
+     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+     *
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+     * ```ts
+     * const expensesControllerGetTotalSpentResults = qraft.expensesService.expensesControllerGetTotalSpent.useQueries({
+     *     queries: [
+     *         {},
+     *         {}
+     *     ]
+     * });
+     * expensesControllerGetTotalSpentResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+     * ```
+     * @example Combined results. Only the data will be returned.
+     * ```ts
+     * const expensesControllerGetTotalSpentCombinedResults = qraft.expensesService.expensesControllerGetTotalSpent.useQueries({
+     *     combine: results => results.map(result => result.data),
+     *     queries: [
+     *         {},
+     *         {}
+     *     ]
+     * });
+     * expensesControllerGetTotalSpentCombinedResults.forEach(data => console.log({ data }));
+     * ```
+     */
+    useQueries<
+      T extends Array<
+        UseQueryOptionsForUseQueries<
+          ExpensesControllerGetTotalSpentSchema,
+          ExpensesControllerGetTotalSpentParameters,
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError
+        >
+      >,
+      TCombinedResult = Array<
+        UseQueryResult<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          UseQueryResult<
+            ExpensesControllerGetTotalSpentData,
+            ExpensesControllerGetTotalSpentError
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    getQueryKey(
+      parameters: ExpensesControllerGetTotalSpentParameters | void
+    ): ServiceOperationQueryKey<
+      ExpensesControllerGetTotalSpentSchema,
+      ExpensesControllerGetTotalSpentParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTotalSpentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerGetTotalSpentError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTotalSpent.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTotalSpentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<
+      TData,
+      ExpensesControllerGetTotalSpentError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+     *
+     * @example Suspense Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTotalSpent.useSuspenseInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useSuspenseInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTotalSpentParameters,
+      TData = ExpensesControllerGetTotalSpentData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options: Omit<
+        UseSuspenseInfiniteQueryOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          OperationInfiniteData<
+            TData,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+          ExpensesControllerGetTotalSpentData,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetTotalSpentData,
+          PartialParameters<TPageParam>
+        >
+    ): UseSuspenseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetTotalSpentParameters>,
+      ExpensesControllerGetTotalSpentError | Error
+    >
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    useSuspenseQueries<
+      T extends Array<
+        UseQueryOptionsForUseSuspenseQuery<
+          ExpensesControllerGetTotalSpentSchema,
+          ExpensesControllerGetTotalSpentParameters,
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError
+        >
+      >,
+      TCombinedResult = Array<
+        UseSuspenseQueryResult<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          WithOptional<
+            UseSuspenseQueryResult<
+              ExpensesControllerGetTotalSpentData,
+              ExpensesControllerGetTotalSpentError
+            >,
+            'data'
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get total spent
+     * @description Get the total amount spent across all expenses
+     */
+    useSuspenseQuery<TData = ExpensesControllerGetTotalSpentData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        | (ExpensesControllerGetTotalSpentParameters | void),
+      options?: Omit<
+        UseSuspenseQueryOptions<
+          ExpensesControllerGetTotalSpentData,
+          ExpensesControllerGetTotalSpentError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTotalSpentSchema,
+            ExpensesControllerGetTotalSpentParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseSuspenseQueryResult<
+      TData,
+      ExpensesControllerGetTotalSpentError | Error
+    >
+    schema: ExpensesControllerGetTotalSpentSchema
+    types: {
+      parameters: ExpensesControllerGetTotalSpentParameters
+      data: ExpensesControllerGetTotalSpentData
+      error: ExpensesControllerGetTotalSpentError
+    }
+  }
+  /**
+   * @summary Get tag statistics
+   * @description Get statistics about expense tags including count and total amount
+   */
+  expensesControllerGetTagStats: {
     /**
      * @summary Get tag statistics
      * @description Get statistics about expense tags including count and total amount
      */
-    expensesControllerGetTagStats: {
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>, options?: CancelOptions): Promise<void>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getQueryKey(parameters: ExpensesControllerGetTagStatsParameters | void): ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options: Omit<DefinedInitialDataOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        fetchInfiniteQuery<TPageParam extends ExpensesControllerGetTagStatsParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters, TPageParam, ExpensesControllerGetTagStatsError>): Promise<OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters>>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        prefetchInfiniteQuery<TPageParam extends ExpensesControllerGetTagStatsParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters, TPageParam, ExpensesControllerGetTagStatsError>): Promise<void>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        ensureInfiniteQueryData<TPageParam extends ExpensesControllerGetTagStatsParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters, TPageParam, ExpensesControllerGetTagStatsError>): Promise<OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters>>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | void): Promise<ExpensesControllerGetTagStatsData>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | void): Promise<void>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | void): Promise<ExpensesControllerGetTagStatsData>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void)): OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters> | undefined;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>): TInfinite extends true ? Array<[
-            queryKey: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>,
-            data: NoInfer<OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters>> | undefined
-        ]> : Array<[
-            queryKey: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>,
+    cancelQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >,
+      options?: CancelOptions
+    ): Promise<void>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getQueryKey(
+      parameters: ExpensesControllerGetTagStatsParameters | void
+    ): ServiceOperationQueryKey<
+      ExpensesControllerGetTagStatsSchema,
+      ExpensesControllerGetTagStatsParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTagStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTagStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    fetchInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTagStatsParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerGetTagStatsSchema,
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters,
+        TPageParam,
+        ExpensesControllerGetTagStatsError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters
+      >
+    >
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    prefetchInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTagStatsParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerGetTagStatsSchema,
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters,
+        TPageParam,
+        ExpensesControllerGetTagStatsError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    ensureInfiniteQueryData<
+      TPageParam extends ExpensesControllerGetTagStatsParameters
+    >(
+      options: ServiceOperationEnsureInfiniteQueryDataOptions<
+        ExpensesControllerGetTagStatsSchema,
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters,
+        TPageParam,
+        ExpensesControllerGetTagStatsError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters
+      >
+    >
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    fetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerGetTagStatsSchema,
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters,
+        ExpensesControllerGetTagStatsError
+      > | void
+    ): Promise<ExpensesControllerGetTagStatsData>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    prefetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerGetTagStatsSchema,
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters,
+        ExpensesControllerGetTagStatsError
+      > | void
+    ): Promise<void>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    ensureQueryData(
+      options: ServiceOperationEnsureQueryDataOptions<
+        ExpensesControllerGetTagStatsSchema,
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsParameters,
+        ExpensesControllerGetTagStatsError
+      > | void
+    ): Promise<ExpensesControllerGetTagStatsData>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getInfiniteQueryData(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void)
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsParameters
+        >
+      | undefined
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getQueriesData<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+    ): TInfinite extends true
+      ? Array<
+          [
+            queryKey: ServiceOperationInfiniteQueryKey<
+              ExpensesControllerGetTagStatsSchema,
+              ExpensesControllerGetTagStatsParameters
+            >,
+            data:
+              | NoInfer<
+                  OperationInfiniteData<
+                    ExpensesControllerGetTagStatsData,
+                    ExpensesControllerGetTagStatsParameters
+                  >
+                >
+              | undefined
+          ]
+        >
+      : Array<
+          [
+            queryKey: ServiceOperationQueryKey<
+              ExpensesControllerGetTagStatsSchema,
+              ExpensesControllerGetTagStatsParameters
+            >,
             data: ExpensesControllerGetTagStatsData | undefined
-        ]>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getQueryData(parameters: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void)): ExpensesControllerGetTagStatsData | undefined;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getQueryState(parameters: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void)): QueryState<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError> | undefined;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getInfiniteQueryState(parameters: ExpensesControllerGetTagStatsParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | void): QueryState<OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters>, ExpensesControllerGetTagStatsError> | undefined;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>, options?: InvalidateOptions): Promise<void>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>): number;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ExpensesControllerGetTagStatsParameters, TMeta, TSignal> | void), client?: (schema: ExpensesControllerGetTagStatsSchema, options: {
-            parameters: ExpensesControllerGetTagStatsParameters;
-            signal?: TSignal;
-            meta?: TMeta;
-        }) => Promise<RequestFnResponse<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>>): Promise<RequestFnResponse<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>, options?: RefetchOptions): Promise<void>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>): void;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>, options?: ResetOptions): Promise<void>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        setInfiniteQueryData(parameters: ExpensesControllerGetTagStatsParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>, updater: Updater<NoInfer<OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters>> | undefined, NoInfer<OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsParameters> | undefined;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>, updater: Updater<NoInfer<ExpensesControllerGetTagStatsData> | undefined, NoInfer<ExpensesControllerGetTagStatsData> | undefined>, options?: SetDataOptions): Array<ExpensesControllerGetTagStatsData | undefined>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        setQueryData(parameters: (ExpensesControllerGetTagStatsParameters | undefined) | ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>, updater: Updater<NoInfer<ExpensesControllerGetTagStatsData> | undefined, NoInfer<ExpensesControllerGetTagStatsData> | undefined>, options?: SetDataOptions): ExpensesControllerGetTagStatsData | undefined;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getInfiniteQueryKey(parameters: ExpensesControllerGetTagStatsParameters | void): ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTagStats.useInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerGetTagStatsParameters, TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options: Omit<UndefinedInitialDataInfiniteOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetTagStatsData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>, ExpensesControllerGetTagStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTagStats.useInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerGetTagStatsParameters, TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options: Omit<DefinedInitialDataInfiniteOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetTagStatsData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>, ExpensesControllerGetTagStatsError | Error>;
-        /**
-         * Monitors the number of queries currently fetching, matching the provided filters.
-         * Useful for creating loading indicators or performing actions based on active requests.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-         * @example Checks the total number of queries fetching from the specified service method,
-         * both normal and infinite. If no parameters are provided, no filtering is applied.
-         * ```ts
-         * const expensesControllerGetTagStatsTotal = qraft.expensesService.expensesControllerGetTagStats.useIsFetching()
-         * ```
-         */
-        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsData, TInfinite, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsError>): number;
-        /**
-         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-         *
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-         * ```ts
-         * const expensesControllerGetTagStatsResults = qraft.expensesService.expensesControllerGetTagStats.useQueries({
-         *     queries: [
-         *         {},
-         *         {}
-         *     ]
-         * });
-         * expensesControllerGetTagStatsResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-         * ```
-         * @example Combined results. Only the data will be returned.
-         * ```ts
-         * const expensesControllerGetTagStatsCombinedResults = qraft.expensesService.expensesControllerGetTagStats.useQueries({
-         *     combine: results => results.map(result => result.data),
-         *     queries: [
-         *         {},
-         *         {}
-         *     ]
-         * });
-         * expensesControllerGetTagStatsCombinedResults.forEach(data => console.log({ data }));
-         * ```
-         */
-        useQueries<T extends Array<UseQueryOptionsForUseQueries<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>>, TCombinedResult = Array<UseQueryResult<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>>>(options: {
-            queries: T;
-            combine?: (results: Array<UseQueryResult<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        getQueryKey(parameters: ExpensesControllerGetTagStatsParameters | void): ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query without parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options: Omit<DefinedInitialDataOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-         *
-         * @example Suspense Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTagStats.useSuspenseInfiniteQuery({}, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useSuspenseInfiniteQuery<TPageParam extends ExpensesControllerGetTagStatsParameters, TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options: Omit<UseSuspenseInfiniteQueryOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>, ExpensesControllerGetTagStatsData, ServiceOperationInfiniteQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetTagStatsData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>, ExpensesControllerGetTagStatsError | Error>;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters, ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>>, TCombinedResult = Array<UseSuspenseQueryResult<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>>>(options: {
-            queries: T;
-            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError>, "data">>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get tag statistics
-         * @description Get statistics about expense tags including count and total amount
-         */
-        useSuspenseQuery<TData = ExpensesControllerGetTagStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters> | (ExpensesControllerGetTagStatsParameters | void), options?: Omit<UseSuspenseQueryOptions<ExpensesControllerGetTagStatsData, ExpensesControllerGetTagStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetTagStatsSchema, ExpensesControllerGetTagStatsParameters>>, "queryKey">): UseSuspenseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>;
-        schema: ExpensesControllerGetTagStatsSchema;
-        types: {
-            parameters: ExpensesControllerGetTagStatsParameters;
-            data: ExpensesControllerGetTagStatsData;
-            error: ExpensesControllerGetTagStatsError;
-        };
-    };
+          ]
+        >
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getQueryData(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void)
+    ): ExpensesControllerGetTagStatsData | undefined
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getQueryState(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void)
+    ):
+      | QueryState<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError
+        >
+      | undefined
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getInfiniteQueryState(
+      parameters:
+        | ExpensesControllerGetTagStatsParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | void
+    ):
+      | QueryState<
+          OperationInfiniteData<
+            ExpensesControllerGetTagStatsData,
+            ExpensesControllerGetTagStatsParameters
+          >,
+          ExpensesControllerGetTagStatsError
+        >
+      | undefined
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    invalidateQueries<TInfinite extends boolean = false>(
+      filters?: InvalidateQueryFilters<
+        ExpensesControllerGetTagStatsSchema,
+        ExpensesControllerGetTagStatsData,
+        TInfinite,
+        ExpensesControllerGetTagStatsParameters,
+        ExpensesControllerGetTagStatsError
+      >,
+      options?: InvalidateOptions
+    ): Promise<void>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    isFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+    ): number
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    <
+      TMeta extends Record<string, any>,
+      TSignal extends AbortSignal = AbortSignal
+    >(
+      options:
+        | QueryFnOptionsByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters,
+            TMeta,
+            TSignal
+          >
+        | (QueryFnOptionsByParameters<
+            ExpensesControllerGetTagStatsParameters,
+            TMeta,
+            TSignal
+          > | void),
+      client?: (
+        schema: ExpensesControllerGetTagStatsSchema,
+        options: {
+          parameters: ExpensesControllerGetTagStatsParameters
+          signal?: TSignal
+          meta?: TMeta
+        }
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerGetTagStatsData,
+        ExpensesControllerGetTagStatsError
+      >
+    >
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    refetchQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >,
+      options?: RefetchOptions
+    ): Promise<void>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    removeQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+    ): void
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    resetQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >,
+      options?: ResetOptions
+    ): Promise<void>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    setInfiniteQueryData(
+      parameters:
+        | ExpensesControllerGetTagStatsParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >,
+      updater: Updater<
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerGetTagStatsData,
+              ExpensesControllerGetTagStatsParameters
+            >
+          >
+        | undefined,
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerGetTagStatsData,
+              ExpensesControllerGetTagStatsParameters
+            >
+          >
+        | undefined
+      >,
+      options?: SetDataOptions
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsParameters
+        >
+      | undefined
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    setQueriesData<TInfinite extends boolean = false>(
+      filters:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerGetTagStatsData> | undefined,
+        NoInfer<ExpensesControllerGetTagStatsData> | undefined
+      >,
+      options?: SetDataOptions
+    ): Array<ExpensesControllerGetTagStatsData | undefined>
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    setQueryData(
+      parameters:
+        | (ExpensesControllerGetTagStatsParameters | undefined)
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerGetTagStatsData> | undefined,
+        NoInfer<ExpensesControllerGetTagStatsData> | undefined
+      >,
+      options?: SetDataOptions
+    ): ExpensesControllerGetTagStatsData | undefined
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getInfiniteQueryKey(
+      parameters: ExpensesControllerGetTagStatsParameters | void
+    ): ServiceOperationInfiniteQueryKey<
+      ExpensesControllerGetTagStatsSchema,
+      ExpensesControllerGetTagStatsParameters
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTagStats.useInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTagStatsParameters,
+      TData = ExpensesControllerGetTagStatsData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options: Omit<
+        UndefinedInitialDataInfiniteOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetTagStatsData,
+          PartialParameters<TPageParam>
+        >
+    ): UseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>,
+      ExpensesControllerGetTagStatsError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTagStats.useInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTagStatsParameters,
+      TData = ExpensesControllerGetTagStatsData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options: Omit<
+        DefinedInitialDataInfiniteOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetTagStatsData,
+          PartialParameters<TPageParam>
+        >
+    ): DefinedUseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>,
+      ExpensesControllerGetTagStatsError | Error
+    >
+    /**
+     * Monitors the number of queries currently fetching, matching the provided filters.
+     * Useful for creating loading indicators or performing actions based on active requests.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+     * @example Checks the total number of queries fetching from the specified service method,
+     * both normal and infinite. If no parameters are provided, no filtering is applied.
+     * ```ts
+     * const expensesControllerGetTagStatsTotal = qraft.expensesService.expensesControllerGetTagStats.useIsFetching()
+     * ```
+     */
+    useIsFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsData,
+            TInfinite,
+            ExpensesControllerGetTagStatsParameters,
+            ExpensesControllerGetTagStatsError
+          >
+    ): number
+    /**
+     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+     *
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+     * ```ts
+     * const expensesControllerGetTagStatsResults = qraft.expensesService.expensesControllerGetTagStats.useQueries({
+     *     queries: [
+     *         {},
+     *         {}
+     *     ]
+     * });
+     * expensesControllerGetTagStatsResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+     * ```
+     * @example Combined results. Only the data will be returned.
+     * ```ts
+     * const expensesControllerGetTagStatsCombinedResults = qraft.expensesService.expensesControllerGetTagStats.useQueries({
+     *     combine: results => results.map(result => result.data),
+     *     queries: [
+     *         {},
+     *         {}
+     *     ]
+     * });
+     * expensesControllerGetTagStatsCombinedResults.forEach(data => console.log({ data }));
+     * ```
+     */
+    useQueries<
+      T extends Array<
+        UseQueryOptionsForUseQueries<
+          ExpensesControllerGetTagStatsSchema,
+          ExpensesControllerGetTagStatsParameters,
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError
+        >
+      >,
+      TCombinedResult = Array<
+        UseQueryResult<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          UseQueryResult<
+            ExpensesControllerGetTagStatsData,
+            ExpensesControllerGetTagStatsError
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    getQueryKey(
+      parameters: ExpensesControllerGetTagStatsParameters | void
+    ): ServiceOperationQueryKey<
+      ExpensesControllerGetTagStatsSchema,
+      ExpensesControllerGetTagStatsParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTagStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query without parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetTagStats.useQuery()
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetTagStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+     *
+     * @example Suspense Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetTagStats.useSuspenseInfiniteQuery({}, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useSuspenseInfiniteQuery<
+      TPageParam extends ExpensesControllerGetTagStatsParameters,
+      TData = ExpensesControllerGetTagStatsData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options: Omit<
+        UseSuspenseInfiniteQueryOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>,
+          ExpensesControllerGetTagStatsData,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetTagStatsData,
+          PartialParameters<TPageParam>
+        >
+    ): UseSuspenseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetTagStatsParameters>,
+      ExpensesControllerGetTagStatsError | Error
+    >
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    useSuspenseQueries<
+      T extends Array<
+        UseQueryOptionsForUseSuspenseQuery<
+          ExpensesControllerGetTagStatsSchema,
+          ExpensesControllerGetTagStatsParameters,
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError
+        >
+      >,
+      TCombinedResult = Array<
+        UseSuspenseQueryResult<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          WithOptional<
+            UseSuspenseQueryResult<
+              ExpensesControllerGetTagStatsData,
+              ExpensesControllerGetTagStatsError
+            >,
+            'data'
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get tag statistics
+     * @description Get statistics about expense tags including count and total amount
+     */
+    useSuspenseQuery<TData = ExpensesControllerGetTagStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        | (ExpensesControllerGetTagStatsParameters | void),
+      options?: Omit<
+        UseSuspenseQueryOptions<
+          ExpensesControllerGetTagStatsData,
+          ExpensesControllerGetTagStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetTagStatsSchema,
+            ExpensesControllerGetTagStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseSuspenseQueryResult<TData, ExpensesControllerGetTagStatsError | Error>
+    schema: ExpensesControllerGetTagStatsSchema
+    types: {
+      parameters: ExpensesControllerGetTagStatsParameters
+      data: ExpensesControllerGetTagStatsData
+      error: ExpensesControllerGetTagStatsError
+    }
+  }
+  /**
+   * @summary Get monthly statistics
+   * @description Get monthly expense statistics for a specific year
+   */
+  expensesControllerGetMonthlyStats: {
     /**
      * @summary Get monthly statistics
      * @description Get monthly expense statistics for a specific year
      */
-    expensesControllerGetMonthlyStats: {
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        cancelQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>, options?: CancelOptions): Promise<void>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getQueryKey(parameters: ExpensesControllerGetMonthlyStatsParameters): ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
-         *     path: {
-         *         year: year
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerGetMonthlyStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
-         *     path: {
-         *         year: year
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options: Omit<DefinedInitialDataOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerGetMonthlyStatsError | Error>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        fetchInfiniteQuery<TPageParam extends ExpensesControllerGetMonthlyStatsParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters, TPageParam, ExpensesControllerGetMonthlyStatsError>): Promise<OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters>>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        prefetchInfiniteQuery<TPageParam extends ExpensesControllerGetMonthlyStatsParameters>(options: ServiceOperationFetchInfiniteQueryOptions<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters, TPageParam, ExpensesControllerGetMonthlyStatsError>): Promise<void>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        ensureInfiniteQueryData<TPageParam extends ExpensesControllerGetMonthlyStatsParameters>(options: ServiceOperationEnsureInfiniteQueryDataOptions<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters, TPageParam, ExpensesControllerGetMonthlyStatsError>): Promise<OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters>>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        fetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>): Promise<ExpensesControllerGetMonthlyStatsData>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        prefetchQuery(options: ServiceOperationFetchQueryOptions<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>): Promise<void>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        ensureQueryData(options: ServiceOperationEnsureQueryDataOptions<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>): Promise<ExpensesControllerGetMonthlyStatsData>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getInfiniteQueryData(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters)): OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters> | undefined;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getQueriesData<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>): TInfinite extends true ? Array<[
-            queryKey: ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>,
-            data: NoInfer<OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters>> | undefined
-        ]> : Array<[
-            queryKey: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>,
+    cancelQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >,
+      options?: CancelOptions
+    ): Promise<void>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getQueryKey(
+      parameters: ExpensesControllerGetMonthlyStatsParameters
+    ): ServiceOperationQueryKey<
+      ExpensesControllerGetMonthlyStatsSchema,
+      ExpensesControllerGetMonthlyStatsParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
+     *     path: {
+     *         year: year
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetMonthlyStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerGetMonthlyStatsError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
+     *     path: {
+     *         year: year
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetMonthlyStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<
+      TData,
+      ExpensesControllerGetMonthlyStatsError | Error
+    >
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    fetchInfiniteQuery<
+      TPageParam extends ExpensesControllerGetMonthlyStatsParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerGetMonthlyStatsSchema,
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters,
+        TPageParam,
+        ExpensesControllerGetMonthlyStatsError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters
+      >
+    >
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    prefetchInfiniteQuery<
+      TPageParam extends ExpensesControllerGetMonthlyStatsParameters
+    >(
+      options: ServiceOperationFetchInfiniteQueryOptions<
+        ExpensesControllerGetMonthlyStatsSchema,
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters,
+        TPageParam,
+        ExpensesControllerGetMonthlyStatsError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    ensureInfiniteQueryData<
+      TPageParam extends ExpensesControllerGetMonthlyStatsParameters
+    >(
+      options: ServiceOperationEnsureInfiniteQueryDataOptions<
+        ExpensesControllerGetMonthlyStatsSchema,
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters,
+        TPageParam,
+        ExpensesControllerGetMonthlyStatsError
+      >
+    ): Promise<
+      OperationInfiniteData<
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters
+      >
+    >
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    fetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerGetMonthlyStatsSchema,
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters,
+        ExpensesControllerGetMonthlyStatsError
+      >
+    ): Promise<ExpensesControllerGetMonthlyStatsData>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    prefetchQuery(
+      options: ServiceOperationFetchQueryOptions<
+        ExpensesControllerGetMonthlyStatsSchema,
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters,
+        ExpensesControllerGetMonthlyStatsError
+      >
+    ): Promise<void>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    ensureQueryData(
+      options: ServiceOperationEnsureQueryDataOptions<
+        ExpensesControllerGetMonthlyStatsSchema,
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsParameters,
+        ExpensesControllerGetMonthlyStatsError
+      >
+    ): Promise<ExpensesControllerGetMonthlyStatsData>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getInfiniteQueryData(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsParameters
+        >
+      | undefined
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getQueriesData<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+    ): TInfinite extends true
+      ? Array<
+          [
+            queryKey: ServiceOperationInfiniteQueryKey<
+              ExpensesControllerGetMonthlyStatsSchema,
+              ExpensesControllerGetMonthlyStatsParameters
+            >,
+            data:
+              | NoInfer<
+                  OperationInfiniteData<
+                    ExpensesControllerGetMonthlyStatsData,
+                    ExpensesControllerGetMonthlyStatsParameters
+                  >
+                >
+              | undefined
+          ]
+        >
+      : Array<
+          [
+            queryKey: ServiceOperationQueryKey<
+              ExpensesControllerGetMonthlyStatsSchema,
+              ExpensesControllerGetMonthlyStatsParameters
+            >,
             data: ExpensesControllerGetMonthlyStatsData | undefined
-        ]>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getQueryData(parameters: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters)): ExpensesControllerGetMonthlyStatsData | undefined;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getQueryState(parameters: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters)): QueryState<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError> | undefined;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getInfiniteQueryState(parameters: ExpensesControllerGetMonthlyStatsParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>): QueryState<OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters>, ExpensesControllerGetMonthlyStatsError> | undefined;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        invalidateQueries<TInfinite extends boolean = false>(filters?: InvalidateQueryFilters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>, options?: InvalidateOptions): Promise<void>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        isFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>): number;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        <TMeta extends Record<string, any>, TSignal extends AbortSignal = AbortSignal>(options: QueryFnOptionsByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters, TMeta, TSignal> | (QueryFnOptionsByParameters<ExpensesControllerGetMonthlyStatsParameters, TMeta, TSignal>), client?: (schema: ExpensesControllerGetMonthlyStatsSchema, options: {
-            parameters: ExpensesControllerGetMonthlyStatsParameters;
-            signal?: TSignal;
-            meta?: TMeta;
-        }) => Promise<RequestFnResponse<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>>): Promise<RequestFnResponse<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        refetchQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>, options?: RefetchOptions): Promise<void>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        removeQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>): void;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        resetQueries<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>, options?: ResetOptions): Promise<void>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        setInfiniteQueryData(parameters: ExpensesControllerGetMonthlyStatsParameters | ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>, updater: Updater<NoInfer<OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters>> | undefined, NoInfer<OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters>> | undefined>, options?: SetDataOptions): OperationInfiniteData<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsParameters> | undefined;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        setQueriesData<TInfinite extends boolean = false>(filters: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>, updater: Updater<NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined, NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined>, options?: SetDataOptions): Array<ExpensesControllerGetMonthlyStatsData | undefined>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        setQueryData(parameters: (ExpensesControllerGetMonthlyStatsParameters) | ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>, updater: Updater<NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined, NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined>, options?: SetDataOptions): ExpensesControllerGetMonthlyStatsData | undefined;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getInfiniteQueryKey(parameters: ExpensesControllerGetMonthlyStatsParameters): ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetMonthlyStats.useInfiniteQuery({
-         *     path: {
-         *         year: year
-         *     }
-         * }, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerGetMonthlyStatsParameters, TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options: Omit<UndefinedInitialDataInfiniteOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetMonthlyStatsData, PartialParameters<TPageParam>>): UseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>, ExpensesControllerGetMonthlyStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
-         *
-         * @example Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetMonthlyStats.useInfiniteQuery({
-         *     path: {
-         *         year: year
-         *     }
-         * }, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useInfiniteQuery<TPageParam extends ExpensesControllerGetMonthlyStatsParameters, TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options: Omit<DefinedInitialDataInfiniteOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>, ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetMonthlyStatsData, PartialParameters<TPageParam>>): DefinedUseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>, ExpensesControllerGetMonthlyStatsError | Error>;
-        /**
-         * Monitors the number of queries currently fetching, matching the provided filters.
-         * Useful for creating loading indicators or performing actions based on active requests.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
-         * @example Checks the total number of queries fetching from the specified service method,
-         * both normal and infinite. If no parameters are provided, no filtering is applied.
-         * ```ts
-         * const expensesControllerGetMonthlyStatsTotal = qraft.expensesService.expensesControllerGetMonthlyStats.useIsFetching()
-         * ```
-         * @example Checks the number of normal queries fetching with the specified parameters.
-         * ```ts
-         * const expensesControllerGetMonthlyStatsByParametersTotal = qraft.expensesService.expensesControllerGetMonthlyStats.useIsFetching({
-         *     infinite: false,
-         *     parameters: {
-         *         path: {
-         *             year: year
-         *         }
-         *     }
-         * })
-         * ```
-         */
-        useIsFetching<TInfinite extends boolean = false>(filters?: QueryFiltersByParameters<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError> | QueryFiltersByQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsData, TInfinite, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsError>): number;
-        /**
-         * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
-         *
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
-         * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
-         * ```ts
-         * const expensesControllerGetMonthlyStatsResults = qraft.expensesService.expensesControllerGetMonthlyStats.useQueries({
-         *     queries: [
-         *         {
-         *             path: {
-         *                 year: year1
-         *             }
-         *         },
-         *         {
-         *             path: {
-         *                 year: year2
-         *             }
-         *         }
-         *     ]
-         * });
-         * expensesControllerGetMonthlyStatsResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
-         * ```
-         * @example Combined results. Only the data will be returned.
-         * ```ts
-         * const expensesControllerGetMonthlyStatsCombinedResults = qraft.expensesService.expensesControllerGetMonthlyStats.useQueries({
-         *     combine: results => results.map(result => result.data),
-         *     queries: [
-         *         {
-         *             path: {
-         *                 year: year1
-         *             }
-         *         },
-         *         {
-         *             path: {
-         *                 year: year2
-         *             }
-         *         }
-         *     ]
-         * });
-         * expensesControllerGetMonthlyStatsCombinedResults.forEach(data => console.log({ data }));
-         * ```
-         */
-        useQueries<T extends Array<UseQueryOptionsForUseQueries<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>>, TCombinedResult = Array<UseQueryResult<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>>>(options: {
-            queries: T;
-            combine?: (results: Array<UseQueryResult<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        getQueryKey(parameters: ExpensesControllerGetMonthlyStatsParameters): ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
-         *     path: {
-         *         year: year
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options?: Omit<UndefinedInitialDataOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>>, "queryKey">): UseQueryResult<TData, ExpensesControllerGetMonthlyStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching, manages loading states and error handling.
-         *
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
-         * @example Query with parameters
-         * ```ts
-         * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
-         *     path: {
-         *         year: year
-         *     }
-         * })
-         * ```
-         */
-        useQuery<TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options: Omit<DefinedInitialDataOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>>, "queryKey">): DefinedUseQueryResult<TData, ExpensesControllerGetMonthlyStatsError | Error>;
-        /**
-         * Performs asynchronous data fetching with support for infinite scrolling scenarios.
-         * Manages paginated data and provides utilities for fetching additional pages.
-         * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
-         *
-         * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
-         *
-         * @example Suspense Infinite Query
-         * ```ts
-         * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetMonthlyStats.useSuspenseInfiniteQuery({
-         *     path: {
-         *         year: year
-         *     }
-         * }, {
-         *     initialPageParam: {},
-         *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
-         * })
-         *
-         * console.log(data);
-         * fetchNextPage(); // Fetch the next page
-         * ```
-         */
-        useSuspenseInfiniteQuery<TPageParam extends ExpensesControllerGetMonthlyStatsParameters, TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options: Omit<UseSuspenseInfiniteQueryOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>, ExpensesControllerGetMonthlyStatsData, ServiceOperationInfiniteQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>, PartialParameters<TPageParam>>, "queryKey" | "getPreviousPageParam" | "getNextPageParam" | "initialPageParam"> & InfiniteQueryPageParamsOptions<ExpensesControllerGetMonthlyStatsData, PartialParameters<TPageParam>>): UseSuspenseInfiniteQueryResult<OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>, ExpensesControllerGetMonthlyStatsError | Error>;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        useSuspenseQueries<T extends Array<UseQueryOptionsForUseSuspenseQuery<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters, ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>>, TCombinedResult = Array<UseSuspenseQueryResult<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>>>(options: {
-            queries: T;
-            combine?: (results: Array<WithOptional<UseSuspenseQueryResult<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError>, "data">>) => TCombinedResult;
-        }): TCombinedResult;
-        /**
-         * @summary Get monthly statistics
-         * @description Get monthly expense statistics for a specific year
-         */
-        useSuspenseQuery<TData = ExpensesControllerGetMonthlyStatsData>(parameters: ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters> | (ExpensesControllerGetMonthlyStatsParameters), options?: Omit<UseSuspenseQueryOptions<ExpensesControllerGetMonthlyStatsData, ExpensesControllerGetMonthlyStatsError, TData, ServiceOperationQueryKey<ExpensesControllerGetMonthlyStatsSchema, ExpensesControllerGetMonthlyStatsParameters>>, "queryKey">): UseSuspenseQueryResult<TData, ExpensesControllerGetMonthlyStatsError | Error>;
-        schema: ExpensesControllerGetMonthlyStatsSchema;
-        types: {
-            parameters: ExpensesControllerGetMonthlyStatsParameters;
-            data: ExpensesControllerGetMonthlyStatsData;
-            error: ExpensesControllerGetMonthlyStatsError;
-        };
-    };
+          ]
+        >
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getQueryData(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters
+    ): ExpensesControllerGetMonthlyStatsData | undefined
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getQueryState(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters
+    ):
+      | QueryState<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError
+        >
+      | undefined
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getInfiniteQueryState(
+      parameters:
+        | ExpensesControllerGetMonthlyStatsParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+    ):
+      | QueryState<
+          OperationInfiniteData<
+            ExpensesControllerGetMonthlyStatsData,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+          ExpensesControllerGetMonthlyStatsError
+        >
+      | undefined
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    invalidateQueries<TInfinite extends boolean = false>(
+      filters?: InvalidateQueryFilters<
+        ExpensesControllerGetMonthlyStatsSchema,
+        ExpensesControllerGetMonthlyStatsData,
+        TInfinite,
+        ExpensesControllerGetMonthlyStatsParameters,
+        ExpensesControllerGetMonthlyStatsError
+      >,
+      options?: InvalidateOptions
+    ): Promise<void>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    isFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+    ): number
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    <
+      TMeta extends Record<string, any>,
+      TSignal extends AbortSignal = AbortSignal
+    >(
+      options:
+        | QueryFnOptionsByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters,
+            TMeta,
+            TSignal
+          >
+        | QueryFnOptionsByParameters<
+            ExpensesControllerGetMonthlyStatsParameters,
+            TMeta,
+            TSignal
+          >,
+      client?: (
+        schema: ExpensesControllerGetMonthlyStatsSchema,
+        options: {
+          parameters: ExpensesControllerGetMonthlyStatsParameters
+          signal?: TSignal
+          meta?: TMeta
+        }
+      ) => Promise<
+        RequestFnResponse<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError
+        >
+      >
+    ): Promise<
+      RequestFnResponse<
+        ExpensesControllerGetMonthlyStatsData,
+        ExpensesControllerGetMonthlyStatsError
+      >
+    >
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    refetchQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >,
+      options?: RefetchOptions
+    ): Promise<void>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    removeQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+    ): void
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    resetQueries<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >,
+      options?: ResetOptions
+    ): Promise<void>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    setInfiniteQueryData(
+      parameters:
+        | ExpensesControllerGetMonthlyStatsParameters
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+      updater: Updater<
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerGetMonthlyStatsData,
+              ExpensesControllerGetMonthlyStatsParameters
+            >
+          >
+        | undefined,
+        | NoInfer<
+            OperationInfiniteData<
+              ExpensesControllerGetMonthlyStatsData,
+              ExpensesControllerGetMonthlyStatsParameters
+            >
+          >
+        | undefined
+      >,
+      options?: SetDataOptions
+    ):
+      | OperationInfiniteData<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsParameters
+        >
+      | undefined
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    setQueriesData<TInfinite extends boolean = false>(
+      filters:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined,
+        NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined
+      >,
+      options?: SetDataOptions
+    ): Array<ExpensesControllerGetMonthlyStatsData | undefined>
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    setQueryData(
+      parameters:
+        | ExpensesControllerGetMonthlyStatsParameters
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+      updater: Updater<
+        NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined,
+        NoInfer<ExpensesControllerGetMonthlyStatsData> | undefined
+      >,
+      options?: SetDataOptions
+    ): ExpensesControllerGetMonthlyStatsData | undefined
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getInfiniteQueryKey(
+      parameters: ExpensesControllerGetMonthlyStatsParameters
+    ): ServiceOperationInfiniteQueryKey<
+      ExpensesControllerGetMonthlyStatsSchema,
+      ExpensesControllerGetMonthlyStatsParameters
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetMonthlyStats.useInfiniteQuery({
+     *     path: {
+     *         year: year
+     *     }
+     * }, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerGetMonthlyStatsParameters,
+      TData = ExpensesControllerGetMonthlyStatsData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options: Omit<
+        UndefinedInitialDataInfiniteOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          OperationInfiniteData<
+            TData,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          PartialParameters<TPageParam>
+        >
+    ): UseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>,
+      ExpensesControllerGetMonthlyStatsError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useInfiniteQuery|`useInfiniteQuery(...)` documentation}
+     *
+     * @example Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetMonthlyStats.useInfiniteQuery({
+     *     path: {
+     *         year: year
+     *     }
+     * }, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useInfiniteQuery<
+      TPageParam extends ExpensesControllerGetMonthlyStatsParameters,
+      TData = ExpensesControllerGetMonthlyStatsData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options: Omit<
+        DefinedInitialDataInfiniteOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          OperationInfiniteData<
+            TData,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          PartialParameters<TPageParam>
+        >
+    ): DefinedUseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>,
+      ExpensesControllerGetMonthlyStatsError | Error
+    >
+    /**
+     * Monitors the number of queries currently fetching, matching the provided filters.
+     * Useful for creating loading indicators or performing actions based on active requests.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsFetching|`useIsFetching(...)` documentation}
+     * @example Checks the total number of queries fetching from the specified service method,
+     * both normal and infinite. If no parameters are provided, no filtering is applied.
+     * ```ts
+     * const expensesControllerGetMonthlyStatsTotal = qraft.expensesService.expensesControllerGetMonthlyStats.useIsFetching()
+     * ```
+     * @example Checks the number of normal queries fetching with the specified parameters.
+     * ```ts
+     * const expensesControllerGetMonthlyStatsByParametersTotal = qraft.expensesService.expensesControllerGetMonthlyStats.useIsFetching({
+     *     infinite: false,
+     *     parameters: {
+     *         path: {
+     *             year: year
+     *         }
+     *     }
+     * })
+     * ```
+     */
+    useIsFetching<TInfinite extends boolean = false>(
+      filters?:
+        | QueryFiltersByParameters<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        | QueryFiltersByQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsData,
+            TInfinite,
+            ExpensesControllerGetMonthlyStatsParameters,
+            ExpensesControllerGetMonthlyStatsError
+          >
+    ): number
+    /**
+     * Allows you to execute multiple asynchronous data fetching operations concurrently. This is especially useful for managing complex data dependencies in parallel.
+     *
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQueries|`useQueries(...)` documentation}
+     * @example Multiple queries. Returns `data`, `error`, `isSuccess` and other properties.
+     * ```ts
+     * const expensesControllerGetMonthlyStatsResults = qraft.expensesService.expensesControllerGetMonthlyStats.useQueries({
+     *     queries: [
+     *         {
+     *             path: {
+     *                 year: year1
+     *             }
+     *         },
+     *         {
+     *             path: {
+     *                 year: year2
+     *             }
+     *         }
+     *     ]
+     * });
+     * expensesControllerGetMonthlyStatsResults.forEach(({ isSuccess, data, error }) => console.log({ isSuccess, data, error }));
+     * ```
+     * @example Combined results. Only the data will be returned.
+     * ```ts
+     * const expensesControllerGetMonthlyStatsCombinedResults = qraft.expensesService.expensesControllerGetMonthlyStats.useQueries({
+     *     combine: results => results.map(result => result.data),
+     *     queries: [
+     *         {
+     *             path: {
+     *                 year: year1
+     *             }
+     *         },
+     *         {
+     *             path: {
+     *                 year: year2
+     *             }
+     *         }
+     *     ]
+     * });
+     * expensesControllerGetMonthlyStatsCombinedResults.forEach(data => console.log({ data }));
+     * ```
+     */
+    useQueries<
+      T extends Array<
+        UseQueryOptionsForUseQueries<
+          ExpensesControllerGetMonthlyStatsSchema,
+          ExpensesControllerGetMonthlyStatsParameters,
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError
+        >
+      >,
+      TCombinedResult = Array<
+        UseQueryResult<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          UseQueryResult<
+            ExpensesControllerGetMonthlyStatsData,
+            ExpensesControllerGetMonthlyStatsError
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    getQueryKey(
+      parameters: ExpensesControllerGetMonthlyStatsParameters
+    ): ServiceOperationQueryKey<
+      ExpensesControllerGetMonthlyStatsSchema,
+      ExpensesControllerGetMonthlyStatsParameters
+    >
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
+     *     path: {
+     *         year: year
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetMonthlyStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options?: Omit<
+        UndefinedInitialDataOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseQueryResult<TData, ExpensesControllerGetMonthlyStatsError | Error>
+    /**
+     * Performs asynchronous data fetching, manages loading states and error handling.
+     *
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useQuery|`useQuery(...)` documentation}
+     * @example Query with parameters
+     * ```ts
+     * const { data, isLoading } = qraft.expensesService.expensesControllerGetMonthlyStats.useQuery({
+     *     path: {
+     *         year: year
+     *     }
+     * })
+     * ```
+     */
+    useQuery<TData = ExpensesControllerGetMonthlyStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options: Omit<
+        DefinedInitialDataOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): DefinedUseQueryResult<
+      TData,
+      ExpensesControllerGetMonthlyStatsError | Error
+    >
+    /**
+     * Performs asynchronous data fetching with support for infinite scrolling scenarios.
+     * Manages paginated data and provides utilities for fetching additional pages.
+     * It functions similarly to `useInfiniteQuery`, but with added support for React Suspense.
+     *
+     * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useSuspenseInfiniteQuery|`useSuspenseInfiniteQuery(...)` documentation}
+     *
+     * @example Suspense Infinite Query
+     * ```ts
+     * const { data, isLoading, fetchNextPage } = qraft.expensesService.expensesControllerGetMonthlyStats.useSuspenseInfiniteQuery({
+     *     path: {
+     *         year: year
+     *     }
+     * }, {
+     *     initialPageParam: {},
+     *     getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) => getNextPageParams(lastPage)
+     * })
+     *
+     * console.log(data);
+     * fetchNextPage(); // Fetch the next page
+     * ```
+     */
+    useSuspenseInfiniteQuery<
+      TPageParam extends ExpensesControllerGetMonthlyStatsParameters,
+      TData = ExpensesControllerGetMonthlyStatsData
+    >(
+      parameters:
+        | ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options: Omit<
+        UseSuspenseInfiniteQueryOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          OperationInfiniteData<
+            TData,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+          ExpensesControllerGetMonthlyStatsData,
+          ServiceOperationInfiniteQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >,
+          PartialParameters<TPageParam>
+        >,
+        | 'queryKey'
+        | 'getPreviousPageParam'
+        | 'getNextPageParam'
+        | 'initialPageParam'
+      > &
+        InfiniteQueryPageParamsOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          PartialParameters<TPageParam>
+        >
+    ): UseSuspenseInfiniteQueryResult<
+      OperationInfiniteData<TData, ExpensesControllerGetMonthlyStatsParameters>,
+      ExpensesControllerGetMonthlyStatsError | Error
+    >
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    useSuspenseQueries<
+      T extends Array<
+        UseQueryOptionsForUseSuspenseQuery<
+          ExpensesControllerGetMonthlyStatsSchema,
+          ExpensesControllerGetMonthlyStatsParameters,
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError
+        >
+      >,
+      TCombinedResult = Array<
+        UseSuspenseQueryResult<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError
+        >
+      >
+    >(options: {
+      queries: T
+      combine?: (
+        results: Array<
+          WithOptional<
+            UseSuspenseQueryResult<
+              ExpensesControllerGetMonthlyStatsData,
+              ExpensesControllerGetMonthlyStatsError
+            >,
+            'data'
+          >
+        >
+      ) => TCombinedResult
+    }): TCombinedResult
+    /**
+     * @summary Get monthly statistics
+     * @description Get monthly expense statistics for a specific year
+     */
+    useSuspenseQuery<TData = ExpensesControllerGetMonthlyStatsData>(
+      parameters:
+        | ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        | ExpensesControllerGetMonthlyStatsParameters,
+      options?: Omit<
+        UseSuspenseQueryOptions<
+          ExpensesControllerGetMonthlyStatsData,
+          ExpensesControllerGetMonthlyStatsError,
+          TData,
+          ServiceOperationQueryKey<
+            ExpensesControllerGetMonthlyStatsSchema,
+            ExpensesControllerGetMonthlyStatsParameters
+          >
+        >,
+        'queryKey'
+      >
+    ): UseSuspenseQueryResult<
+      TData,
+      ExpensesControllerGetMonthlyStatsError | Error
+    >
+    schema: ExpensesControllerGetMonthlyStatsSchema
+    types: {
+      parameters: ExpensesControllerGetMonthlyStatsParameters
+      data: ExpensesControllerGetMonthlyStatsData
+      error: ExpensesControllerGetMonthlyStatsError
+    }
+  }
 }
 export const expensesService: {
-    /**
-     * @summary Create expense
-     * @description Create a new expense for the authenticated user
-     */
-    expensesControllerCreate: {
-        schema: {
-            method: "post";
-            url: "/expenses";
-            mediaType: [
-                "application/json"
-            ];
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Get all expenses
-     * @description Retrieve all expenses for the authenticated user with pagination and filtering options
-     */
-    expensesControllerFindAll: {
-        schema: {
-            method: "get";
-            url: "/expenses";
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Get expense by ID
-     * @description Retrieve a specific expense by its ID
-     */
-    expensesControllerFindOne: {
-        schema: {
-            method: "get";
-            url: "/expenses/{id}";
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Update expense
-     * @description Update an existing expense by ID
-     */
-    expensesControllerUpdate: {
-        schema: {
-            method: "put";
-            url: "/expenses/{id}";
-            mediaType: [
-                "application/json"
-            ];
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Delete expense
-     * @description Delete an expense by ID
-     */
-    expensesControllerRemove: {
-        schema: {
-            method: "delete";
-            url: "/expenses/{id}";
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Get total spent
-     * @description Get the total amount spent across all expenses
-     */
-    expensesControllerGetTotalSpent: {
-        schema: {
-            method: "get";
-            url: "/expenses/stats/total";
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Get tag statistics
-     * @description Get statistics about expense tags including count and total amount
-     */
-    expensesControllerGetTagStats: {
-        schema: {
-            method: "get";
-            url: "/expenses/stats/tags";
-            security: [
-                "bearer"
-            ];
-        };
-    };
-    /**
-     * @summary Get monthly statistics
-     * @description Get monthly expense statistics for a specific year
-     */
-    expensesControllerGetMonthlyStats: {
-        schema: {
-            method: "get";
-            url: "/expenses/stats/monthly/{year}";
-            security: [
-                "bearer"
-            ];
-        };
-    };
-} = {
-    expensesControllerCreate: {
-        schema: {
-            method: "post",
-            url: "/expenses",
-            mediaType: ["application/json"],
-            security: ["bearer"]
-        }
-    },
-    expensesControllerFindAll: {
-        schema: {
-            method: "get",
-            url: "/expenses",
-            security: ["bearer"]
-        }
-    },
-    expensesControllerFindOne: {
-        schema: {
-            method: "get",
-            url: "/expenses/{id}",
-            security: ["bearer"]
-        }
-    },
-    expensesControllerUpdate: {
-        schema: {
-            method: "put",
-            url: "/expenses/{id}",
-            mediaType: ["application/json"],
-            security: ["bearer"]
-        }
-    },
-    expensesControllerRemove: {
-        schema: {
-            method: "delete",
-            url: "/expenses/{id}",
-            security: ["bearer"]
-        }
-    },
-    expensesControllerGetTotalSpent: {
-        schema: {
-            method: "get",
-            url: "/expenses/stats/total",
-            security: ["bearer"]
-        }
-    },
-    expensesControllerGetTagStats: {
-        schema: {
-            method: "get",
-            url: "/expenses/stats/tags",
-            security: ["bearer"]
-        }
-    },
-    expensesControllerGetMonthlyStats: {
-        schema: {
-            method: "get",
-            url: "/expenses/stats/monthly/{year}",
-            security: ["bearer"]
-        }
+  /**
+   * @summary Create expense
+   * @description Create a new expense for the authenticated user
+   */
+  expensesControllerCreate: {
+    schema: {
+      method: 'post'
+      url: '/expenses'
+      mediaType: ['application/json']
+      security: ['bearer']
     }
-};
+  }
+  /**
+   * @summary Get all expenses
+   * @description Retrieve all expenses for the authenticated user with pagination and filtering options
+   */
+  expensesControllerFindAll: {
+    schema: {
+      method: 'get'
+      url: '/expenses'
+      security: ['bearer']
+    }
+  }
+  /**
+   * @summary Get expense by ID
+   * @description Retrieve a specific expense by its ID
+   */
+  expensesControllerFindOne: {
+    schema: {
+      method: 'get'
+      url: '/expenses/{id}'
+      security: ['bearer']
+    }
+  }
+  /**
+   * @summary Update expense
+   * @description Update an existing expense by ID
+   */
+  expensesControllerUpdate: {
+    schema: {
+      method: 'put'
+      url: '/expenses/{id}'
+      mediaType: ['application/json']
+      security: ['bearer']
+    }
+  }
+  /**
+   * @summary Delete expense
+   * @description Delete an expense by ID
+   */
+  expensesControllerRemove: {
+    schema: {
+      method: 'delete'
+      url: '/expenses/{id}'
+      security: ['bearer']
+    }
+  }
+  /**
+   * @summary Get total spent
+   * @description Get the total amount spent across all expenses
+   */
+  expensesControllerGetTotalSpent: {
+    schema: {
+      method: 'get'
+      url: '/expenses/stats/total'
+      security: ['bearer']
+    }
+  }
+  /**
+   * @summary Get tag statistics
+   * @description Get statistics about expense tags including count and total amount
+   */
+  expensesControllerGetTagStats: {
+    schema: {
+      method: 'get'
+      url: '/expenses/stats/tags'
+      security: ['bearer']
+    }
+  }
+  /**
+   * @summary Get monthly statistics
+   * @description Get monthly expense statistics for a specific year
+   */
+  expensesControllerGetMonthlyStats: {
+    schema: {
+      method: 'get'
+      url: '/expenses/stats/monthly/{year}'
+      security: ['bearer']
+    }
+  }
+} = {
+  expensesControllerCreate: {
+    schema: {
+      method: 'post',
+      url: '/expenses',
+      mediaType: ['application/json'],
+      security: ['bearer']
+    }
+  },
+  expensesControllerFindAll: {
+    schema: {
+      method: 'get',
+      url: '/expenses',
+      security: ['bearer']
+    }
+  },
+  expensesControllerFindOne: {
+    schema: {
+      method: 'get',
+      url: '/expenses/{id}',
+      security: ['bearer']
+    }
+  },
+  expensesControllerUpdate: {
+    schema: {
+      method: 'put',
+      url: '/expenses/{id}',
+      mediaType: ['application/json'],
+      security: ['bearer']
+    }
+  },
+  expensesControllerRemove: {
+    schema: {
+      method: 'delete',
+      url: '/expenses/{id}',
+      security: ['bearer']
+    }
+  },
+  expensesControllerGetTotalSpent: {
+    schema: {
+      method: 'get',
+      url: '/expenses/stats/total',
+      security: ['bearer']
+    }
+  },
+  expensesControllerGetTagStats: {
+    schema: {
+      method: 'get',
+      url: '/expenses/stats/tags',
+      security: ['bearer']
+    }
+  },
+  expensesControllerGetMonthlyStats: {
+    schema: {
+      method: 'get',
+      url: '/expenses/stats/monthly/{year}',
+      security: ['bearer']
+    }
+  }
+}
 type ExpensesControllerCreateSchema = {
-    method: "post";
-    url: "/expenses";
-    mediaType: [
-        "application/json"
-    ];
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerCreateParameters = {};
-type ExpensesControllerCreateData = paths["/expenses"]["post"]["responses"]["201"]["content"]["application/json"];
-type ExpensesControllerCreateError = unknown;
-type ExpensesControllerCreateBody = NonNullable<paths["/expenses"]["post"]["requestBody"]>["content"]["application/json"];
+  method: 'post'
+  url: '/expenses'
+  mediaType: ['application/json']
+  security: ['bearer']
+}
+type ExpensesControllerCreateParameters = {}
+type ExpensesControllerCreateData =
+  paths['/expenses']['post']['responses']['201']['content']['application/json']
+type ExpensesControllerCreateError = unknown
+type ExpensesControllerCreateBody = NonNullable<
+  paths['/expenses']['post']['requestBody']
+>['content']['application/json']
 type ExpensesControllerFindAllSchema = {
-    method: "get";
-    url: "/expenses";
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerFindAllParameters = paths["/expenses"]["get"]["parameters"];
-type ExpensesControllerFindAllData = paths["/expenses"]["get"]["responses"]["200"]["content"]["application/json"];
-type ExpensesControllerFindAllError = unknown;
+  method: 'get'
+  url: '/expenses'
+  security: ['bearer']
+}
+type ExpensesControllerFindAllParameters =
+  paths['/expenses']['get']['parameters']
+type ExpensesControllerFindAllData =
+  paths['/expenses']['get']['responses']['200']['content']['application/json']
+type ExpensesControllerFindAllError = unknown
 type ExpensesControllerFindOneSchema = {
-    method: "get";
-    url: "/expenses/{id}";
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerFindOneParameters = paths["/expenses/{id}"]["get"]["parameters"];
-type ExpensesControllerFindOneData = paths["/expenses/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
-type ExpensesControllerFindOneError = unknown;
+  method: 'get'
+  url: '/expenses/{id}'
+  security: ['bearer']
+}
+type ExpensesControllerFindOneParameters =
+  paths['/expenses/{id}']['get']['parameters']
+type ExpensesControllerFindOneData =
+  paths['/expenses/{id}']['get']['responses']['200']['content']['application/json']
+type ExpensesControllerFindOneError = unknown
 type ExpensesControllerUpdateSchema = {
-    method: "put";
-    url: "/expenses/{id}";
-    mediaType: [
-        "application/json"
-    ];
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerUpdateParameters = paths["/expenses/{id}"]["put"]["parameters"];
-type ExpensesControllerUpdateData = paths["/expenses/{id}"]["put"]["responses"]["200"]["content"]["application/json"];
-type ExpensesControllerUpdateError = unknown;
-type ExpensesControllerUpdateBody = NonNullable<paths["/expenses/{id}"]["put"]["requestBody"]>["content"]["application/json"];
+  method: 'put'
+  url: '/expenses/{id}'
+  mediaType: ['application/json']
+  security: ['bearer']
+}
+type ExpensesControllerUpdateParameters =
+  paths['/expenses/{id}']['put']['parameters']
+type ExpensesControllerUpdateData =
+  paths['/expenses/{id}']['put']['responses']['200']['content']['application/json']
+type ExpensesControllerUpdateError = unknown
+type ExpensesControllerUpdateBody = NonNullable<
+  paths['/expenses/{id}']['put']['requestBody']
+>['content']['application/json']
 type ExpensesControllerRemoveSchema = {
-    method: "delete";
-    url: "/expenses/{id}";
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerRemoveParameters = paths["/expenses/{id}"]["delete"]["parameters"];
-type ExpensesControllerRemoveData = paths["/expenses/{id}"]["delete"]["responses"]["200"]["content"]["application/json"];
-type ExpensesControllerRemoveError = unknown;
-type ExpensesControllerRemoveBody = undefined;
+  method: 'delete'
+  url: '/expenses/{id}'
+  security: ['bearer']
+}
+type ExpensesControllerRemoveParameters =
+  paths['/expenses/{id}']['delete']['parameters']
+type ExpensesControllerRemoveData =
+  paths['/expenses/{id}']['delete']['responses']['200']['content']['application/json']
+type ExpensesControllerRemoveError = unknown
+type ExpensesControllerRemoveBody = undefined
 type ExpensesControllerGetTotalSpentSchema = {
-    method: "get";
-    url: "/expenses/stats/total";
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerGetTotalSpentParameters = undefined;
-type ExpensesControllerGetTotalSpentData = paths["/expenses/stats/total"]["get"]["responses"]["200"]["content"]["application/json"];
-type ExpensesControllerGetTotalSpentError = unknown;
+  method: 'get'
+  url: '/expenses/stats/total'
+  security: ['bearer']
+}
+type ExpensesControllerGetTotalSpentParameters = undefined
+type ExpensesControllerGetTotalSpentData =
+  paths['/expenses/stats/total']['get']['responses']['200']['content']['application/json']
+type ExpensesControllerGetTotalSpentError = unknown
 type ExpensesControllerGetTagStatsSchema = {
-    method: "get";
-    url: "/expenses/stats/tags";
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerGetTagStatsParameters = undefined;
-type ExpensesControllerGetTagStatsData = paths["/expenses/stats/tags"]["get"]["responses"]["200"]["content"]["application/json"];
-type ExpensesControllerGetTagStatsError = unknown;
+  method: 'get'
+  url: '/expenses/stats/tags'
+  security: ['bearer']
+}
+type ExpensesControllerGetTagStatsParameters = undefined
+type ExpensesControllerGetTagStatsData =
+  paths['/expenses/stats/tags']['get']['responses']['200']['content']['application/json']
+type ExpensesControllerGetTagStatsError = unknown
 type ExpensesControllerGetMonthlyStatsSchema = {
-    method: "get";
-    url: "/expenses/stats/monthly/{year}";
-    security: [
-        "bearer"
-    ];
-};
-type ExpensesControllerGetMonthlyStatsParameters = paths["/expenses/stats/monthly/{year}"]["get"]["parameters"];
-type ExpensesControllerGetMonthlyStatsData = paths["/expenses/stats/monthly/{year}"]["get"]["responses"]["200"]["content"]["application/json"];
-type ExpensesControllerGetMonthlyStatsError = unknown;
+  method: 'get'
+  url: '/expenses/stats/monthly/{year}'
+  security: ['bearer']
+}
+type ExpensesControllerGetMonthlyStatsParameters =
+  paths['/expenses/stats/monthly/{year}']['get']['parameters']
+type ExpensesControllerGetMonthlyStatsData =
+  paths['/expenses/stats/monthly/{year}']['get']['responses']['200']['content']['application/json']
+type ExpensesControllerGetMonthlyStatsError = unknown
