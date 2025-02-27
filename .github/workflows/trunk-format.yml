@@ -38,6 +38,9 @@ jobs:
         with:
           node-version: 20
           cache: "pnpm"
+          cache-dependency-path: |
+            expensify-frontend/pnpm-lock.yaml
+            expensify-backend/pnpm-lock.yaml
 
       # Backend formatting
       - name: Install backend dependencies
