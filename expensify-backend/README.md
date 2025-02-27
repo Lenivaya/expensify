@@ -1,54 +1,77 @@
+# Backend
+
 ## Project setup
 
 ```bash
-$ pnpm install
+pnpm install
+```
+
+## Configure environment variables
+
+```bash
+cp .env.example .env
+
+nvim .env
+# or
+code .env
+```
+
+## Database setup
+
+Setup your postgres database by any way you want, or use the dev docker compose file from root of the project:
+
+```bash
+docker compose -f dev.docker-compose.yaml up -d
+```
+
+Then you can configure the database in the .env file.
+
+### Apply migrations
+
+To apply migrations, you can run the following command:
+
+```bash
+pnpm db:migrate
+```
+
+### Push migrations
+
+If you want to quickly force apply your schema from code without creating new migrations, you can run the following command:
+
+```bash
+pnpm db:push
+```
+
+### Seed database
+
+To seed database with some data to test the application, you can run the following command:
+
+```bash
+pnpm db:seed
 ```
 
 ## Compile and run the project
 
 ```bash
 # development
-$ pnpm run start
+pnpm start
 
-# watch mode
-$ pnpm run start:dev
+# watch mode development
+pnpm start:dev
 
 # production mode
-$ pnpm run start:prod
+pnpm build && pnpm start:prod
 ```
 
-## Run tests
+## tests
 
 ```bash
 # unit tests
-$ pnpm run test
+pnpm test
 
 # e2e tests
-$ pnpm run test:e2e
+pnpm test:e2e
 
 # test coverage
-$ pnpm run test:cov
+pnpm test:cov
 ```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ pnpm install -g mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).

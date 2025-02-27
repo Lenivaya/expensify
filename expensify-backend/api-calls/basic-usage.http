@@ -19,7 +19,7 @@ accept: application/json
 content-type: application/json
 
 {
-  "login": "john.doe@example.com",
+  "login": "john.doe",
   "password": "password123"
 }
 

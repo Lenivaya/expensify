@@ -71,7 +71,6 @@ export class CreateExpenseDto {
     description: 'List of tags for categorizing and organizing the expense',
     example: ['food', 'groceries'],
     type: [String],
-    isArray: true,
     minItems: 1
   })
   @IsArray()

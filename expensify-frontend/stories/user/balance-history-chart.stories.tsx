@@ -108,8 +108,7 @@ export const Tall: Story = {
 export const NoControls: Story = {
   args: {
     ...Default.args,
-    showTimeRangeSelector: false,
-    showZoomControls: false
+    showTimeRangeSelector: false
   }
 }
 
@@ -148,7 +147,6 @@ It displays three key metrics:
 ### Features
 - Interactive area chart with smooth animations
 - Time range selection (1M, 3M, 6M, 1Y, ALL)
-- Zoom controls for detailed data exploration
 - Responsive design
 - Custom tooltips with detailed information
 - Dark mode compatible

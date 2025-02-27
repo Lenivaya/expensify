@@ -34,46 +34,14 @@ import { isNotNull } from 'drizzle-orm'
  */
 @Exclude()
 export class ExpenseSearchDto {
-  /**
-   * Array of expense records that match the search criteria.
-   * Contains the full expense information for each matching record.
-   * The array may be empty if no records match the search criteria.
-   *
-   * @type {ExpenseDto[]}
-   * @required
-   * @example [
-   *   {
-   *     id: '1',
-   *     amount: 29.99,
-   *     description: 'Grocery shopping',
-   *     tags: ['food', 'groceries'],
-   *     createdAt: '2024-02-26T10:00:00Z',
-   *     updatedAt: '2024-02-26T10:00:00Z'
-   *   }
-   * ]
-   */
   @Expose()
   @ApiProperty({
     description: 'Array of expense records matching the search criteria',
-    type: [ExpenseDto],
-    isArray: true
+    type: [ExpenseDto]
   })
   @IsNotEmpty()
   data: ExpenseDto[]
 
-  /**
-   * Metadata about the search results, including pagination information.
-   * Contains total count of matching records, current page number,
-   * and number of records per page (limit).
-   *
-   * @type {MetaSearchInfo}
-   * @required
-   * @example {
-   *   total: 1,
-   *   page: 1,
-   *   limit: 10
-   * }
-   */
   @Expose()
   @ApiProperty({
     description:

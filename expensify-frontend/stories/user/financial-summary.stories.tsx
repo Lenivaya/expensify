@@ -50,15 +50,15 @@ type Story = StoryObj<typeof meta>
 
 const defaultData = {
   currentBalance: {
-    totalInflows: '5000.00',
-    totalExpenses: '3000.00',
-    balance: '2000.00'
+    totalInflows: 5000.0,
+    totalExpenses: 3000.0,
+    balance: 2000.0
   },
   statistics: {
-    averageInflow: '1000.00',
-    averageExpense: '800.00',
-    averageMonthlyInflow: '4000.00',
-    averageMonthlyExpense: '3200.00',
+    averageInflow: 1000.0,
+    averageExpense: 800.0,
+    averageMonthlyInflow: 4000.0,
+    averageMonthlyExpense: 3200.0,
     totalInflowCount: 25,
     totalExpenseCount: 50
   }
@@ -105,15 +105,15 @@ export const HighBalance: Story = {
   args: {
     data: {
       currentBalance: {
-        totalInflows: '150000.00',
-        totalExpenses: '50000.00',
-        balance: '100000.00'
+        totalInflows: 150000.0,
+        totalExpenses: 50000.0,
+        balance: 100000.0
       },
       statistics: {
-        averageInflow: '15000.00',
-        averageExpense: '5000.00',
-        averageMonthlyInflow: '60000.00',
-        averageMonthlyExpense: '20000.00',
+        averageInflow: 15000.0,
+        averageExpense: 5000.0,
+        averageMonthlyInflow: 60000.0,
+        averageMonthlyExpense: 20000.0,
         totalInflowCount: 10,
         totalExpenseCount: 20
       }
@@ -133,15 +133,15 @@ export const NegativeBalance: Story = {
   args: {
     data: {
       currentBalance: {
-        totalInflows: '3000.00',
-        totalExpenses: '5000.00',
-        balance: '-2000.00'
+        totalInflows: 3000.0,
+        totalExpenses: 5000.0,
+        balance: -2000.0
       },
       statistics: {
-        averageInflow: '750.00',
-        averageExpense: '1250.00',
-        averageMonthlyInflow: '3000.00',
-        averageMonthlyExpense: '5000.00',
+        averageInflow: 750.0,
+        averageExpense: 1250.0,
+        averageMonthlyInflow: 3000.0,
+        averageMonthlyExpense: 5000.0,
         totalInflowCount: 4,
         totalExpenseCount: 8
       }

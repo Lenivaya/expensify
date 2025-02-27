@@ -33,6 +33,7 @@
                 postgresql
                 pgcli
                 act
+                parallel
               ];
             };
           };

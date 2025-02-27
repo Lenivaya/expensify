@@ -48,14 +48,9 @@ export const useUser = () => {
   const isAuthTokenPresent = useIsAuthTokenPresent()
 
   const { data, isLoading, error } =
-    expensifyApi.auth.authControllerGetMe.useQuery(
-      {
-        queryKey: ['currentUser', isAuthTokenPresent]
-      },
-      {
-        enabled: isAuthTokenPresent
-      }
-    )
+    expensifyApi.auth.authControllerGetMe.useQuery(undefined, {
+      enabled: isAuthTokenPresent
+    })
 
   return { data, isLoading, error }
 }

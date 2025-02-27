@@ -75,8 +75,14 @@ export interface paths {
         put?: never;
         post?: never;
         /**
-         * Deletes user
-         * @description Deletes a user account. This operation cannot be undone.
+         * Delete user account and all associated data
+         * @description Permanently deletes a user account and all associated data including:
+         *         - Personal information
+         *         - Financial records (expenses and inflows)
+         *         - Analytics data and consent settings
+         *         - Activity history
+         *
+         *         This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
          */
         delete: operations["UsersController_deleteUser"];
         options?: never;
@@ -693,7 +699,7 @@ export interface components {
              *       "groceries"
              *     ]
              */
-            tags: unknown[][];
+            tags: string[];
         };
         ExpenseDto: {
             /** Format: uuid */
@@ -735,15 +741,9 @@ export interface components {
             pageCount: number;
         };
         ExpenseSearchDto: {
-            /**
-             * @description Array of expense records matching the search criteria
-             * @example [
-             */
-            data: unknown[][];
-            /**
-             * @description Metadata about the search results including pagination information
-             * @example {
-             */
+            /** @description Array of expense records matching the search criteria */
+            data: components["schemas"]["ExpenseDto"][];
+            /** @description Metadata about the search results including pagination information */
             meta: components["schemas"]["MetaSearchInfo"];
         };
         UpdateExpenseDto: {
@@ -765,7 +765,7 @@ export interface components {
              *       "household"
              *     ]
              */
-            tags?: unknown[][];
+            tags?: string[];
         };
         TagStatistics: {
             /**
@@ -819,7 +819,7 @@ export interface components {
              *       "work"
              *     ]
              */
-            tags: unknown[][];
+            tags: string[];
         };
         InflowDto: {
             /** Format: uuid */
@@ -837,15 +837,9 @@ export interface components {
             deletedAt: string | null;
         };
         InflowSearchDto: {
-            /**
-             * @description Array of inflow records matching the search criteria
-             * @example [
-             */
-            data: unknown[][];
-            /**
-             * @description Metadata about the search results including pagination information
-             * @example {
-             */
+            /** @description Array of inflow records matching the search criteria */
+            data: components["schemas"]["InflowDto"][];
+            /** @description Metadata about the search results including pagination information */
             meta: components["schemas"]["MetaSearchInfo"];
         };
         UpdateInflowDto: {
@@ -867,7 +861,7 @@ export interface components {
              *       "performance"
              *     ]
              */
-            tags?: unknown[][];
+            tags?: string[];
         };
         TrackingConsentDto: {
             /**
@@ -889,7 +883,10 @@ export interface components {
              */
             advertising: boolean;
         };
-        /** @enum {string} */
+        /**
+         * @description Type of activity performed
+         * @enum {string}
+         */
         ActivityType: "AUTH" | "ERROR" | "PAGE_VIEW" | "EXPENSE_CREATED" | "BUDGET_UPDATED" | "SOCIAL_SHARE" | "SOCIAL_LIKE" | "SOCIAL_COMMENT" | "AD_INTERACTION" | "AD_CLICK" | "AD_IMPRESSION";
         UserActivityDto: {
             /**
@@ -1010,12 +1007,19 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description User successfully deleted */
-            204: {
+            /** @description User and all associated data successfully deleted */
+            200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": {
+                        /** @example User and all associated data successfully deleted */
+                        message?: string;
+                        /** @example user123 */
+                        deletedUserId?: string;
+                    };
+                };
             };
             /** @description User is not authorized to delete this account */
             401: {

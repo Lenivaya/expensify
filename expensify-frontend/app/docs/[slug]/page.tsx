@@ -18,9 +18,9 @@ const slugToTitle: Record<ValidSlug, string> = {
 }
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -30,7 +30,8 @@ export async function generateStaticParams() {
 }
 
 export default async function DocPage({ params }: Props) {
-  const slug = params.slug as ValidSlug
+  const parsedParams = await params
+  const slug = parsedParams.slug as ValidSlug
 
   if (!validSlugs.includes(slug)) {
     notFound()

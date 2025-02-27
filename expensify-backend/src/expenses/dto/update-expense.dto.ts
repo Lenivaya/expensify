@@ -84,7 +84,6 @@ export class UpdateExpenseDto {
     example: ['food', 'groceries', 'household'],
     type: [String],
     required: false,
-    isArray: true,
     minItems: 1
   })
   @IsArray()

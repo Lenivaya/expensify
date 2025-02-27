@@ -15,7 +15,9 @@ import cookie from '@fastify/cookie'
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter({
+      logger: true
+    }),
     {
       logger: ['error', 'warn', 'log', 'debug', 'verbose']
     }
@@ -23,7 +25,7 @@ async function bootstrap() {
 
   // Register cookie plugin
   await app.register(cookie, {
-    secret: process.env.COOKIE_SECRET || 'your-secret-key', // You should set this in your environment variables
+    secret: process.env.COOKIE_SECRET || 'your-secret-key',
     hook: 'onRequest',
     parseOptions: {}
   })
@@ -69,9 +71,17 @@ async function bootstrap() {
   )
 
   app.enableCors()
-  await app.listen(process.env.PORT ?? 3000)
+
+  const host = process.env.HOST || '0.0.0.0'
+  const port = parseInt(process.env.PORT || '3000', 10)
+
+  await app.listen(port, host)
+  console.log(`Application is running on: http://${host}:${port}`)
+  console.log(`Swagger docs available at: http://${host}:${port}/docs`)
+  console.log(`API Reference available at: http://${host}:${port}/reference`)
 }
 
-bootstrap()
-  .catch(console.error)
-  .finally(() => console.log('Server started'))
+bootstrap().catch((error) => {
+  console.error('Failed to start the application:', error)
+  process.exit(1)
+})

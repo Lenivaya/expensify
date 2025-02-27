@@ -73,10 +73,8 @@ export class CreateInflowDto {
     description: 'List of tags for categorizing and organizing the inflow',
     example: ['salary', 'work'],
     type: [String],
-    isArray: true,
     minItems: 1
   })
-  @IsArray()
   @IsString({ each: true })
   tags: string[]
 }

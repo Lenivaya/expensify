@@ -1050,9 +1050,9 @@ components:
             - food
             - groceries
           minItems: 1
-          items:
-            type: array
           type: array
+          items:
+            type: string
       required:
         - amount
         - description
@@ -1130,13 +1130,11 @@ components:
       properties:
         data:
           description: Array of expense records matching the search criteria
-          example: '['
-          items:
-            type: array
           type: array
+          items:
+            $ref: '#/components/schemas/ExpenseDto'
         meta:
           description: Metadata about the search results including pagination information
-          example: '{'
           allOf:
             - $ref: '#/components/schemas/MetaSearchInfo'
       required:
@@ -1163,9 +1161,9 @@ components:
             - groceries
             - household
           minItems: 1
-          items:
-            type: array
           type: array
+          items:
+            type: string
     TagStatistics:
       type: object
       properties:
@@ -1231,9 +1229,9 @@ components:
             - salary
             - work
           minItems: 1
-          items:
-            type: array
           type: array
+          items:
+            type: string
       required:
         - amount
         - description
@@ -1281,13 +1279,11 @@ components:
       properties:
         data:
           description: Array of inflow records matching the search criteria
-          example: '['
-          items:
-            type: array
           type: array
+          items:
+            $ref: '#/components/schemas/InflowDto'
         meta:
           description: Metadata about the search results including pagination information
-          example: '{'
           allOf:
             - $ref: '#/components/schemas/MetaSearchInfo'
       required:
@@ -1316,9 +1312,9 @@ components:
             - bonus
             - performance
           minItems: 1
-          items:
-            type: array
           type: array
+          items:
+            type: string
     TrackingConsentDto:
       type: object
       properties:
@@ -1355,6 +1351,7 @@ components:
         - AD_INTERACTION
         - AD_CLICK
         - AD_IMPRESSION
+      description: Type of activity performed
     UserActivityDto:
       type: object
       properties:

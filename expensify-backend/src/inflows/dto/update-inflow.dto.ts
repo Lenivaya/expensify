@@ -85,7 +85,6 @@ export class UpdateInflowDto {
     example: ['salary', 'bonus', 'performance'],
     type: [String],
     required: false,
-    isArray: true,
     minItems: 1
   })
   @IsArray()

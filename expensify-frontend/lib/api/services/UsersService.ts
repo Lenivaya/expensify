@@ -144,13 +144,25 @@ export interface UsersService {
         };
     };
     /**
-     * @summary Deletes user
-     * @description Deletes a user account. This operation cannot be undone.
+     * @summary Delete user account and all associated data
+     * @description Permanently deletes a user account and all associated data including:
+     *     - Personal information
+     *     - Financial records (expenses and inflows)
+     *     - Analytics data and consent settings
+     *     - Activity history
+     *
+     *     This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
      */
     usersControllerDeleteUser: {
         /**
-         * @summary Deletes user
-         * @description Deletes a user account. This operation cannot be undone.
+         * @summary Delete user account and all associated data
+         * @description Permanently deletes a user account and all associated data including:
+         *     - Personal information
+         *     - Financial records (expenses and inflows)
+         *     - Analytics data and consent settings
+         *     - Activity history
+         *
+         *     This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
          */
         getMutationKey(parameters: UsersControllerDeleteUserParameters | void): ServiceOperationMutationKey<UsersControllerDeleteUserSchema, UsersControllerDeleteUserParameters>;
         /**
@@ -208,8 +220,14 @@ export interface UsersService {
         /**
          * Returns the count of currently in-progress mutations.
          *
-         * @summary Deletes user
-         * @description Deletes a user account. This operation cannot be undone.
+         * @summary Delete user account and all associated data
+         * @description Permanently deletes a user account and all associated data including:
+         *     - Personal information
+         *     - Financial records (expenses and inflows)
+         *     - Analytics data and consent settings
+         *     - Activity history
+         *
+         *     This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useIsMutating|`useIsMutating(...)` documentation}
          * @example Check how many mutations are currently in progress for the specified service method.
          * ```ts
@@ -228,20 +246,38 @@ export interface UsersService {
          */
         useIsMutating<TContext = unknown>(filters?: MutationFiltersByParameters<UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError | Error, TContext> | MutationFiltersByMutationKey<UsersControllerDeleteUserSchema, UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError | Error, TContext>): number;
         /**
-         * @summary Deletes user
-         * @description Deletes a user account. This operation cannot be undone.
+         * @summary Delete user account and all associated data
+         * @description Permanently deletes a user account and all associated data including:
+         *     - Personal information
+         *     - Financial records (expenses and inflows)
+         *     - Analytics data and consent settings
+         *     - Activity history
+         *
+         *     This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
          */
         isMutating<TContext>(filters?: MutationFiltersByParameters<UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError | Error, TContext> | MutationFiltersByMutationKey<UsersControllerDeleteUserSchema, UsersControllerDeleteUserBody, UsersControllerDeleteUserData, UsersControllerDeleteUserParameters, UsersControllerDeleteUserError | Error, TContext>): number;
         /**
-         * @summary Deletes user
-         * @description Deletes a user account. This operation cannot be undone.
+         * @summary Delete user account and all associated data
+         * @description Permanently deletes a user account and all associated data including:
+         *     - Personal information
+         *     - Financial records (expenses and inflows)
+         *     - Analytics data and consent settings
+         *     - Activity history
+         *
+         *     This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
          */
         (options: ServiceOperationMutationFnOptions<UsersControllerDeleteUserBody, UsersControllerDeleteUserParameters>, client?: (schema: UsersControllerDeleteUserSchema, options: ServiceOperationMutationFnOptions<UsersControllerDeleteUserBody, UsersControllerDeleteUserParameters>) => Promise<RequestFnResponse<UsersControllerDeleteUserData, UsersControllerDeleteUserError>>): Promise<RequestFnResponse<UsersControllerDeleteUserData, UsersControllerDeleteUserError>>;
         /**
          * Provides access to the current state of a mutation, including its status, any resulting data, and associated errors.
          *
-         * @summary Deletes user
-         * @description Deletes a user account. This operation cannot be undone.
+         * @summary Delete user account and all associated data
+         * @description Permanently deletes a user account and all associated data including:
+         *     - Personal information
+         *     - Financial records (expenses and inflows)
+         *     - Analytics data and consent settings
+         *     - Activity history
+         *
+         *     This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
          * @see {@link https://openapi-qraft.github.io/openapi-qraft/docs/hooks/useMutationState|`useMutationState(...)` documentation}
          * @example Get all variables of all running mutations.
          * ```ts
@@ -1917,8 +1953,14 @@ export const usersService: {
         };
     };
     /**
-     * @summary Deletes user
-     * @description Deletes a user account. This operation cannot be undone.
+     * @summary Delete user account and all associated data
+     * @description Permanently deletes a user account and all associated data including:
+     *     - Personal information
+     *     - Financial records (expenses and inflows)
+     *     - Analytics data and consent settings
+     *     - Activity history
+     *
+     *     This action cannot be undone. All data will be permanently erased in accordance with GDPR requirements.
      */
     usersControllerDeleteUser: {
         schema: {
@@ -2068,7 +2110,7 @@ type UsersControllerDeleteUserSchema = {
     ];
 };
 type UsersControllerDeleteUserParameters = paths["/users/{id}"]["delete"]["parameters"];
-type UsersControllerDeleteUserData = unknown;
+type UsersControllerDeleteUserData = paths["/users/{id}"]["delete"]["responses"]["200"]["content"]["application/json"];
 type UsersControllerDeleteUserError = unknown;
 type UsersControllerDeleteUserBody = undefined;
 type UsersControllerGetCurrentBalanceSchema = {

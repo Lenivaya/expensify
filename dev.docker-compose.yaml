@@ -8,13 +8,14 @@ services:
       POSTGRES_DB: expensify
     ports:
       - 5432:5432
-    expose:
-      - 5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - expensify-dev-network
 
 networks:
-  default:
-    name: expensify-dev-network
+  expensify-dev-network:
+    driver: bridge
 
 volumes:
-  expensify-dev-database:
-
+  postgres-data:

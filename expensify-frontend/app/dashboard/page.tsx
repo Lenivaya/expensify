@@ -20,10 +20,11 @@ import { InflowListContainer } from '@/components/inflows/inflow-list-container'
 import { useDeleteInflow } from '@/lib/hooks/inflows/use-delete-inflow'
 import { useEditInflow } from '@/lib/hooks/inflows/use-edit-inflow'
 import { EditInflowDialog } from '@/components/inflows/edit-inflow-dialog/edit-inflow-dialog'
+import { mergeManyIfs } from '@/lib/objects'
 
 export default withAuth(Dashboard)
 
-export function Dashboard() {
+function Dashboard() {
   return (
     <main className='min-h-screen bg-background'>
       <div className='flex flex-col gap-12 py-32'>
@@ -60,9 +61,7 @@ export function Dashboard() {
 function UserDashboardFinanceSummary() {
   const { data, isLoading, error } =
     expensifyApi.users.usersControllerGetFinancialSummary.useQuery(
-      {
-        queryKey: ['userFinanceSummary']
-      },
+      undefined,
       {}
     )
 
@@ -88,12 +87,7 @@ function UserDashboardFinanceSummary() {
 
 function UserDashboardBalanceHistory() {
   const { data, isLoading, error } =
-    expensifyApi.users.usersControllerGetBalanceHistory.useQuery(
-      {
-        queryKey: ['userBalanceHistory']
-      },
-      {}
-    )
+    expensifyApi.users.usersControllerGetBalanceHistory.useQuery(undefined, {})
 
   if (error) {
     console.error(error)
@@ -128,12 +122,7 @@ function UserDashboardBalanceHistory() {
 
 function UserDashboardTopTags() {
   const { data, isLoading, error } =
-    expensifyApi.users.usersControllerGetTopTags.useQuery(
-      {
-        queryKey: ['userTopTags']
-      },
-      {}
-    )
+    expensifyApi.users.usersControllerGetTopTags.useQuery(undefined, {})
 
   if (error) {
     console.error(error)
@@ -182,19 +171,16 @@ function UserDashboardExpenseList() {
   const { data, isLoading, error } =
     expensifyApi.expenses.expensesControllerFindAll.useQuery(
       {
-        queryKey: [
-          'userExpenseList',
-          search,
-          pagination.page,
-          pagination.limit,
-          selectedTags
-        ],
-        query: {
-          search,
-          page: pagination.page,
-          limit: pagination.limit,
-          tags: selectedTags.length > 0 ? selectedTags.join(',') : undefined
-        }
+        query: mergeManyIfs(
+          {
+            page: pagination.page,
+            limit: pagination.limit
+          },
+          [
+            [isSome(search), { search: search as string }],
+            [selectedTags.length > 0, { tags: selectedTags }]
+          ]
+        )
       },
       {}
     )
@@ -313,19 +299,16 @@ function UserDashboardInflowList() {
   const { data, isLoading, error } =
     expensifyApi.inflows.inflowsControllerFindAll.useQuery(
       {
-        queryKey: [
-          'userInflowList',
-          search,
-          pagination.page,
-          pagination.limit,
-          selectedTags
-        ],
-        query: {
-          search,
-          page: pagination.page,
-          limit: pagination.limit,
-          tags: selectedTags.length > 0 ? selectedTags.join(',') : undefined
-        }
+        query: mergeManyIfs(
+          {
+            page: pagination.page,
+            limit: pagination.limit
+          },
+          [
+            [isSome(search), { search: search as string }],
+            [selectedTags.length > 0, { tags: selectedTags }]
+          ]
+        )
       },
       {}
     )

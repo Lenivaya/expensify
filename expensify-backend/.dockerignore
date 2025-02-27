@@ -1,0 +1,8 @@
+node_modules
+dist
+*.log
+*.md
+.git
+api-calls
+openapi-spec.yaml
+license-report.txt
