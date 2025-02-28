@@ -1,0 +1,8 @@
+Licenses
+├─ MIT: 44
+├─ UNKNOWN: 2
+├─ (Apache-2.0 OR MIT): 1
+├─ Apache-2.0: 1
+├─ ISC: 1
+└─ MPL-2.0: 1
+
