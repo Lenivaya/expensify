@@ -180,7 +180,6 @@ const PaginationControls = memo(function PaginationControls({
 /**
  * A container component that provides a complete inflow management interface
  *
- * @module InflowListContainer
  * @description
  * This component serves as a high-level container for managing and displaying inflows.
  * It combines search functionality, pagination, and the inflow card list with additional

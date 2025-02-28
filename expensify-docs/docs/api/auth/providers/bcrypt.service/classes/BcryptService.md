@@ -40,7 +40,7 @@ Hashes data using bcrypt with an automatically generated salt.
 
 The plain text data or buffer to hash
 
-`string` | `Buffer`
+`string` | `Buffer`\<`ArrayBufferLike`\>
 
 #### Returns
 
@@ -66,7 +66,7 @@ Compares plain text data with a bcrypt hash.
 
 The plain text data or buffer to compare
 
-`string` | `Buffer`
+`string` | `Buffer`\<`ArrayBufferLike`\>
 
 ##### encrypted
 

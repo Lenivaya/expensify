@@ -18,7 +18,6 @@ interface GoBackButtonProps {
 /**
  * A reusable button component for navigation back to the previous page
  *
- * @module GoBackButton
  * @description
  * This component provides a consistent way to navigate back in the application history.
  * It combines Next.js router navigation with optional custom click handling.

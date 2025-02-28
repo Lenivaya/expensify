@@ -43,7 +43,7 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "expensify/users-controller-delete-user",
-          label: "Deletes user",
+          label: "Delete user account and all associated data",
           className: "api-method delete",
         },
         {
@@ -183,6 +183,30 @@ const sidebar: SidebarsConfig = {
           id: "expensify/inflows-controller-get-monthly-stats",
           label: "Get monthly statistics",
           className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Analytics",
+      items: [
+        {
+          type: "doc",
+          id: "expensify/analytics-controller-get-consent",
+          label: "Get user consent settings",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "expensify/analytics-controller-update-consent",
+          label: "Update consent settings",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "expensify/analytics-controller-track-activity",
+          label: "Track user activity",
+          className: "api-method post",
         },
       ],
     },

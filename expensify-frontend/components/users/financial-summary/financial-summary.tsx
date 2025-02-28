@@ -184,7 +184,6 @@ export interface FinancialStatisticsCardProps {
 /**
  * A comprehensive financial summary card component
  *
- * @module FinancialSummaryCard
  * @description
  * Renders a beautiful and interactive card that provides a complete overview
  * of a user's financial status. The component includes current balance,
@@ -256,7 +255,7 @@ export function FinancialSummaryCard({
 
   return (
     <EnhancedCard className={cn('h-full', className)}>
-      <EnhancedCardHeader className='items-center pb-0 space-y-1 pt-4'>
+      <EnhancedCardHeader className='items-center pb-0 space-y-1 pt-4 relative'>
         <div className='flex items-center gap-2'>
           <CircleDollarSignIcon className='h-5 w-5 text-primary/70' />
           <EnhancedCardTitle>Financial Summary</EnhancedCardTitle>
@@ -264,7 +263,7 @@ export function FinancialSummaryCard({
         <EnhancedCardDescription>
           Track your inflows, expenses, and overall balance
         </EnhancedCardDescription>
-        <div className='absolute right-4 top-4'>
+        <div className='absolute right-4 top-4 z-[1]'>
           <Tooltip delayDuration={200}>
             <TooltipTrigger asChild>
               <Button
@@ -346,7 +345,7 @@ export function FinancialSummaryCard({
         <div className='space-y-2'>
           <div
             className='flex items-center justify-between cursor-pointer'
-            onClick={() => setShowStats(!showStats)}
+            onClick={() => setShowStats((prev) => !prev)}
           >
             <div className='flex items-center gap-1.5'>
               <BarChart3Icon className='h-4 w-4 text-muted-foreground/70' />

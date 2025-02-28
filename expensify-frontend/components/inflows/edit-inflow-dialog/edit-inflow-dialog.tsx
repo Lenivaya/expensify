@@ -25,7 +25,6 @@ export interface EditInflowDialogProps {
 /**
  * A dialog component for editing inflow entries
  *
- * @module EditInflowDialog
  * @description
  * This component provides a modal dialog interface for editing existing inflows.
  * It wraps the InflowForm component in a dialog context and handles loading states.

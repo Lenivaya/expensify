@@ -78,7 +78,6 @@ const MemoizedPrettyTag = memo(PrettyTag)
 /**
  * A card component for displaying individual expense entries
  *
- * @module ExpenseCard
  * @description
  * This component displays expense information in a card format with support for
  * various interactions like editing, deleting, and tag management. It includes

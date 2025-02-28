@@ -18,7 +18,6 @@ interface Props {
 /**
  * A component that conditionally renders content based on user authentication and authorization
  *
- * @module ShowOnlyForUser
  * @description
  * This component provides a declarative way to control content visibility based on user authentication
  * and specific user authorization. It uses pattern matching for clear and type-safe authorization logic.

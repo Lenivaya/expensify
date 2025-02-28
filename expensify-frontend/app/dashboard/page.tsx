@@ -29,7 +29,7 @@ function Dashboard() {
     <main className='min-h-screen bg-background'>
       <div className='flex flex-col gap-12 py-32'>
         <div className='w-full max-w-[120rem] mx-auto px-6 sm:px-8 lg:px-12 flex flex-col gap-12'>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[400px]'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[400px] [&>*]:isolate'>
             <div className='h-full'>
               <UserDashboardFinanceSummary />
             </div>
@@ -38,11 +38,11 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className='h-[800px]'>
+          <div className='h-[800px] isolate'>
             <UserDashboardBalanceHistory />
           </div>
 
-          <div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+          <div className='grid grid-cols-1 lg:grid-cols-2 gap-8 [&>*]:isolate'>
             <div className='h-[800px]'>
               <UserDashboardExpenseList />
             </div>
@@ -53,7 +53,24 @@ function Dashboard() {
         </div>
       </div>
       <div className='pb-16'></div>
-      <ExpensifyFloatingButtons />
+      <ExpensifyFloatingButtons
+        onInflowAdd={async () => {
+          await Promise.all([
+            expensifyApi.inflows.inflowsControllerFindAll.invalidateQueries(),
+            expensifyApi.users.usersControllerGetFinancialSummary.invalidateQueries(),
+            expensifyApi.users.usersControllerGetBalanceHistory.invalidateQueries(),
+            expensifyApi.users.usersControllerGetTopTags.invalidateQueries()
+          ])
+        }}
+        onExpenseAdd={async () => {
+          await Promise.all([
+            expensifyApi.expenses.expensesControllerFindAll.invalidateQueries(),
+            expensifyApi.users.usersControllerGetFinancialSummary.invalidateQueries(),
+            expensifyApi.users.usersControllerGetBalanceHistory.invalidateQueries(),
+            expensifyApi.users.usersControllerGetTopTags.invalidateQueries()
+          ])
+        }}
+      />
     </main>
   )
 }

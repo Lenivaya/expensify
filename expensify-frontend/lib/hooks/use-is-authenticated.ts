@@ -5,7 +5,6 @@ import { useIsAuthTokenPresent } from './use-auth-token'
 /**
  * Hook to check if the user is currently authenticated
  *
- * @module useIsAuthenticated
  * @description
  * A React hook that provides a simple way to check if the user is currently
  * authenticated. It uses the presence of an auth token as the authentication

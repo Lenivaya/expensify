@@ -99,7 +99,6 @@ const MemoizedPrettyTag = memo(PrettyTag)
 /**
  * A card component for displaying individual inflow entries
  *
- * @module InflowCard
  * @description
  * This component displays inflow information in a card format with interactive
  * features like editing, deletion, and tag management. It includes optimizations

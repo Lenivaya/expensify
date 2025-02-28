@@ -15,7 +15,6 @@ import {
 /**
  * The main navigation component for the application
  *
- * @module Navbar
  * @description
  * This component provides the main navigation interface for the application,
  * featuring a responsive design with animated interactions and visual feedback.

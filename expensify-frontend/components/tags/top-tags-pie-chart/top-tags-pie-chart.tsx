@@ -76,7 +76,6 @@ interface CustomLegendItemProps {
 /**
  * Custom legend item component for the pie chart
  *
- * @module CustomLegendItem
  * @description
  * Renders a single legend item with tag information, amount, and percentage.
  * Includes visual elements like color indicator and badge.
@@ -135,7 +134,6 @@ const CustomLegendItem = ({
 /**
  * Interactive pie chart component for displaying tag distribution
  *
- * @module TopTagsPieChart
  * @description
  * A comprehensive pie chart component for visualizing the distribution of tags
  * across transactions. Supports filtering by type, searching, and interactive

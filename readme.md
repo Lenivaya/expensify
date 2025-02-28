@@ -1,99 +1,136 @@
 # Expensify
 
-A modern, full-stack expense tracking application that helps users manage their finances effectively.
+Modern, full-stack expense tracking application with rich analytics and budgeting features.
 
-## Features
+<!--toc:start-->
 
-- **Expense Tracking**: Record and categorize your expenses with ease
-- **Income Management**: Track your income sources and cash inflows
-- **Budget Planning**: Set and monitor budgets for different expense categories
-- **Analytics Dashboard**:
-  - Visual representation of spending patterns
-  - Monthly balance breakdowns
-  - Tag-based expense categorization
-  - Financial summaries and statistics
-- **User Management**: Secure authentication and profile management
+- [Expensify](#expensify)
+  - [Video Demo](#video-demo)
+    - [Overall Usage](#overall-usage)
+    - [OpenAPI Reference (Scalar)](#openapi-reference-scalar)
+    - [OpenAPI Reference (Swagger)](#openapi-reference-swagger)
+    - [Docusaurus Documentation](#docusaurus-documentation)
+    - [Storybook](#storybook)
+  - [Key Features](#key-features)
+  - [Quick Start](#quick-start)
+  - [Tech Stack](#tech-stack)
+    - [Backend](#backend)
+    - [Frontend](#frontend)
+    - [Documentation](#documentation)
+  - [Project Structure](#project-structure)
+  - [Documentation](#documentation)
+  - [Legal](#legal)
+  <!--toc:end-->
 
-## Basic Setup and Commands
+## Video Demo
 
-For detailed setup instructions and commands, please refer to:
+### Overall Usage
 
-- [Backend Setup and Commands](./expensify-backend/README.md)
-- [Frontend Setup and Commands](./expensify-frontend/README.md)
+[![YouTube demo](http://i.ytimg.com/vi/hXr6pItBF1o/hqdefault.jpg)](https://www.youtube.com/watch?v=hXr6pItBF1o)
 
-## Configuration
+_(click on images, it'll open a video)_
 
-### Core Configuration Files
+### OpenAPI Reference (Scalar)
 
-- Backend: `.env` (copy from `.env.example`)
-- Frontend: `.env.local`
-- Documentation: `docusaurus.config.ts`
+<https://github.com/user-attachments/assets/3c362231-5b90-4e67-a739-a3c9a268b0a9>
 
-For detailed configuration options, please refer to the respective project READMEs.
+### OpenAPI Reference (Swagger)
+
+<https://github.com/user-attachments/assets/0aecdeba-b792-423e-a358-c53fb98f94f7>
+
+### Docusaurus Documentation
+
+<https://github.com/user-attachments/assets/32811028-ec3a-4893-b802-e6eedced462f>
+
+### Storybook
+
+<https://github.com/user-attachments/assets/5f5a1603-409e-4421-9991-c3dfefd5949d>
+
+## Key Features
+
+- 📊 **Comprehensive Analytics Dashboard**
+  - Visual spending patterns
+  - Monthly breakdowns
+  - Tag-based categorization
+  - Financial summaries
+- 💰 **Financial Management**
+  - Expense tracking and categorization
+  - Income source management
+  - Budget planning and monitoring
+- 🔐 **User System**
+  - Secure JWT authentication
+  - Profile customization
+  - Multi-device support
+
+## Quick Start
+
+1. Clone the repository
+2. Set up backend:
+
+   ```bash
+   cd expensify-backend
+   cp .env.example .env
+   pnpm install
+   pnpm start:dev
+   ```
+
+3. Set up frontend:
+
+   ```bash
+   cd expensify-frontend
+   cp .env.example .env
+   pnpm install
+   pnpm dev
+   ```
+
+Detailed setup instructions in [Backend](./expensify-backend/README.md) and [Frontend](./expensify-frontend/README.md) READMEs.
 
 ## Tech Stack
 
 ### Backend
 
-- **Framework**: NestJS with Fastify adapter
-- **Database**: PostgreSQL with Drizzle ORM
-- **Authentication**: JWT with Passport.js
-- **API Documentation**: Swagger/OpenAPI/Scalar/Docusaurus
+- NestJS with Fastify
+- PostgreSQL + Drizzle ORM
+- JWT authentication
+- OpenAPI documentation
 
 ### Frontend
 
-- **Framework**: Next.js 15
-- **UI Components**:
-  - Radix UI primitives
-  - Tailwind CSS for styling
-  - Lucide icons
-  - Shadcn/UI
-- **State Management**: TanStack Query (React Query)
-- **Charts**: Recharts
-- **Form Handling**: React Hook Form with Zod validation
-- **Development Tools**: Storybook for component development
+- Next.js 15
+- Radix UI + Shadcn/UI
+- TanStack Query
+- Recharts
+- React Hook Form + Zod
 
-### Docs
+### Documentation
 
-Built with Docusaurus.
-
-[Could be found here](https://lenivaya.github.io/expensify/)
+- Docusaurus ([View Docs](https://lenivaya.github.io/expensify/))
+- Storybook
+- OpenAPI (Swagger/Scalar)
 
 ## Project Structure
 
 ```
 expensify/
-├── expensify-backend/    # NestJS backend application
-├── expensify-frontend/   # Next.js frontend application
-└── expensify-docs/      # Docusaurus documentation
+├── expensify-backend/    # NestJS API
+├── expensify-frontend/   # Next.js SPA
+└── expensify-docs/      # Documentation
 ```
 
 ## Documentation
 
-- [Frontend Readme](./expensify-frontend/README.md)
-- [Backend Readme](./expensify-backend/README.md)
-- [System Readme](./expensify-docs/README.md)
-
-## Getting Started
-
-1. Clone the repository
-2. Follow setup instructions in:
-   - [Backend Setup Guide](./expensify-backend/README.md)
-   - [Frontend Setup Guide](./expensify-frontend/README.md)
+- [API Documentation](https://lenivaya.github.io/expensify/)
+- [Frontend Guide](./expensify-frontend/README.md)
+- [Backend Guide](./expensify-backend/README.md)
+- [Documentation Guide](./expensify-docs/README.md)
 
 ## Legal
 
-- [End User License Agreement (EULA)](./EULA.md)
+- [License](./LICENSE) - BSD 3-Clause
+- [EULA](./EULA.md)
 - [Privacy Policy](./PRIVACY_POLICY.md)
-
-## License
-
-This project is licensed under the BSD 3-Clause - see the [LICENSE](./LICENSE) file for details.
-
-## Author
-
-- [Lenivaya](https://github.com/Lenivaya)
+- [License Reports](./expensify-backend/license-report.txt)
 
 ---
 
-© 2024 Expensify. All rights reserved.
+© 2025 [Lenivaya](https://github.com/Lenivaya). All rights reserved.

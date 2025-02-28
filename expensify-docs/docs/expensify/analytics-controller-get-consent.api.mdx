@@ -1,0 +1,71 @@
+---
+id: analytics-controller-get-consent
+title: "Get user consent settings"
+description: "Retrieves the current cookie and tracking consent settings for the user"
+sidebar_label: "Get user consent settings"
+hide_title: true
+hide_table_of_contents: true
+api: eJytVE1v2zAM/SuGzsGSbbfciq4rOuwwtAl2KIqBkelYjSK5Eh3UM/zfR8rK14JhK7BcYn3w8fHxUb0qMepgGjLeqbm6RwoGdxgLqrHQbQjoqNDebwwW4MqCAuiNcWvec1HOIhLxOhaVDymojRjURPkGAwjqXcm4Vw5sR0bHa+8oeGsx/FgjXY8gfL2BAFskDFHNH58mKmBs5JCXvfowm8nfOdUl57lkEXIBZRFbrTHGqrW24wR8kyQV40DTWKMTuelzFLBeRV3jFuSLugYZ3q+eUSdmQUohM1KBfSEnV1feWwTHd88Z5uqSMoe4pGIbYY0HLTkQX2HbWAarwEYUoApaS3k9TFT02oB9Y9IxqNhiaaCoEKhlWROBWEP4x8xQ7qT8KNfflp5lY3XBmp/cjlOYv2YdxAAvrQnI5nk8Ef0gxDkvNgwZEjy1yKJmIp/Iq0F+HInsZ0MdI/ZqhRDYp+y1QYJhLb472lQQ2Y61F/OyUZNDqebF9EBmqg/uZSvuRuv2qg3cJtWPW8OFQA9pv1jef+WjHXcBVna01hgxGj2roWqiZj6dWq/B1j7S/OOMZ+EPmKZkNqYyDMIFPx0rfhBzj0n2dWfHp1aOW5P88dmHLUjuL98XvJn7LUSUqGhc5ZMPst43rw26aKrugtXhpLj6difFskLjyft3szyRoGUiBbfh6raQZtFB4nWLlB6TiyH/PVN/HO7/+IDlwglfadpYME4xy9TcPnvh3Jh7N7Du0ik57vsVRFwGOwyy/dJi6Mbnbd/4ZEAOQCiTG3u1wU7eS367GkoOsa3QuHizhlOH3t5Iq6AVVscRPe9rQs9H4LoTbKaZbiz8Bt0glh1JkKw5EZvpF6BFKvE=
+sidebar_class_name: "get api-method"
+info_path: docs/expensify/expensify
+custom_edit_url: null
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get user consent settings"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/analytics/consent"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Retrieves the current cookie and tracking consent settings for the user
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+>
+</Heading>
+
+<ParamsDetails
+  parameters={[]}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={undefined}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{"200":{"description":"User consent settings retrieved successfully","content":{"application/json":{"schema":{"type":"object","properties":{"analytics":{"type":"boolean","description":"Consent for analytics and usage tracking","example":false,"default":false},"social":{"type":"boolean","description":"Consent for social media features and sharing","example":false,"default":false},"advertising":{"type":"boolean","description":"Consent for personalized advertising","example":false,"default":false}},"required":["analytics","social","advertising"],"title":"TrackingConsentDto"}}}}}}
+>
+  
+</StatusCodes>
+
+
+      

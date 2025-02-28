@@ -1,7 +1,6 @@
 /**
  * Higher-order component for protecting routes that require authentication
  *
- * @module withAuth
  * @description
  * A higher-order component (HOC) that provides authentication protection for routes
  * and components. It automatically redirects unauthenticated users to the sign-in

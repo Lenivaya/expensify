@@ -16,6 +16,29 @@ nvim .env
 code .env
 ```
 
+### Environment Variables Reference
+
+The following environment variables are available for configuration:
+
+#### Database Configuration
+
+- `POSTGRES_HOST` - PostgreSQL server host (default: localhost)
+- `POSTGRES_PORT` - PostgreSQL server port (default: 5432)
+- `POSTGRES_USER` - PostgreSQL username (default: postgres)
+- `POSTGRES_PASSWORD` - PostgreSQL password (default: postgres)
+- `POSTGRES_DB` - PostgreSQL database name (default: expensify)
+
+#### Server Configuration
+
+- `PORT` - Server port number (default: 3000)
+- `HOST` - Server host address (default: 0.0.0.0)
+- `COOKIE_SECRET` - Secret key for cookie signing
+
+#### Authentication
+
+- `JWT_SECRET` - Secret key for JWT token signing
+- `JWT_TOKEN_TTL` - JWT token time-to-live duration (default: 7d)
+
 ## Database setup
 
 Setup your postgres database by any way you want, or use the dev docker compose file from root of the project:
@@ -62,6 +85,15 @@ pnpm start:dev
 # production mode
 pnpm build && pnpm start:prod
 ```
+
+### Docs
+
+Backend API exposes OpenAPI documentation, which has two versions:
+
+- swagger: https://localhost:3000/docs
+- scalar api reference: https://localhost:3000/reference
+
+Swagger is more conventional, when scalar api reference is more modern, user friendly and has more features like search, filtering, etc.
 
 ## tests
 

@@ -3,7 +3,6 @@ import { memo } from 'react'
 /**
  * A component to display when there is no data for the pie chart
  *
- * @module EmptyState
  * @description
  * This component provides a visually appealing empty state for the pie chart
  * when there is no data to display. It includes an illustration and helpful text

@@ -1,34 +1,52 @@
 # Frontend
 
-Setup your backend server by following the instructions in the [backend README](../expensify-backend/README.md).
+## Prerequisites
 
-Run the backend server in watch mode, which will generate the api spec file.
+Before starting, set up the backend server by following the instructions in the [backend README](../expensify-backend/README.md).
 
-With it you may generate the api client and use it in the frontend. (or use existing one if you didn't change the API code):
+## Environment Setup
 
-either by using justfile:
+First, create your environment configuration:
 
-```sh
+```bash
+cp .env.example .env
+```
+
+### Environment Variables Reference
+
+The following environment variables are available for configuration:
+
+- `NEXT_PUBLIC_API_URL` - Backend API URL (default: http://localhost:3000)
+
+## API Client Generation
+
+Run the backend server in watch mode to generate the API specification file. Then, generate the API client using one of the following methods:
+
+### Using justfile:
+
+```bash
 just frontend-api-client-from-spec
 ```
 
-or by using the openapi-qraft cli:
+### Using openapi-qraft CLI directly:
 
-```sh
+```bash
 pnpm openapi-qraft --plugin tanstack-query-react --plugin openapi-typescript ../expensify-backend/openapi-spec.yaml --output-dir lib/api
 ```
 
-## Getting Started
+## Development
 
-First, run the development server:
+To start the development server:
 
 ```bash
 pnpm dev
 ```
 
-Open the browser and go to url from your terminal, you should see the app.
+The terminal will display the URL where your application is running. Open this URL in your browser to view the application.
 
-## Production build
+## Production
+
+To create and run a production build:
 
 ```bash
 pnpm build && pnpm start
@@ -36,7 +54,7 @@ pnpm build && pnpm start
 
 ## Storybook
 
-To run the storybook, you can run the following command:
+To launch the Storybook component explorer:
 
 ```bash
 pnpm storybook

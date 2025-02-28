@@ -8,7 +8,6 @@ import { useUser } from '@/lib/hooks/use-user'
 /**
  * A smart component that handles user authentication state in the navbar
  *
- * @module NavbarUser
  * @description
  * This component acts as a container that conditionally renders either the authenticated
  * or unauthenticated user interface in the navbar based on the current authentication state.

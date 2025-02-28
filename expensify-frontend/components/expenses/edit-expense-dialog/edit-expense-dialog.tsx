@@ -25,7 +25,6 @@ export interface EditExpenseDialogProps {
 /**
  * A dialog component for editing expense entries
  *
- * @module EditExpenseDialog
  * @description
  * This component provides a modal dialog interface for editing existing expenses.
  * It wraps the ExpenseForm component in a dialog context and handles loading states.
