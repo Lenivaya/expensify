@@ -129,7 +129,9 @@ expensify/
 - [License](./LICENSE) - BSD 3-Clause
 - [EULA](./EULA.md)
 - [Privacy Policy](./PRIVACY_POLICY.md) - GDPR Compliant Data Protection Policy
-- [License Reports](./expensify-backend/license-report.txt)
+- License Reports
+  - [Backend](./expensify-backend/license-report.txt)
+  - [Frontend](./expensify-frontend/license-report.txt)
 
 ---
 
