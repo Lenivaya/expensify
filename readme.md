@@ -105,16 +105,16 @@ Detailed setup instructions in [Backend](./expensify-backend/README.md) and [Fro
 ### Documentation
 
 - Docusaurus ([View Docs](https://lenivaya.github.io/expensify/))
-- Storybook
+- Storybook ([View storybook](https://67be4bbc08c1819973a92b99-xahpphwsjl.chromatic.com/))
 - OpenAPI (Swagger/Scalar)
 
 ## Project Structure
 
-```
+```sh
 expensify/
 ├── expensify-backend/    # NestJS API
 ├── expensify-frontend/   # Next.js SPA
-└── expensify-docs/      # Documentation
+└── expensify-docs/       # Documentation
 ```
 
 ## Documentation
@@ -128,7 +128,7 @@ expensify/
 
 - [License](./LICENSE) - BSD 3-Clause
 - [EULA](./EULA.md)
-- [Privacy Policy](./PRIVACY_POLICY.md)
+- [Privacy Policy](./PRIVACY_POLICY.md) - GDPR Compliant Data Protection Policy
 - [License Reports](./expensify-backend/license-report.txt)
 
 ---
